@@ -9,13 +9,6 @@ function CreateCodex() {
     catArrow.addEventListener("click", ()=>openSubCategories(cat.subcats, catArrow.id, catTitle.id));
     catTitle.appendChild(catArrow);
     Element("contentScroller").appendChild(catTitle);
-    // for(let subcat of cat.subcats) {
-    //   Element("contentScroller").appendChild(CreateText(subcat.subcat, "CodexSubcategories"));
-    //   for(let entity of subcat.content) {
-    //     Element("contentScroller").appendChild(CreateText(entity.key, "CodexEntities"));
-    //     FormCodexEntity(entity.key, entity.content, entity.tags);
-    //   }
-    // }
   }
 }
 
@@ -69,6 +62,7 @@ function FormCodexEntity(key, content, tags) {
   for(let tag of tags) {
     tagsText += tag.tag + ", ";
   }
+  tagsText = tagsText.substring(0, tagsText.length-2);
   Element("content").appendChild(CreateText(tagsText, "CodexEntities"));
 }
 
@@ -77,18 +71,24 @@ function ReadContent(text) {
   let textContent = Create('div');
   textContent.id = "CodexBaseText";
   for(let colors of content) {
+    let img;
     let link;
     let color;
     let text;
-    if(colors.indexOf("/") != -1) {
+    if(colors.indexOf("%") != -1) {
+      img = colors.split("%")[1];
+      text = colors.split("%")[2];
+    }
+    else if(colors.indexOf("/") != -1) {
       color = colors.split("/")[1];
       text = colors.split("/")[2];
     } if(colors.indexOf("&") != -1) {
-      console.log('?');
       link = colors.split("&")[1];
       text = colors.split("&")[2];
     } else if(text == undefined) text = colors;
     if(text == ":break") textContent.innerHTML += "<br>";
+    else if(img != undefined && link == undefined) textContent.innerHTML += `<img style="width: 30px height: 30px" src="resources/images/icons/${img}.png">`;
+    else if(img != undefined && link != undefined) textContent.innerHTML += `<img style="width: 30px height: 30px" class="PointerClass" src="resources/images/icons/${img}.png" onclick="${link}">`;
     else if(link != undefined) textContent.innerHTML += `<span style = "color: ${color || "white"}" class="PointerClass" onclick="${link}">${text}</span>`;
     else if(text) textContent.innerHTML += `<span style = "color: ${color || "white"}">${text}</span>`;
   }

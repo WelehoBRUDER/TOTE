@@ -73,6 +73,8 @@ body {
 
 .PointerClass {
   cursor: pointer;
+  /*text-shadow: -0.05em 0.05em 0.1em black;*/
+  text-decoration: underline;
 }
 
 .CodexEntryTitle {
@@ -84,6 +86,11 @@ body {
   left: 50%;
   top: -40px;
   transform: translateX(-50%);
+}
+
+.TextIconClass {
+  width: 30px;
+  height: 30px;
 }
 
 #CodexBaseText {

@@ -27,7 +27,6 @@ function GetCodexEntity(cat, subcat, key) {
         if(subcats.subcat == subcat) {
           for(let entity of subcats.content) {
             if(entity.key == key) {
-              console.log(entity.key, entity.content, entity.tags);
               return FormCodexEntity(entity.key, entity.content, entity.tags);
             }
           }
