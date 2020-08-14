@@ -77,13 +77,19 @@ function ReadContent(text) {
   let textContent = Create('div');
   textContent.id = "CodexBaseText";
   for(let colors of content) {
+    let link;
     let color;
     let text;
     if(colors.indexOf("/") != -1) {
       color = colors.split("/")[1];
       text = colors.split("/")[2];
-    } else text = colors;
+    } if(colors.indexOf("&") != -1) {
+      console.log('?');
+      link = colors.split("&")[1];
+      text = colors.split("&")[2];
+    } else if(text == undefined) text = colors;
     if(text == ":break") textContent.innerHTML += "<br>";
+    else if(link != undefined) textContent.innerHTML += `<span style = "color: ${color || "white"}" class="PointerClass" onclick="${link}">${text}</span>`;
     else if(text) textContent.innerHTML += `<span style = "color: ${color || "white"}">${text}</span>`;
   }
   return textContent;

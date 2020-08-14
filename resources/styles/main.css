@@ -71,6 +71,10 @@ body {
   width: max-content;
 }
 
+.PointerClass {
+  cursor: pointer;
+}
+
 .CodexEntryTitle {
   font-size: 56px;
   color: rgb(211, 211, 211);
