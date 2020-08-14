@@ -1,5 +1,8 @@
-var player_name = "Adventurer Avanti" // Fallback name
-var player_color = "rgb(100,100,100)"
+var player_name = "Adventurer Avanti"; // Fallback name
+var player_color = "rgb(100,100,100)";
+var enemy_var = "Lamia";
+var enemy_length = "3.5";
+var enemy_damage = 15;
 
 class Actor {
   constructor(key, name, classvar, stats, equipment, color) {

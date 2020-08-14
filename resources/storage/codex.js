@@ -24,6 +24,15 @@ var codex = [
               { tag: "humanoid" }
             ]
           },
+          {
+            key: enemy_var,
+            content: `§/cyan/${enemy_var}s§ are ${enemy_length}m long creatures that deal ${enemy_damage} §/red/damage§ to §/yellow/${player_name}§.`,
+            tags: [
+              {tag: "enemies"},
+              {tag: "dangerous"},
+              {tag: "lamia"}
+            ]
+          },
         ]
       },
       {
