@@ -1,4 +1,4 @@
-// § = make new span, / = isolate color, :break = line break / br
+// § = make new span, / = isolate color, :break = line break / br, & = isolate function, % = isolate image
 var codex = [
   {
     cat: "Gameplay",
@@ -11,7 +11,7 @@ var codex = [
             content: "§/red/Health§ §%heart_icon_small%§ is the most basic §/yellow/stat§ in TOTE. When your §/red/health§ §%heart_icon_small%§ reaches 0, you are §/black/defeated§.",
             tags: [
               { tag: "health" },
-              { tag: "stat" },
+              { tag: "stats" },
               { tag: "gameplay" }
             ]
           }
