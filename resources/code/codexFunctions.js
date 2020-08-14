@@ -1,5 +1,8 @@
 var tagSearch = false;
 
+Element("contentSearchbutton").style.backgroundImage = 'url("resources/images/icons/magnifying_glass_medium.png")';
+Element("contentSearchtagtoggle").style.backgroundImage = 'url("resources/images/icons/tag_icon_medium.png")';
+
 function CreateCodex() {
   Element("content").textContent = "";
   Element("contentScroller").textContent = "";

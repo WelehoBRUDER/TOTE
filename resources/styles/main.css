@@ -43,7 +43,6 @@ body {
   width: 40px;
   height: 40px;
   background-color: grey;
-  background-image: url("../images/icons/magnifying_glass_medium.png");
   text-align: center;
   border-radius: 4px;
   box-shadow: inset 0 0 10px 5px rgb(70, 69, 69), 0 0 2px 2px black;
@@ -54,12 +53,10 @@ body {
 }
 
 #contentSearchbutton {
-  background-image: url("../images/icons/magnifying_glass_medium.png");
   right: 40px;
 }
 
 #contentSearchtagtoggle {
-  background-image: url("../images/icons/tag_icon_medium.png");
   right: 0px;
 }
 
