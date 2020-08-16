@@ -100,8 +100,8 @@ function ReadContent(text) {
       text = colors.split("&")[2];
     } else if (text == undefined) text = colors;
     if (text == ":break") textContent.innerHTML += "<br>";
-    else if (img != undefined && link == undefined) textContent.innerHTML += `<img style="width: 30px height: 30px" src="resources/images/icons/${img}.png">`;
-    else if (img != undefined && link != undefined) textContent.innerHTML += `<img style="width: 30px height: 30px" class="PointerClass" src="resources/images/icons/${img}.png" onclick="${link}">`;
+    else if (img != undefined && link == undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/icons/${img}.png">`;
+    else if (img != undefined && link != undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/icons/${img}.png" onclick="${link}">`;
     else if (link != undefined) textContent.innerHTML += `<span style = "color: ${color || "white"}" class="PointerClass" onclick="${link}">${text}</span>`;
     else if (text) textContent.innerHTML += `<span style = "color: ${color || "white"}">${text}</span>`;
   }

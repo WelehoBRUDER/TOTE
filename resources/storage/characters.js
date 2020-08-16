@@ -9,8 +9,8 @@ class Actor {
       this.class = classvar,
       this.stats = stats,
       this.equipment = equipment,
-    this.color = color,
-    this.image = image
+      this.color = color,
+      this.image = image
   }
 }
 
@@ -70,7 +70,7 @@ function LisaaJaPoista() {
 
 var characters = {
   player: new Player("warrior",
-    new Stats(50, 10, 5, 5, 5, 5, 5, 5, 5, 0),
+    new Stats(8624, 10, 5, 5, 5, 5, 5, 5, 5, 0),
     [
       new Weapon("basic_iron_sword_0", "Rusty Iron Sword", 10, 0, false, [{ type: "slash", value: 5 }, { type: "thrust", value: 2 }], -1),
       new Armor("basic_let_armor_1", "Crude Leather Armor", 25, 0, "chest", { slash: 5, blunt: 10, thrust: 3, fire: 2, frost: 5, wind: 5, water: 4, shock: 8, light: 5, dark: 5 }, 0)
@@ -81,15 +81,21 @@ var characters = {
       [
         new Weapon("basic_iron_dagger_0", "Rusty Iron Dagger", 5, 0, false, [{ type: "slash", value: 3 }, { type: "thrust", value: 1 }], 1),
         new Armor("basic_let_armor_1", "Crude Leather Armor", 25, 0, "chest", { slash: 5, blunt: 10, thrust: 3, fire: 2, frost: 5, wind: 5, water: 4, shock: 8, light: 5, dark: 5 }, 0)
-      ], "cyan", "ally_portrait")
+      ], "cyan", "portrait_kynier_temp")
   ],
   enemies: [
     new Actor("enemy_rogue_thief", "Thief", "rogue",
-      new Stats(40, 5, 5, 5, 5, 5, 5, 5, 5, 0),
+      new Stats(99999, 5, 5, 5, 5, 5, 5, 5, 5, 0),
       [
         new Weapon("basic_iron_dagger_0", "Rusty Iron Dagger", 5, 0, false, [{ type: "slash", value: 3 }, { type: "thrust", value: 1 }], 1),
         new Armor("basic_let_armor_1", "Crude Leather Armor", 25, 0, "chest", { slash: 5, blunt: 10, thrust: 3, fire: 2, frost: 5, wind: 5, water: 4, shock: 8, light: 5, dark: 5 }, 0)
-      ], "red", "enemy_portrait")
+      ], "red", "portrait_thief_temp"),
+    new Actor("enemy_warrior_goblin", "Goblin", "warrior",
+      new Stats(60, 5, 5, 5, 5, 5, 5, 5, 5, 0),
+      [
+        new Weapon("basic_iron_mace_0", "Rusty Iron Mace", 5, 0, false, [{ type: "blunt", value: 6 }], 1),
+        new Armor("basic_let_armor_1", "Crude Leather Armor", 25, 0, "chest", { slash: 5, blunt: 10, thrust: 3, fire: 2, frost: 5, wind: 5, water: 4, shock: 8, light: 5, dark: 5 }, 0)
+      ], "green", "portrait_goblin_temp"),
   ]
 }
 
