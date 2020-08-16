@@ -1,20 +1,22 @@
-var player_name = "Adventurer Avanti" // Fallback name
-var player_color = "rgb(100,100,100)"
+var player_name = "Adventurer Avanti"; // Fallback name
+var player_color = "rgb(100,100,100)";
+var player_image = "portrait_player_temp";
 
 class Actor {
-  constructor(key, name, classvar, stats, equipment, color) {
+  constructor(key, name, classvar, stats, equipment, color, image) {
     this.key = key,
       this.name = name,
       this.class = classvar,
       this.stats = stats,
-      this.equipment = equipment
-    this.color = color
+      this.equipment = equipment,
+    this.color = color,
+    this.image = image
   }
 }
 
 class Player extends Actor {
   constructor(classvar, stats, equipment) {
-    super("player", player_name, classvar, stats, equipment, player_color)
+    super("player", player_name, classvar, stats, equipment, player_color, player_image)
   }
 }
 
@@ -79,7 +81,7 @@ var characters = {
       [
         new Weapon("basic_iron_dagger_0", "Rusty Iron Dagger", 5, 0, false, [{ type: "slash", value: 3 }, { type: "thrust", value: 1 }], 1),
         new Armor("basic_let_armor_1", "Crude Leather Armor", 25, 0, "chest", { slash: 5, blunt: 10, thrust: 3, fire: 2, frost: 5, wind: 5, water: 4, shock: 8, light: 5, dark: 5 }, 0)
-      ])
+      ], "cyan", "ally_portrait")
   ],
   enemies: [
     new Actor("enemy_rogue_thief", "Thief", "rogue",
@@ -87,7 +89,7 @@ var characters = {
       [
         new Weapon("basic_iron_dagger_0", "Rusty Iron Dagger", 5, 0, false, [{ type: "slash", value: 3 }, { type: "thrust", value: 1 }], 1),
         new Armor("basic_let_armor_1", "Crude Leather Armor", 25, 0, "chest", { slash: 5, blunt: 10, thrust: 3, fire: 2, frost: 5, wind: 5, water: 4, shock: 8, light: 5, dark: 5 }, 0)
-      ])
+      ], "red", "enemy_portrait")
   ]
 }
 
