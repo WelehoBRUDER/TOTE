@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TOTE - v0.0.1</title>
   <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="map.css">
 </head>
 <body>
-  <div id="codex">
+  <div id="mapFrame">
+    <canvas id="map" width="1200px" height="800px"></canvas>
+  </div>
+  <div id="codex" hidden>
     <div id="content"></div>
     <div id="contentScroller"></div>
     <div id="contentSearchbar">
@@ -26,5 +30,7 @@
 <script src="resources/storage/characters.js"></script>
 <script src="resources/storage/text.js"></script>
 <script src="resources/storage/codex.js"></script>
+<script src="resources/storage/map.js"></script>
 <script src="resources/code/portraitCreator.js"></script>
+<script src="resources/code/mapFunctions.js"></script>
 <script src="resources/code/codexFunctions.js"></script>

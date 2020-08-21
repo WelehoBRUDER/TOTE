@@ -59,12 +59,3 @@ PushCombatantToTable(characters.enemies[1], enemiesFight);
 
 
 CreatePortraits();
-
-// <div class="portrait_background">
-//   <div class="hpbarbg"></div>
-//   <div class="hpbarfill"></div>
-//   <div class="mpbarbg"></div>
-//   <div class="mpbarfill"></div>
-//   <img src="resources/images/portraits/${character.image}.png" class="portrait_image">
-//   <img src="resources/images/icons/${character.class}_icon.png" class="portrait_class">
-//   </div>

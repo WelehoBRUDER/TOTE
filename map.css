@@ -1,0 +1,10 @@
+#mapFrame {
+  width: 1200px;
+  height: 800px;
+  border: 10px solid rgb(41, 41, 41);
+  position: absolute;
+  left: 50%;
+  top: 60px;
+  margin-left: -605px;
+  border-radius: 12px;
+}
