@@ -2,6 +2,7 @@
 
 let px = 8;
 let py = 4;
+let lit = false;
 
 const map = Element('map');
 const ctx = map.getContext('2d');
@@ -52,10 +53,29 @@ function DrawPlayer() {
   }
 }
 
+function DrawPlayerHighlight() {
+  let img = new Image();
+  img.src = "resources/images/tiles/playerHighlight_tile.png";
+  img.onload = function () {
+    ctx.drawImage(img, px * 80, py * 80);
+  }
+}
+
 window.addEventListener("keydown", movement);
 
+function NotMoveKey(key) {
+  if (key != "w" && key != "a" && key != "s" && key != "d" && key != "ArrowUp" && key != "ArrowLeft" && key != "ArrowDown" && key != "ArrowRight") return true;
+  else return false;
+}
+
 function movement(e) {
-  if (e.key == "w" || e.key == "ArrowUp") {
+  if (NotMoveKey(e.key) && e.key != " ") return
+  else if (e.key == " ") {
+    DrawImage(px, py);
+    if(!lit) lit = true;
+    else lit = false;
+  }
+  else if (e.key == "w" || e.key == "ArrowUp") {
     DrawImage(px, py);
     if (CanWalk(px, py - 1) && py - 1 > -1) py--;
 
@@ -73,14 +93,14 @@ function movement(e) {
   else if (e.key == "d" || e.key == "ArrowRight") {
     DrawImage(px, py);
     if (CanWalk(px + 1, py) && px + 1 < 16) px++;
-
   }
-  DrawPlayer();
+  if(!lit) DrawPlayer();
+  else if(lit) DrawPlayerHighlight();
 }
 
 function CanWalk(x, y) {
   // I don't know why, but it just works like this.
-  if((!mapArray[y]) || !mapArray[y][x]) return false;
+  if ((!mapArray[y]) || !mapArray[y][x]) return false;
   if (parseInt(mapArray[y][x]) == 0) return false;
   else if (parseInt(mapArray[y][x]) == 9) return false;
   else return true;
