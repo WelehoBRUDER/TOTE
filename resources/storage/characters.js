@@ -98,3 +98,6 @@ var characters = {
       ], "green", "portrait_goblin_temp"),
   ]
 }
+
+characters.player.cords = {x: 8, y: 4};
+characters.player.map = "Forlorn Plains";
