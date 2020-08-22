@@ -101,3 +101,4 @@ var characters = {
 
 characters.player.cords = {x: 8, y: 4};
 characters.player.map = "Forlorn Plains";
+characters.player.lit = false;

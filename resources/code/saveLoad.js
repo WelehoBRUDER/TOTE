@@ -76,7 +76,7 @@ function LoadSlotNoPrompt(key) {
   hideAlert();
   characters = JSON.parse(localStorage.getItem(`${key}characters`));
   DrawMap();
-  Saving();
+  Loading();
 }
 
 function LoadSlotPrompt(key) {

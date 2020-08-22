@@ -5,6 +5,7 @@ function CreateUiButtons() {
     but.src = `resources/images/icons/ui_icon${button.bg}.png`;
     but.addEventListener("click", ()=>toggleButton(button.open));
     but.classList.add("ui_button");
+    but.setAttribute('draggable', false);
     Element("uiIcons").appendChild(but);
   }
 }

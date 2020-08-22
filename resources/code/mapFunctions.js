@@ -2,8 +2,6 @@
 
 // This file is used to create the tile map and move around it
 
-let lit = false;
-
 const map = Element('map');
 const ctx = map.getContext('2d');
 
@@ -43,7 +41,8 @@ function DrawMap() {
         }
         img.onload = function () {
           ctx.drawImage(img, x * 80, y * 80);
-          if (characters.player.cords.x == x && characters.player.cords.y == y) DrawPlayer();
+          if (characters.player.cords.x == x && characters.player.cords.y == y && !characters.player.lit) DrawPlayer();
+          else if(characters.player.cords.x == x && characters.player.cords.y == y && characters.player.lit) DrawPlayerHighlight();
         }
       }
     }
@@ -84,7 +83,7 @@ function movement(e) {
   // Toggle highlight
   else if (e.key == " ") {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
-    lit = !lit;
+    characters[0].player.lit = !characters[0].player.lit;
   }
   else if (e.key == "w" || e.key == "ArrowUp") {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
@@ -105,8 +104,8 @@ function movement(e) {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x + 1, characters.player.cords.y) && characters.player.cords.x + 1 < 16) characters.player.cords.x++;
   }
-  if(!lit && e.key != "Enter") DrawPlayer();
-  else if(lit && e.key != "Enter") DrawPlayerHighlight();
+  if(!characters[0].player.lit && e.key != "Enter") DrawPlayer();
+  else if(characters[0].player.lit && e.key != "Enter") DrawPlayerHighlight();
 }
 
 function CanWalk(x, y) {
