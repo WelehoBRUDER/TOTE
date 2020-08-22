@@ -83,7 +83,7 @@ function movement(e) {
   // Toggle highlight
   else if (e.key == " ") {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
-    characters[0].player.lit = !characters[0].player.lit;
+    characters.player.lit = !characters.player.lit;
   }
   else if (e.key == "w" || e.key == "ArrowUp") {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
@@ -104,8 +104,8 @@ function movement(e) {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x + 1, characters.player.cords.y) && characters.player.cords.x + 1 < 16) characters.player.cords.x++;
   }
-  if(!characters[0].player.lit && e.key != "Enter") DrawPlayer();
-  else if(characters[0].player.lit && e.key != "Enter") DrawPlayerHighlight();
+  if(!characters.player.lit && e.key != "Enter") DrawPlayer();
+  else if(characters.player.lit && e.key != "Enter") DrawPlayerHighlight();
 }
 
 function CanWalk(x, y) {
