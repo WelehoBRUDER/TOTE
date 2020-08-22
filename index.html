@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="map.css">
 </head>
 <body>
-  <div id="mapFrame">
+  <div id="mapFrame" hidden>
     <canvas id="map" width="1200px" height="800px"></canvas>
   </div>
   <div id="codex" hidden>
@@ -24,6 +24,25 @@
     <div id="allyportraits"></div>
     <div id="enemyportraits"></div>
   </div>
+  <div id="settings">
+    <button id="saves" onclick="Saving()">Save</button>
+    <button id="load" onclick="Loading()">Load</button>
+    <button id="options">Options</button>
+    <button id="menu">Menu</button>
+  </div>
+  <div id="saveLoad"></div>
+  <div id="uiIcons"></div>
+  <div id="AlertBase" hidden>
+    <div id="dimScreen" onclick="hideAlert()"></div>
+    <div id="Alert">
+      <div id="topAlert">
+        <img src="resources/images/icons/warn_icon.png" alt="" id="alertIco">
+      </div>
+      <p id="textAlert">You are about to overwrite save [VERY LONG SAVE NAME WOULD THEN GO HERE YOU GET IT BRO??], are you sure you want to continue?</p>
+      <button id="yesAlert"></button>
+      <button id="noAlert" onclick="hideAlert()">Cancel</button>
+  </div>
+  </div>
 </body>
 </html>
 <script src="resources/code/helpFunctions.js"></script>
@@ -35,3 +54,5 @@
 <script src="resources/code/mapFunctions.js"></script>
 <script src="resources/code/mapActions.js"></script>
 <script src="resources/code/codexFunctions.js"></script>
+<script src="resources/code/saveLoad.js"></script>
+<script src="resources/code/ui.js"></script>
