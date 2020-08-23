@@ -324,7 +324,7 @@ body {
   transition: 0.15s;
   width: 300px;
   height: 80px;
-  box-shadow: 0 12px 4px 4px rgb(112, 13, 33), inset 0 0 3px 3px crimson;
+  box-shadow: 0 12px 4px 4px rgb(70, 8, 20);
   border: none;
   background-color: rgb(255, 20, 67);
   user-select: none;
@@ -355,12 +355,12 @@ body {
 
 #settings button:hover {
   margin-top: 8px;
-  box-shadow: 0 4px 4px 4px rgb(112, 13, 33), inset 0 0 3px 3px crimson;
+  box-shadow: 0 4px 4px 4px rgb(70, 8, 20);
 }
 
 #settings button:active {
   margin-top: 10px;
-  box-shadow: 0 4px 4px 4px rgb(112, 13, 33), inset 0 0 3px 3px crimson;
+  box-shadow: 0 4px 4px 4px rgb(70, 8, 20);
 }
 
 #saveLoad {
@@ -376,7 +376,7 @@ body {
   transition: 0.15s;
   width: 300px;
   height: 80px;
-  box-shadow: 0 12px 4px 4px rgb(112, 13, 33), inset 0 0 3px 3px crimson;
+  box-shadow: 0 12px 4px 4px rgb(70, 8, 20);
   border: none;
   background-color: rgb(255, 20, 67);
   user-select: none;
@@ -393,12 +393,12 @@ body {
 
 #saveLoad button:hover {
   top: 8px;
-  box-shadow: 0 4px 4px 4px rgb(112, 13, 33), inset 0 0 3px 3px crimson;
+  box-shadow: 0 4px 4px 4px rgb(70, 8, 20);
 }
 
 #saveLoad button:active {
   top: 10px;
-  box-shadow: 0 4px 4px 4px rgb(112, 13, 33), inset 0 0 3px 3px crimson;
+  box-shadow: 0 2px 4px 4px rgb(70, 8, 20);
 }
 
 #Alert {

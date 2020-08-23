@@ -7,6 +7,7 @@ function Saving() {
       button.textContent = `Back`;
       button.style.fontSize = "48px";
       button.style.width = "260px";
+      button.style.backgroundImage = 'url("resources/images/bg/bg_red.png")';
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => toggleButton("settings"));
     }
@@ -16,6 +17,7 @@ function Saving() {
       button.style.width = "160px";
       button.style.fontSize = "24px";
       button.style.height = "90px";
+      button.style.backgroundImage = 'url("resources/images/bg/bg_red.png")';
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => SaveNoPrompt("toFile"));
     }
@@ -24,6 +26,7 @@ function Saving() {
       button.textContent = `Save ${slot.key} - empty`;
       button.style.fontSize = "24px";
       button.style.width = "500px";
+      button.style.backgroundImage = 'url("resources/images/bg/bg_red.png")';
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => SaveNoPrompt(slot.key));
     }
@@ -33,6 +36,7 @@ function Saving() {
       button.textContent = `Save ${slot.key} - ${pInfo.player.name} | ${pInfo.player.map} | last saved: ${slot.date}`;
       button.style.fontSize = "24px";
       button.style.width = "500px";
+      button.style.backgroundImage = 'url("resources/images/bg/bg_red.png")';
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => SavePrompt(slot.key));
     }
@@ -48,6 +52,7 @@ function Loading() {
       button.textContent = `Back`;
       button.style.fontSize = "48px";
       button.style.width = "260px";
+      button.style.backgroundImage = 'url("resources/images/bg/bg_red.png")';
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => toggleButton("settings"));
     }
@@ -57,6 +62,7 @@ function Loading() {
       button.style.width = "160px";
       button.style.fontSize = "36px";
       button.style.height = "120px";
+      button.style.backgroundImage = 'url("resources/images/bg/bg_red.png")';
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => LoadSlotNoPrompt("toFile"));
     }
@@ -65,6 +71,9 @@ function Loading() {
       button.textContent = `Save ${slot.key} - empty`;
       button.style.fontSize = "24px";
       button.style.width = "500px";
+      button.style.filter = "brightness(50%)";
+      button.style.pointerEvents = "none";
+      button.style.backgroundImage = 'url("resources/images/bg/bg_red.png")';
       Element("saveLoad").appendChild(button);
     }
     else {
@@ -73,6 +82,7 @@ function Loading() {
       button.textContent = `Save ${slot.key} - ${pInfo.player.name} | ${pInfo.player.map} | last saved: ${slot.date}`;
       button.style.fontSize = "24px";
       button.style.width = "500px";
+      button.style.backgroundImage = 'url("resources/images/bg/bg_red.png")';
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => LoadSlotPrompt(slot.key));
     }
@@ -97,15 +107,27 @@ function SaveNoPrompt(key) {
       };
 
     }());
-    saveData(characters, `TOTE-${characters.player.name}-save-${new Date().getHours()}.${new Date().getMinutes()}.txt`);
+    let saveArray = [
+      {
+        key: "characters",
+        data: characters
+      },
+      {
+        key: "mapArrays",
+        data: mapArrays
+      }
+    ];
+    saveData(saveArray, `TOTE-${characters.player.name}-save-${new Date().getHours()}.${new Date().getMinutes()}.txt`);
     return
   }
   let int = 0;
   for (let i = 0; i < Saves.length; i++) {
     if (Saves[i].key == key) int = i;
   }
+  let minutes = new Date().getMinutes();
+  if(minutes < 10) minutes = `0${new Date().getMinutes()}`;
   Saves[int].save = true;
-  Saves[int].date = `${new Date().getDate()}.${new Date().getMonth() + 1}.${new Date().getFullYear()} | ${new Date().getHours()}:${new Date().getMinutes()}`;
+  Saves[int].date = `${new Date().getDate()}.${new Date().getMonth() + 1}.${new Date().getFullYear()} | ${new Date().getHours()}:${minutes}`;
   localStorage.setItem("saves", JSON.stringify(Saves));
   localStorage.setItem(`${Saves[int].key}characters`, JSON.stringify(characters));
   Saving();
@@ -116,10 +138,8 @@ function LoadSlotNoPrompt(key) {
   if (key == "toFile") {
     let fileInput = Create("input");
     fileInput.setAttribute('type', 'file');
-    document.body.appendChild(fileInput);
-    fileInput.id = "fileinput";
     fileInput.click();
-    fileInput.addEventListener("change", () => HandleFile());
+    fileInput.addEventListener("change", () => HandleFile(fileInput.files[0]));
     return;
   }
   characters = JSON.parse(localStorage.getItem(`${key}characters`));
@@ -127,9 +147,7 @@ function LoadSlotNoPrompt(key) {
   Loading();
 }
 
-function HandleFile() {
-  console.log(Element("fileinput").files);
-  let file = Element("fileinput").files[0];
+function HandleFile(file) {
   let reader = new FileReader();
   let text = "";
 
@@ -144,10 +162,18 @@ function HandleFile() {
   reader.readAsText(file);
 
   function FinishRead() {
-    let table = JSON.parse(text);
-    characters = table;
+    let Table = JSON.parse(text);
+    characters = GetKey("characters", Table).data;
     DrawMap();
     Loading();
+  }
+}
+
+function GetKey(key, table) {
+  for(let object of table) {
+    if(object.key == key) {
+      return object;
+    }
   }
 }
 
