@@ -22,6 +22,11 @@ var ui_buttons = [
     id: "mapButton"
   },
   {
+    bg: "_inv",
+    open: "invFrame",
+    id: "invButton"
+  },
+  {
     bg: "_info",
     open: "codex",
     id: "codexButton"
@@ -37,6 +42,7 @@ function HideAll() {
   Element("codex").style.display = "none";
   Element("mapFrame").style.display = "none";
   Element("settings").style.display = "none";
+  Element("invFrame").style.display = "none";
   Element("saveLoad").textContent = "";
 }
 

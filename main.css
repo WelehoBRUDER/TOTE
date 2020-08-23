@@ -482,3 +482,94 @@ body {
   top: 0px;
   opacity: 0.85;
 }
+
+#invFrame {
+  width: 1200px;
+  height: 720px;
+  position: absolute;
+  left: 50%;
+  margin-left: -600px;
+  top: 100px;
+  border-radius: 8px;
+  border: 8px solid rgb(80, 80, 80);
+  box-shadow: 0 6px 5px 5px rgb(59, 59, 59);
+}
+
+#invGridFrame {
+  width: 60%;
+  height: 100%;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  border: 6px solid rgb(32, 20, 10);
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+#invGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+#invGrid div {
+  transition: 0.1s;
+  width: 90px;
+  height: 95px;
+  background-color: rgb(54, 54, 54);
+  border: 6px solid rgb(27, 27, 27);
+  box-sizing: border-box;
+  margin: 12px;
+  padding: 0px;
+  position: relative;
+}
+
+#invGrid p {
+  position: absolute;
+  right: 8px;
+  bottom: -25px;
+  color: white;
+  font-size: 24px;
+  text-shadow: 0 0 4px black;
+}
+
+#invGrid div:hover {
+  border: 6px solid rgb(43, 43, 43);
+}
+
+#infoBox {
+  transition: 0.2s;
+  transform: scale(1.0);
+  width: 400px;
+  height: fit-content;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  user-select: none;
+  background-color: rgb(27, 27, 27);
+  text-shadow: 0 1px 2px silver;
+  font-weight: bold;
+}
+
+#infoBox p, span {
+  color: white;
+  font-size: 30px;
+  font-family: roboto;
+  margin: 0px;
+  position: relative;
+}
+
+#infoBox h1 {
+  color: white;
+  text-align: center;
+  text-decoration: underline;
+}
+
+#infoBox p {
+  margin-left: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

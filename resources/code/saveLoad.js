@@ -163,9 +163,7 @@ function HandleFile(file) {
 
   function FinishRead() {
     let Table = JSON.parse(text);
-    characters = GetKey("characters", Table).data;
-    DrawMap();
-    Loading();
+    LoadSlotPromptFile(file.name, Table);
   }
 }
 
@@ -182,6 +180,20 @@ function LoadSlotPrompt(key) {
   Element("yesAlert").textContent = "Load";
   Element("textAlert").textContent = `Are you sure you wish to load game on ${key}? You will lose all unsaved progress.`;
   Element("yesAlert").onclick = () => LoadSlotNoPrompt(key);
+}
+
+function LoadSlotPromptFile(file, data) {
+  Element("AlertBase").style.display = "block";
+  Element("yesAlert").textContent = "Load";
+  Element("textAlert").textContent = `Are you sure you wish to load game from file ${file}? You will lose all unsaved progress.`;
+  Element("yesAlert").onclick = () => LoadSlot(data);
+}
+
+function LoadSlot(data) {
+  hideAlert();
+  characters = GetKey("characters", data).data;
+  DrawMap();
+  Loading();
 }
 
 function SavePrompt(key) {

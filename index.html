@@ -32,13 +32,19 @@
   </div>
   <div id="saveLoad"></div>
   <div id="uiIcons"></div>
+  <div id="invFrame">
+    <div id="invGridFrame">
+      <div id="invGrid"></div>
+      <div id="infoBox"></div>
+    </div>
+  </div>
   <div id="AlertBase" hidden>
     <div id="dimScreen" onclick="hideAlert()"></div>
     <div id="Alert">
       <div id="topAlert">
         <img src="resources/images/icons/warn_icon.png" alt="" id="alertIco">
       </div>
-      <p id="textAlert">You are about to overwrite save [VERY LONG SAVE NAME WOULD THEN GO HERE YOU GET IT BRO??], are you sure you want to continue?</p>
+      <p id="textAlert"></p>
       <button id="yesAlert"></button>
       <button id="noAlert" onclick="hideAlert()">Cancel</button>
   </div>
@@ -55,4 +61,5 @@
 <script src="resources/code/mapActions.js"></script>
 <script src="resources/code/codexFunctions.js"></script>
 <script src="resources/code/saveLoad.js"></script>
+<script src="resources/code/invFunctions.js"></script>
 <script src="resources/code/ui.js"></script>
