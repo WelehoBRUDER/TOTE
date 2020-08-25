@@ -14,6 +14,8 @@ function CreateInv() {
       item.appendChild(img);
       item.addEventListener("mouseenter", ShowItemInfo);
       item.addEventListener("mouseleave", HideItemInfo);
+      item.addEventListener("click", EquipItem);
+      item.addEventListener("dblclick", DoubleClickEquipItem);
       if (itm.amount > 1) {
         let num = Create("p");
         num.textContent = itm.amount;
@@ -27,36 +29,46 @@ function CreateInv() {
 function ShowItemInfo(e) {
   Element("infoBox").style.transform = "scale(1)";
   Element("infoBox").textContent = "";
-  Element("infoBox").style.top = `${e.target.offsetTop}px`;
-  Element("infoBox").style.left = `${e.target.offsetLeft+100}px`;
-  let itm = characters.player.inventory[e.target.id.substring(7)];
+  let itm;
+  if (e.target.id.length > 8) {
+    itm = FindEquipment(e.target.id);
+    Element("infoBox").style.top = `${e.target.parentElement.offsetTop}px`;
+    Element("infoBox").style.left = `${e.target.parentElement.offsetLeft + 150}px`;
+  }
+  else {
+    itm = characters.player.inventory[e.target.id.substring(7)];
+    Element("infoBox").style.top = `${e.target.offsetTop}px`;
+    Element("infoBox").style.left = `${e.target.offsetLeft + 585}px`;
+  }
   Element("infoBox").innerHTML += `<h1>${itm.name}</h1>`
+  if (FoundDesc(itm) != false) Element("infoBox").appendChild(HandleDescSyntax(FoundDesc(itm)));
+  else if (debug) Element("infoBox").appendChild(HandleDescSyntax(`§/red/ERROR: DESCRIPTION NOT FOUND!§`));
   Element("infoBox").innerHTML += `<p>Price: ${itm.price}<span style="color: yellow">¤</span</p>
   <p>Amount: ${itm.amount}</p>
   <p>Level: ${itm.level}</p>
   `;
-  if(itm.speed) Element("infoBox").innerHTML += `<p>Speed: <span style="color: ${speedColor(itm.speed)}">${itm.speed}</span></p>`
-  if(itm.slot) Element("infoBox").innerHTML += `<p>Slot: ${itm.slot[0].toUpperCase()}${itm.slot.substring(1)}</p>`;
-  if(itm.twohand) Element("infoBox").innerHTML += `<p style="color: orange">Two handed weapon!</p>`;
-  if(itm.armor) {
+  if (itm.speed) Element("infoBox").innerHTML += `<p>Speed: <span style="color: ${speedColor(itm.speed)}">${itm.speed}</span></p>`
+  if (itm.slot) Element("infoBox").innerHTML += `<p>Slot: ${itm.slot[0].toUpperCase()}${itm.slot.substring(1)}</p>`;
+  if (itm.twohand) Element("infoBox").innerHTML += `<p style="color: orange">Two handed weapon!</p>`;
+  if (itm.armor) {
     Element("infoBox").innerHTML += `<p id="defText">Defenses: </p>
     <div class="grid">${loop()}</div>
     `;
     function loop() {
       let textElement = "";
-      for(let text in itm.armor) {
+      for (let text in itm.armor) {
         textElement += `<p style="color: ${colors[text]}">${text[0].toUpperCase()}${text.substring(1)}: <span>${itm.armor[text]}</span> </p>`;
       }
       return textElement;
     }
   }
-  if(itm.dmg) {
+  if (itm.dmg) {
     Element("infoBox").innerHTML += `<p id="defText">Damages: </p>
     <div class="grid">${loop()}</div>
     `;
     function loop() {
       let textElement = "";
-      for(let text of itm.dmg) {
+      for (let text of itm.dmg) {
         textElement += `<p style="color: ${colors[text.type]}">${text.type[0].toUpperCase()}${text.type.substring(1)}: <span>${text.value}</span> </p>`;
       }
       return textElement;
@@ -64,21 +76,50 @@ function ShowItemInfo(e) {
     Element("infoBox").innerHTML += `<p>Total: ${totalDmg(itm.dmg)}</p>`
     function totalDmg(dmg) {
       let damage = 0;
-      for(let value of dmg) {
+      for (let value of dmg) {
         damage += value.value;
       }
       damage += " dmg";
       return damage;
     }
   }
-  
+}
+
+function kassuStrat() {
+  characters.player.inventory[1] = characters.player.equipment[2];
+  CreateInv();
+}
+
+function HandleDescSyntax(text) {
+  let content = text.split("§");
+  let textContent = Create('div');
+  for (let colors of content) {
+    let color;
+    let text;
+    if (colors.indexOf("/") != -1) {
+      color = colors.split("/")[1];
+      text = colors.split("/")[2];
+    } else if (text == undefined) text = colors;
+    if (text == ":break") textContent.innerHTML += "<br>";
+    else if (text) textContent.innerHTML += `<span style = "color: ${color || "white"}" class="desc">${text}</span>`;
+  }
+  return textContent;
+}
+
+function FoundDesc(itm) {
+  for (let desc of itemDesc) {
+    if (desc.key == itm.key) {
+      return desc.text;
+    }
+  }
+  return false;
 }
 
 function speedColor(speed) {
-  if(speed > 0) {
+  if (speed > 0) {
     return "rgb(22, 196, 68)";
   }
-  else if(speed == 0) {
+  else if (speed == 0) {
     return "rgb(211, 214, 47)";
   }
   else {
@@ -88,6 +129,34 @@ function speedColor(speed) {
 
 function HideItemInfo() {
   Element("infoBox").style.transform = "scale(0)";
+}
+
+function CreateEquippedInventory() {
+  for (let item of characters.player.equipment) {
+    if (item.dmg) {
+      Element("weaponSlot").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      Element(item.key).addEventListener("mouseenter", ShowItemInfo);
+      Element(item.key).addEventListener("mouseleave", HideItemInfo);
+    }
+    else if (item.slot) {
+      if (item.slot == "chest") Element("chestarmor").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "helmet") Element("helmet").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "gloves") Element("gloves").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "feet") Element("feet").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "shield") Element("shieldSlot").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      Element(item.key).addEventListener("mouseenter", ShowItemInfo);
+      Element(item.key).addEventListener("mouseleave", HideItemInfo);
+    }
+  }
+}
+
+function FindEquipment(key) {
+  for (let eq of characters.player.equipment) {
+    if (eq.key == key) {
+      return eq;
+    }
+  }
+  return false;
 }
 
 function SortInv(reverse, filter, string) {
@@ -114,6 +183,64 @@ function SortInv(reverse, filter, string) {
     return 0;
   });
 }
+
+function EquipItem(e) {
+  let int;
+  if(!e.target.id) int = e.target.parentElement.id.substring(7);
+  else int = e.target.id.substring(7);
+  if(e.shiftKey) {
+    if(characters.player.inventory[int].dmg) {
+      let copy = GetWeapon();
+      characters.player.equipment[GetWeaponInt()] = characters.player.inventory[int];
+      characters.player.inventory[int] = copy;
+    }
+    else if(characters.player.inventory[int].slot) {
+      let copy = characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)];
+      characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)] = characters.player.inventory[int];
+      characters.player.inventory[int] = copy;
+    }
+    CreateEquippedInventory();
+    CreateInv();
+  }
+}
+
+function DoubleClickEquipItem(e) {
+  let int;
+  if(!e.target.id) int = e.target.parentElement.id.substring(7);
+  else int = e.target.id.substring(7);
+    if(characters.player.inventory[int].dmg) {
+      let copy = GetWeapon();
+      characters.player.equipment[GetWeaponInt()] = characters.player.inventory[int];
+      characters.player.inventory[int] = copy;
+    }
+    else if(characters.player.inventory[int].slot) {
+      let copy = characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)];
+      characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)] = characters.player.inventory[int];
+      characters.player.inventory[int] = copy;
+    }
+    CreateEquippedInventory();
+    CreateInv();
+}
+
+function GetArmorBySlot(slot) {
+  for(let i = 0; i<characters.player.equipment.length; i++) {
+    if(characters.player.equipment[i].slot == slot) return i;
+  }
+}
+
+function GetWeapon() {
+  for(let wep of characters.player.equipment) {
+    if(wep.dmg) return wep;
+  }
+}
+
+function GetWeaponInt() {
+  for(let i = 0; i<characters.player.equipment.length; i++) {
+    if(characters.player.equipment[i].dmg) return i;
+  }
+}
+
+CreateEquippedInventory();
 
 const colors = {
   dark: "rgb(10, 10, 10)",

@@ -117,7 +117,9 @@ function SaveNoPrompt(key) {
         data: mapArrays
       }
     ];
-    saveData(saveArray, `TOTE-${characters.player.name}-save-${new Date().getHours()}.${new Date().getMinutes()}.txt`);
+    let minutes = new Date().getMinutes();
+    if(minutes < 10) minutes = `0${new Date().getMinutes()}`;
+    saveData(saveArray, `TOTE-${characters.player.name}-save-${new Date().getHours()}.${minutes}.txt`);
     return
   }
   let int = 0;
@@ -144,6 +146,8 @@ function LoadSlotNoPrompt(key) {
   }
   characters = JSON.parse(localStorage.getItem(`${key}characters`));
   DrawMap();
+  CreateEquippedInventory();
+  CreateInv();
   Loading();
 }
 
@@ -192,6 +196,8 @@ function LoadSlotPromptFile(file, data) {
 function LoadSlot(data) {
   hideAlert();
   characters = GetKey("characters", data).data;
+  CreateEquippedInventory();
+  CreateInv();
   DrawMap();
   Loading();
 }

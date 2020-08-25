@@ -24,20 +24,46 @@
     <div id="allyportraits"></div>
     <div id="enemyportraits"></div>
   </div>
-  <div id="settings">
+  <div id="saveLoad"></div>
+  <div id="invFrame">
+    <div id="invEquipFrame">
+      <div id="armorFrame">
+        <div id="helmet"></div>
+        <p id="helmetText">Head Armor</p>
+        <div id="chestarmor"></div>
+        <p id="chestText">Chest Armor</p>
+        <div id="gloves"></div>
+        <p id="glovesText">Hand Armor</p>
+        <div id="feet"></div>
+        <p id="feetText">Leg Armor</p>
+      </div>
+      <div id="weaponFrame">
+        <div id="weaponSlot"></div>
+        <p id="weaponText">Weapon</p>
+        <div id="shieldSlot"></div>
+        <p id="shieldText">Shield</p>
+      </div>
+      <div id="ringFrame">
+        <div id="ring1"></div>
+        <p id="ring1Text">Ring 1</p>
+        <div id="ring2"></div>
+        <p id="ring2Text">Ring 2</p>
+        <div id="ring3"></div>
+        <p id="ring3Text">Ring 3</p>
+      </div>
+    </div>
+    <div id="invGridFrame">
+      <div id="invGrid"></div>
+    </div>
+    <div id="infoBox"></div>
+  </div>
+  <div id="settings" hidden>
     <button id="saves" onclick="Saving()" style="background-image: url('resources/images/bg/bg_red.png');">Save</button>
     <button id="load" onclick="Loading()" style="background-image: url('resources/images/bg/bg_red.png');">Load</button>
     <button id="options" style="background-image: url('resources/images/bg/bg_red.png');">Options</button>
     <button id="menu" style="background-image: url('resources/images/bg/bg_red.png');">Menu</button>
   </div>
-  <div id="saveLoad"></div>
   <div id="uiIcons"></div>
-  <div id="invFrame">
-    <div id="invGridFrame">
-      <div id="invGrid"></div>
-      <div id="infoBox"></div>
-    </div>
-  </div>
   <div id="AlertBase" hidden>
     <div id="dimScreen" onclick="hideAlert()"></div>
     <div id="Alert">
@@ -55,6 +81,7 @@
 <script src="resources/storage/characters.js"></script>
 <script src="resources/storage/text.js"></script>
 <script src="resources/storage/codex.js"></script>
+<script src="resources/storage/desc.js"></script>
 <script src="resources/storage/map.js"></script>
 <script src="resources/code/portraitCreator.js"></script>
 <script src="resources/code/mapFunctions.js"></script>

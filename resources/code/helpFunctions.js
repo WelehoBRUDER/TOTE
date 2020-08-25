@@ -35,3 +35,6 @@ function GetCodexEntity(cat, subcat, key) {
     }
   }
 }
+
+// Enable debug mode, adding more dev options and displaying errors.
+let debug = true;

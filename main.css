@@ -540,7 +540,7 @@ body {
 #infoBox {
   transition: 0.2s;
   transform: scale(1.0);
-  width: 400px;
+  width: 425px;
   height: fit-content;
   position: absolute;
   top: 0px;
@@ -553,10 +553,24 @@ body {
 
 #infoBox p, span {
   color: white;
-  font-size: 30px;
+  font-size: 27px;
   font-family: roboto;
   margin: 0px;
   position: relative;
+  white-space: nowrap;
+}
+
+#infoBox div {
+  margin: 25px;
+}
+
+.desc {
+  color: white;
+  font-size: 24px;
+  font-family: roboto;
+  margin: 0px;
+  font-style: italic;
+  white-space: normal;
 }
 
 #infoBox h1 {
@@ -572,4 +586,158 @@ body {
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+#invEquipFrame {
+  width: 40%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  border: 6px solid rgb(36, 36, 36);
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+#armorFrame div, #weaponFrame div {
+  transition: 0.1s;
+  width: 135px;
+  height: 140px;
+  background-color: rgb(54, 54, 54);
+  border: 6px solid rgb(27, 27, 27);
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+}
+
+#armorFrame div:hover, #weaponFrame div:hover, #ringFrame div:hover {
+  border: 6px solid rgb(44, 44, 44);
+}
+
+#armorFrame p, #weaponFrame p {
+  font-size: 26px;
+  font-family: roboto;
+  color: silver;
+  text-shadow: -1px 2px 4px rgb(58, 58, 58);
+  position: absolute;
+}
+
+#helmet {
+  left: 50px;
+  top: 25px;
+}
+
+#helmetText {
+  left: 50px;
+  top: 145px;
+}
+
+#chestarmor {
+  right: 50px;
+  top: 25px;
+}
+
+#chestText {
+  right: 50px;
+  top: 145px;
+}
+
+#gloves {
+  left: 50px;
+  top: 215px;
+}
+
+#glovesText {
+  left: 50px;
+  top: 335px;
+}
+
+#feet {
+  right: 50px;
+  top: 215px;
+}
+
+#feetText {
+  right: 60px;
+  top: 335px;
+}
+
+#weaponSlot {
+  left: 50px;
+  top: 430px;
+}
+
+#weaponText {
+  left: 70px;
+  top: 555px;
+}
+
+#shieldSlot {
+  right: 50px;
+  top: 430px;
+}
+
+#shieldText {
+  right: 90px;
+  top: 555px;
+}
+
+#ringFrame div {
+  transition: 0.1s;
+  width: 76px;
+  height: 65px;
+  background-color: rgb(54, 54, 54);
+  border: 6px solid rgb(27, 27, 27);
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+}
+
+#ringFrame p {
+  font-size: 18px;
+  font-family: roboto;
+  color: silver;
+  text-shadow: -1px 2px 4px rgb(58, 58, 58);
+  position: absolute;
+}
+
+#ring1 {
+  left: 60px;
+  bottom: 25px;
+}
+
+#ring2 {
+  left: 196px;
+  bottom: 25px;
+}
+
+#ring3 {
+  right: 60px;
+  bottom: 25px;
+}
+
+#ring1Text {
+  left: 72px;
+  bottom: -20px;
+}
+
+#ring2Text {
+  left: 208px;
+  bottom: -20px;
+}
+
+#ring3Text {
+  right: 72px;
+  bottom: -20px;
+}
+
+.equippedItem {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
 }
