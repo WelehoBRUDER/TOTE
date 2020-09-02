@@ -113,8 +113,8 @@ function SaveNoPrompt(key) {
         data: characters
       },
       {
-        key: "mapArrays",
-        data: mapArrays
+        key: "global",
+        data: global
       }
     ];
     let minutes = new Date().getMinutes();
@@ -132,6 +132,7 @@ function SaveNoPrompt(key) {
   Saves[int].date = `${new Date().getDate()}.${new Date().getMonth() + 1}.${new Date().getFullYear()} | ${new Date().getHours()}:${minutes}`;
   localStorage.setItem("saves", JSON.stringify(Saves));
   localStorage.setItem(`${Saves[int].key}characters`, JSON.stringify(characters));
+  localStorage.setItem(`${Saves[int].key}global`, JSON.stringify(global));
   Saving();
 }
 
@@ -145,10 +146,16 @@ function LoadSlotNoPrompt(key) {
     return;
   }
   characters = JSON.parse(localStorage.getItem(`${key}characters`));
+  global = JSON.parse(localStorage.getItem(`${key}global`));
+  LoadingUpdate();
+  Loading();
+}
+
+function LoadingUpdate() {
+  GlobalUpdate();
   DrawMap();
   CreateEquippedInventory();
   CreateInv();
-  Loading();
 }
 
 function HandleFile(file) {
@@ -196,9 +203,8 @@ function LoadSlotPromptFile(file, data) {
 function LoadSlot(data) {
   hideAlert();
   characters = GetKey("characters", data).data;
-  CreateEquippedInventory();
-  CreateInv();
-  DrawMap();
+  global = GetKey("global", data).data;
+  LoadingUpdate();
   Loading();
 }
 

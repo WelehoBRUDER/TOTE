@@ -9,8 +9,8 @@ let int = 0;
 
 // Gets the int of a map based on its key
 function GetMap(key) {
-  for(let i = 0; i<mapArrays.length; i++) {
-    if(mapArrays[i].key == key) int = i;
+  for (let i = 0; i < mapArrays.length; i++) {
+    if (mapArrays[i].key == key) int = i;
   }
 }
 
@@ -42,7 +42,7 @@ function DrawMap() {
         img.onload = function () {
           ctx.drawImage(img, x * 80, y * 80);
           if (characters.player.cords.x == x && characters.player.cords.y == y && !characters.player.lit) DrawPlayer();
-          else if(characters.player.cords.x == x && characters.player.cords.y == y && characters.player.lit) DrawPlayerHighlight();
+          else if (characters.player.cords.x == x && characters.player.cords.y == y && characters.player.lit) DrawPlayerHighlight();
         }
       }
     }
@@ -79,7 +79,7 @@ function movement(e) {
   // Rejecting incorrect inputs
   if (NotMoveKey(e.key) && e.key != " " && e.key != "Enter") return
   // Enter is the "map action", if the tile has an action it will be performed
-  if(e.key == "Enter") MapAction(characters.player.cords.x, characters.player.cords.y);
+  if (e.key == "Enter") MapAction(characters.player.cords.x, characters.player.cords.y);
   // Toggle highlight
   else if (e.key == " ") {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
@@ -88,24 +88,27 @@ function movement(e) {
   else if (e.key == "w" || e.key == "ArrowUp") {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x, characters.player.cords.y - 1) && characters.player.cords.y - 1 > -1) characters.player.cords.y--;
-
+    if (CanWalk(characters.player.cords.x, characters.player.cords.y - 1) && characters.player.cords.y - 1 > -1) global.time.minute += 5;
   }
   else if (e.key == "s" || e.key == "ArrowDown") {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x, characters.player.cords.y + 1) != 0 && characters.player.cords.y + 1 < 10) characters.player.cords.y++;
+    if (CanWalk(characters.player.cords.x, characters.player.cords.y + 1) != 0 && characters.player.cords.y + 1 < 10) global.time.minute += 5;
 
   }
   else if (e.key == "a" || e.key == "ArrowLeft") {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x - 1, characters.player.cords.y) && characters.player.cords.x - 1 > -1) characters.player.cords.x--;
-
+    if (CanWalk(characters.player.cords.x - 1, characters.player.cords.y) && characters.player.cords.x - 1 > -1) global.time.minute += 5;
   }
   else if (e.key == "d" || e.key == "ArrowRight") {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x + 1, characters.player.cords.y) && characters.player.cords.x + 1 < 16) characters.player.cords.x++;
+    if (CanWalk(characters.player.cords.x + 1, characters.player.cords.y) && characters.player.cords.x + 1 < 16) global.time.minute += 5;
   }
-  if(!characters.player.lit && e.key != "Enter") DrawPlayer();
-  else if(characters.player.lit && e.key != "Enter") DrawPlayerHighlight();
+  GlobalUpdate();
+  if (!characters.player.lit && e.key != "Enter") DrawPlayer();
+  else if (characters.player.lit && e.key != "Enter") DrawPlayerHighlight();
 }
 
 function CanWalk(x, y) {

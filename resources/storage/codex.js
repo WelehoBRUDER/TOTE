@@ -43,6 +43,15 @@ var codex = [
               { tag: "humanoid" }
             ]
           },
+          {
+            key: "Viktor Stahlhelm",
+            content: "",
+            tags: [
+              {tag: "enemies"},
+              {tag: "villain"},
+              {tag: "humanoid"}
+            ]
+          }
         ]
       },
       {
@@ -91,6 +100,23 @@ var codex = [
             ]
           }
         ]
+      }
+    ]
+  },
+  {
+    cat: "Events",
+    subcats: [
+      {
+        subcat: "The Prelude (150-230)",
+        content: []
+      },
+      {
+        subcat: "The Great Terror (230-266)",
+        content: []
+      },
+      {
+        subcat: "Dawn of Hope (266-present)",
+        content: []
       }
     ]
   }

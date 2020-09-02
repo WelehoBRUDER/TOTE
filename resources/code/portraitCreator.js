@@ -2,7 +2,6 @@ function CreatePortrait(character, enemy) {
   let portrait = Create('div');
   portrait.id = character.key + "_Portrait";
   let name = character.name;
-  console.log(name.length);
   if (name.length > 18) {
     name = name.substring(0, 17);
     name += "...";
@@ -54,8 +53,10 @@ function HarmPlayer(dmg) {
 
 PushCombatantToTable(characters.player, alliesFight);
 PushCombatantToTable(characters.allies[0], alliesFight);
+PushCombatantToTable(characters.allies[1], alliesFight);
 PushCombatantToTable(characters.enemies[0], enemiesFight);
 PushCombatantToTable(characters.enemies[1], enemiesFight);
+PushCombatantToTable(characters.enemies[2], enemiesFight);
 
 
 CreatePortraits();

@@ -549,6 +549,7 @@ body {
   background-color: rgb(27, 27, 27);
   text-shadow: 0 1px 2px silver;
   font-weight: bold;
+  z-index: 2
 }
 
 #infoBox p, span {
@@ -557,7 +558,6 @@ body {
   font-family: roboto;
   margin: 0px;
   position: relative;
-  white-space: nowrap;
 }
 
 #infoBox div {
@@ -740,4 +740,51 @@ body {
   position: absolute;
   left: 0px;
   top: 0px;
+}
+
+#timeFrame {
+  width: 360px;
+  height: 120px;
+  background-color: rgb(97, 14, 14);
+  border-radius: 16px;
+  position: absolute;
+  left: 50%;
+  margin-left: -180px;
+  top: 900px;
+  background-image: url("resources/images/bg/bg_cbrown.png");
+  box-shadow: 0 5px 5px 5px rgb(39, 21, 11);
+}
+
+#timeFrame div {
+  width: 320px;
+  height: 4px;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  margin-left: -160px;
+  top: 56px;
+  box-shadow: inset 0 0 1px 1px silver, 0 0 2px 1px rgb(177, 176, 176);
+}
+
+#timeFrame p {
+  color: white;
+  text-shadow: 0 2px 6px rgb(0, 0, 0);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  position: absolute;
+}
+
+#clock {
+  font-size: 30px;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#date {
+  font-size: 30px;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }

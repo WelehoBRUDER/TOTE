@@ -132,8 +132,14 @@ function HideItemInfo() {
 }
 
 function CreateEquippedInventory() {
+  Element("weaponSlot").innerHTML = "";
+  Element("chestarmor").innerHTML = "";
+  Element("helmet").innerHTML = "";
+  Element("gloves").innerHTML = "";
+  Element("feet").innerHTML = "";
+  Element("shieldSlot").innerHTML = "";
   for (let item of characters.player.equipment) {
-    if (item.dmg) {
+    if (GetWeapon() && item.dmg) {
       Element("weaponSlot").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
       Element(item.key).addEventListener("mouseenter", ShowItemInfo);
       Element(item.key).addEventListener("mouseleave", HideItemInfo);
@@ -150,6 +156,21 @@ function CreateEquippedInventory() {
   }
 }
 
+// DBL CLICK WORKS, YOU JUST NEED TO BE MORE PRECISE, IDIOT ;)
+Element("weaponSlot").addEventListener("click", UnequipWeapon);
+Element("weaponSlot").addEventListener("dblclick", UnequipWeaponDBL);
+Element("shieldSlot").addEventListener("click", (e = this) => UnequipArmor(e, "shield"));
+Element("shieldSlot").addEventListener("dblclick", () => UnequipArmorDBL("shield"));
+Element("chestarmor").addEventListener("click", (e = this) => UnequipArmor(e, "chest"));
+Element("chestarmor").addEventListener("dblclick", () => UnequipArmorDBL("chest"));
+Element("helmet").addEventListener("click", (e = this) => UnequipArmor(e, "helmet"));
+Element("helmet").addEventListener("dblclick", () => UnequipArmorDBL("helmet"));
+Element("gloves").addEventListener("click", (e = this) => UnequipArmor(e, "gloves"));
+Element("gloves").addEventListener("dblclick", () => UnequipArmorDBL("gloves"));
+Element("feet").addEventListener("click", (e = this) => UnequipArmor(e, "feet"));
+Element("feet").addEventListener("dblclick", () => UnequipArmorDBL("feet"));
+
+
 function FindEquipment(key) {
   for (let eq of characters.player.equipment) {
     if (eq.key == key) {
@@ -157,6 +178,46 @@ function FindEquipment(key) {
     }
   }
   return false;
+}
+
+function UnequipArmor(e, slot) {
+  if (e.shiftKey) {
+    let copy = characters.player.equipment[GetArmorBySlot(slot)];
+    characters.player.inventory.push(copy);
+    characters.player.equipment.splice(GetArmorBySlot(slot), 1);
+  }
+  HideItemInfo();
+  CreateEquippedInventory();
+  CreateInv();
+}
+
+function UnequipArmorDBL(slot) {
+  let copy = characters.player.equipment[GetArmorBySlot(slot)];
+  characters.player.inventory.push(copy);
+  characters.player.equipment.splice(GetArmorBySlot(slot), 1);
+  HideItemInfo();
+  CreateEquippedInventory();
+  CreateInv();
+}
+
+function UnequipWeapon(e) {
+  if (e.shiftKey) {
+    let copy = GetWeapon();
+    characters.player.inventory.push(copy);
+    characters.player.equipment.splice(GetWeaponInt(), 1);
+    HideItemInfo();
+    CreateEquippedInventory();
+    CreateInv();
+  }
+}
+
+function UnequipWeaponDBL() {
+  let copy = GetWeapon();
+  characters.player.inventory.push(copy);
+  characters.player.equipment.splice(GetWeaponInt(), 1);
+  HideItemInfo();
+  CreateEquippedInventory();
+  CreateInv();
 }
 
 function SortInv(reverse, filter, string) {
@@ -186,18 +247,29 @@ function SortInv(reverse, filter, string) {
 
 function EquipItem(e) {
   let int;
-  if(!e.target.id) int = e.target.parentElement.id.substring(7);
+  if (!e.target.id) int = e.target.parentElement.id.substring(7);
   else int = e.target.id.substring(7);
-  if(e.shiftKey) {
-    if(characters.player.inventory[int].dmg) {
+  if (e.shiftKey) {
+    if (characters.player.inventory[int].dmg) {
       let copy = GetWeapon();
-      characters.player.equipment[GetWeaponInt()] = characters.player.inventory[int];
-      characters.player.inventory[int] = copy;
+      if (THEREISWEAPON() === true) {
+        characters.player.equipment[GetWeaponInt()] = characters.player.inventory[int];
+        characters.player.inventory[int] = copy;
+      }
+      else {
+        characters.player.equipment.push(characters.player.inventory[int]);
+        characters.player.inventory.splice(int, 1);
+      }
     }
-    else if(characters.player.inventory[int].slot) {
+    else if (characters.player.inventory[int].slot) {
       let copy = characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)];
-      characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)] = characters.player.inventory[int];
-      characters.player.inventory[int] = copy;
+      if (GetArmorBySlot(characters.player.inventory[int].slot)) {
+        characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)] = characters.player.inventory[int];
+        characters.player.inventory[int] = copy;
+      } else {
+        characters.player.equipment.push(characters.player.inventory[int]);
+        characters.player.inventory.splice(int, 1);
+      }
     }
     CreateEquippedInventory();
     CreateInv();
@@ -206,38 +278,59 @@ function EquipItem(e) {
 
 function DoubleClickEquipItem(e) {
   let int;
-  if(!e.target.id) int = e.target.parentElement.id.substring(7);
+  if (!e.target.id) int = e.target.parentElement.id.substring(7);
   else int = e.target.id.substring(7);
-    if(characters.player.inventory[int].dmg) {
-      let copy = GetWeapon();
+  if (characters.player.inventory[int].dmg) {
+    let copy = GetWeapon();
+    if (THEREISWEAPON() === true) {
       characters.player.equipment[GetWeaponInt()] = characters.player.inventory[int];
       characters.player.inventory[int] = copy;
     }
-    else if(characters.player.inventory[int].slot) {
-      let copy = characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)];
+    else {
+      characters.player.equipment.push(characters.player.inventory[int]);
+      characters.player.inventory.splice(int, 1);
+    }
+  }
+  else if (characters.player.inventory[int].slot) {
+    let copy = characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)];
+    if (GetArmorBySlot(characters.player.inventory[int].slot)) {
       characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)] = characters.player.inventory[int];
       characters.player.inventory[int] = copy;
+    } else {
+      characters.player.equipment.push(characters.player.inventory[int]);
+      characters.player.inventory.splice(int, 1);
     }
-    CreateEquippedInventory();
-    CreateInv();
+  }
+  CreateEquippedInventory();
+  CreateInv();
 }
 
 function GetArmorBySlot(slot) {
-  for(let i = 0; i<characters.player.equipment.length; i++) {
-    if(characters.player.equipment[i].slot == slot) return i;
+  for (let i = 0; i < characters.player.equipment.length; i++) {
+    if (characters.player.equipment[i].slot == slot) return i;
   }
+  return false;
 }
 
 function GetWeapon() {
-  for(let wep of characters.player.equipment) {
-    if(wep.dmg) return wep;
+  for (let wep of characters.player.equipment) {
+    if (wep.dmg) return wep;
   }
 }
 
-function GetWeaponInt() {
-  for(let i = 0; i<characters.player.equipment.length; i++) {
-    if(characters.player.equipment[i].dmg) return i;
+// Had to add this since the other ones weren't enough...
+function THEREISWEAPON() {
+  for (let wep of characters.player.equipment) {
+    if (wep.dmg) return true;
   }
+  return false;
+}
+
+function GetWeaponInt() {
+  for (let i = 0; i < characters.player.equipment.length; i++) {
+    if (characters.player.equipment[i].dmg) return i;
+  }
+  return false;
 }
 
 CreateEquippedInventory();
@@ -253,6 +346,33 @@ const colors = {
   slash: "rgb(129, 129, 130)",
   blunt: "rgb(154, 152, 156)",
   thrust: "rgb(91, 90, 92)"
+}
+
+function GetAVGArmor(char) {
+  let arm = {};
+  let amnt = 0;
+  let firstTime = true;
+  for (let eq of char.equipment) {
+    if (eq.slot && eq.slot != "shield") {
+      if (firstTime) {
+        arm = JSON.parse(JSON.stringify(eq.armor));
+        firstTime = false;
+        for (let text in arm) {
+          arm[text] = 0;
+        }
+      }
+      for (let def in eq.armor) {
+        arm[def] += eq.armor[def];
+      }
+      amnt++;
+    }
+  }
+
+  for (let def in arm) {
+    arm[def] = Math.ceil(arm[def] / (8 - amnt));
+  }
+  return arm;
+  console.log(arm);
 }
 
 CreateInv();
