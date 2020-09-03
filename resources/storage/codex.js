@@ -23,7 +23,7 @@ var codex = [
   },
   {
     cat: "Characters",
-    text: "yes people in game yes",
+    text: "§:break§yes people in game yes",
     subcats: [
       {
         subcat: "Enemies",
@@ -88,15 +88,20 @@ var codex = [
           },
           {
             key: "Kitty Witty",
-            content: "§:break§Big Aww. Kitty is way better than §&GotCodexEntity('Characters','Fluffy Bois',Doggus Woggus'&Doggus§ :)."
-          }
+            content: "§:break§Big Aww. Kitty is way better than §&GotCodexEntity('Characters','Fluffy Bois',Doggus Woggus'&Doggus§ :).",
+            tags: [
+              { tag: "fluffy" },
+              { tag: "cute" },
+              { tag: "feline" }
+            ]
+          },
         ]
-      }
+      },
     ]
   },
   {
     cat: "Races",
-    text: "Learn about the races which live in Die Welt.",
+    text: "§:break§Learn about the races which live in Die Welt.",
     subcats: [
       {
         subcat: "Humans",
@@ -169,7 +174,7 @@ var codex = [
   },
   {
     cat: "Areas",
-    text: "Discover the different areas in Die Welt.",
+    text: "§:break§Discover the different areas in Die Welt.",
     subcats: [
       {
         subcat: "Helleria",
@@ -260,7 +265,7 @@ var codex = [
   },
   {
     cat: "Events",
-    text: "What happened and when.",
+    text: "§:break§What happened and when.",
     subcats: [
       {
         subcat: "The Prelude (150-230)",
