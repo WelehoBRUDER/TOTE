@@ -14,6 +14,7 @@ function CreateCodex() {
     catTitle.id = cat.cat + "Title";
     catArrow.id = cat.cat + "Button";
     catArrow.addEventListener("click", () => openSubCategories(cat.subcats, catArrow.id, catTitle.id));
+    catTitle.addEventListener("mousedown", ()=>renderCategoryContent(cat.cat, cat.text));
     catTitle.appendChild(catArrow);
     Element("contentScroller").appendChild(catTitle);
   }
@@ -31,6 +32,7 @@ function openSubCategories(subcats, id, parent) {
       catSubtitle.id = subcat.subcat + "Title";
       catSubarrow.id = subcat.subcat + "Button";
       catSubarrow.addEventListener("click", () => openEntityList(subcat.content, catSubarrow.id, catSubtitle.id));
+      catSubtitle.addEventListener("mouseup", ()=> renderCategoryContent(subcat.subcat, subcat.text))
       catSubtitle.appendChild(catSubarrow);
       Element(base.id).appendChild(catSubtitle);
     }
@@ -73,12 +75,26 @@ function FormCodexEntity(key, content, tags) {
   Element("content").textContent = "";
   Element("content").appendChild(CreateText(key, "CodexEntryTitle"));
   Element("content").appendChild(ReadContent(content));
-  let tagsText = "Tags: ";
-  for (let tag of tags) {
-    tagsText += tag.tag + ", ";
+  if(tags != undefined) {
+    let tagsText = "Tags: ";
+    for (let tag of tags) {
+      tagsText += tag.tag + ", ";
+    }
+    tagsText = tagsText.substring(0, tagsText.length - 2);
+    Element("content").appendChild(CreateText(tagsText, "CodexEntities"));
+  } else {
+    if(debug) console.log("Tags are missing! Your entry will be harder to find!");
   }
-  tagsText = tagsText.substring(0, tagsText.length - 2);
-  Element("content").appendChild(CreateText(tagsText, "CodexEntities"));
+
+}
+
+function renderCategoryContent(key, content) {
+  Element("content").textContent = "";
+  Element("content").appendChild(CreateText(key, "CodexEntryTitle"));
+  if(content) {
+    Element("content").appendChild(ReadContent(content));
+  }
+  else if(debug) console.log("Category has no content! If this is intentional, ignore this message.");
 }
 
 function ReadContent(text) {
@@ -109,6 +125,7 @@ function ReadContent(text) {
   }
   return textContent;
 }
+
 
 function ToggleTags() {
   if (!tagSearch) {
