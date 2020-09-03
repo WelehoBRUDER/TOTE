@@ -23,6 +23,7 @@ var codex = [
   },
   {
     cat: "Characters",
+    text: "yes people in game yes",
     subcats: [
       {
         subcat: "Enemies",
@@ -53,6 +54,23 @@ var codex = [
               {tag: "villain"},
               {tag: "humanoid"}
             ]
+          },
+          {
+            key: "Sand Witches",
+            content: "§:break§Sand Witches are witches local to the desert in eastern midlands.",
+            tags: [
+              { tag: "desert" },
+              { tag: "enemy"}
+            ]
+          },
+          {
+            key: "Sand Bitches",
+            content: "§:break§Sand Bitches are desert rats under the control of §&GetCodexEntity('Characters','Enemies','Sand Witches')&Sand Witches§.",
+            tags: [
+              { tag: "desert"},
+              { tag: "sandwitch"},
+              { tag: "enemy"}
+            ]
           }
         ]
       },
@@ -68,12 +86,17 @@ var codex = [
               { tag: "canine" }
             ]
           },
+          {
+            key: "Kitty Witty",
+            content: "§:break§Big Aww. Kitty is way better than §&GotCodexEntity('Characters','Fluffy Bois',Doggus Woggus'&Doggus§ :)."
+          }
         ]
       }
     ]
   },
   {
     cat: "Races",
+    text: "Learn about the races which live in Die Welt.",
     subcats: [
       {
         subcat: "Humans",
@@ -146,6 +169,7 @@ var codex = [
   },
   {
     cat: "Areas",
+    text: "Discover the different areas in Die Welt.",
     subcats: [
       {
         subcat: "Helleria",
@@ -203,7 +227,7 @@ var codex = [
         content: [
           {
             key: "Ululul",
-            content: "§:break§Ululul is the home to lanklets, the giants of the swamps.",
+            content: "§:break§Ululul is the home to §&GetCodexEntity('Races','Yeeters','Lanklets')&lanklets§, the giants of the swamps.",
             tags: [
               { tag: "swamp" },
               { tag: "lanklet"}
@@ -211,7 +235,7 @@ var codex = [
           },
           {
             key: "Swampf",
-            content: "§:break§The area surrounding §&/orange/GetCodexEntity('Areas','Swamps','Ululul')&Ululul§. It's known all around Die Welt for its deadly bog in which only lanklets thrive."
+            content: "§:break§The area surrounding §&/orange/GetCodexEntity('Areas','Swamps','Ululul')&Ululul§. It's known all around Die Welt for its deadly bog in which only §&GetCodexEntity('Races','Yeeters','Lanklets')&lanklets§ thrive."
           }
         ]
       },
@@ -236,6 +260,7 @@ var codex = [
   },
   {
     cat: "Events",
+    text: "What happened and when.",
     subcats: [
       {
         subcat: "The Prelude (150-230)",
