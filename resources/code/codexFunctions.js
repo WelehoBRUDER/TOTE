@@ -101,7 +101,10 @@ function FormCodexEntity(key, content, tags, image=null) {
 
 function CreateCodexImage(src) {
   let image = Create("img");
-  image.src = `resources/images/events/${src}.png`;
+  let srcOf = src.split("|");
+  image.src = `resources/images/${srcOf[0]}.png`;
+  image.style.borderColor = srcOf[1];
+  image.style.boxShadow = `-2px 6px 4px 1px ${srcOf[2]}`;
   image.classList.add("codexImage");
   return image;
 }
