@@ -83,6 +83,36 @@ function ShowItemInfo(e) {
       return damage;
     }
   }
+  if(itm.effects) {
+    Element("infoBox").innerHTML += `<p>Effects:</p>`;
+    let effectDiv = Create("div");
+    effectDiv.classList.add("effectBox");
+    effectDiv.appendChild(effects(itm.effects));
+    Element("infoBox").appendChild(effectDiv);
+  }
+}
+
+function effects(effects) {
+  let main = Create("p");
+  main.classList.add("effectMain");
+  for(let effect of effects) {
+    let sub = Create("p");
+    sub.classList.add("effectLine");
+    sub.appendChild(HandleDescSyntax(GetStringByKey(effect.action, actions)));
+    sub.appendChild(HandleDescSyntax(GetStringByKey(effect.type, symbols)));
+    sub.innerHTML += `<p><span>by ${effect.value}</span></p>`;
+    main.appendChild(sub);
+  }
+  return main;
+}
+
+
+function GetStringByKey(key, array) {
+  for(let item of array) {
+    if(item.key == key) {
+      return item.content;
+    }
+  }
 }
 
 function kassuStrat() {
@@ -92,15 +122,21 @@ function kassuStrat() {
 
 function HandleDescSyntax(text) {
   let content = text.split("§");
-  let textContent = Create('div');
+  let textContent = Create('p');
   for (let colors of content) {
+    let img;
     let color;
     let text;
-    if (colors.indexOf("/") != -1) {
+    if (colors.indexOf("%") != -1) {
+      img = colors.split("%")[1];
+      text = colors.split("%")[2];
+    }
+    else if (colors.indexOf("/") != -1) {
       color = colors.split("/")[1];
       text = colors.split("/")[2];
     } else if (text == undefined) text = colors;
     if (text == ":break") textContent.innerHTML += "<br>";
+    else if (img != undefined) textContent.innerHTML += `<img style="width: 22px; height: 22px;" src="resources/images/icons/${img}.png">`;
     else if (text) textContent.innerHTML += `<span style = "color: ${color || "white"}" class="desc">${text}</span>`;
   }
   return textContent;
@@ -132,6 +168,7 @@ function HideItemInfo() {
 }
 
 function CreateEquippedInventory() {
+  UpdatePlayerStats();
   Element("weaponSlot").innerHTML = "";
   Element("chestarmor").innerHTML = "";
   Element("helmet").innerHTML = "";
@@ -346,7 +383,24 @@ const colors = {
   slash: "rgb(129, 129, 130)",
   blunt: "rgb(154, 152, 156)",
   thrust: "rgb(91, 90, 92)"
-}
+};
+
+const actions = [
+  {key: "increase", content: "§/rgb(11, 191, 32)/Increases§"},
+  {key: "decrease", content: "§/rgb(128, 9, 15)/Decreases§"}
+];
+
+const symbols = [
+  {key: "hp", content: "§/rgb(237, 9, 47)/maximum health§ §%heart_icon_small%§"},
+  {key: "mana", content: "§/rgb(9, 106, 128)/maximum mana§ §%warn_icon%§"},
+  {key: "str", content: "§/rgb(201, 198, 187)/strength§ §%warn_icon%§"},
+  {key: "dex", content: "§/rgb(201, 198, 187)/dexterity §%warn_icon%§"},
+  {key: "agi", content: "§/rgb(201, 198, 187)/agility §%warn_icon%§"},
+  {key: "wis", content: "§/rgb(201, 198, 187)/wisdom §%warn_icon%§"},
+  {key: "int", content: "§/rgb(201, 198, 187)/intelligence §%warn_icon%§"},
+  {key: "fth", content: "§/rgb(201, 198, 187)/faith §%warn_icon%§"},
+  {key: "acc", content: "§/rgb(201, 198, 187)/accuracy §%warn_icon%§"},
+];
 
 function GetAVGArmor(char) {
   let arm = {};
@@ -372,7 +426,71 @@ function GetAVGArmor(char) {
     arm[def] = Math.ceil(arm[def] / (8 - amnt));
   }
   return arm;
-  console.log(arm);
+}
+
+function UpdatePlayerStats() {
+  if(!characters.player.modifiers) characters.player.modifiers = [];
+  for(let eq of characters.player.equipment) {
+    if(eq.effects) {
+      for(let effect of eq.effects) {
+        if(!ModExists(effect.key)) {
+          effect.applied = false;
+          characters.player.modifiers.push(effect);
+          AddValueOfMod(effect);
+        }
+      }
+    }
+  }
+  while(KeepRunningModRemoval()) {
+    RemoveModIfEquipRemoved();
+  }
+  addToFight();
+}
+
+function AddValueOfMod(effect) {
+  if(effect.applied == true) return;
+  if(effect.action == "increase") characters.player.stats[effect.type] += effect.value;
+  else if(effect.action == "decrease") characters.player.stats[effect.type] -= effect.value;
+  effect.applied = true;
+}
+
+function KeepRunningModRemoval() {
+  for(let mod of characters.player.modifiers) {
+    if(ModShouldNotExist(mod.key)) return true;
+  }
+  return false;
+}
+
+function RemoveModIfEquipRemoved() {
+  let copy = characters.player.modifiers
+  for(let i=0; i<characters.player.modifiers.length; i++) {
+    if(ModShouldNotExist(characters.player.modifiers[i].key)) {
+      let effect = characters.player.modifiers[i];
+      if(effect.action == "increase") characters.player.stats[effect.type] -= effect.value;
+      else if(effect.action == "decrease") characters.player.stats[effect.type] += effect.value;
+      copy.splice(i, 1);
+    }
+  }
+  characters.player.modifiers = copy;
+}
+
+function ModShouldNotExist(key) {
+  for(let eq of characters.player.equipment) {
+    if(eq.effects) {
+      for(let effect of eq.effects) {
+        if(effect.key == key) return false;
+      }
+    }
+  }
+  return true;
+}
+
+function ModExists(key) {
+  for(let mod of characters.player.modifiers) {
+    if(mod.key == key) {
+      return true;
+    }
+  }
 }
 
 CreateInv();
