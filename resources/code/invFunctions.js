@@ -426,9 +426,7 @@ function UpdatePlayerStats() {
   for(let eq of characters.player.equipment) {
     if(eq.effects) {
       for(let effect of eq.effects) {
-        if(ModExists(effect.key)) {
-          return;
-        } else {
+        if(!ModExists(effect.key)) {
           effect.applied = false;
           characters.player.modifiers.push(effect);
           AddValueOfMod(effect);
