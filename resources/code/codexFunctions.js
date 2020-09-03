@@ -75,18 +75,26 @@ function FormCodexEntity(key, content, tags) {
   Element("content").textContent = "";
   Element("content").appendChild(CreateText(key, "CodexEntryTitle"));
   Element("content").appendChild(ReadContent(content));
-  let tagsText = "Tags: ";
-  for (let tag of tags) {
-    tagsText += tag.tag + ", ";
+  if(tags != undefined) {
+    let tagsText = "Tags: ";
+    for (let tag of tags) {
+      tagsText += tag.tag + ", ";
+    }
+    tagsText = tagsText.substring(0, tagsText.length - 2);
+    Element("content").appendChild(CreateText(tagsText, "CodexEntities"));
+  } else {
+    if(debug) console.log("Tags are missing! Your entry will be harder to find!");
   }
-  tagsText = tagsText.substring(0, tagsText.length - 2);
-  Element("content").appendChild(CreateText(tagsText, "CodexEntities"));
+
 }
 
 function renderCategoryContent(key, content) {
   Element("content").textContent = "";
   Element("content").appendChild(CreateText(key, "CodexEntryTitle"));
-  Element("content").appendChild(ReadContent(content));
+  if(content) {
+    Element("content").appendChild(ReadContent(content));
+  }
+  else if(debug) console.log("Category has no content! If this is intentional, ignore this message.");
 }
 
 function ReadContent(text) {
@@ -117,6 +125,7 @@ function ReadContent(text) {
   }
   return textContent;
 }
+
 
 function ToggleTags() {
   if (!tagSearch) {
