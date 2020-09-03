@@ -197,6 +197,23 @@ var codex = [
         ]
       },
       {
+        subcat: "Swamps",
+        content: [
+          {
+            key: "Ululul",
+            content: "§:break§Ululul is the home to lanklets, the giants of the swamps.",
+            tags: [
+              { tag: "swamp" },
+              { tag: "lanklet"}
+            ]
+          },
+          {
+            key: "Swampf",
+            content: "§:break§The area surrounding §&/orange/GetCodexEntity('Areas','Swamps','Ululul')&Ululul§. It's known all around Die Welt for its deadly bog in which only lanklets thrive."
+          }
+        ]
+      },
+      {
         subcat: "North Mountains",
         content: [
           {
