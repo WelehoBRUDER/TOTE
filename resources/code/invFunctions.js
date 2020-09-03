@@ -392,7 +392,14 @@ const actions = [
 
 const symbols = [
   {key: "hp", content: "§/rgb(237, 9, 47)/maximum health§ §%heart_icon_small%§"},
-  {key: "mana", content: "§/rgb(9, 106, 128)/maximum mana§ §%warn_icon%§"}
+  {key: "mana", content: "§/rgb(9, 106, 128)/maximum mana§ §%warn_icon%§"},
+  {key: "str", content: "§/rgb(201, 198, 187)/strength§ §%warn_icon%§"},
+  {key: "dex", content: "§/rgb(201, 198, 187)/dexterity §%warn_icon%§"},
+  {key: "agi", content: "§/rgb(201, 198, 187)/agility §%warn_icon%§"},
+  {key: "wis", content: "§/rgb(201, 198, 187)/wisdom §%warn_icon%§"},
+  {key: "int", content: "§/rgb(201, 198, 187)/intelligence §%warn_icon%§"},
+  {key: "fth", content: "§/rgb(201, 198, 187)/faith §%warn_icon%§"},
+  {key: "acc", content: "§/rgb(201, 198, 187)/accuracy §%warn_icon%§"},
 ];
 
 function GetAVGArmor(char) {
