@@ -14,7 +14,7 @@ function CreateCodex() {
     catTitle.id = cat.cat + "Title";
     catArrow.id = cat.cat + "Button";
     catArrow.addEventListener("click", () => openSubCategories(cat.subcats, catArrow.id, catTitle.id));
-    catTitle.addEventListener("mousedown", ()=>renderCategoryContent(cat.cat, cat.text));
+    catTitle.onclick = ()=>renderCategoryContent(cat.cat, cat.text);
     catTitle.appendChild(catArrow);
     Element("contentScroller").appendChild(catTitle);
   }
@@ -32,7 +32,10 @@ function openSubCategories(subcats, id, parent) {
       catSubtitle.id = subcat.subcat + "Title";
       catSubarrow.id = subcat.subcat + "Button";
       catSubarrow.addEventListener("click", () => openEntityList(subcat.content, catSubarrow.id, catSubtitle.id));
-      catSubtitle.addEventListener("mouseup", ()=> renderCategoryContent(subcat.subcat, subcat.text))
+      catSubtitle.onclick = function(e) {
+        e.stopPropagation();
+        renderCategoryContent(subcat.subcat, subcat.text);
+      }
       catSubtitle.appendChild(catSubarrow);
       Element(base.id).appendChild(catSubtitle);
     }
@@ -53,7 +56,10 @@ function openEntityList(content, id, parent) {
       let catEntity = CreateText(entity.key, "CodexEntities")
       catEntity.id = entity.key + "Entity";
       catEntity.style.textDecoration = "none";
-      catEntity.addEventListener("click", () => FormCodexEntity(entity.key, entity.content, entity.tags));
+      catEntity.onclick = function(e) {
+        e.stopPropagation();
+        FormCodexEntity(entity.key, entity.content, entity.tags);
+      }
       Element(base.id).appendChild(catEntity);
     }
   }
@@ -63,11 +69,15 @@ function openEntityList(content, id, parent) {
   }
 }
 
+function stop(e) {
+  e.stopPropagation();
+}
+
 function createSearchedEntity(entity) {
   let catEntity = CreateText(entity.key, "CodexEntities")
   catEntity.id = entity.key + "SearchedEntity";
   catEntity.style.textDecoration = "none";
-  catEntity.addEventListener("click", () => FormCodexEntity(entity.key, entity.content, entity.tags));
+  catEntity.addEventListener("click",(e)=>stop(e), () => FormCodexEntity(entity.key, entity.content, entity.tags));
   Element("contentScroller").appendChild(catEntity);
 }
 
