@@ -24,7 +24,41 @@ var codex = [
   {
     cat: "Characters",
     text: "§:break§yes people in game yes",
+    image: "placeholder",
     subcats: [
+      {
+        subcat: "Party Members",
+        content: [
+          {
+            key: player_name,
+            content: "§:break§"
+          },
+          {
+            key: "Piphliph Starkergetränkeliebhaber",
+            content: "§:break§Piphliph is a drunken man MC and co meet in a forest. He is a son of a §/gray/&GetCodexEntity('Races','Yeeters','Dwarves')&dwarf§ and §/blue/&GetCodexEntity('Races','Yeeters','North Folk')&northfolk§. Upon turning 18 years old, Piphliph was sent out to the world by his parents, but was quickly distracted by the greater “interests” in his life (mainly alcohol). The forest critters soon taught him the magic of making his own moonshine, and he hasn’t consumed anything since.",
+            tags: [
+              { tag: "party" },
+              { tag: "alcohol" }
+            ]
+          },
+          {
+            key: "Tontu Waldbruder",
+            content: "§:break§Tontu is one of the surviving §/brown/&GetCodexEntity('Races','Elves','Wood elves')&wood elves§. You saved him, and as you share a goal of defeating §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§, he joined your party. With his knowledge and your skills of adventuring, finding the Evertree might not be so difficult after all.",
+            tags: [
+              { tag: "party" },
+              { tag: "wood elf" }
+            ]
+          },
+          {
+            key: "Cossu the Skeleboi",
+            content: "§:break§You found Cossu's bones laying in one of the dynes in the desert. With the {lol joku key item}, you were able to bring him back to life.",
+            tags: [
+              { tag: "party" },
+              { tag: "desert" }
+            ]
+          }
+        ]
+      },
       {
         subcat: "Enemies",
         content: [
@@ -48,7 +82,7 @@ var codex = [
           },
           {
             key: "Viktor Stahlhelm",
-            content: "§:break§Viktor is the main antagonist of TOTE, and is the reason for the Evertree’s tears.§:break§§:break§He seeks strength in order to create a better and more ‘just’ world, according to his own ideals. He made the Evertree’s strength his own in order to further this goal.§:break§§:break§Age: 62§:break§§:break§ Birthdate: 6th of Sepalus, 203",
+            content: "§:break§Viktor is the main antagonist of TOTE, and is the reason for the Evertree’s tears.§:break§§:break§He seeks strength in order to create a better and more ‘just’ world, according to his own ideals. He made the Evertree’s strength his own in order to further this goal.§:break§§:break§Age: 62§:break§§:break§ Birthdate: 17th of Maid, 203",
             tags: [
               {tag: "enemies"},
               {tag: "villain"},
@@ -107,7 +141,7 @@ var codex = [
         subcat: "Humans",
         content: [
           {
-            key: "North folf",
+            key: "North folk",
             content: "§:break§Humans native to the northern parts of Die Welt.",
             tags: [
               { tag: "humans "}
@@ -134,7 +168,7 @@ var codex = [
           content: [
             {
               key: "Dark elves",
-              content: "§:break§Dark elves seem to be kind of assholes. There used to be three tribes, but §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ united them and claimed the place of the chief.",
+              content: "§:break§§/rgb(100, 26, 156)/Dark elves§ seem to be kind of assholes. There used to be three tribes, but §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ united them and claimed the place of the chief.",
               tags: [
                 { tag: "elves" },
                 { tag: "viktor "}
@@ -142,7 +176,7 @@ var codex = [
             },
             {
               key: "Wood elves",
-              content: "§:break§Wood elves used to live in Ewigerwald, in their village of §/green/&GetCodexEntity('Areas','Ewigerwald','Ewigerdorf')&Ewigerdorf§. Their whole existance was to protect the Evertree before §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ and the dark elves came and destroyed them. Most of the wood elves were killed in battle, but a few survived.",
+              content: "§:break§§/brown/Wood elves§ used to live in Ewigerwald, in their village of §/green/&GetCodexEntity('Areas','Ewigerwald','Ewigerdorf')&Ewigerdorf§. Their whole existance was to protect the Evertree before §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ and the dark elves came and destroyed them. Most of the wood elves were killed in battle, but a few survived.",
               tags: [
                 { tag: "elves" },
                 { tag: "viktor "}
@@ -277,7 +311,7 @@ var codex = [
           {
             key: "Assault on the Evertree (230)",
             image: "placeholder",
-            content: "§:break§On this fateful day, §/red/&GetCodexEntity('Characters', 'Enemies', 'Viktor Stahlhelm')&Viktor§, at the age of 26, invaded the Evertree and took its sap.§:break§§:break§ Viktor led the three great dark elf clans in a crusade against their hated enemies, the wood elves. The assault came as a surprise to the outnumbered wood elves guarding the Evertree, and their initial garrisons were overwhelmed in a few hours.§:break§§:break§ An alarm was sounded and the entire city was soon engulfed in total war, even women and children fighting to the death to defend the Evertree, for if it were to fall, all of the world would soon follow.§:break§§:break§ Though the defenders were able to stop the assault itself at the gates of the tree, Viktor and his most trusted entourage managed to breach a weak point and infiltrate the tree.§:break§§:break§ Viktor and his followers all drank the Evertree’s sap and gained immense powers, greater than any mortal should possess. They stashed as much sap as they could, and then broke out of the tree to join their army, which was nearing annihilation. §:break§§:break§ With their newly acquired powers, the leaders razed the city to the ground as they retreated with their weakened forces, taking multiple wood elf civilians and soldiers alike as their ‘trophies’.§:break§§:break§ The city was completely devastated, half of her population lying in a ditch and two thirds of her buildings in ruins."
+            content: "§:break§On this fateful day, §/red/&GetCodexEntity('Characters', 'Enemies', 'Viktor Stahlhelm')&Viktor§, at the age of 26, invaded the §/gold/&GetCodexEntity('Areas','Ewigerwald','Evertree')&Evertree§ and took its sap.§:break§§:break§ Viktor led the three great dark elf clans in a crusade against their hated enemies, the wood elves. The assault came as a surprise to the outnumbered wood elves guarding the Evertree, and their initial garrisons were overwhelmed in a few hours.§:break§§:break§ An alarm was sounded and the entire city was soon engulfed in total war, even women and children fighting to the death to defend the Evertree, for if it were to fall, all of the world would soon follow.§:break§§:break§ Though the defenders were able to stop the assault itself at the gates of the tree, Viktor and his most trusted entourage managed to breach a weak point and infiltrate the tree.§:break§§:break§ Viktor and his followers all drank the Evertree’s sap and gained immense powers, greater than any mortal should possess. They stashed as much sap as they could, and then broke out of the tree to join their army, which was nearing annihilation. §:break§§:break§ With their newly acquired powers, the leaders razed the city to the ground as they retreated with their weakened forces, taking multiple wood elf civilians and soldiers alike as their ‘trophies’.§:break§§:break§ The city was completely devastated, half of her population lying in a ditch and two thirds of her buildings in ruins."
           }
         ]
       },
