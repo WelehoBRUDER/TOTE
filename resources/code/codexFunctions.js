@@ -14,6 +14,7 @@ function CreateCodex() {
     catTitle.id = cat.cat + "Title";
     catArrow.id = cat.cat + "Button";
     catArrow.addEventListener("click", () => openSubCategories(cat.subcats, catArrow.id, catTitle.id));
+    catTitle.addEventListener("mousedown", ()=>renderCategoryContent(cat.cat, cat.text));
     catTitle.appendChild(catArrow);
     Element("contentScroller").appendChild(catTitle);
   }
@@ -31,6 +32,7 @@ function openSubCategories(subcats, id, parent) {
       catSubtitle.id = subcat.subcat + "Title";
       catSubarrow.id = subcat.subcat + "Button";
       catSubarrow.addEventListener("click", () => openEntityList(subcat.content, catSubarrow.id, catSubtitle.id));
+      catSubtitle.addEventListener("mouseup", ()=> renderCategoryContent(subcat.subcat, subcat.text))
       catSubtitle.appendChild(catSubarrow);
       Element(base.id).appendChild(catSubtitle);
     }
@@ -79,6 +81,12 @@ function FormCodexEntity(key, content, tags) {
   }
   tagsText = tagsText.substring(0, tagsText.length - 2);
   Element("content").appendChild(CreateText(tagsText, "CodexEntities"));
+}
+
+function renderCategoryContent(key, content) {
+  Element("content").textContent = "";
+  Element("content").appendChild(CreateText(key, "CodexEntryTitle"));
+  Element("content").appendChild(ReadContent(content));
 }
 
 function ReadContent(text) {

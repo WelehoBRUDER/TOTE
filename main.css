@@ -106,6 +106,7 @@ span {
   color: silver;
   text-shadow: 0 0 10px black;
   margin: 5px;
+  cursor: pointer;
 }
 
 .CodexCategories {
