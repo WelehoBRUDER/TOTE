@@ -132,7 +132,7 @@ var codex = [
             },
             {
               key: "Dwarves",
-              content: "§:break§Dwarves habit the tall mountains in the northern parts of Die Welt.",
+              content: "§:break§Dwarves and their three clans habit the tall mountains in the northern parts of Die Welt.",
               tags: [
 
               ]
@@ -201,14 +201,15 @@ var codex = [
         content: [
           {
             key: "The Great Summits",
-            content: "§:break§ The highest peaks in Die Welt. Only one tribe of dwarves live near the top.",
+            content: "§:break§ The highest peaks in Die Welt. Only one clan of dwarves live near the top.",
             tags: [
               { tag: "dwarves"},
               { tag: "mountain"}
             ]
           },
           {
-            key: ""
+            key: "Harvould and surrounding areas",
+            content: "§:break§The biggest of the three dwarven clans have made their homes into the tallest of the mountains, Harvould. Their city bears the same name. Another clan lives in the surrounding forest, their village dug under the ground. Their homes are a maze of carefully built tunnels only the clan can navigate in."
           }
         ]
       }
