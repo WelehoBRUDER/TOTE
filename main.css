@@ -196,6 +196,17 @@ span {
   text-shadow: 0 0 8px black;
 }
 
+.codexImage {
+  width: 256px;
+  height: 256px;
+  border: 4px solid black;
+  position: relative;
+  right: 0px;
+  top: 10px;
+  float: right;
+  margin: 5px;
+}
+
 #allyportraits {
   width: 300px;
   height: 700px;

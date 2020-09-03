@@ -14,7 +14,7 @@ function CreateCodex() {
     catTitle.id = cat.cat + "Title";
     catArrow.id = cat.cat + "Button";
     catArrow.addEventListener("click", () => openSubCategories(cat.subcats, catArrow.id, catTitle.id));
-    catTitle.onclick = ()=>renderCategoryContent(cat.cat, cat.text);
+    catTitle.onclick = ()=>renderCategoryContent(cat.cat, cat.text, cat.image);
     catTitle.appendChild(catArrow);
     Element("contentScroller").appendChild(catTitle);
   }
@@ -34,7 +34,7 @@ function openSubCategories(subcats, id, parent) {
       catSubarrow.addEventListener("click", () => openEntityList(subcat.content, catSubarrow.id, catSubtitle.id));
       catSubtitle.onclick = function(e) {
         e.stopPropagation();
-        renderCategoryContent(subcat.subcat, subcat.text);
+        renderCategoryContent(subcat.subcat, subcat.text, subcat.image);
       }
       catSubtitle.appendChild(catSubarrow);
       Element(base.id).appendChild(catSubtitle);
@@ -58,7 +58,7 @@ function openEntityList(content, id, parent) {
       catEntity.style.textDecoration = "none";
       catEntity.onclick = function(e) {
         e.stopPropagation();
-        FormCodexEntity(entity.key, entity.content, entity.tags);
+        FormCodexEntity(entity.key, entity.content, entity.tags, entity.image);
       }
       Element(base.id).appendChild(catEntity);
     }
@@ -77,14 +77,15 @@ function createSearchedEntity(entity) {
   let catEntity = CreateText(entity.key, "CodexEntities")
   catEntity.id = entity.key + "SearchedEntity";
   catEntity.style.textDecoration = "none";
-  catEntity.addEventListener("click",(e)=>stop(e), () => FormCodexEntity(entity.key, entity.content, entity.tags));
+  catEntity.addEventListener("click", () => FormCodexEntity(entity.key, entity.content, entity.tags, entity.image));
   Element("contentScroller").appendChild(catEntity);
 }
 
-function FormCodexEntity(key, content, tags) {
+function FormCodexEntity(key, content, tags, image=null) {
   Element("content").textContent = "";
   Element("content").appendChild(CreateText(key, "CodexEntryTitle"));
-  Element("content").appendChild(ReadContent(content));
+  if((image == null || image == undefined) && debug) console.log('Entity' + `%c ${key}`, 'color: yellow;', 'has no image, if this is intentional, ignore this message.');
+  Element("content").appendChild(ReadContent(content, image));
   if(tags != undefined) {
     let tagsText = "Tags: ";
     for (let tag of tags) {
@@ -93,24 +94,33 @@ function FormCodexEntity(key, content, tags) {
     tagsText = tagsText.substring(0, tagsText.length - 2);
     Element("content").appendChild(CreateText(tagsText, "CodexEntities"));
   } else {
-    if(debug) console.log("Tags are missing! Your entry will be harder to find!");
+    if(debug) console.log('Entity' + `%c ${key}`, 'color: yellow;', 'has no tags, consider adding some to make searching easier');
   }
 
 }
 
-function renderCategoryContent(key, content) {
+function CreateCodexImage(src) {
+  let image = Create("img");
+  image.src = `resources/images/events/${src}.png`;
+  image.classList.add("codexImage");
+  return image;
+}
+
+function renderCategoryContent(key, content, image) {
   Element("content").textContent = "";
+  if((image == null || image == undefined) && debug) console.log('Entity' + `%c ${key}`, 'color: yellow;', 'has no image, if this is intentional, ignore this message.');
   Element("content").appendChild(CreateText(key, "CodexEntryTitle"));
   if(content) {
-    Element("content").appendChild(ReadContent(content));
+    Element("content").appendChild(ReadContent(content, image));
   }
-  else if(debug) console.log("Category has no content! If this is intentional, ignore this message.");
+  else if(debug) console.log('Entity' + `%c ${key}`, 'color: yellow;','has no text content, if this is intentional, ignore this message.');
 }
 
-function ReadContent(text) {
+function ReadContent(text, image) {
   let content = text.split("§");
   let textContent = Create('div');
   textContent.id = "CodexBaseText";
+  if(image != null && image != undefined) textContent.appendChild(CreateCodexImage(image));
   for (let colors of content) {
     let img;
     let link;
