@@ -92,4 +92,5 @@ characters.player.inventory = [
   AddItem("leather_helmet"),
   AddItem("leather_gloves"),
   AddItem("leather_boots"),
+  AddItem("magical_chestplate")
 ];
