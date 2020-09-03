@@ -2,9 +2,11 @@
 var codex = [
   {
     cat: "Gameplay",
+    text: "Gameplay is the most §/green/basic§ thing in TOTE.",
     subcats: [
       {
         subcat: "Stats",
+        text: "§/blue/Stats§ are cool yo.",
         content: [
           {
             key: "Health",
