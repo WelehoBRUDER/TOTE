@@ -187,9 +187,8 @@ span {
   top: 80px;
 }
 
-#CodexBaseText p,
-span {
-  user-select: all !important;
+#CodexBaseText p, span {
+  user-select: text !important;
   font-size: 30px;
   color: silver;
   text-shadow: 0 0 8px black;
