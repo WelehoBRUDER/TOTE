@@ -1,6 +1,35 @@
-.none {
+@font-face {
+    font-family: RobotoThin;
+    src: url(fonts/Roboto-Thin.ttf);
+    font-weight: normal;
 }
 
-.codexBold {
-    font-weight: bold;
+@font-face {
+    font-family: RobotoLight;
+    src: url(fonts/Roboto-Light.ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(fonts/Roboto-Regular.ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: RobotoMedium;
+    src: url(fonts/Roboto-Medium.ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: RobotoBold;
+    src: url(fonts/Roboto-Bold.ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: RobotoBolder;
+    src: url(fonts/Roboto-Black.ttf);
+    font-weight: normal;
 }
