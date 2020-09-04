@@ -79,7 +79,9 @@ var codex = [
         content: [
           {
             key: player_name,
-            content: `§:break§§${player_name}§ is an average commoner from the midlands. 10 years ago, §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ raided his hometown and kidnapped his little sister. Since then, MC has been thirsty for revenge. As soon as he turned 18, he and two of his friends left home in search of §/blue/&GetCodexEntity('Characters','Other characters','Erika')&Erika§.`,
+            image: "portraits/portrait_player_temp|lime|green",
+            content: `§:break§§/aqua/${player_name}§ is an average commoner from the midlands. 10 years ago, §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ raided his hometown and kidnapped his little sister. Since then, MC has been thirsty for revenge. As soon as he turned 18, he and two of his friends left home in search of §/blue/&GetCodexEntity('Characters','Other characters','Erika')&Erika§.`,
+
             tags: [
               { tag: "party" },
               { tag: "viktor stahlhelm" },
@@ -88,6 +90,7 @@ var codex = [
           },
           {
             key: "Christina Schutzengel",
+            image: "portraits/portrait_white_mage_temp|gold|orange",
             content: `§:break§§/aqua/${player_name}§’s childhood friend, who he does not have any romantic feelings toward. Christina is a healer, but can cast a more powerful offensive spell.`,
             tags: [
               { tag: "party" },
@@ -97,6 +100,8 @@ var codex = [
           },
           {
             key: "Marthynn von Wulf",
+
+            image: "portraits/portrait_rogue_temp|black|black",
             content: `§:break§§/aqua/${player_name}§’s childhood friend. Marthynn is quiet and likes keeping to himself, but deep down cares for his friends. His family has had an affiliation with wolves for decades, and relates to them on a spiritual level. Marthynn is a rogue.§:break§§:break§§:break§“I was born with the wolves, you wouldn’t understand.”`,
             tags: [
               { tag: "party" },
@@ -106,6 +111,7 @@ var codex = [
           },
           {
             key: "Piphliph Starkergetränkeliebhaber",
+            image: "portraits/portrait_piplip|lightblue|blue",
             content: "§:break§Piphliph is a drunken man MC and co meet in a forest. He is a son of a §/gray/&GetCodexEntity('Races','Yeeters','Dwarves')&dwarf§ and §/blue/&GetCodexEntity('Races','Yeeters','North Folk')&northfolk§. Upon turning 18 years old, Piphliph was sent out to the world by his parents, but was quickly distracted by the greater “interests” in his life (mainly alcohol). The forest critters soon taught him the magic of making his own moonshine, and he hasn’t consumed anything since.",
             tags: [
               { tag: "party" },
@@ -114,6 +120,7 @@ var codex = [
           },
           {
             key: "Tontu Waldbruder",
+            image: "portraits/portrait_tontu_temp|brown|brown",
             content: "§:break§Tontu is one of the surviving §/brown/&GetCodexEntity('Races','Elves','Wood elves')&wood elves§. You saved him, and as you share a goal of defeating §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§, he joined your party. With his knowledge and your skills of adventuring, finding the Evertree might not be so difficult after all.",
             tags: [
               { tag: "party" },
@@ -122,6 +129,7 @@ var codex = [
           },
           {
             key: "Cossu the Skeleboi",
+            image: "portraits/portrait_cossu|silver|white",
             content: "§:break§You found Cossu's bones laying in one of the dynes in the desert. With the {lol joku key item}, you were able to bring him back to life.",
             tags: [
               { tag: "party" },
