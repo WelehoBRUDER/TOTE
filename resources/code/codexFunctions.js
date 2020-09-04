@@ -125,6 +125,14 @@ function renderCategoryContent(key, content, image) {
 
 function getMark(mark) {
   let result = "";
+  if(mark.indexOf("s") != -1) {
+    let size = mark.split("s")[1];
+    result = ` font-size: ${size}px;`;
+  }
+  if(mark.indexOf("lg") != -1) {
+    let amount = mark.split("lg")[1];
+    result = ` letter-spacing: ${amount}px;`;
+  }
   switch(mark) {
     case "B": result = " font-family: RobotoBold;"; break;
     case "BB": result = " font-family: RobotoBolder;"; break;
@@ -132,6 +140,8 @@ function getMark(mark) {
     case "E": result = " font-family: Roboto;"; break;
     case "LL": result = " font-family: RobotoThin;"; break;
     case "I": result = " font-style: italic;"; break;
+    case "OL": result = " text-decoration: overline;"; break;
+    case "LT": result = " text-decoration: line-through;"; break;
   }
   return result;
 }

@@ -10,6 +10,8 @@ function CreateInv() {
       let itm = characters.player.inventory[i];
       item.id = `invItem${i}`;
       let img = Create("img");
+      img.style.height = "85px";
+      img.style.width = "80px";
       if(imageExists(`resources/images/items/${itm.img}.png`)) {
         img.src = `resources/images/items/${itm.img}.png`;
       } else {

@@ -1,8 +1,9 @@
 // § = make new span, / = isolate color, :break = line break / br, & = isolate function, % = isolate image
+// ¤ = contains styles, for example §¤BB-I-LT¤text§
 var codex = [
   {
     cat: "New Syntax Introduction",
-    text: "With this new update, it is possible to add special styles to text. §:break§ §:break§ §¤B-¤Bold§ B- §:break§ §¤BB-¤Bolder§ BB- §:break§ §¤M-¤Medium§ M- §:break§ §¤E-¤Emphasis§ E- §:break§ Normal §:break§ §¤LL-¤Lighter§ LL- §:break§ §¤I-¤Italic§ I- §:break§ §¤B-I¤Bold and Italic§ B-I",
+    text: "With this new update, it is §¤BB-I-LT-lg2¤possible§ to add special styles to text. §¤s50-¤THIS TEXT IS MASSIVE!§ §¤s8-¤this text is tiny.§ §¤s75-BB-I¤midgets§ §:break§ §:break§ §¤B-¤Bold§ B- §:break§ §¤BB-¤Bolder§ BB- §:break§ §¤M-¤Medium§ M- §:break§ §¤E-¤Emphasis§ E- §:break§ Normal §:break§ §¤LL-¤Lighter§ LL- §:break§ §¤I-¤Italic§ I- §:break§ §¤B-I¤Bold and Italic§ B-I §:break§ §¤I-BB¤THICC§ I-BB §:break§ sNumber-, ex. s41- §¤s41-¤affects size§ §:break§ §:break§ §¤OL-¤You can overline§ OL-  §:break§ §¤LT-¤Or line-through...§ LT-  §:break§ §¤lg8-¤Why not use spacing?§ lgNumber-",
     subcats: []
   },
   {
