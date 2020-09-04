@@ -1,6 +1,37 @@
 @font-face {
-  font-family: roboto;
+  font-family: RobotoThin;
   src: url(fonts/Roboto-Thin.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: RobotoLight;
+  src: url(fonts/Roboto-Light.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(fonts/Roboto-Regular.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: RobotoMedium;
+  src: url(fonts/Roboto-Medium.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: RobotoBold;
+  src: url(fonts/Roboto-Bold.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: RobotoBolder;
+  src: url(fonts/Roboto-Black.ttf);
+  font-weight: normal;
 }
 
 body {
@@ -10,7 +41,7 @@ body {
 
 #codex p,
 span {
-  font-family: roboto;
+  font-family: RobotoLight;
 }
 
 #codex {
@@ -189,7 +220,8 @@ span {
   left: 10px;
   top: 80px;
 }
-#CodexBaseText p, span {
+#CodexBaseText p,
+span {
   user-select: text !important;
   font-size: 30px;
   color: silver;
@@ -370,7 +402,7 @@ span {
   user-select: none;
   outline: none;
   font-size: 48px;
-  font-family: roboto;
+  font-family: Roboto;
   color: white;
   text-shadow: 0 4px 6px black;
   position: absolute;
@@ -422,7 +454,7 @@ span {
   user-select: none;
   outline: none;
   font-size: 48px;
-  font-family: roboto;
+  font-family: Roboto;
   color: white;
   text-shadow: 0 4px 6px black;
   margin: 20px;
@@ -510,7 +542,7 @@ span {
 #textAlert {
   color: silver;
   text-shadow: 0 4px 8px black;
-  font-family: roboto;
+  font-family: Roboto;
   font-size: 20px;
   text-align: center;
 }
@@ -599,7 +631,7 @@ span {
 span {
   color: white;
   font-size: 27px;
-  font-family: roboto;
+  font-family: Roboto;
   margin: 0px;
   position: relative;
 }
@@ -648,7 +680,7 @@ span {
 .desc {
   color: white;
   font-size: 24px;
-  font-family: roboto;
+  font-family: Roboto;
   margin: 0px;
   font-style: italic;
   white-space: normal;
@@ -703,7 +735,7 @@ span {
 #armorFrame p,
 #weaponFrame p {
   font-size: 26px;
-  font-family: roboto;
+  font-family: Roboto;
   color: silver;
   text-shadow: -1px 2px 4px rgb(58, 58, 58);
   position: absolute;
@@ -783,7 +815,7 @@ span {
 
 #ringFrame p {
   font-size: 18px;
-  font-family: roboto;
+  font-family: Roboto;
   color: silver;
   text-shadow: -1px 2px 4px rgb(58, 58, 58);
   position: absolute;

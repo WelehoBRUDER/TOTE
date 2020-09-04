@@ -36,5 +36,25 @@ function GetCodexEntity(cat, subcat, key) {
   }
 }
 
+function imgMissing(src) {
+  if(debug) console.log('Image' + `%c ${src}`, 'color: yellow', 'was broken. Replaced with missing image.');
+  return "resources/images/events/missing_image.png";
+}
+
+function imageExists(image_url){
+
+  var http = new XMLHttpRequest();
+
+  http.open('HEAD', image_url, false);
+  http.send();
+
+  return http.status != 404;
+
+}
+
+// function imageExists(image_url){
+//   var req = new Request(image_url, {method: "HEAD"});
+//   fetch(req).then((res)=>{return res.status != 404});
+// }
 // Enable debug mode, adding more dev options and displaying errors.
 let debug = true;

@@ -1,8 +1,13 @@
 // § = make new span, / = isolate color, :break = line break / br, & = isolate function, % = isolate image
 var codex = [
   {
+    cat: "New Syntax Introduction",
+    text: "With this new update, it is possible to add special styles to text. §:break§ §:break§ §¤B-¤Bold§ B- §:break§ §¤BB-¤Bolder§ BB- §:break§ §¤M-¤Medium§ M- §:break§ §¤E-¤Emphasis§ E- §:break§ Normal §:break§ §¤LL-¤Lighter§ LL- §:break§ §¤I-¤Italic§ I- §:break§ §¤B-I¤Bold and Italic§ B-I",
+    subcats: []
+  },
+  {
     cat: "Gameplay",
-    text: "Gameplay is the most §/green/basic§ thing in TOTE.",
+    text: "§¤BB-I¤Gameplay§ is the most §/green/basic§ thing in TOTE. This is §¤B-¤Bold§ and this is §¤BB-I¤/red/Bolder§",
     subcats: [
       {
         subcat: "Stats",
@@ -10,7 +15,7 @@ var codex = [
         content: [
           {
             key: "Health",
-            content: "§/red/Health§ §%heart_icon_small%§ is the most basic §/yellow/stat§ in TOTE. When your §/red/health§ §%heart_icon_small%§ reaches 0, you are §/black/defeated§.",
+            content: "§/red/Health§ §%typo_heatr_icon_small%§ is the most basic §/yellow/stat§ in TOTE. When your §/red/health§ §%heart_icon_small%§ reaches 0, you are §/black/defeated§.",
             tags: [
               { tag: "health" },
               { tag: "stats" },

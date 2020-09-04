@@ -102,10 +102,14 @@ function FormCodexEntity(key, content, tags, image=null) {
 function CreateCodexImage(src) {
   let image = Create("img");
   let srcOf = src.split("|");
-  image.src = `resources/images/${srcOf[0]}.png`;
+  image.classList.add("codexImage");
+  if(imageExists(`resources/images/${srcOf[0]}.png`)) {
+    image.src = `resources/images/${srcOf[0]}.png`;
+  } else {
+    image.src = imgMissing(srcOf[0])
+  }
   image.style.borderColor = srcOf[1];
   image.style.boxShadow = `-2px 6px 4px 1px ${srcOf[2]}`;
-  image.classList.add("codexImage");
   return image;
 }
 
@@ -119,6 +123,19 @@ function renderCategoryContent(key, content, image) {
   else if(debug) console.log('Entity' + `%c ${key}`, 'color: yellow;','has no text content, if this is intentional, ignore this message.');
 }
 
+function getMark(mark) {
+  let result = "";
+  switch(mark) {
+    case "B": result = " font-family: RobotoBold;"; break;
+    case "BB": result = " font-family: RobotoBolder;"; break;
+    case "M": result = " font-family: RobotoMedium;"; break;
+    case "E": result = " font-family: Roboto;"; break;
+    case "LL": result = " font-family: RobotoThin;"; break;
+    case "I": result = " font-style: italic;"; break;
+  }
+  return result;
+}
+
 function ReadContent(text, image) {
   let content = text.split("§");
   let textContent = Create('div');
@@ -127,8 +144,19 @@ function ReadContent(text, image) {
   for (let colors of content) {
     let img;
     let link;
-    let color;
+    let color = "white";
     let text;
+    let style = "";
+    if(colors.indexOf("¤") != -1) {
+      let styleMarks = colors.split("¤")[1];
+      text = colors.split("¤")[2];
+      if(styleMarks.indexOf("-") != -1) {
+        let marks = styleMarks.split("-");
+        for(let mark of marks) {
+          style += getMark(mark);
+        }
+      }
+    }
     if (colors.indexOf("%") != -1) {
       img = colors.split("%")[1];
       text = colors.split("%")[2];
@@ -140,11 +168,14 @@ function ReadContent(text, image) {
       link = colors.split("&")[1];
       text = colors.split("&")[2];
     } else if (text == undefined) text = colors;
+    style += ` color: ${color};`;
     if (text == ":break") textContent.innerHTML += "<br>";
-    else if (img != undefined && link == undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/icons/${img}.png">`;
-    else if (img != undefined && link != undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/icons/${img}.png" onclick="${link}">`;
-    else if (link != undefined) textContent.innerHTML += `<span style = "color: ${color || "white"}" class="PointerClass" onclick="${link}">${text}</span>`;
-    else if (text) textContent.innerHTML += `<span style = "color: ${color || "white"}">${text}</span>`;
+    else if (img != undefined && link == undefined && imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/icons/${img}.png">`;
+    else if(img != undefined && link == undefined && !imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/events/missing_image.png">`;
+    else if (img != undefined && link != undefined && imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/icons/${img}.png" onclick="${link}">`;
+    else if(img != undefined && link != undefined && !imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/events/missing_image.png" onclick="${link}">`;
+    else if (link != undefined) textContent.innerHTML += `<span style = "${style}" class="PointerClass" onclick="${link}">${text}</span>`;
+    else if (text) textContent.innerHTML += `<span style = "${style}" >${text}</span>`;
   }
   return textContent;
 }
@@ -167,7 +198,7 @@ function SearchEntities() {
   for (let cats of codex) {
     for (let subcats of cats.subcats) {
       for (let content of subcats.content) {
-        if (tagSearch == true) {
+        if (tagSearch == true && content.tags) {
           for (let tag of content.tags) {
             if (searchValue.length < 3) {
               if (tag.tag.startsWith(searchValue)) {

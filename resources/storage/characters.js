@@ -53,7 +53,7 @@ var characters = {
       [
         AddItem("broken_iron_dagger"),
         AddItem("leather_chest"),
-      ], "cyan", "portrait_kynier_temp"),
+      ], "cyan", "portrait_kynieer_temp"),
     new Actor("ally_ranger_tontu", "Tontu Waldbruder", "ranger",
     new Stats(60, 10, 3, 6, 6, 5, 5, 4, 7, 2),
     [

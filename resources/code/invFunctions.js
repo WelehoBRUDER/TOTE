@@ -10,7 +10,11 @@ function CreateInv() {
       let itm = characters.player.inventory[i];
       item.id = `invItem${i}`;
       let img = Create("img");
-      img.src = `resources/images/items/${itm.img}.png`;
+      if(imageExists(`resources/images/items/${itm.img}.png`)) {
+        img.src = `resources/images/items/${itm.img}.png`;
+      } else {
+        img.src = imgMissing(itm.img);
+      }
       item.appendChild(img);
       item.addEventListener("mouseenter", ShowItemInfo);
       item.addEventListener("mouseleave", HideItemInfo);
@@ -177,16 +181,22 @@ function CreateEquippedInventory() {
   Element("shieldSlot").innerHTML = "";
   for (let item of characters.player.equipment) {
     if (GetWeapon() && item.dmg) {
-      Element("weaponSlot").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      if(imageExists(`resources/images/items/${item.img}.png`))Element("weaponSlot").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if(!imageExists(`resources/images/items/${item.img}.png`))Element("weaponSlot").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
       Element(item.key).addEventListener("mouseenter", ShowItemInfo);
       Element(item.key).addEventListener("mouseleave", HideItemInfo);
     }
     else if (item.slot) {
-      if (item.slot == "chest") Element("chestarmor").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
-      else if (item.slot == "helmet") Element("helmet").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
-      else if (item.slot == "gloves") Element("gloves").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
-      else if (item.slot == "feet") Element("feet").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
-      else if (item.slot == "shield") Element("shieldSlot").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      if (item.slot == "chest" && imageExists(`resources/images/items/${item.img}.png`)) Element("chestarmor").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if(item.slot == "chest" && !imageExists(`resources/images/items/${item.img}.png`)) Element("chestarmor").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "helmet" && imageExists(`resources/images/items/${item.img}.png`)) Element("helmet").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "helmet" && !imageExists(`resources/images/items/${item.img}.png`)) Element("helmet").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "gloves" && imageExists(`resources/images/items/${item.img}.png`)) Element("gloves").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "gloves" && !imageExists(`resources/images/items/${item.img}.png`)) Element("gloves").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "feet" && imageExists(`resources/images/items/${item.img}.png`)) Element("feet").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "feet" && !imageExists(`resources/images/items/${item.img}.png`)) Element("feet").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "shield" && imageExists(`resources/images/items/${item.img}.png`)) Element("shieldSlot").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "shield" && !imageExists(`resources/images/items/${item.img}.png`)) Element("shieldSlot").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
       Element(item.key).addEventListener("mouseenter", ShowItemInfo);
       Element(item.key).addEventListener("mouseleave", HideItemInfo);
     }

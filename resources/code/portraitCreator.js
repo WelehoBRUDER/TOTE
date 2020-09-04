@@ -6,10 +6,12 @@ function CreatePortrait(character, enemy) {
     name = name.substring(0, 17);
     name += "...";
   }
+  let portrait_image_url = `portraits/${character.image}`;
+  if(!imageExists(`resources/images/${portrait_image_url}.png`)) portrait_image_url = "events/missing_image";
   portrait.innerHTML = `
     <div class="portrait_background">
       <p class="portrait_title">${name}</p>
-      <img src="resources/images/portraits/${character.image}.png" class="portrait_image">
+      <img src="resources/images/${portrait_image_url}.png" class="portrait_image">
       <div class="hpbarbg">
       <p class="barNum">${character.stats.hp} / ${character.stats.maxhp}</p>
       </div>
