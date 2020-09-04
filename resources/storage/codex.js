@@ -18,6 +18,54 @@ var codex = [
             ]
           }
         ]
+      },
+      {
+        subcat: "Classes",
+        text: "All fighting classes present in Die Welt",
+        content: [
+          {
+            key: "Warrior",
+            content: "§:break§Wielding swords and shit.",
+            tags: [
+              { tag: "classes" }
+            ]
+          },
+          {
+            key: "Healer",
+            content: "§:break§Muijat hiilaa.",
+            tags: [
+              { tag: "classes" }
+            ]
+          },
+          {
+            key: "Rogue",
+            content: "§:break§Edge Lords.",
+            tags: [
+              { tag: "classes" }
+            ]
+          },
+          {
+            key: "Ranger",
+            content: "§:break§Furryt???",
+            tags: [
+              { tag: "classes" }
+            ]
+          },
+          {
+            key: "Brawler",
+            content: "§:break§Nyrkkitappelut. Kännissä.",
+            tags: [
+              { tag: "classes" }
+            ]
+          },
+          {
+            key: "Necromancer",
+            content: "§:break§Yikes forever.",
+            tags: [
+              { tag: "classes" }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -31,7 +79,30 @@ var codex = [
         content: [
           {
             key: player_name,
-            content: "§:break§",
+            content: "§:break§MC is an average commoner from the midlands. 10 years ago, §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ raided his hometown and kidnapped his little sister. Since then, MC has been thirsty for revenge. As soon as he turned 18, he and two of his friends left home in search of §/blue/&GetCodexEntity('Characters','Other characters','Erika')&Erika§.",
+            tags: [
+              { tag: "party" },
+              { tag: "viktor stahlhelm" },
+              { tag: "erika" }
+            ]
+          },
+          {
+            key: "Christina Schutzengel",
+            content: "§:break§§/aqua/Henry§’s childhood friend, who he does not have any romantic feelings toward. Christina is a healer, but can cast a more powerful offensive spell.",
+            tags: [
+              { tag: "party" },
+              { tag: player_name },
+              { tag: "healer" }
+            ]
+          },
+          {
+            key: "Marthynn von Wulf",
+            content: "§:break§§/aqua/Henry§’s childhood friend. Marthynn is quiet and likes keeping to himself, but deep down cares for his friends. His family has had an affiliation with wolves for decades, and relates to them on a spiritual level. Marthynn is a rogue.§:break§§:break§§:break§“I was born with the wolves, you wouldn’t understand.”",
+            tags: [
+              { tag: "party" },
+              { tag: player_name },
+              { tag: "rogue" }
+            ]
           },
           {
             key: "Piphliph Starkergetränkeliebhaber",
@@ -57,6 +128,18 @@ var codex = [
               { tag: "desert" }
             ]
           }
+        ]
+      },
+      {
+        subcat: "Other characters",
+        content: [
+          {
+            key: "Erika",
+            content: "§:break§MC’s little sister. That’s it folks, see you in the next episode.",
+            tags: [
+              { tag: player_name }
+            ]
+          },
         ]
       },
       {
