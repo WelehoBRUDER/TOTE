@@ -53,7 +53,7 @@ var characters = {
       [
         AddItem("broken_iron_dagger"),
         AddItem("leather_chest"),
-      ], "cyan", "portrait_kynieer_temp"),
+      ], "cyan", "portrait_kynier_temp"),
     new Actor("ally_ranger_tontu", "Tontu Waldbruder", "ranger",
     new Stats(60, 10, 3, 6, 6, 5, 5, 4, 7, 2),
     [
@@ -94,3 +94,10 @@ characters.player.inventory = [
   AddItem("leather_boots"),
   AddItem("magical_chestplate")
 ];
+
+let party = [
+  {equip: characters.player},
+]
+
+party.push({equip: characters.allies[0]});
+party.push({equip: characters.allies[1]});
