@@ -8,8 +8,11 @@ let global = {
     year: 266
   },
   equipping: characters.player,
-  equippingNUM: 0
+  equippingNUM: 0,
+  party: [{equip: characters.player}]
 };
+
+global.party.push({equip: characters.allies[0]});
 
 // Updates global variables
 function GlobalUpdate() {

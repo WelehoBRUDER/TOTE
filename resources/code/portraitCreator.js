@@ -61,10 +61,6 @@ function addToFight() {
   ClearCombatTables();
   PushCombatantToTable(characters.player, alliesFight);
   PushCombatantToTable(characters.allies[0], alliesFight);
-  PushCombatantToTable(characters.allies[1], alliesFight);
-  PushCombatantToTable(characters.enemies[0], enemiesFight);
-  PushCombatantToTable(characters.enemies[1], enemiesFight);
-  PushCombatantToTable(characters.enemies[2], enemiesFight);
   CreatePortraits();
 }
 
