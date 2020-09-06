@@ -200,14 +200,12 @@ function CreateEquippedInventory() {
   Element("shieldSlot").innerHTML = "";
   for (let item of global.equipping.equipment) {
     if (GetWeapon() && item.dmg) {
-    console.log("?"); 
     if(imageExists(`resources/images/items/${item.img}.png`))Element("weaponSlot").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
       else if(!imageExists(`resources/images/items/${item.img}.png`))Element("weaponSlot").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
       Element(item.key).addEventListener("mouseenter", ShowItemInfo);
       Element(item.key).addEventListener("mouseleave", HideItemInfo);
     }
     else if (item.slot) {
-      console.log("?");
       if (item.slot == "chest" && imageExists(`resources/images/items/${item.img}.png`)) Element("chestarmor").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
       else if(item.slot == "chest" && !imageExists(`resources/images/items/${item.img}.png`)) Element("chestarmor").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
       else if (item.slot == "helmet" && imageExists(`resources/images/items/${item.img}.png`)) Element("helmet").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;

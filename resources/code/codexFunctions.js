@@ -120,7 +120,7 @@ function renderCategoryContent(key, content, image) {
   if(content) {
     Element("content").appendChild(ReadContent(content, image));
   }
-  else if(debug) console.log('Entity' + `%c ${key}`, 'color: yellow;','has no text content, if this is intentional, ignore this message.');
+  else if(debug) console.log('Entity' + `#c ${key}`, 'color: yellow;','has no text content, if this is intentional, ignore this message.');
 }
 
 function getMark(mark) {
@@ -167,9 +167,9 @@ function ReadContent(text, image) {
         }
       }
     }
-    if (colors.indexOf("%") != -1) {
-      img = colors.split("%")[1];
-      text = colors.split("%")[2];
+    if (colors.indexOf("#") != -1) {
+      img = colors.split("#")[1];
+      text = colors.split("#")[2];
     }
     else if (colors.indexOf("/") != -1) {
       color = colors.split("/")[1];

@@ -7,6 +7,7 @@ let global = {
     month: 3,
     year: 266
   },
+  controlling: characters.player,
   equipping: characters.player,
   equippingNUM: 0,
   party: [{equip: characters.player}]

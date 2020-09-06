@@ -1,10 +1,15 @@
 var texts = [
   {
-    key: "combat_miss_1",
-    text: "§ACTORCOLOR[VAR:actor]§ clutches their §Y[VAR:weapon]§ and attacks §ACTORCOLOR[VAR:char]§ using §Y[VAR:ability]§ and §Rmisses!§"
-  },
-  {
-    key: "combat_hit_1",
-    text: "§ACTORCOLOR[VAR:actor]§ clutches their §Y[VAR:weapon]§ and attacks §ACTORCOLOR[VAR:char]§ using §Y[VAR:ability]§, dealing §Y[VAR:damage]§ §Rdamage!§"
+    cat: "combat",
+    texts: [
+      {
+        key: "attack",
+        text: "Attempt to §/crimson/attack§ your foe using your weapon. §/red/Damage§ and §/cyan/accuracy§ depend on your §/green/skills§."
+      },
+      {
+        key: "defense",
+        text: "Guard against incoming §/crimson/attacks§ for 1 turn. §/green/Reduces§ §/red/damage§ by §/yellow/50%§ and §/green/lowers§ §/orange/threat§ by §/yellow/1§."
+      }
+    ]
   }
 ]

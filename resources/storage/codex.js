@@ -1,9 +1,9 @@
-// § = make new span, / = isolate color, :break = line break / br, & = isolate function, % = isolate image
+// § = make new span, / = isolate color, :break = line break / br, & = isolate function, # = isolate image
 // ¤ = contains styles, for example §¤BB-I-LT¤text§
 var codex = [
   {
     cat: "New Syntax Introduction",
-    text: "With this new update, it is §¤BB-I-LT-lg2¤possible§ to add special styles to text. §¤s50-¤THIS TEXT IS MASSIVE!§ §¤s8-¤this text is tiny.§ §¤s75-BB-I¤midgets§ §:break§ §:break§ §¤B-¤Bold§ B- §:break§ §¤BB-¤Bolder§ BB- §:break§ §¤M-¤Medium§ M- §:break§ §¤E-¤Emphasis§ E- §:break§ Normal §:break§ §¤LL-¤Lighter§ LL- §:break§ §¤I-¤Italic§ I- §:break§ §¤B-I¤Bold and Italic§ B-I §:break§ §¤I-BB¤THICC§ I-BB §:break§ sNumber-, ex. s41- §¤s41-¤affects size§ §:break§ §:break§ §¤OL-¤You can overline§ OL-  §:break§ §¤LT-¤Or line-through...§ LT-  §:break§ §¤lg8-¤Why not use spacing?§ lgNumber-",
+    text: `With this new update, (color and name come from variable -->§¤B-¤/${characters.allies[0].color}/${characters.allies[0].name}§) it is §¤BB-I-LT-lg2¤possible§ to add special styles to text. §¤s50-¤THIS TEXT IS MASSIVE!§ §¤s8-¤this text is tiny.§ §¤s75-BB-I¤midgets§ §:break§ §:break§ §¤B-¤Bold§ B- §:break§ §¤BB-¤Bolder§ BB- §:break§ §¤M-¤Medium§ M- §:break§ §¤E-¤Emphasis§ E- §:break§ Normal §:break§ §¤LL-¤Lighter§ LL- §:break§ §¤I-¤Italic§ I- §:break§ §¤B-I¤Bold and Italic§ B-I §:break§ §¤I-BB¤THICC§ I-BB §:break§ sNumber-, ex. s41- §¤s41-¤affects size§ §:break§ §:break§ §¤OL-¤You can overline§ OL-  §:break§ §¤LT-¤Or line-through...§ LT-  §:break§ §¤lg8-¤Why not use spacing?§ lgNumber-`,
     subcats: []
   },
   {
@@ -16,7 +16,7 @@ var codex = [
         content: [
           {
             key: "Health",
-            content: "§/red/Health§ §%typo_heatr_icon_small%§ is the most basic §/yellow/stat§ in TOTE. When your §/red/health§ §%heart_icon_small%§ reaches 0, you are §/black/defeated§.",
+            content: "§/red/Health§ §#typo_heatr_icon_small#§ is the most basic §/yellow/stat§ in TOTE. When your §/red/health§ §#heart_icon_small#§ reaches 0, you are §/black/defeated§.",
             tags: [
               { tag: "health" },
               { tag: "stats" },
@@ -161,7 +161,7 @@ var codex = [
         content: [
           {
             key: "Thief",
-            content: "§:break§Thieves §%thief_icon_small%§ are the most common §/rgb(191,75,57)/enemy§ in §/rgb(74,181,186)/&GetCodexEntity('Areas', 'Helleria', 'Hellerian Kingdom')&Helleria§. §:break§ I §%heart_icon_small%§ you :) §:break§ Thieves are usually found threatening homeless people around the slums of most cities, or ambushing unsuspecting travelers among less travelled roads. §:break§ §:break§ Was that a line break? §:break§ §/blue/Yes§ §/green/It§ §/red/Was§ §:break§ §/green/&GetCodexEntity('Characters', 'Enemies', 'Goblin')&Goblin§ link.",
+            content: "§:break§Thieves §#thief_icon_small#§ are the most common §/rgb(191,75,57)/enemy§ in §/rgb(74,181,186)/&GetCodexEntity('Areas', 'Helleria', 'Hellerian Kingdom')&Helleria§. §:break§ I §#heart_icon_small#§ you :) §:break§ Thieves are usually found threatening homeless people around the slums of most cities, or ambushing unsuspecting travelers among less travelled roads. §:break§ §:break§ Was that a line break? §:break§ §/blue/Yes§ §/green/It§ §/red/Was§ §:break§ §/green/&GetCodexEntity('Characters', 'Enemies', 'Goblin')&Goblin§ link.",
             tags: [
               { tag: "enemies" },
               { tag: "weak" },
@@ -170,7 +170,7 @@ var codex = [
           },
           {
             key: "Goblin",
-            content: "§:break§Goblins §%goblin_icon_small%§ are §/brown/pieces of shit§ that plague §/cyan/&GetCodexEntity('Areas', 'Helleria', 'Hellerian Kingdom')&Helleria§ in every corner. They typically have §/red/30HP§ §%heart_icon_small%&GetCodexEntity('Gameplay', 'Stats', 'Health')&§.",
+            content: "§:break§Goblins §#goblin_icon_small#§ are §/brown/pieces of shit§ that plague §/cyan/&GetCodexEntity('Areas', 'Helleria', 'Hellerian Kingdom')&Helleria§ in every corner. They typically have §/red/30HP§ §#heart_icon_small#&GetCodexEntity('Gameplay', 'Stats', 'Health')&§.",
             tags: [
               { tag: "enemies" },
               { tag: "weak" },

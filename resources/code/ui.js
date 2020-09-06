@@ -13,9 +13,15 @@ function CreateUiButtons() {
 function toggleButton(action) {
   HideAll();
   Element(action).style.display = "block";
+  if(action == "combat") FormCombatEnvironment();
 }
 
 var ui_buttons = [
+  {
+    bg: "_combat",
+    open: "combat",
+    id: "combatButton"
+  },
   {
     bg: "_map",
     open: "mapFrame",
@@ -43,6 +49,7 @@ function HideAll() {
   Element("mapFrame").style.display = "none";
   Element("settings").style.display = "none";
   Element("invFrame").style.display = "none";
+  Element("combat").style.display = "none";
   Element("saveLoad").textContent = "";
 }
 
