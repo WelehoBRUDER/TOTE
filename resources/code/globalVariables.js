@@ -1,3 +1,4 @@
+
 let global = {
   time: {
     minute: 15,
@@ -5,8 +6,13 @@ let global = {
     day: 1,
     month: 3,
     year: 266
-  }
+  },
+  equipping: characters.player,
+  equippingNUM: 0,
+  party: [{equip: characters.player}]
 };
+
+global.party.push({equip: characters.allies[0]});
 
 // Updates global variables
 function GlobalUpdate() {

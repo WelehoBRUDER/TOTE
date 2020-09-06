@@ -1,8 +1,14 @@
 // § = make new span, / = isolate color, :break = line break / br, & = isolate function, % = isolate image
+// ¤ = contains styles, for example §¤BB-I-LT¤text§
 var codex = [
   {
+    cat: "New Syntax Introduction",
+    text: "With this new update, it is §¤BB-I-LT-lg2¤possible§ to add special styles to text. §¤s50-¤THIS TEXT IS MASSIVE!§ §¤s8-¤this text is tiny.§ §¤s75-BB-I¤midgets§ §:break§ §:break§ §¤B-¤Bold§ B- §:break§ §¤BB-¤Bolder§ BB- §:break§ §¤M-¤Medium§ M- §:break§ §¤E-¤Emphasis§ E- §:break§ Normal §:break§ §¤LL-¤Lighter§ LL- §:break§ §¤I-¤Italic§ I- §:break§ §¤B-I¤Bold and Italic§ B-I §:break§ §¤I-BB¤THICC§ I-BB §:break§ sNumber-, ex. s41- §¤s41-¤affects size§ §:break§ §:break§ §¤OL-¤You can overline§ OL-  §:break§ §¤LT-¤Or line-through...§ LT-  §:break§ §¤lg8-¤Why not use spacing?§ lgNumber-",
+    subcats: []
+  },
+  {
     cat: "Gameplay",
-    text: "Gameplay is the most §/green/basic§ thing in TOTE.",
+    text: "§¤BB-I¤Gameplay§ is the most §/green/basic§ thing in TOTE. This is §¤B-¤Bold§ and this is §¤BB-I¤/red/Bolder§",
     subcats: [
       {
         subcat: "Stats",
@@ -10,11 +16,59 @@ var codex = [
         content: [
           {
             key: "Health",
-            content: "§/red/Health§ §%heart_icon_small%§ is the most basic §/yellow/stat§ in TOTE. When your §/red/health§ §%heart_icon_small%§ reaches 0, you are §/black/defeated§.",
+            content: "§/red/Health§ §%typo_heatr_icon_small%§ is the most basic §/yellow/stat§ in TOTE. When your §/red/health§ §%heart_icon_small%§ reaches 0, you are §/black/defeated§.",
             tags: [
               { tag: "health" },
               { tag: "stats" },
               { tag: "gameplay" }
+            ]
+          }
+        ]
+      },
+      {
+        subcat: "Classes",
+        text: "All fighting classes present in Die Welt",
+        content: [
+          {
+            key: "Warrior",
+            content: "§:break§Wielding swords and shit.",
+            tags: [
+              { tag: "classes" }
+            ]
+          },
+          {
+            key: "Healer",
+            content: "§:break§Muijat hiilaa.",
+            tags: [
+              { tag: "classes" }
+            ]
+          },
+          {
+            key: "Rogue",
+            content: "§:break§Edge Lords.",
+            tags: [
+              { tag: "classes" }
+            ]
+          },
+          {
+            key: "Ranger",
+            content: "§:break§Furryt???",
+            tags: [
+              { tag: "classes" }
+            ]
+          },
+          {
+            key: "Brawler",
+            content: "§:break§Nyrkkitappelut. Kännissä.",
+            tags: [
+              { tag: "classes" }
+            ]
+          },
+          {
+            key: "Necromancer",
+            content: "§:break§Yikes forever.",
+            tags: [
+              { tag: "classes" }
             ]
           }
         ]
@@ -23,8 +77,85 @@ var codex = [
   },
   {
     cat: "Characters",
-    text: "yes people in game yes",
+    text: "§:break§yes people in game yes",
+    image: "placeholder",
     subcats: [
+      {
+        subcat: "Party Members",
+        content: [
+          {
+            key: player_name,
+            image: "portraits/portrait_player_temp|lime|green",
+            content: `§:break§§/aqua/${player_name}§ is an average commoner from the midlands. 10 years ago, §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ raided his hometown and kidnapped his little sister. Since then, MC has been thirsty for revenge. As soon as he turned 18, he and two of his friends left home in search of §/blue/&GetCodexEntity('Characters','Other characters','Erika')&Erika§.`,
+
+            tags: [
+              { tag: "party" },
+              { tag: "viktor stahlhelm" },
+              { tag: "erika" }
+            ]
+          },
+          {
+            key: "Christina Schutzengel",
+            image: "portraits/portrait_white_mage_temp|gold|orange",
+            content: `§:break§§/aqua/${player_name}§’s childhood friend, who he does not have any romantic feelings toward. Christina is a healer, but can cast a more powerful offensive spell.`,
+            tags: [
+              { tag: "party" },
+              { tag: player_name },
+              { tag: "healer" }
+            ]
+          },
+          {
+            key: "Marthynn von Wulf",
+
+            image: "portraits/portrait_rogue_temp|black|black",
+            content: `§:break§§/aqua/${player_name}§’s childhood friend. Marthynn is quiet and likes keeping to himself, but deep down cares for his friends. His family has had an affiliation with wolves for decades, and relates to them on a spiritual level. Marthynn is a rogue.§:break§§:break§§:break§“I was born with the wolves, you wouldn’t understand.”`,
+            tags: [
+              { tag: "party" },
+              { tag: player_name },
+              { tag: "rogue" }
+            ]
+          },
+          {
+            key: "Piphliph Starkergetränkeliebhaber",
+            image: "portraits/portrait_piplip|lightblue|blue",
+            content: "§:break§Piphliph is a drunken man MC and co meet in a forest. He is a son of a §/gray/&GetCodexEntity('Races','Yeeters','Dwarves')&dwarf§ and §/blue/&GetCodexEntity('Races','Yeeters','North Folk')&northfolk§. Upon turning 18 years old, Piphliph was sent out to the world by his parents, but was quickly distracted by the greater “interests” in his life (mainly alcohol). The forest critters soon taught him the magic of making his own moonshine, and he hasn’t consumed anything since.",
+            tags: [
+              { tag: "party" },
+              { tag: "alcohol" }
+            ]
+          },
+          {
+            key: "Tontu Waldbruder",
+            image: "portraits/portrait_tontu_temp|brown|brown",
+            content: "§:break§Tontu is one of the surviving §/brown/&GetCodexEntity('Races','Elves','Wood elves')&wood elves§. You saved him, and as you share a goal of defeating §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§, he joined your party. With his knowledge and your skills of adventuring, finding the Evertree might not be so difficult after all.",
+            tags: [
+              { tag: "party" },
+              { tag: "wood elf" }
+            ]
+          },
+          {
+            key: "Cossu the Skeleboi",
+            image: "portraits/portrait_cossu|silver|white",
+            content: "§:break§You found Cossu's bones laying in one of the dynes in the desert. With the {lol joku key item}, you were able to bring him back to life.",
+            tags: [
+              { tag: "party" },
+              { tag: "desert" }
+            ]
+          }
+        ]
+      },
+      {
+        subcat: "Other characters",
+        content: [
+          {
+            key: "Erika",
+            content: `§:break§§/aqua/${player_name}§’s little sister. That’s it folks, see you in the next episode.`,
+            tags: [
+              { tag: player_name }
+            ]
+          },
+        ]
+      },
       {
         subcat: "Enemies",
         content: [
@@ -48,7 +179,7 @@ var codex = [
           },
           {
             key: "Viktor Stahlhelm",
-            content: "§:break§Viktor is the main antagonist of TOTE, and is the reason for the Evertree’s tears.§:break§§:break§He seeks strength in order to create a better and more ‘just’ world, according to his own ideals. He made the Evertree’s strength his own in order to further this goal.§:break§§:break§Age: 62§:break§§:break§ Birthdate: 6th of Sepalus, 203",
+            content: "§:break§Viktor is the main antagonist of TOTE, and is the reason for the Evertree’s tears.§:break§§:break§He seeks strength in order to create a better and more ‘just’ world, according to his own ideals. He made the Evertree’s strength his own in order to further this goal.§:break§§:break§Age: 62§:break§§:break§ Birthdate: 17th of Maid, 203",
             tags: [
               {tag: "enemies"},
               {tag: "villain"},
@@ -88,21 +219,26 @@ var codex = [
           },
           {
             key: "Kitty Witty",
-            content: "§:break§Big Aww. Kitty is way better than §&GotCodexEntity('Characters','Fluffy Bois',Doggus Woggus'&Doggus§ :)."
-          }
+            content: "§:break§Big Aww. Kitty is way better than §&GotCodexEntity('Characters','Fluffy Bois',Doggus Woggus'&Doggus§ :).",
+            tags: [
+              { tag: "fluffy" },
+              { tag: "cute" },
+              { tag: "feline" }
+            ]
+          },
         ]
-      }
+      },
     ]
   },
   {
     cat: "Races",
-    text: "Learn about the races which live in Die Welt.",
+    text: "§:break§Learn about the races which live in Die Welt.",
     subcats: [
       {
         subcat: "Humans",
         content: [
           {
-            key: "North folf",
+            key: "North folk",
             content: "§:break§Humans native to the northern parts of Die Welt.",
             tags: [
               { tag: "humans "}
@@ -129,7 +265,7 @@ var codex = [
           content: [
             {
               key: "Dark elves",
-              content: "§:break§Dark elves seem to be kind of assholes. There used to be three tribes, but §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ united them and claimed the place of the chief.",
+              content: "§:break§§/rgb(100, 26, 156)/Dark elves§ seem to be kind of assholes. There used to be three tribes, but §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ united them and claimed the place of the chief.",
               tags: [
                 { tag: "elves" },
                 { tag: "viktor "}
@@ -137,7 +273,7 @@ var codex = [
             },
             {
               key: "Wood elves",
-              content: "§:break§Wood elves used to live in Ewigerwald, in their village of §/green/&GetCodexEntity('Areas','Ewigerwald','Ewigerdorf')&Ewigerdorf§. Their whole existance was to protect the Evertree before §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ and the dark elves came and destroyed them. Most of the wood elves were killed in battle, but a few survived.",
+              content: "§:break§§/brown/Wood elves§ used to live in Ewigerwald, in their village of §/green/&GetCodexEntity('Areas','Ewigerwald','Ewigerdorf')&Ewigerdorf§. Their whole existance was to protect the Evertree before §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ and the dark elves came and destroyed them. Most of the wood elves were killed in battle, but a few survived.",
               tags: [
                 { tag: "elves" },
                 { tag: "viktor "}
@@ -169,7 +305,7 @@ var codex = [
   },
   {
     cat: "Areas",
-    text: "Discover the different areas in Die Welt.",
+    text: "§:break§Discover the different areas in Die Welt.",
     subcats: [
       {
         subcat: "Helleria",
@@ -260,7 +396,7 @@ var codex = [
   },
   {
     cat: "Events",
-    text: "What happened and when.",
+    text: "§:break§What happened and when.",
     subcats: [
       {
         subcat: "The Prelude (150-230)",
@@ -271,7 +407,10 @@ var codex = [
         content: [
           {
             key: "Assault on the Evertree (230)",
+
+            image: "icons/warn_icon|lime|green",
             content: "§:break§On this fateful day, §/red/&GetCodexEntity('Characters', 'Enemies', 'Viktor Stahlhelm')&Viktor§, at the age of 26, invaded the Evertree and took its sap.§:break§§:break§ Viktor led the three great dark elf clans in a crusade against their hated enemies, the wood elves. The assault came as a surprise to the outnumbered wood elves guarding the Evertree, and their initial garrisons were overwhelmed in a few hours.§:break§§:break§ An alarm was sounded and the entire city was soon engulfed in total war, even women and children fighting to the death to defend the Evertree, for if it were to fall, all of the world would soon follow.§:break§§:break§ Though the defenders were able to stop the assault itself at the gates of the tree, Viktor and his most trusted entourage managed to breach a weak point and infiltrate the tree.§:break§§:break§ Viktor and his followers all drank the Evertree’s sap and gained immense powers, greater than any mortal should possess. They stashed as much sap as they could, and then broke out of the tree to join their army, which was nearing annihilation. §:break§§:break§ With their newly acquired powers, the leaders razed the city to the ground as they retreated with their weakened forces, taking multiple wood elf civilians and soldiers alike as their ‘trophies’.§:break§§:break§ The city was completely devastated, half of her population lying in a ditch and two thirds of her buildings in ruins."
+
           }
         ]
       },

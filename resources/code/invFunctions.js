@@ -10,7 +10,13 @@ function CreateInv() {
       let itm = characters.player.inventory[i];
       item.id = `invItem${i}`;
       let img = Create("img");
-      img.src = `resources/images/items/${itm.img}.png`;
+      img.style.height = "85px";
+      img.style.width = "80px";
+      if(imageExists(`resources/images/items/${itm.img}.png`)) {
+        img.src = `resources/images/items/${itm.img}.png`;
+      } else {
+        img.src = imgMissing(itm.img);
+      }
       item.appendChild(img);
       item.addEventListener("mouseenter", ShowItemInfo);
       item.addEventListener("mouseleave", HideItemInfo);
@@ -116,7 +122,7 @@ function GetStringByKey(key, array) {
 }
 
 function kassuStrat() {
-  characters.player.inventory[1] = characters.player.equipment[2];
+  characters.player.inventory[1] = global.equipping.equipment[2];
   CreateInv();
 }
 
@@ -151,6 +157,23 @@ function FoundDesc(itm) {
   return false;
 }
 
+function MoveEquip(by) {
+  console.log(by);
+  if(global.party.length <= 1) return;
+  if(global.equippingNUM <= 0 && by < 0) global.equippingNUM = global.party.length-1;
+  else if(global.equippingNUM >= global.party.length-1)  global.equippingNUM = 0;
+  else global.equippingNUM += by;
+  ChangeEquip();
+}
+
+function ChangeEquip() {
+  console.log(global.equippingNUM);
+  global.equipping = global.party[global.equippingNUM].equip;
+  Element("charbeingequipped").textContent = global.equipping.name;
+  console.log(global.equipping);
+  CreateEquippedInventory();
+}
+
 function speedColor(speed) {
   if (speed > 0) {
     return "rgb(22, 196, 68)";
@@ -175,18 +198,26 @@ function CreateEquippedInventory() {
   Element("gloves").innerHTML = "";
   Element("feet").innerHTML = "";
   Element("shieldSlot").innerHTML = "";
-  for (let item of characters.player.equipment) {
+  for (let item of global.equipping.equipment) {
     if (GetWeapon() && item.dmg) {
-      Element("weaponSlot").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+    console.log("?"); 
+    if(imageExists(`resources/images/items/${item.img}.png`))Element("weaponSlot").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if(!imageExists(`resources/images/items/${item.img}.png`))Element("weaponSlot").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
       Element(item.key).addEventListener("mouseenter", ShowItemInfo);
       Element(item.key).addEventListener("mouseleave", HideItemInfo);
     }
     else if (item.slot) {
-      if (item.slot == "chest") Element("chestarmor").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
-      else if (item.slot == "helmet") Element("helmet").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
-      else if (item.slot == "gloves") Element("gloves").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
-      else if (item.slot == "feet") Element("feet").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
-      else if (item.slot == "shield") Element("shieldSlot").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      console.log("?");
+      if (item.slot == "chest" && imageExists(`resources/images/items/${item.img}.png`)) Element("chestarmor").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if(item.slot == "chest" && !imageExists(`resources/images/items/${item.img}.png`)) Element("chestarmor").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "helmet" && imageExists(`resources/images/items/${item.img}.png`)) Element("helmet").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "helmet" && !imageExists(`resources/images/items/${item.img}.png`)) Element("helmet").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "gloves" && imageExists(`resources/images/items/${item.img}.png`)) Element("gloves").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "gloves" && !imageExists(`resources/images/items/${item.img}.png`)) Element("gloves").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "feet" && imageExists(`resources/images/items/${item.img}.png`)) Element("feet").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "feet" && !imageExists(`resources/images/items/${item.img}.png`)) Element("feet").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "shield" && imageExists(`resources/images/items/${item.img}.png`)) Element("shieldSlot").innerHTML = `<img src="resources/images/items/${item.img}.png" class="equippedItem" id="${item.key}">`;
+      else if (item.slot == "shield" && !imageExists(`resources/images/items/${item.img}.png`)) Element("shieldSlot").innerHTML = `<img src=${imgMissing(item.img)} class="equippedItem" id="${item.key}">`;
       Element(item.key).addEventListener("mouseenter", ShowItemInfo);
       Element(item.key).addEventListener("mouseleave", HideItemInfo);
     }
@@ -209,7 +240,7 @@ Element("feet").addEventListener("dblclick", () => UnequipArmorDBL("feet"));
 
 
 function FindEquipment(key) {
-  for (let eq of characters.player.equipment) {
+  for (let eq of global.equipping.equipment) {
     if (eq.key == key) {
       return eq;
     }
@@ -218,10 +249,11 @@ function FindEquipment(key) {
 }
 
 function UnequipArmor(e, slot) {
+  if(!GetArmorBySlot(slot)) return;
   if (e.shiftKey) {
-    let copy = characters.player.equipment[GetArmorBySlot(slot)];
+    let copy = global.equipping.equipment[GetArmorBySlot(slot)];
     characters.player.inventory.push(copy);
-    characters.player.equipment.splice(GetArmorBySlot(slot), 1);
+    global.equipping.equipment.splice(GetArmorBySlot(slot), 1);
   }
   HideItemInfo();
   CreateEquippedInventory();
@@ -229,19 +261,21 @@ function UnequipArmor(e, slot) {
 }
 
 function UnequipArmorDBL(slot) {
-  let copy = characters.player.equipment[GetArmorBySlot(slot)];
+  if(GetArmorBySlot(slot) === false) return;
+  let copy = global.equipping.equipment[GetArmorBySlot(slot)];
   characters.player.inventory.push(copy);
-  characters.player.equipment.splice(GetArmorBySlot(slot), 1);
+  global.equipping.equipment.splice(GetArmorBySlot(slot), 1);
   HideItemInfo();
   CreateEquippedInventory();
   CreateInv();
 }
 
 function UnequipWeapon(e) {
+  if(!THEREISWEAPON()) return;
   if (e.shiftKey) {
     let copy = GetWeapon();
     characters.player.inventory.push(copy);
-    characters.player.equipment.splice(GetWeaponInt(), 1);
+    global.equipping.equipment.splice(GetWeaponInt(), 1);
     HideItemInfo();
     CreateEquippedInventory();
     CreateInv();
@@ -249,9 +283,10 @@ function UnequipWeapon(e) {
 }
 
 function UnequipWeaponDBL() {
+  if(!THEREISWEAPON()) return;
   let copy = GetWeapon();
   characters.player.inventory.push(copy);
-  characters.player.equipment.splice(GetWeaponInt(), 1);
+  global.equipping.equipment.splice(GetWeaponInt(), 1);
   HideItemInfo();
   CreateEquippedInventory();
   CreateInv();
@@ -290,21 +325,21 @@ function EquipItem(e) {
     if (characters.player.inventory[int].dmg) {
       let copy = GetWeapon();
       if (THEREISWEAPON() === true) {
-        characters.player.equipment[GetWeaponInt()] = characters.player.inventory[int];
+        global.equipping.equipment[GetWeaponInt()] = characters.player.inventory[int];
         characters.player.inventory[int] = copy;
       }
       else {
-        characters.player.equipment.push(characters.player.inventory[int]);
+        global.equipping.equipment.push(characters.player.inventory[int]);
         characters.player.inventory.splice(int, 1);
       }
     }
     else if (characters.player.inventory[int].slot) {
-      let copy = characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)];
+      let copy = global.equipping.equipment[GetArmorBySlot(characters.player.inventory[int].slot)];
       if (GetArmorBySlot(characters.player.inventory[int].slot)) {
-        characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)] = characters.player.inventory[int];
+        global.equipping.equipment[GetArmorBySlot(characters.player.inventory[int].slot)] = characters.player.inventory[int];
         characters.player.inventory[int] = copy;
       } else {
-        characters.player.equipment.push(characters.player.inventory[int]);
+        global.equipping.equipment.push(characters.player.inventory[int]);
         characters.player.inventory.splice(int, 1);
       }
     }
@@ -320,21 +355,21 @@ function DoubleClickEquipItem(e) {
   if (characters.player.inventory[int].dmg) {
     let copy = GetWeapon();
     if (THEREISWEAPON() === true) {
-      characters.player.equipment[GetWeaponInt()] = characters.player.inventory[int];
+      global.equipping.equipment[GetWeaponInt()] = characters.player.inventory[int];
       characters.player.inventory[int] = copy;
     }
     else {
-      characters.player.equipment.push(characters.player.inventory[int]);
+      global.equipping.equipment.push(characters.player.inventory[int]);
       characters.player.inventory.splice(int, 1);
     }
   }
   else if (characters.player.inventory[int].slot) {
-    let copy = characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)];
+    let copy = global.equipping.equipment[GetArmorBySlot(characters.player.inventory[int].slot)];
     if (GetArmorBySlot(characters.player.inventory[int].slot)) {
-      characters.player.equipment[GetArmorBySlot(characters.player.inventory[int].slot)] = characters.player.inventory[int];
+      global.equipping.equipment[GetArmorBySlot(characters.player.inventory[int].slot)] = characters.player.inventory[int];
       characters.player.inventory[int] = copy;
     } else {
-      characters.player.equipment.push(characters.player.inventory[int]);
+      global.equipping.equipment.push(characters.player.inventory[int]);
       characters.player.inventory.splice(int, 1);
     }
   }
@@ -343,29 +378,29 @@ function DoubleClickEquipItem(e) {
 }
 
 function GetArmorBySlot(slot) {
-  for (let i = 0; i < characters.player.equipment.length; i++) {
-    if (characters.player.equipment[i].slot == slot) return i;
+  for (let i = 0; i < global.equipping.equipment.length; i++) {
+    if (global.equipping.equipment[i].slot == slot) return i;
   }
   return false;
 }
 
 function GetWeapon() {
-  for (let wep of characters.player.equipment) {
+  for (let wep of global.equipping.equipment) {
     if (wep.dmg) return wep;
   }
 }
 
 // Had to add this since the other ones weren't enough...
 function THEREISWEAPON() {
-  for (let wep of characters.player.equipment) {
+  for (let wep of global.equipping.equipment) {
     if (wep.dmg) return true;
   }
   return false;
 }
 
 function GetWeaponInt() {
-  for (let i = 0; i < characters.player.equipment.length; i++) {
-    if (characters.player.equipment[i].dmg) return i;
+  for (let i = 0; i < global.equipping.equipment.length; i++) {
+    if (global.equipping.equipment[i].dmg) return i;
   }
   return false;
 }
@@ -429,13 +464,13 @@ function GetAVGArmor(char) {
 }
 
 function UpdatePlayerStats() {
-  if(!characters.player.modifiers) characters.player.modifiers = [];
-  for(let eq of characters.player.equipment) {
+  if(!global.equipping.modifiers) global.equipping.modifiers = [];
+  for(let eq of global.equipping.equipment) {
     if(eq.effects) {
       for(let effect of eq.effects) {
         if(!ModExists(effect.key)) {
           effect.applied = false;
-          characters.player.modifiers.push(effect);
+          global.equipping.modifiers.push(effect);
           AddValueOfMod(effect);
         }
       }
@@ -449,33 +484,33 @@ function UpdatePlayerStats() {
 
 function AddValueOfMod(effect) {
   if(effect.applied == true) return;
-  if(effect.action == "increase") characters.player.stats[effect.type] += effect.value;
-  else if(effect.action == "decrease") characters.player.stats[effect.type] -= effect.value;
+  if(effect.action == "increase") global.equipping.stats[effect.type] += effect.value;
+  else if(effect.action == "decrease") global.equipping.stats[effect.type] -= effect.value;
   effect.applied = true;
 }
 
 function KeepRunningModRemoval() {
-  for(let mod of characters.player.modifiers) {
+  for(let mod of global.equipping.modifiers) {
     if(ModShouldNotExist(mod.key)) return true;
   }
   return false;
 }
 
 function RemoveModIfEquipRemoved() {
-  let copy = characters.player.modifiers
-  for(let i=0; i<characters.player.modifiers.length; i++) {
-    if(ModShouldNotExist(characters.player.modifiers[i].key)) {
-      let effect = characters.player.modifiers[i];
-      if(effect.action == "increase") characters.player.stats[effect.type] -= effect.value;
-      else if(effect.action == "decrease") characters.player.stats[effect.type] += effect.value;
+  let copy = global.equipping.modifiers
+  for(let i=0; i<global.equipping.modifiers.length; i++) {
+    if(ModShouldNotExist(global.equipping.modifiers[i].key)) {
+      let effect = global.equipping.modifiers[i];
+      if(effect.action == "increase") global.equipping.stats[effect.type] -= effect.value;
+      else if(effect.action == "decrease") global.equipping.stats[effect.type] += effect.value;
       copy.splice(i, 1);
     }
   }
-  characters.player.modifiers = copy;
+  global.equipping.modifiers = copy;
 }
 
 function ModShouldNotExist(key) {
-  for(let eq of characters.player.equipment) {
+  for(let eq of global.equipping.equipment) {
     if(eq.effects) {
       for(let effect of eq.effects) {
         if(effect.key == key) return false;
@@ -486,7 +521,7 @@ function ModShouldNotExist(key) {
 }
 
 function ModExists(key) {
-  for(let mod of characters.player.modifiers) {
+  for(let mod of global.equipping.modifiers) {
     if(mod.key == key) {
       return true;
     }

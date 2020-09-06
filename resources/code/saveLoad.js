@@ -146,6 +146,7 @@ function LoadSlotNoPrompt(key) {
     return;
   }
   characters = JSON.parse(localStorage.getItem(`${key}characters`));
+  console.log(localStorage.getItem(`${key}global`));
   global = JSON.parse(localStorage.getItem(`${key}global`));
   LoadingUpdate();
   Loading();

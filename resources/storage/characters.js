@@ -20,6 +20,23 @@ class Player extends Actor {
   }
 }
 
+class Enemy extends Actor {
+  constructor(key, name, classvar, stats, equipment, color, image, modifiers, abilities) {
+    super(key, name, classvar, stats, equipment, color, image),
+    this.modifiers = modifiers,
+    this.abilities = abilities
+  }
+}
+
+class Ally extends Actor {
+  constructor(key, name, classvar, stats, equipment, color, image, modifiers, abilities, xp) {
+    super(key, name, classvar, stats, equipment, color, image),
+    this.modifiers = modifiers,
+    this.abilities = abilities,
+    this.xp = xp
+  }
+}
+
 class Stats {
   constructor(hp, mana, str, dex, agi, wis, int, fth, acc, spd) {
     this.hp = hp,
@@ -48,36 +65,13 @@ var characters = {
       AddItem("rusty_iron_sword")
     ]),
   allies: [
-    new Actor("ally_healer_kyn", "Kynier Haleforth", "healer",
-      new Stats(50, 15, 3, 3, 3, 7, 7, 7, 5, 1),
-      [
-        AddItem("broken_iron_dagger"),
-        AddItem("leather_chest"),
-      ], "cyan", "portrait_kynier_temp"),
-    new Actor("ally_ranger_tontu", "Tontu Waldbruder", "ranger",
-    new Stats(60, 10, 3, 6, 6, 5, 5, 4, 7, 2),
+    new Ally("ally_healer_christina", "Christina Schutzengel", "healer", 
+    new Stats(60, 20, 3, 3, 3, 7, 7, 7, 5, 1), 
     [
       AddItem("broken_iron_dagger")
-    ], "lime", "portrait_tontu_temp")
+    ], "gold", "portrait_white_mage_temp", [], [], {points: 0, needed: 100, modifier: 1.00})
   ],
   enemies: [
-    new Actor("enemy_rogue_thief", "Thief", "rogue",
-      new Stats(45, 5, 5, 5, 5, 5, 5, 5, 5, 0),
-      [
-        AddItem("broken_iron_dagger"),
-        AddItem("leather_chest"),
-      ], "red", "portrait_thief_temp"),
-    new Actor("enemy_warrior_goblin", "Goblin", "warrior",
-      new Stats(60, 5, 5, 5, 5, 5, 5, 5, 5, 0),
-      [
-        AddItem("rusty_iron_bastard_sword"),
-        AddItem("leather_chest"),
-      ], "green", "portrait_goblin_temp"),
-    new Actor("enemy_main_villain", "Viktor Stahlhelm", "warlock", 
-      new Stats(6000, 4000, 80, 80, 60, 95, 95, 100, 70, 5),
-      [
-        AddItem("broken_iron_dagger")
-      ], "black", "portrait_bigbad_temp"),
   ]
 }
 
@@ -94,3 +88,4 @@ characters.player.inventory = [
   AddItem("leather_boots"),
   AddItem("magical_chestplate")
 ];
+characters.player.xp = {points: 0, needed: 100, modifier: 1.00};
