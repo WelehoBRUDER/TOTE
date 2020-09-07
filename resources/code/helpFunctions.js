@@ -65,6 +65,30 @@ const CHAR = function(key) {
   }
 }
 
+const CHARNAME = function(key) {
+  if(key == characters.player.key) return characters.player.name;
+  else {
+    for(let char of characters.allies) {
+      if(char.key == key) return char.name;
+    }
+  }
+    for(let char of characters.enemies) {
+      if(char.key == key) return char.name;
+  }
+}
+
+const CHARCOLOR = function(key) {
+  if(key == characters.player.key) return characters.player.color;
+  else {
+    for(let char of characters.allies) {
+      if(char.key == key) return char.color;
+    }
+  }
+    for(let char of characters.enemies) {
+      if(char.key == key) return char.color;
+  }
+}
+
 // function imageExists(image_url){
 //   var req = new Request(image_url, {method: "HEAD"});
 //   fetch(req).then((res)=>{return res.status != 404});
