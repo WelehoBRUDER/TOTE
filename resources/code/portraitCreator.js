@@ -60,7 +60,6 @@ function HarmPlayer(dmg) {
 function addToFight() {
   ClearCombatTables();
   PushCombatantToTable(characters.player, alliesFight);
-  PushCombatantToTable(characters.allies[0], alliesFight);
   CreatePortraits();
 }
 

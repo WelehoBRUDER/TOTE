@@ -1,105 +1,126 @@
 <!DOCTYPE html>
 <html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TOTE - v0.0.2</title>
+    <link rel="stylesheet" href="misc.css" />
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="map.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TOTE - v0.0.2</title>
-  <link rel="stylesheet" href="misc.css" />
-  <link rel="stylesheet" href="main.css" />
-  <link rel="stylesheet" href="map.css" />
-</head>
-
-<body>
-  <div id="mapFrame" hidden>
-    <canvas id="map" width="1200px" height="800px"></canvas>
-  </div>
-  <div id="codex" hidden>
-    <div id="content"></div>
-    <div id="contentScroller"></div>
-    <div id="contentSearchbar">
-      <div id="contentSearchbutton" onclick="SearchEntities()"></div>
-      <div id="contentSearchtagtoggle" onclick="ToggleTags()"></div>
-      <input maxlength="20" id="contentSearchfield" onchange="SearchEntities()" />
+  <body>
+    <div id="mapFrame" hidden>
+      <canvas id="map" width="1200px" height="800px"></canvas>
     </div>
-  </div>
-  <div id="portraits">
-    <div id="allyportraits"></div>
-    <div id="enemyportraits"></div>
-  </div>
-  <div id="timeFrame">
-    <p id="clock">22.26</p>
-    <div></div>
-    <p id="date">17th of May, 266</p>
-  </div>
-  <div id="saveLoad"></div>
-  <div id="invFrame">
-    <p id="goForward" onclick="MoveEquip(1)">></p>
-    <p id="charbeingequipped"></p>
-    <p id="goBackward" onclick="MoveEquip(-1)"><</p>
-        <div id="invEquipFrame">
-          <div id="armorFrame">
-            <div id="helmet"></div>
-            <p id="helmetText">Head Armor</p>
-            <div id="chestarmor"></div>
-            <p id="chestText">Chest Armor</p>
-            <div id="gloves"></div>
-            <p id="glovesText">Hand Armor</p>
-            <div id="feet"></div>
-            <p id="feetText">Leg Armor</p>
-          </div>
-          <div id="weaponFrame">
-            <div id="weaponSlot"></div>
-            <p id="weaponText">Weapon</p>
-            <div id="shieldSlot"></div>
-            <p id="shieldText">Shield</p>
-          </div>
-          <div id="ringFrame">
-            <div id="ring1"></div>
-            <p id="ring1Text">Ring 1</p>
-            <div id="ring2"></div>
-            <p id="ring2Text">Ring 2</p>
-            <div id="ring3"></div>
-            <p id="ring3Text">Ring 3</p>
-          </div>
-        </div>
-        <div id="invGridFrame">
-          <div id="invGrid"></div>
-        </div>
-        <div id="infoBox"></div>
-  </div>
-  <div id="settings" hidden>
-    <button id="saves" onclick="Saving()" style="background-image: url('resources/images/bg/bg_red.png')">
-      Save
-    </button>
-    <button id="load" onclick="Loading()" style="background-image: url('resources/images/bg/bg_red.png')">
-      Load
-    </button>
-    <button id="options" style="background-image: url('resources/images/bg/bg_red.png')">
-      Options
-    </button>
-    <button id="menu" style="background-image: url('resources/images/bg/bg_red.png')">
-      Menu
-    </button>
-  </div>
-  <div id="combat"></div>
-  <div id="uiIcons"></div>
-  <div id="AlertBase" hidden>
-    <div id="dimScreen" onclick="hideAlert()"></div>
-    <div id="Alert">
-      <div id="topAlert">
-        <img src="resources/images/icons/warn_icon.png" alt="" id="alertIco" />
+    <div id="codex" hidden>
+      <div id="content"></div>
+      <div id="contentScroller"></div>
+      <div id="contentSearchbar">
+        <div id="contentSearchbutton" onclick="SearchEntities()"></div>
+        <div id="contentSearchtagtoggle" onclick="ToggleTags()"></div>
+        <input
+          maxlength="20"
+          id="contentSearchfield"
+          onchange="SearchEntities()"
+        />
       </div>
-      <p id="textAlert"></p>
-      <button id="yesAlert"></button>
-      <button id="noAlert" onclick="hideAlert()">Cancel</button>
     </div>
-  </div>
-</body>
-
+    <div id="portraits">
+      <div id="allyportraits"></div>
+      <div id="enemyportraits"></div>
+    </div>
+    <div id="timeFrame">
+      <p id="clock">22.26</p>
+      <div></div>
+      <p id="date">17th of May, 266</p>
+    </div>
+    <div id="saveLoad"></div>
+    <div id="invFrame">
+      <p id="goForward" onclick="MoveEquip(1)">></p>
+      <p id="charbeingequipped"></p>
+      <p id="goBackward" onclick="MoveEquip(-1)"><</p>
+      <div id="invEquipFrame">
+        <div id="armorFrame">
+          <div id="helmet"></div>
+          <p id="helmetText">Head Armor</p>
+          <div id="chestarmor"></div>
+          <p id="chestText">Chest Armor</p>
+          <div id="gloves"></div>
+          <p id="glovesText">Hand Armor</p>
+          <div id="feet"></div>
+          <p id="feetText">Leg Armor</p>
+        </div>
+        <div id="weaponFrame">
+          <div id="weaponSlot"></div>
+          <p id="weaponText">Weapon</p>
+          <div id="shieldSlot"></div>
+          <p id="shieldText">Shield</p>
+        </div>
+        <div id="ringFrame">
+          <div id="ring1"></div>
+          <p id="ring1Text">Ring 1</p>
+          <div id="ring2"></div>
+          <p id="ring2Text">Ring 2</p>
+          <div id="ring3"></div>
+          <p id="ring3Text">Ring 3</p>
+        </div>
+      </div>
+      <div id="invGridFrame">
+        <div id="invGrid"></div>
+      </div>
+      <div id="infoBox"></div>
+    </div>
+    <div id="settings" hidden>
+      <button
+        id="saves"
+        onclick="Saving()"
+        style="background-image: url('resources/images/bg/bg_red.png')"
+      >
+        Save
+      </button>
+      <button
+        id="load"
+        onclick="Loading()"
+        style="background-image: url('resources/images/bg/bg_red.png')"
+      >
+        Load
+      </button>
+      <button
+        id="options"
+        style="background-image: url('resources/images/bg/bg_red.png')"
+      >
+        Options
+      </button>
+      <button
+        id="menu"
+        style="background-image: url('resources/images/bg/bg_red.png')"
+      >
+        Menu
+      </button>
+    </div>
+    <div id="combat"></div>
+    <div id="uiIcons"></div>
+    <div id="AlertBase" hidden>
+      <div id="dimScreen" onclick="hideAlert()"></div>
+      <div id="Alert">
+        <div id="topAlert">
+          <img
+            src="resources/images/icons/warn_icon.png"
+            alt=""
+            id="alertIco"
+          />
+        </div>
+        <p id="textAlert"></p>
+        <button id="yesAlert"></button>
+        <button id="noAlert" onclick="hideAlert()">Cancel</button>
+      </div>
+    </div>
+  </body>
 </html>
 <script src="resources/code/helpFunctions.js"></script>
 <script src="resources/storage/items.js"></script>
+<script src="resources/storage/classes.js"></script>
 <script src="resources/storage/characters.js"></script>
 <script src="resources/storage/text.js"></script>
 <script src="resources/storage/codex.js"></script>
@@ -113,4 +134,5 @@
 <script src="resources/code/codexFunctions.js"></script>
 <script src="resources/code/saveLoad.js"></script>
 <script src="resources/code/invFunctions.js"></script>
+<script src="resources/code/classesFunctions.js"></script>
 <script src="resources/code/ui.js"></script>

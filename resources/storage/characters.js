@@ -3,11 +3,10 @@ var player_color = "rgb(100,100,100)";
 var player_image = "portrait_player_temp";
 
 class Actor {
-  constructor(key, name, classvar, stats, equipment, color, image) {
+  constructor(key, name, Class, equipment, color, image) {
     this.key = key,
       this.name = name,
-      this.class = classvar,
-      this.stats = stats,
+      this.class = Class,
       this.equipment = equipment,
       this.color = color,
       this.image = image
@@ -15,40 +14,30 @@ class Actor {
 }
 
 class Player extends Actor {
-  constructor(classvar, stats, equipment) {
-    super("player", player_name, classvar, stats, equipment, player_color, player_image)
+  constructor(Class, equipment, stats) {
+    super("player", player_name, Class, equipment, player_color, player_image)
+    this.stats = stats
   }
 }
 
 class Enemy extends Actor {
-  constructor(key, name, classvar, stats, equipment, color, image, modifiers, abilities) {
-    super(key, name, classvar, stats, equipment, color, image),
+  constructor(key, name, Class, equipment, color, image, modifiers, abilities, statBonuses, level, stats) {
+    super(key, name, Class, equipment, color, image),
     this.modifiers = modifiers,
-    this.abilities = abilities
+    this.abilities = abilities,
+    this.statBonuses = statBonuses,
+    this.level = level,
+    this.stats = stats
   }
 }
 
 class Ally extends Actor {
-  constructor(key, name, classvar, stats, equipment, color, image, modifiers, abilities, xp) {
-    super(key, name, classvar, stats, equipment, color, image),
+  constructor(key, name, Class, equipment, color, image, modifiers, abilities, xp, stats) {
+    super(key, name, Class, equipment, color, image),
     this.modifiers = modifiers,
     this.abilities = abilities,
-    this.xp = xp
-  }
-}
-
-class Stats {
-  constructor(hp, mana, str, dex, agi, wis, int, fth, acc, spd) {
-    this.hp = hp,
-      this.mana = mana,
-      this.str = str,
-      this.dex = dex,
-      this.agi = agi,
-      this.wis = wis,
-      this.int = int,
-      this.fth = fth,
-      this.acc = acc,
-      this.spd = spd
+    this.xp = xp,
+    this.stats = stats
   }
 }
 
@@ -59,17 +48,11 @@ function LisaaJaPoista() {
 }
 
 var characters = {
-  player: new Player("warrior",
-    new Stats(100, 10, 5, 5, 5, 5, 5, 5, 5, 0),
+  player: new Player(CharClass("Warrior"),
     [
       AddItem("rusty_iron_sword")
-    ]),
+    ], {}),
   allies: [
-    new Ally("ally_healer_christina", "Christina Schutzengel", "healer", 
-    new Stats(60, 20, 3, 3, 3, 7, 7, 7, 5, 1), 
-    [
-      AddItem("broken_iron_dagger")
-    ], "gold", "portrait_white_mage_temp", [], [], {points: 0, needed: 100, modifier: 1.00})
   ],
   enemies: [
   ]
@@ -88,4 +71,5 @@ characters.player.inventory = [
   AddItem("leather_boots"),
   AddItem("magical_chestplate")
 ];
-characters.player.xp = {points: 0, needed: 100, modifier: 1.00};
+characters.player.xp = {points: 0, needed: 100, modifier: 1.00, level: 1};
+
