@@ -52,6 +52,19 @@ function imageExists(image_url){
 
 }
 
+const CHAR = function(key) {
+  if(key == characters.player.key) return characters.player;
+  else {
+    for(let char of characters.allies) {
+      if(char.key == key) return char;
+    }
+  }
+
+    for(let char of characters.enemies) {
+      if(char.key == key) return char;
+  }
+}
+
 // function imageExists(image_url){
 //   var req = new Request(image_url, {method: "HEAD"});
 //   fetch(req).then((res)=>{return res.status != 404});
