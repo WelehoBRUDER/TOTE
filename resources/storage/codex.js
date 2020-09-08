@@ -108,7 +108,7 @@ var codex = [
             key: "Marthynn von Wulf",
 
             image: "portraits/portrait_rogue_temp|black|black",
-            content: `§:break§§/aqua/${player_name}§’s childhood friend. Marthynn is quiet and likes keeping to himself, but deep down cares for his friends. His family has had an affiliation with wolves for decades, and relates to them on a spiritual level. Marthynn is a rogue.§:break§§:break§§:break§“I was born with the wolves, you wouldn’t understand.”`,
+            content: `§:break§§/aqua/${player_name}§’s childhood friend. Marthynn is quiet and likes keeping to himself, but deep down cares for his friends. His family has had an affiliation with wolves for decades, and relates to them on a spiritual level. Marthynn is a rogue.§:break§§:break§§:break§§¤I-¤“I was born with the wolves, you wouldn’t understand.”§ - Marthynn himself about himself.`,
             tags: [
               { tag: "party" },
               { tag: player_name },
@@ -116,9 +116,9 @@ var codex = [
             ]
           },
           {
-            key: "Piphliph Starkergetränkeliebhaber",
+            key: "Arzt Starkergetränkeliebhaber",
             image: "portraits/portrait_piplip|lightblue|blue",
-            content: "§:break§Piphliph is a drunken man MC and co meet in a forest. He is a son of a §/gray/&GetCodexEntity('Races','Yeeters','Dwarves')&dwarf§ and §/blue/&GetCodexEntity('Races','Yeeters','North Folk')&northfolk§. Upon turning 18 years old, Piphliph was sent out to the world by his parents, but was quickly distracted by the greater “interests” in his life (mainly alcohol). The forest critters soon taught him the magic of making his own moonshine, and he hasn’t consumed anything since.",
+            content: "§:break§Arzt is a drunken man MC and co meet in a forest. He is a son of a §/gray/&GetCodexEntity('Races','Yeeters','Dwarves')&dwarf§ and §/blue/&GetCodexEntity('Races','Yeeters','North Folk')&northfolk§. Upon turning 18 years old, Piphliph was sent out to the world by his parents, but was quickly distracted by the greater “interests” in his life (mainly alcohol). The forest critters soon taught him the magic of making his own moonshine, and he hasn’t consumed anything since.",
             tags: [
               { tag: "party" },
               { tag: "alcohol" }
