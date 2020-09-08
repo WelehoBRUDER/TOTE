@@ -1,6 +1,13 @@
 const abilities = [
     {
         key: "fierce-assault",
-        img: "events/missing_image.png"
+        img: "icons/fierce_assault.png"
     }
 ];
+
+const spells = [
+    {
+        key: "mana-blast",
+        img: "icons/mana_blast.png"
+    }
+]

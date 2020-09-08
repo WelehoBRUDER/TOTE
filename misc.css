@@ -103,7 +103,11 @@
 #combatAbility1 img,
 #combatAbility2 img,
 #combatAbility3 img,
-#combatAbility4 img {
+#combatAbility4 img,
+#combatSpell1 img,
+#combatSpell2 img,
+#combatSpell3 img,
+#combatSpell4 img {
     position: absolute;
     text-align: center;
     align-self: center;
@@ -121,57 +125,50 @@
 #combatAbility1 {
     position: absolute;
     left: 0px;
-    top: -210px;
+    top: 110px;
 }
 
 #combatAbility2 {
     position: absolute;
     left: 200px;
-    top: -210px;
+    top: 110px;
 }
 
 #combatAbility3 {
     position: absolute;
     left: 100px;
-    top: -320px;
+    top: 220px;
 }
 
 #combatAbility4 {
     position: absolute;
     left: 100px;
-    top: -100px;
+    top: 0px;
 }
 
-#spell_wheel {
-    position: absolute;
-    right: 225px;
-    bottom: 10px;
-    width: fit-content;
-    height: fit-content;
-}
 
 #combatSpell1 {
     position: absolute;
-    left: 0px;
-    top: -210px;
+    left: 500px;
+    top: 110px;
 }
 
 #combatSpell2 {
     position: absolute;
-    left: 200px;
-    top: -210px;
+    left: 700px;
+    top: 110px;
 }
 
 #combatSpell3 {
     position: absolute;
-    left: 100px;
-    top: -320px;
+    left: 600px;
+    top: 220px;
 }
 
 #combatSpell4 {
     position: absolute;
-    left: 100px;
-    top: -100px;
+    left: 600px;
+    top: 0px;
 }
 
 #combatUltimate {
@@ -197,10 +194,7 @@
 #combatButtonsContainer div {
     transition: 0.1s;
     transform: scale(1);
-}
-
-#combatButtonsContainer div:hover {
-    transform: scale(1.075);
+    cursor: pointer;
 }
 
 #abilityInfo {

@@ -72,10 +72,13 @@ characters.player.inventory = [
   AddItem("magical_chestplate")
 ];
 characters.player.xp = {points: 0, needed: 100, modifier: 1.00, level: 1};
-characters.player.abilities = [Ability("fierce-assault")]
+characters.player.abilities = [Ability("fierce-assault")];
+characters.player.spells = [Spell("mana-blast")];
 
 characters.player.abilities[0].equipped = true;
 characters.player.abilities[0].slot = 1;
+characters.player.spells[0].equipped = true;
+characters.player.spells[0].slot = 1;
 
 function Ability(key) {
   for(let abi of abilities) {
@@ -83,3 +86,8 @@ function Ability(key) {
   }
 }
 
+function Spell(key) {
+  for(let spell of spells) {
+    if(spell.key == key) return spell;
+  }
+}

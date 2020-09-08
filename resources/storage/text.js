@@ -12,7 +12,11 @@ var texts = [
       },
       {
         key: "fierce-assault",
-        text: "Dedicate your all to a massive §/crimson/attack§ for 1.25x damage! Cost: 10 §/cyan/mana§."
+        text: "Dedicate your all to a massive §/crimson/attack§ that §/green/ignores§ armor for 1.25x damage! Cost: 10 §/cyan/mana§. Cooldown: 4 §/yellow/turns§."
+      },
+      {
+        key: "mana-blast",
+        text: "Concentrate your mana in one fierce blast. Cost: 25 §/cyan/mana§."
       }
     ]
   }
