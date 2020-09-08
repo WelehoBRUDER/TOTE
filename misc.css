@@ -34,7 +34,8 @@
     font-weight: normal;
 }
 
-#goForward, #goBackward {
+#goForward,
+#goBackward {
     transition: 0.15s;
     padding: 4px;
     padding-left: 15px;
@@ -53,7 +54,8 @@
     z-index: 2;
 }
 
-#goForward:hover, #goBackward:hover {
+#goForward:hover,
+#goBackward:hover {
     background: rgb(59, 59, 59);
     box-shadow: inset 0 0 6px 6px rgb(44, 44, 44);
     text-shadow: -2px 3px 5px black;
@@ -98,6 +100,24 @@
     height: fit-content;
 }
 
+#combatAbility1 img,
+#combatAbility2 img,
+#combatAbility3 img,
+#combatAbility4 img {
+    position: absolute;
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.combatAbiImage {
+    top: 12px;
+    width: 65px;
+    height: 65px;
+}
+
 #combatAbility1 {
     position: absolute;
     left: 0px;
@@ -130,7 +150,7 @@
     height: fit-content;
 }
 
-#combatSpell1{
+#combatSpell1 {
     position: absolute;
     left: 0px;
     top: -210px;
@@ -160,7 +180,8 @@
     margin-left: -64px;
 }
 
-#combatAttack, #combatDefense {
+#combatAttack,
+#combatDefense {
     position: absolute;
     top: 220px;
 }
@@ -173,12 +194,12 @@
     right: 175px;
 }
 
-#combatButtonsContainer img {
+#combatButtonsContainer div {
     transition: 0.1s;
-    transform: scale(1.00);
+    transform: scale(1);
 }
 
-#combatButtonsContainer img:hover {
+#combatButtonsContainer div:hover {
     transform: scale(1.075);
 }
 
@@ -186,7 +207,7 @@
     display: block;
     transition: 0.1s;
     background-color: rgba(0, 0, 0, 0.45);
-    width: 150px; 
+    width: 150px;
     height: fit-content;
     position: absolute;
     text-align: center;
@@ -198,7 +219,6 @@
     margin: 5px;
     opacity: 1.5;
 }
-
 
 #abilityInfo span {
     font-size: 15px;
