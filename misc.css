@@ -112,62 +112,72 @@
     text-align: center;
     align-self: center;
     justify-self: center;
-    left: 50%;
-    transform: translateX(-50%);
+}
+
+#combatAbility1,
+#combatAbility2,
+#combatAbility3,
+#combatAbility4,
+#combatSpell1,
+#combatSpell2,
+#combatSpell3,
+#combatSpell4 {
+    height: 96px;
+    width: 96px;
 }
 
 .combatAbiImage {
     top: 12px;
     width: 65px;
     height: 65px;
+    left: 16px;
 }
 
 #combatAbility1 {
     position: absolute;
-    left: 0px;
+    left: -100px;
     top: 110px;
 }
 
 #combatAbility2 {
     position: absolute;
-    left: 200px;
+    left: 100px;
     top: 110px;
 }
 
 #combatAbility3 {
     position: absolute;
-    left: 100px;
+    left: 0px;
     top: 220px;
 }
 
 #combatAbility4 {
     position: absolute;
-    left: 100px;
+    left: 0px;
     top: 0px;
 }
 
-
 #combatSpell1 {
     position: absolute;
-    left: 500px;
+    left: 550px;
     top: 110px;
 }
 
 #combatSpell2 {
     position: absolute;
-    left: 700px;
+    left: 750px;
     top: 110px;
 }
 
 #combatSpell3 {
     position: absolute;
-    left: 600px;
+    left: 650px;
     top: 220px;
 }
 
 #combatSpell4 {
     position: absolute;
-    left: 600px;
+    left: 650px;
     top: 0px;
 }
 
@@ -201,7 +211,7 @@
     display: block;
     transition: 0.1s;
     background-color: rgba(0, 0, 0, 0.45);
-    width: 150px;
+    width: 200px;
     height: fit-content;
     position: absolute;
     text-align: center;

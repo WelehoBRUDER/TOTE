@@ -16,7 +16,6 @@ function FormCombatEnvironment() {
 <img src="resources/images/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()">
 <img src="resources/images/icons/ultimate_ability.png" id="combatUltimate">
   </div>`;
-  EquipSpellsAndAbilities();
 }
 
 function abiOfSlot(char, slot) {
@@ -48,6 +47,8 @@ function CombatAbility(char, slot) {
   }
 }
 
+var delay = null;
+
 function CombatSpell(char, slot) {
   if(spellOfSlot(char, slot) != undefined) {
     let spell = spellOfSlot(char, slot);
@@ -63,52 +64,32 @@ function CombatSpell(char, slot) {
   }
 }
 
-{/* <div id="spell_wheel">
-<img src="resources/images/icons/spell_wheel.png" id="combatSpell1">
-<img src="resources/images/icons/spell_wheel.png" id="combatSpell2">
-<img src="resources/images/icons/spell_wheel.png" id="combatSpell3">
-<img src="resources/images/icons/spell_wheel.png" id="combatSpell4">
-</div> */}
-
-{/* <div id="combatAbility1">
-<img src="resources/images/icons/ability_wheel.png">
-</div>
-<div id="combatAbility2">
-<img src="resources/images/icons/ability_wheel.png">
-</div>
-<div id="combatAbility3">
-<img src="resources/images/icons/ability_wheel.png">
-</div>
-<div id="combatAbility4">
-<img src="resources/images/icons/ability_wheel.png">
-</div> */}
-
-function EquipSpellsAndAbilities() {
-  for(let abi of global.controlling.abilities) {
-    if(abi.equipped) {
-      console.log(abi.slot);
-      if(abi.slot == 1) {Element("combatAbility1").addEventListener("mouseover",()=>showInfoCombat(abi.key, this) );
-       Element("combatAbility1").addEventListener("mouseleave", ()=>hideInfoCombat());}
-    }
-  }
-}
-
-function showInfoCombat(key, elem) {
+function infoContent(key, elem) {
   Element("abilityInfo").textContent = "";
   let text = GetCombatInfo(key);
   if(text == undefined) text = "§¤s19-BB¤/red/Unfortunately it seems that your text was not found...§";
   Element("abilityInfo").style.background = "rgba(0,0,0,0.55)";
   Element("abilityInfo").style.opacity = "1.00";
   console.log(elem.offsetTop, elem.offsetLeft);
-  Element("abilityInfo").style.top = `${(elem.offsetTop - 90)}px`;
-  Element("abilityInfo").style.left = `${(elem.offsetLeft - 15)}px`;
+  Element("abilityInfo").style.top = `${(elem.offsetTop - 100)}px`;
+  Element("abilityInfo").style.left = `${(elem.offsetLeft - 50)}px`;
   Element("abilityInfo").appendChild(ReadContentCombat(text));
 }
 
+function showInfoCombat(key, elem) {
+  if(delay) {
+    clearTimeout(delay);
+    delay = null;
+  }
+  delay = setTimeout(()=>infoContent(key, elem), 800);
+}
+
 function hideInfoCombat() {
+  clearTimeout(delay);
   Element("abilityInfo").style.background = "rgba(0,0,0,0.00)";
   Element("abilityInfo").style.opacity = "0.00";
-  setTimeout(function () { Element("abilityInfo").textContent = ""; }, 100);
+  console.log("hideinfo!!!!");
+  setTimeout(function () { Element("abilityInfo").textContent = ""; clearTimeout(delay); }, 100);
 }
 
 function GetCombatInfo(key) {
