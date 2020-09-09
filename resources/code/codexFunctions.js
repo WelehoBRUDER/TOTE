@@ -211,11 +211,11 @@ function SearchEntities() {
         if (tagSearch == true && content.tags) {
           for (let tag of content.tags) {
             if (searchValue.length < 3) {
-              if (tag.tag.startsWith(searchValue)) {
+              if (tag.tag.toLowerCase().startsWith(searchValue)) {
                 createSearchedEntity(content);
               }
             } else {
-              if (tag.tag.indexOf(searchValue) != -1) {
+              if (tag.tag.toLowerCase().indexOf(searchValue) != -1) {
                 createSearchedEntity(content);
               }
             }
