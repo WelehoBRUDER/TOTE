@@ -116,9 +116,9 @@ var codex = [
             ]
           },
           {
-            key: "Arzt Starkergetränkeliebhaber",
+            key: "Dr. Starkergetränkeliebhaber",
             image: "portraits/portrait_piplip|lightblue|blue",
-            content: "§:break§Arzt is a drunken man MC and co meet in a forest. He is a son of a §/gray/&GetCodexEntity('Races','Yeeters','Dwarves')&dwarf§ and §/blue/&GetCodexEntity('Races','Yeeters','North Folk')&northfolk§. Upon turning 18 years old, Piphliph was sent out to the world by his parents, but was quickly distracted by the greater “interests” in his life (mainly alcohol). The forest critters soon taught him the magic of making his own moonshine, and he hasn’t consumed anything since.",
+            content: "§:break§Doctor Starkergetränkeliebhaber is a drunken man MC and co meet in a forest. He is a son of a §/gray/&GetCodexEntity('Races','Yeeters','Dwarves')&dwarf§ and §/blue/&GetCodexEntity('Races','Yeeters','North Folk')&northfolk§. Upon turning 18 years old, Doc was sent out to the world by his parents, but was quickly distracted by the greater “interests” in his life (mainly alcohol). The forest critters soon taught him the magic of making his own moonshine, and he hasn’t consumed anything since.",
             tags: [
               { tag: "party" },
               { tag: "alcohol" }
