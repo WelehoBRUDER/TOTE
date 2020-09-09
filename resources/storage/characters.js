@@ -1,4 +1,4 @@
-var player_name = "Henry the Harlot"; // Fallback name
+var player_name = "Hennri Bauer"; // Fallback name
 var player_color = "rgb(100,100,100)";
 var player_image = "portrait_player_temp";
 
@@ -72,11 +72,13 @@ characters.player.inventory = [
   AddItem("magical_chestplate")
 ];
 characters.player.xp = {points: 0, needed: 100, modifier: 1.00, level: 1};
-characters.player.abilities = [Ability("fierce-assault")];
+characters.player.abilities = [Ability("fierce-assault"), Ability("shield-bash")];
 characters.player.spells = [Spell("mana-blast")];
 
 characters.player.abilities[0].equipped = true;
 characters.player.abilities[0].slot = 1;
+characters.player.abilities[1].equipped = true;
+characters.player.abilities[1].slot = 4;
 characters.player.spells[0].equipped = true;
 characters.player.spells[0].slot = 1;
 

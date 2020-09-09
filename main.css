@@ -831,7 +831,7 @@ span {
   position: absolute;
   left: 50%;
   margin-left: -180px;
-  top: 900px;
+  bottom: 20px;
   background-image: url("resources/images/bg/bg_cbrown.png");
   box-shadow: 0 5px 5px 5px rgb(39, 21, 11);
 }

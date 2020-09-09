@@ -2,6 +2,10 @@ const abilities = [
     {
         key: "fierce-assault",
         img: "icons/fierce_assault.png"
+    },
+    {
+        key: "shield-bash",
+        img: "icons/shield_bash.png"
     }
 ];
 

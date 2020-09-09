@@ -17,6 +17,10 @@ var texts = [
       {
         key: "mana-blast",
         text: "Concentrate your mana in one fierce blast. Cost: 25 §/cyan/mana§."
+      },
+      {
+        key: "shield-bash",
+        text: "Deal §/crimson/damage§ based on your equipped §/yellow/shield§ and §/yellow/stun§ enemy for 1 turn. Cooldown: 5 §/yellow/turns§."
       }
     ]
   }
