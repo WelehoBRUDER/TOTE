@@ -81,6 +81,97 @@
     padding-right: 5px;
 }
 
+/* OPTIONS MENU */
+#optionsScreen {
+    width: 450px;
+    height: 500px;
+    background-color: rgb(94, 4, 4);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -250px;
+    margin-left: -225px;
+    border-radius: 4px;
+    border: 8px solid rgb(49, 2, 2);
+    box-shadow: 0 8px 6px 8px rgb(39, 1, 1), inset 0 0 8px 8px rgb(80, 3, 3);
+    z-index: 3;
+    background-image: url("resources/images/bg/bg_red.png");
+}
+
+#qlContainer {
+    width: 90%;
+    height: 60px;
+    position: relative;
+    left: 10px;
+    top: 10px;
+}
+
+.optionsCheck {
+    display: block;
+    width: 35px;
+    height: 35px;
+    background-color: rgb(87, 15, 15);
+    border: 2px solid darkred;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    text-align: center;
+}
+
+.optionsCheck p {
+    transition: 0.2s;
+    text-align: center;
+    color: white;
+    font-family: Roboto;
+    font-size: 32px;
+}
+
+#qlCheck {
+    transform: scale(0.00);
+    position: absolute;
+    left: 7px;
+    bottom: -35px;
+}
+
+.optionsText {
+    font-size: 32px;
+    font-family: Roboto;
+    position: absolute;
+    top: -25px;
+    left: 60px;
+    color: white;
+    text-shadow: 0 0 4px black;
+}
+
+#optionsBack {
+    transition: 0.15s;
+    width: 105px;
+    height: 50px;
+    border: none;
+    box-shadow: 0 12px 4px 4px rgb(70, 8, 20);
+    background-color: rgb(92, 1, 19);
+    user-select: none;
+    outline: none;
+    font-size: 44px;
+    font-family: RobotoLight;
+    color: white;
+    text-shadow: 0 4px 6px black;
+    margin: 20px;
+    position: relative;
+    top: 325px;
+    cursor: pointer;
+  }
+  
+  #optionsBack:hover {
+    top: 333px;
+    box-shadow: 0 4px 4px 4px rgb(70, 8, 20);
+  }
+  
+  #optionsBack:active {
+    top: 335px;
+    box-shadow: 0 2px 4px 4px rgb(70, 8, 20);
+  }
+
 /* COMBAT */
 
 #combatButtonsContainer {

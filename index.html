@@ -96,6 +96,7 @@
       </button>
       <button
         id="options"
+        onclick="OpenSettings()"
         style="background-image: url('resources/images/bg/bg_red.png')"
       >
         Options
@@ -109,6 +110,13 @@
     </div>
     <div id="combat"></div>
     <div id="uiIcons"></div>
+    <div id="optionsScreen" hidden>
+      <div id="qlContainer">
+        <div id="QuickLoadCheck" class="optionsCheck" onclick="toggleQL()"><p id="qlCheck">X</p></div>
+        <p class="optionsText">Enable Quick Load</p>
+      </div>
+      <button onclick="backToMenu()" id="optionsBack">Back</button>
+    </div>
     <div id="AlertBase" hidden>
       <div id="dimScreen" onclick="hideAlert()"></div>
       <div id="Alert">

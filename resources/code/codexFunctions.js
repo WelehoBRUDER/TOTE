@@ -103,7 +103,8 @@ function CreateCodexImage(src) {
   let image = Create("img");
   let srcOf = src.split("|");
   image.classList.add("codexImage");
-  if(imageExists(`resources/images/${srcOf[0]}.png`)) {
+  if(global.quickload) image.src = `resources/images/${srcOf[0]}.png`;
+  else if(imageExists(`resources/images/${srcOf[0]}.png`)) {
     image.src = `resources/images/${srcOf[0]}.png`;
   } else {
     image.src = imgMissing(srcOf[0])
@@ -180,10 +181,16 @@ function ReadContent(text, image) {
     } else if (text == undefined) text = colors;
     style += ` color: ${color};`;
     if (text == ":break") textContent.innerHTML += "<br>";
-    else if (img != undefined && link == undefined && imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/icons/${img}.png">`;
-    else if(img != undefined && link == undefined && !imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/events/missing_image.png">`;
-    else if (img != undefined && link != undefined && imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/icons/${img}.png" onclick="${link}">`;
-    else if(img != undefined && link != undefined && !imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/events/missing_image.png" onclick="${link}">`;
+    else if(global.quickload && img != undefined) {
+      if (img != undefined && link == undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/icons/${img}.png">`;
+      else if (img != undefined && link != undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/icons/${img}.png" onclick="${link}">`;
+    }
+    else if(!global.quickload && img != undefined) {
+      if (img != undefined && link == undefined && imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/icons/${img}.png">`;
+      else if(img != undefined && link == undefined && !imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/events/missing_image.png">`;
+      else if (img != undefined && link != undefined && imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/icons/${img}.png" onclick="${link}">`;
+      else if(img != undefined && link != undefined && !imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/events/missing_image.png" onclick="${link}">`;
+    }
     else if (link != undefined) textContent.innerHTML += `<span style = "${style}" class="PointerClass" onclick="${link}">${text}</span>`;
     else if (text) textContent.innerHTML += `<span style = "${style}" >${text}</span>`;
   }

@@ -10,7 +10,8 @@ let global = {
   controlling: characters.player,
   equipping: characters.player,
   equippingNUM: 0,
-  party: [{equip: characters.player}]
+  party: [{equip: characters.player}],
+  quickload: false
 };
 
 global.party.push({equip: characters.allies[0]});

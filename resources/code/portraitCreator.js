@@ -7,7 +7,8 @@ function CreatePortrait(character, enemy) {
     name += "...";
   }
   let portrait_image_url = `portraits/${character.image}`;
-  if(!imageExists(`resources/images/${portrait_image_url}.png`)) portrait_image_url = "events/missing_image";
+  console.log(global.quickload);
+  if(!global.quickload) if(!imageExists(`resources/images/${portrait_image_url}.png`)) portrait_image_url = "events/missing_image";
   portrait.innerHTML = `
     <div class="portrait_background">
       <p class="portrait_title">${name}</p>

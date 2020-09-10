@@ -57,4 +57,24 @@ function Worldmap() {
   HideAll();
 }
 
+function toggleQL() {
+  if(global.quickload == false) {
+    global.quickload = true;
+    Element("qlCheck").style.transform = "scale(1.00)";
+  } else {
+    global.quickload = false;
+    Element("qlCheck").style.transform = "scale(0.00)";
+  }
+}
+
+function OpenSettings() {
+  HideAll();
+  Element("optionsScreen").style.display = "block";
+}
+
+function backToMenu() {
+  Element("optionsScreen").style.display = "none";
+  Element("settings").style.display = "block";
+}
+
 CreateUiButtons();
