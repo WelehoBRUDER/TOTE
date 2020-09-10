@@ -53,4 +53,8 @@ function HideAll() {
   Element("saveLoad").textContent = "";
 }
 
+function Worldmap() {
+  HideAll();
+}
+
 CreateUiButtons();

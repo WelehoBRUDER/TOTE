@@ -149,6 +149,7 @@ var codex = [
         content: [
           {
             key: "Erika",
+            image: "portraits/portrait_erika_temp|yellow|orange",
             content: `§:break§§/aqua/${player_name}§’s little sister. That’s it folks, see you in the next episode.`,
             tags: [
               { tag: player_name }
@@ -170,6 +171,7 @@ var codex = [
           },
           {
             key: "Goblin",
+            image: "portraits/portrait_goblin_temp|#1E8449|#145A32",
             content: "§:break§Goblins §#goblin_icon_small#§ are §/brown/pieces of shit§ that plague §/cyan/&GetCodexEntity('Areas', 'Helleria', 'Hellerian Kingdom')&Helleria§ in every corner. They typically have §/red/30HP§ §#heart_icon_small#&GetCodexEntity('Gameplay', 'Stats', 'Health')&§.",
             tags: [
               { tag: "enemies" },
@@ -179,6 +181,7 @@ var codex = [
           },
           {
             key: "Viktor Stahlhelm",
+            image: "portraits/portrait_bigbad_temp|purple|pink",
             content: "§:break§Viktor is the main antagonist of TOTE, and is the reason for the Evertree’s tears.§:break§§:break§He seeks strength in order to create a better and more ‘just’ world, according to his own ideals. He made the Evertree’s strength his own in order to further this goal.§:break§§:break§Age: 62§:break§§:break§ Birthdate: 17th of Maid, 203",
             tags: [
               {tag: "enemies"},
