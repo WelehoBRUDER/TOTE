@@ -2,6 +2,7 @@ var combat = Element("combat");
 
 function FormCombatEnvironment() {
   combat.innerHTML = `
+  <div id="combatTextContainer"></div>
   <div id="combatButtonsContainer">
   <div id="abilityInfo"></div>
   ${CombatAbility(global.controlling, 1)}
@@ -12,7 +13,7 @@ function FormCombatEnvironment() {
   ${CombatSpell(global.controlling, 2)}
   ${CombatSpell(global.controlling, 3)}
   ${CombatSpell(global.controlling, 4)}
-<img src="resources/images/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()">
+<img src="resources/images/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="CreateCombatText(GetCombatInfo())">
 <img src="resources/images/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()">
 <img src="resources/images/icons/ultimate_ability.png" id="combatUltimate">
   </div>`;
@@ -96,6 +97,20 @@ function GetCombatInfo(key) {
   }
 }
 
+function CreateCombatText() {
+  global.combat.actor = characters.enemies[0];
+  global.combat.target = characters.player;
+  let act = global.combat.actor;
+  let trg = global.combat.target;
+  let text = `§/${act.color}/${act.name}§ §#${act.image}#§ cocks ${act.pron.possesive} §/yellow/${ActorWep(act).name}§ and unleashes a savage §/porcelain/slash§ at §/${trg.color}/${trg.name}§ §#${trg.image}#§. The blow §/yellow/connects§ and deals ${global.combat.damage} §/red/damage§ to §/${trg.color}/${trg.name}§ §#${trg.image}#§.`;
+  Element("combatTextContainer").appendChild(ReadContentCombat(text));
+}
+
+function ActorWep(char) {
+  for(let wep of char.equipment) if(wep.dmg) return wep;
+}
+
+
 function ReadContentCombat(text) {
   let content = text.split("§");
   let textContent = Create('p');
@@ -129,14 +144,14 @@ function ReadContentCombat(text) {
     style += ` color: ${color};`;
     if (text == ":break") textContent.innerHTML += "<br>";
     else if(global.quickload && img != undefined) {
-      if (img != undefined && link == undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/icons/${img}.png">`;
-      else if (img != undefined && link != undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/icons/${img}.png" onclick="${link}">`;
+      if (img != undefined && link == undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/${img}.png">`;
+      else if (img != undefined && link != undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
     }
     else if(!global.quickload && img != undefined) {
-      if (img != undefined && link == undefined && imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/icons/${img}.png">`;
-      else if(img != undefined && link == undefined && !imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/events/missing_image.png">`;
-      else if (img != undefined && link != undefined && imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/icons/${img}.png" onclick="${link}">`;
-      else if(img != undefined && link != undefined && !imageExists(`resources/images/icons/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/events/missing_image.png" onclick="${link}">`;
+      if (img != undefined && link == undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/${img}.png">`;
+      else if(img != undefined && link == undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/events/missing_image.png">`;
+      else if (img != undefined && link != undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
+      else if(img != undefined && link != undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/events/missing_image.png" onclick="${link}">`;
     }
     else if (link != undefined) textContent.innerHTML += `<span style = "${style}" class="PointerClass" onclick="${link}">${text}</span>`;
     else if (text) textContent.innerHTML += `<span style = "${style}" >${text}</span>`;

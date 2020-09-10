@@ -160,8 +160,9 @@ function FoundDesc(itm) {
   return false;
 }
 
+Element("charbeingequipped").textContent = global.equipping.name;
+
 function MoveEquip(by) {
-  console.log(by);
   if (global.party.length <= 1) return;
   if (global.equippingNUM <= 0 && by < 0) global.equippingNUM = global.party.length - 1;
   else if (global.equippingNUM >= global.party.length - 1) global.equippingNUM = 0;

@@ -1,6 +1,6 @@
 var player_name = "Hennri Bauer"; // Fallback name
 var player_color = "rgb(100,100,100)";
-var player_image = "portrait_player_temp";
+var player_image = "portraits/portrait_player_temp";
 
 class Actor {
   constructor(key, name, Class, equipment, color, image) {
@@ -14,20 +14,22 @@ class Actor {
 }
 
 class Player extends Actor {
-  constructor(Class, equipment, stats) {
+  constructor(Class, equipment, stats, pron) {
     super("player", player_name, Class, equipment, player_color, player_image)
     this.stats = stats
+    this.pron = pron
   }
 }
 
 class Enemy extends Actor {
-  constructor(key, name, Class, equipment, color, image, modifiers, abilities, statBonuses, level, stats) {
+  constructor(key, name, Class, equipment, color, image, modifiers, abilities, statBonuses, xp, stats, pron) {
     super(key, name, Class, equipment, color, image),
     this.modifiers = modifiers,
     this.abilities = abilities,
     this.statBonuses = statBonuses,
-    this.level = level,
-    this.stats = stats
+    this.xp = xp,
+    this.stats = stats,
+    this.pron = pron
   }
 }
 
@@ -51,10 +53,15 @@ var characters = {
   player: new Player(CharClass("Warrior"),
     [
       AddItem("rusty_iron_sword")
-    ], {}),
+    ], {}, {objective: "him", possesive: "his"}),
   allies: [
   ],
   enemies: [
+    new Enemy("goblin_simp", "Goblin Simp", CharClass("Warrior"), 
+    [
+      AddItem("broken_iron_sword")
+    ], "rgb(51, 102, 0)", "portraits/portrait_goblin_temp", [], [], [], {level: 1},
+    {}, {objective: "him", possesive: "his"})
   ]
 }
 

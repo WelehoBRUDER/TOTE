@@ -1,3 +1,5 @@
+
+
 var texts = [
   {
     cat: "combat",
@@ -21,7 +23,13 @@ var texts = [
       {
         key: "shield-bash",
         text: "Deal §/crimson/damage§ based on your equipped §/yellow/shield§ and §/yellow/stun§ enemy for 1 turn. Cooldown: 5 §/yellow/turns§."
-      }
+      },
     ]
   }
 ]
+
+function GetActorWeapon(Actor) {
+  for(let wep of Actor.equipment) {
+    if(wep.dmg) return wep;
+  }
+}

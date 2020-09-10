@@ -1,6 +1,5 @@
 
 function StatsForCharacters(char) {
-    console.log(char);
     char.stats.maxhp = CalculateHPFromLevelAndClass(char);
     char.stats.maxmana = CalculateMPFromLevelAndClass(char);
     for(let stat in char.class.baseStats) {

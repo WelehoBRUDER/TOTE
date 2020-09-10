@@ -11,10 +11,14 @@ let global = {
   equipping: characters.player,
   equippingNUM: 0,
   party: [{equip: characters.player}],
-  quickload: false
+  quickload: false,
+  combat: {
+    actor: characters.player,
+    target: characters.enemies[0],
+    damage: 46
+  }
 };
 
-global.party.push({equip: characters.allies[0]});
 
 // Updates global variables
 function GlobalUpdate() {

@@ -6,8 +6,7 @@ function CreatePortrait(character, enemy) {
     name = name.substring(0, 17);
     name += "...";
   }
-  let portrait_image_url = `portraits/${character.image}`;
-  console.log(global.quickload);
+  let portrait_image_url = `${character.image}`;
   if(!global.quickload) if(!imageExists(`resources/images/${portrait_image_url}.png`)) portrait_image_url = "events/missing_image";
   portrait.innerHTML = `
     <div class="portrait_background">
@@ -61,6 +60,7 @@ function HarmPlayer(dmg) {
 function addToFight() {
   ClearCombatTables();
   PushCombatantToTable(characters.player, alliesFight);
+  PushCombatantToTable(characters.enemies[0], enemiesFight);
   CreatePortraits();
 }
 
