@@ -300,6 +300,32 @@ var codex = [
             }
           ]
           
+      },
+      {
+        subcat: "Orcs",
+        content: [
+          {
+            key:"yee",
+            content: "jotain",
+            tags: [
+
+            ]
+          },
+          {
+            key: "yuu",
+            content: "asdfghjkl",
+            tags: [
+
+            ]
+          },
+          {
+            key: "yaa",
+            content: "jkjkkjkjljkklk",
+            tags: [
+
+            ]
+          }
+        ]
       }
     ]
   },
@@ -311,7 +337,7 @@ var codex = [
         subcat: "Helleria",
         content: [
           {
-            key: "Hellerian Kingdom",
+            key: "",
             content: "§:break§§/rgb(74,181,186)/Helleria§ is the largest kingdom located in the north of §/green/Vaduz§.",
             tags: [
               { tag: "helleria" },
