@@ -70,7 +70,6 @@ function infoContent(key, elem) {
   if(text == undefined) text = "§¤s19-BB¤/red/Unfortunately it seems that your text was not found...§";
   Element("abilityInfo").style.background = "rgba(0,0,0,0.55)";
   Element("abilityInfo").style.opacity = "1.00";
-  console.log(elem.offsetTop, elem.offsetLeft);
   Element("abilityInfo").style.top = `${(elem.offsetTop - 100)}px`;
   Element("abilityInfo").style.left = `${(elem.offsetLeft - 50)}px`;
   Element("abilityInfo").appendChild(ReadContentCombat(text));
@@ -88,7 +87,6 @@ function hideInfoCombat() {
   clearTimeout(delay);
   Element("abilityInfo").style.background = "rgba(0,0,0,0.00)";
   Element("abilityInfo").style.opacity = "0.00";
-  console.log("hideinfo!!!!");
   setTimeout(function () { Element("abilityInfo").textContent = ""; clearTimeout(delay); }, 100);
 }
 

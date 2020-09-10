@@ -1,7 +1,30 @@
 body {
   background-color: rgb(61, 61, 61);
   user-select: none;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("resources/images/misc/world_map.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  filter: blur();
 }
+
+/* #bgframe {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("resources/images/misc/world_map.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+} */
 
 #codex p,
 span {
@@ -381,12 +404,16 @@ span {
   top: 110px;
 }
 
-#options {
+#worldmap {
   top: 220px;
 }
 
-#menu {
+#options {
   top: 330px;
+}
+
+#menu {
+  top: 440px;
 }
 
 #settings button:hover {
