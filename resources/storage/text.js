@@ -24,6 +24,10 @@ var texts = [
         key: "shield-bash",
         text: "Deal §/crimson/damage§ based on your equipped §/yellow/shield§ and §/yellow/stun§ enemy for 1 turn. Cooldown: 5 §/yellow/turns§."
       },
+      {
+        key: "combat-slash-hit-1",
+        text: ""
+      }
     ]
   }
 ]

@@ -79,7 +79,23 @@ function VariableText(text) {
   let variable = text.split("@var.");
   if(variable[1].indexOf("(") != -1) {
     let data = variable[1].replace(/[ \)]/, "").split(/[\(,]/);
+    if(data[1].startsWith("+")){
+      if(data[1].indexOf(".") === -1) data[1] = window[data[1].replace("+", "")];
+      else data[1] = data[1].replace("+", "");
+    }
+    if(data[1].indexOf(".") != -1) {
+      data[1] = data[1].split(".");
+      let data1Variable = window[data[1][0]];
+      for(let child of data[1])
+      {
+        if(child == data[1][0]) continue;
+        data1Variable = data1Variable[child]
+      }
+      data[1] = data1Variable;
+    }
     return window[data[0]](data[1])
+  } else if(variable[1].startsWith("+")) {
+    return window[variable[1].replace("+", "")];
   }
   //return eval(variable[1]);
 }
