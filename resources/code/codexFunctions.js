@@ -95,7 +95,19 @@ function VariableText(text) {
     }
     return window[data[0]](data[1])
   } else if(variable[1].startsWith("+")) {
-    return window[variable[1].replace("+", "")];
+    variable[1] = variable[1].replace("+", "");
+    if(variable[1].indexOf(".") != -1) {
+      variable[1] = variable[1].split(".");
+      let data1Variable = window[variable[1][0]];
+      for(let child of variable[1])
+      {
+        if(child == variable[1][0]) continue;
+        data1Variable = data1Variable[child]
+      }
+      variable[1] = data1Variable;
+      return variable[1];
+    }
+    return window[variable[1]];
   }
   //return eval(variable[1]);
 }
