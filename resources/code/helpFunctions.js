@@ -52,7 +52,7 @@ function imageExists(image_url){
 
 }
 
-const CHAR = function(key) {
+function CHAR (key) {
   if(key == characters.player.key) return characters.player;
   else {
     for(let char of characters.allies) {
@@ -65,7 +65,7 @@ const CHAR = function(key) {
   }
 }
 
-const CHARNAME = function(key) {
+function CHARNAME(key) {
   if(key == characters.player.key) return characters.player.name;
   else {
     for(let char of characters.allies) {
@@ -77,7 +77,7 @@ const CHARNAME = function(key) {
   }
 }
 
-const CHARCOLOR = function(key) {
+function CHARCOLOR(key) {
   if(key == characters.player.key) return characters.player.color;
   else {
     for(let char of characters.allies) {

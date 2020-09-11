@@ -77,7 +77,11 @@ function stop(e) {
 
 function VariableText(text) {
   let variable = text.split("@var.");
-  return eval(variable[1]);
+  if(variable[1].indexOf("(") != -1) {
+    let data = variable[1].replace(/[ \)]/, "").split(/[\(,]/);
+    return window[data[0]](data[1])
+  }
+  //return eval(variable[1]);
 }
 
 function createSearchedEntity(entity) {
