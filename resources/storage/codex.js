@@ -1,5 +1,8 @@
 // § = make new span, / = isolate color, :break = line break / br, & = isolate function, # = isolate image
 // ¤ = contains styles, for example §¤BB-I-LT¤text§
+// @var. = Use this if you must use a variable / function for text, color or image.
+// JS variables within text are NEVER updated, but we can assign strings new meanings!
+// @var.(func/var) will evaluate the string that comes after @var. and return it as a string.
 var codex = [
   {
     cat: "New Syntax Introduction",
@@ -84,9 +87,9 @@ var codex = [
         subcat: "Party Members",
         content: [
           {
-            key: player_name,
+            key: "@var.CHARNAME('player')",
             image: "portraits/portrait_player_temp|lime|green",
-            content: `§:break§§/aqua/${player_name}§ is an average commoner from the midlands. 10 years ago, §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ raided his hometown and kidnapped his little sister. Since then, MC has been thirsty for revenge. As soon as he turned 18, he and two of his friends left home in search of §/blue/&GetCodexEntity('Characters','Other characters','Erika')&Erika§.`,
+            content: `§:break§§/@var.CHARCOLOR("player")/@var.CHARNAME("player")§ is an average commoner from the midlands. 10 years ago, §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ raided his hometown and kidnapped his little sister. Since then, MC has been thirsty for revenge. As soon as he turned 18, he and two of his friends left home in search of §/blue/&GetCodexEntity('Characters','Other characters','Erika')&Erika§.`,
 
             tags: [
               { tag: "party" },
@@ -97,10 +100,10 @@ var codex = [
           {
             key: "Christina Schutzengel",
             image: "portraits/portrait_white_mage_temp|gold|orange",
-            content: `§:break§§/aqua/${player_name}§’s childhood friend, who he does not have any romantic feelings toward. Christina is a healer, but can cast a more powerful offensive spell.`,
+            content: `§:break§§/@var.CHARCOLOR("player")/@var.CHARNAME("player")§’s childhood friend, who he does not have any romantic feelings toward. Christina is a healer, but can cast a more powerful offensive spell.`,
             tags: [
               { tag: "party" },
-              { tag: player_name },
+              { tag: "@var.CHARNAME('player')" },
               { tag: "healer" }
             ]
           },
@@ -108,10 +111,10 @@ var codex = [
             key: "Marthynn von Wulf",
 
             image: "portraits/portrait_rogue_temp|black|black",
-            content: `§:break§§/aqua/${player_name}§’s childhood friend. Marthynn is quiet and likes keeping to himself, but deep down cares for his friends. His family has had an affiliation with wolves for decades, and relates to them on a spiritual level. Marthynn is a rogue.§:break§§:break§§:break§§¤I-¤“I was born with the wolves, you wouldn’t understand.”§ - Marthynn himself about himself.`,
+            content: `§:break§§/@var.CHARCOLOR("player")/@var.CHARNAME("player")§’s childhood friend. Marthynn is quiet and likes keeping to himself, but deep down cares for his friends. His family has had an affiliation with wolves for decades, and relates to them on a spiritual level. Marthynn is a rogue.§:break§§:break§§:break§§¤I-¤“I was born with the wolves, you wouldn’t understand.”§ - Marthynn himself about himself.`,
             tags: [
               { tag: "party" },
-              { tag: player_name },
+              { tag: "@var.CHARNAME('player')" },
               { tag: "rogue" }
             ]
           },
@@ -150,9 +153,9 @@ var codex = [
           {
             key: "Erika",
             image: "portraits/portrait_erika_temp|yellow|orange",
-            content: `§:break§§/aqua/${player_name}§’s little sister. That’s it folks, see you in the next episode.`,
+            content: `§:break§§/@var.CHARCOLOR("player")/@var.CHARNAME("player")§’s little sister. That’s it folks, see you in the next episode.`,
             tags: [
-              { tag: player_name }
+              { tag: "@var.CHARNAME('player')" }
             ]
           },
         ]

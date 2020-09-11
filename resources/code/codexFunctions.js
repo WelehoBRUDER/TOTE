@@ -53,8 +53,10 @@ function openEntityList(content, id, parent) {
     base.id = id + "Base";
     Element(parent).appendChild(base);
     for (let entity of content) {
-      let catEntity = CreateText(entity.key, "CodexEntities")
-      catEntity.id = entity.key + "Entity";
+      let title = entity.key;
+      if(title.startsWith("@var.")) title = VariableText(title);
+      let catEntity = CreateText(title, "CodexEntities")
+      catEntity.id = title + "Entity";
       catEntity.style.textDecoration = "none";
       catEntity.onclick = function(e) {
         e.stopPropagation();
@@ -73,9 +75,17 @@ function stop(e) {
   e.stopPropagation();
 }
 
+function VariableText(text) {
+  let variable = text.split("@var.");
+  return eval(variable[1]);
+}
+
 function createSearchedEntity(entity) {
-  let catEntity = CreateText(entity.key, "CodexEntities")
-  catEntity.id = entity.key + "SearchedEntity";
+  let txt;
+  if(entity.key.startsWith("@var.")) txt = VariableText(entity.key);
+  else txt = entity.key;
+  let catEntity = CreateText(txt, "CodexEntities")
+  catEntity.id = txt + "SearchedEntity";
   catEntity.style.textDecoration = "none";
   catEntity.addEventListener("click", () => FormCodexEntity(entity.key, entity.content, entity.tags, entity.image));
   Element("contentScroller").appendChild(catEntity);
@@ -83,18 +93,22 @@ function createSearchedEntity(entity) {
 
 function FormCodexEntity(key, content, tags, image=null) {
   Element("content").textContent = "";
-  Element("content").appendChild(CreateText(key, "CodexEntryTitle"));
-  if((image == null || image == undefined) && debug) console.log('Entity' + `%c ${key}`, 'color: yellow;', 'has no image, if this is intentional, ignore this message.');
+  let title = key;
+  if(key.startsWith("@var.")) title = VariableText(key);
+  Element("content").appendChild(CreateText(title, "CodexEntryTitle"));
+  if((image == null || image == undefined) && debug) console.log('Entity' + `%c ${title}`, 'color: yellow;', 'has no image, if this is intentional, ignore this message.');
   Element("content").appendChild(ReadContent(content, image));
   if(tags != undefined) {
     let tagsText = "Tags: ";
     for (let tag of tags) {
-      tagsText += tag.tag + ", ";
+      let Tag = tag.tag;
+      if(Tag.startsWith("@var.")) Tag = VariableText(Tag);
+      tagsText += Tag + ", ";
     }
     tagsText = tagsText.substring(0, tagsText.length - 2);
     Element("content").appendChild(CreateText(tagsText, "CodexEntities"));
   } else {
-    if(debug) console.log('Entity' + `%c ${key}`, 'color: yellow;', 'has no tags, consider adding some to make searching easier');
+    if(debug) console.log('Entity' + `%c ${title}`, 'color: yellow;', 'has no tags, consider adding some to make searching easier');
   }
 
 }
@@ -170,15 +184,22 @@ function ReadContent(text, image) {
     }
     if (colors.indexOf("#") != -1) {
       img = colors.split("#")[1];
+      if(img.startsWith("@var.")) img = VariableText(img);
       text = colors.split("#")[2];
+      if(text.startsWith("@var.")) text = VariableText(text);
     }
     else if (colors.indexOf("/") != -1) {
       color = colors.split("/")[1];
+      if(color.startsWith("@var.")) color = VariableText(color);
       text = colors.split("/")[2];
+      if(text.startsWith("@var.")) text = VariableText(text);
     } if (colors.indexOf("&") != -1) {
       link = colors.split("&")[1];
       text = colors.split("&")[2];
-    } else if (text == undefined) text = colors;
+    } else if  (text == undefined) {
+      text = colors;
+      if(text.startsWith("@var.")) text = VariableText(text);
+    } 
     style += ` color: ${color};`;
     if (text == ":break") textContent.innerHTML += "<br>";
     else if(global.quickload && img != undefined) {
@@ -218,22 +239,36 @@ function SearchEntities() {
         if (tagSearch == true && content.tags) {
           for (let tag of content.tags) {
             if (searchValue.length < 3) {
-              if (tag.tag.toLowerCase().startsWith(searchValue)) {
+              let Tag = tag.tag;
+              if(Tag.startsWith("@var.")) Tag = VariableText(Tag);
+              if (Tag.toLowerCase().startsWith(searchValue)) {
                 createSearchedEntity(content);
               }
             } else {
-              if (tag.tag.toLowerCase().indexOf(searchValue) != -1) {
+              let Tag = tag.tag;
+              if(Tag.startsWith("@var.")) Tag = VariableText(Tag);
+              if (Tag.toLowerCase().indexOf(searchValue) != -1) {
                 createSearchedEntity(content);
               }
             }
           }
         } else if (tagSearch == false) {
           if (searchValue.length < 3) {
-            if (content.key.toLowerCase().startsWith(searchValue)) {
+            if(content.key.startsWith("@var.")) {
+              if(VariableText(content.key).toLowerCase().startsWith(searchValue)) {
+                createSearchedEntity(content);
+              }
+            }
+            else if (content.key.toLowerCase().startsWith(searchValue)) {
               createSearchedEntity(content);
             }
           } else {
-            if (content.key.toLowerCase().indexOf(searchValue) != -1) {
+            if(content.key.startsWith("@var.")) {
+              if(VariableText(content.key).toLowerCase().indexOf(searchValue) != -1) {
+                createSearchedEntity(content);
+              }
+            }
+            else if (content.key.toLowerCase().indexOf(searchValue) != -1) {
               createSearchedEntity(content);
             }
           }
