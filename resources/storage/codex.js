@@ -3,6 +3,8 @@
 // @var. = Use this if you must use a variable / function for text, color or image.
 // JS variables within text are NEVER updated, but we can assign strings new meanings!
 // @var.(func/var) will evaluate the string that comes after @var. and return it as a string.
+// If you wish to give a value as a variable instead of a string, add + to the start, for example:
+// @var.+player_name or @var.CHARNAME(+characters.player.key) outputs "Hennri Bauer".
 var codex = [
   {
     cat: "New Syntax Introduction",
