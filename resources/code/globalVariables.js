@@ -7,15 +7,15 @@ let global = {
     month: 3,
     year: 266
   },
-  controlling: characters.player,
+  controlling: null,
   equipping: characters.player,
   equippingNUM: 0,
-  party: [{equip: characters.player}],
+  party: [{equip: characters.player}, {equip: characters.allies[0]}],
   quickload: false,
   combat: {
     actor: characters.player,
     target: characters.enemies[0],
-    damage: 46
+    value: 46
   }
 };
 

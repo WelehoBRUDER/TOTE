@@ -227,21 +227,23 @@ span {
 }
 
 #allyportraits {
-  width: 300px;
-  height: 700px;
+  width: 350px;
+  height: 750px;
   position: absolute;
   left: 50%;
   top: 75px;
   margin-left: -950px;
+  overflow: auto;
 }
 
 #enemyportraits {
-  width: 300px;
-  height: 700px;
+  width: 350px;
+  height: 750px;
   position: absolute;
   left: 50%;
   top: 75px;
   margin-left: 610px;
+  overflow: auto;
 }
 
 .portrait_background {

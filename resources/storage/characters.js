@@ -3,9 +3,10 @@ var player_color = "rgb(100,100,100)";
 var player_image = "portraits/portrait_player_temp";
 
 class Actor {
-  constructor(key, name, Class, equipment, color, image) {
+  constructor(key, name, race, Class, equipment, color, image) {
     this.key = key,
       this.name = name,
+      this.race = race,
       this.class = Class,
       this.equipment = equipment,
       this.color = color,
@@ -15,15 +16,15 @@ class Actor {
 
 class Player extends Actor {
   constructor(Class, equipment, stats, pron) {
-    super("player", player_name, Class, equipment, player_color, player_image)
+    super("player", player_name, Race("Human"), Class, equipment, player_color, player_image)
     this.stats = stats
     this.pron = pron
   }
 }
 
 class Enemy extends Actor {
-  constructor(key, name, Class, equipment, color, image, modifiers, abilities, statBonuses, xp, stats, pron) {
-    super(key, name, Class, equipment, color, image),
+  constructor(key, name, race, Class, equipment, color, image, modifiers, abilities, statBonuses, xp, stats, pron) {
+    super(key, name, race, Class, equipment, color, image),
     this.modifiers = modifiers,
     this.abilities = abilities,
     this.statBonuses = statBonuses,
@@ -34,12 +35,14 @@ class Enemy extends Actor {
 }
 
 class Ally extends Actor {
-  constructor(key, name, Class, equipment, color, image, modifiers, abilities, xp, stats) {
-    super(key, name, Class, equipment, color, image),
+  constructor(key, name, race, Class, equipment, color, image, modifiers, abilities, xp, stats, pron, ai) {
+    super(key, name, race, Class, equipment, color, image),
     this.modifiers = modifiers,
     this.abilities = abilities,
     this.xp = xp,
-    this.stats = stats
+    this.stats = stats,
+    this.pron = pron,
+    this.ai = ai
   }
 }
 
@@ -53,15 +56,19 @@ var characters = {
   player: new Player(CharClass("Warrior"),
     [
       AddItem("rusty_iron_sword")
-    ], {}, {objective: "him", possesive: "his"}),
+    ], {}, {objective: "him", possesive: "his", singular: "he"}),
   allies: [
+    new Ally("christina_healer", "Christina Schutzengel", Race("Human"), CharClass("Healer"), [
+      AddItem("broken_iron_dagger")
+    ], "gold", "portraits/portrait_white_mage_temp", [], [], {points: 0, needed: 100, modifier: 1.00, level: 1}, {},
+    {objective: "her", possesive: "her", singular: "she"}, true)
   ],
   enemies: [
-    new Enemy("goblin_simp", "Goblin Simp", CharClass("Warrior"), 
+    new Enemy("goblin_simp", "Goblin Simp",  Race("Goblin"), CharClass("Warrior"), 
     [
       AddItem("broken_iron_sword")
     ], "rgb(51, 102, 0)", "portraits/portrait_goblin_temp", [], [], [], {level: 1},
-    {}, {objective: "him", possesive: "his"})
+    {}, {objective: "him", possesive: "his", singular: "he"})
   ]
 }
 

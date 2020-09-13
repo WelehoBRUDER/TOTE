@@ -339,3 +339,33 @@
     padding: 5px;
     border: 2px solid rgb(48, 48, 48);
 }
+
+#targetingCombat {
+    width: 400px;
+    height: 250px;
+    background-color: rgba(0, 0, 0, 0.45);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -125px;
+    z-index: 4;
+    overflow: auto;
+    display: none;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#targetingCombat img {
+    transition: 0.1s;
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+    position: relative;
+    border: 3px solid gold;
+    box-shadow: 0 0 1px 1px gold;
+    margin: 10px;
+}
+
+#targetingCombat img:hover {
+    box-shadow: 0 0 5px 5px rgb(170, 145, 1);
+}

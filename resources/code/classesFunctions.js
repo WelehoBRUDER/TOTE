@@ -5,8 +5,14 @@ function StatsForCharacters(char) {
     for(let stat in char.class.baseStats) {
         char.stats[stat] = char.class.baseStats[stat];
     }
+    for(let stat in char.race.baseStats) {
+        char.stats[stat] += char.race.baseStats[stat];
+    }
     char.stats.maxhp += IncMaxHP(char.stats);
     char.stats.maxmana += IncMaxMana(char.stats);
+    for(let stat in char.race.multipliers) {
+        char.stats[stat] = Math.ceil(char.stats[stat] * char.race.multipliers[stat]);
+    }
     char.stats.hp = char.stats.maxhp;
     char.stats.mana = char.stats.maxmana;
 }

@@ -92,7 +92,6 @@ var codex = [
             key: "@var.CHARNAME(+characters.player.key)",
             image: "portraits/portrait_player_temp|lime|green",
             content: `§:break§§/@var.CHARCOLOR(player)/@var.+characters.player.name§ is an average commoner from the midlands. 10 years ago, §/red/&GetCodexEntity('Characters','Enemies','Viktor Stahlhelm')&Viktor Stahlhelm§ raided his hometown and kidnapped his little sister. Since then, MC has been thirsty for revenge. As soon as he turned 18, he and two of his friends left home in search of §/blue/&GetCodexEntity('Characters','Other characters','Erika')&Erika§.`,
-
             tags: [
               { tag: "party" },
               { tag: "viktor stahlhelm" },

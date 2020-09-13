@@ -1,5 +1,7 @@
 var combat = Element("combat");
 
+var combatTextStorage = [];
+
 function FormCombatEnvironment() {
   combat.innerHTML = `
   <div id="combatTextContainer"></div>
@@ -13,10 +15,11 @@ function FormCombatEnvironment() {
   ${CombatSpell(global.controlling, 2)}
   ${CombatSpell(global.controlling, 3)}
   ${CombatSpell(global.controlling, 4)}
-<img src="resources/images/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="CreateCombatText(GetCombatInfo())">
+<img src="resources/images/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, RegularAttack, global.controlling)">
 <img src="resources/images/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()">
 <img src="resources/images/icons/ultimate_ability.png" id="combatUltimate">
   </div>`;
+  RestoreCombatText();
 }
 
 function abiOfSlot(char, slot) {
@@ -100,11 +103,18 @@ function GetCombatInfo(key) {
 function CreateCombatText() {
   global.combat.actor = characters.enemies[0];
   global.combat.target = characters.player;
-  let act = global.combat.actor;
-  let trg = global.combat.target;
-  let text = `§/${act.color}/${act.name}§ §#${act.image}#§ cocks ${act.pron.possesive} §/yellow/${ActorWep(act).name}§ and unleashes a savage §/porcelain/slash§ at §/${trg.color}/${trg.name}§ §#${trg.image}#§. The blow §/yellow/connects§ and deals ${global.combat.damage} §/red/damage§ to §/${trg.color}/${trg.name}§ §#${trg.image}#§.`;
+  UpdateBV();
+  let text = texts[1].subcats[0].texts[Random(texts[1].subcats[0].texts.length)].text;
+  combatTextStorage.push({text: text});
   Element("combatTextContainer").appendChild(ReadContentCombat(text));
 }
+
+function RestoreCombatText() {
+  for(let txt of combatTextStorage) {
+    Element("combatTextContainer").appendChild(ReadContentCombat(txt.text));
+  }
+}
+
 
 function ActorWep(char) {
   for(let wep of char.equipment) if(wep.dmg) return wep;
@@ -132,15 +142,22 @@ function ReadContentCombat(text) {
     }
     if (colors.indexOf("#") != -1) {
       img = colors.split("#")[1];
+      if(img.startsWith("@var.")) img = VariableText(img);
       text = colors.split("#")[2];
+      if(text.startsWith("@var.")) text = VariableText(text);
     }
     else if (colors.indexOf("/") != -1) {
       color = colors.split("/")[1];
+      if(color.startsWith("@var.")) color = VariableText(color);
       text = colors.split("/")[2];
+      if(text.startsWith("@var.")) text = VariableText(text);
     } if (colors.indexOf("&") != -1) {
       link = colors.split("&")[1];
       text = colors.split("&")[2];
-    } else if (text == undefined) text = colors;
+    } else if  (text == undefined) {
+      text = colors;
+      if(text.startsWith("@var.")) text = VariableText(text);
+    } 
     style += ` color: ${color};`;
     if (text == ":break") textContent.innerHTML += "<br>";
     else if(global.quickload && img != undefined) {

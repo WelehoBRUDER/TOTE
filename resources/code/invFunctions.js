@@ -437,8 +437,8 @@ const actions = [
 ];
 
 const symbols = [
-  { key: "hp", content: "§/rgb(237, 9, 47)/maximum health§ §%heart_icon_small%§" },
-  { key: "mana", content: "§/rgb(9, 106, 128)/maximum mana§ §%warn_icon%§" },
+  { key: "maxhp", content: "§/rgb(237, 9, 47)/maximum health§ §%heart_icon_small%§" },
+  { key: "maxmana", content: "§/rgb(9, 106, 128)/maximum mana§ §%warn_icon%§" },
   { key: "str", content: "§/rgb(201, 198, 187)/strength§ §%warn_icon%§" },
   { key: "dex", content: "§/rgb(201, 198, 187)/dexterity §%warn_icon%§" },
   { key: "agi", content: "§/rgb(201, 198, 187)/agility §%warn_icon%§" },
