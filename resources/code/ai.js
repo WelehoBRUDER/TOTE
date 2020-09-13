@@ -19,7 +19,11 @@ function targetingAi(char) {
   for(let unit of table) {
     if(unit.threatChance >= value) { targeting = unit; break;}
   }
-  console.log(targeting);
+  let func = decideAbility(char);
+}
+
+function decideAbility(char) {
+  
 }
 
 function ReturnTable(char) {

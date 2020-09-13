@@ -15,3 +15,16 @@ const spells = [
         img: "icons/mana_blast.png"
     }
 ]
+
+function Ability(key) {
+    for(let abi of abilities) {
+      if(abi.key == key) return abi;
+    }
+  }
+  
+  function Spell(key) {
+    for(let spell of spells) {
+      if(spell.key == key) return spell;
+    }
+  }
+  

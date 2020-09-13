@@ -80,8 +80,8 @@ function addToFight() {
   ClearCombatTables();
   PushCombatantToTable(characters.player, alliesFight);
   PushCombatantToTable(characters.allies[0], alliesFight);
-  PushCombatantToTable(characters.enemies[0], enemiesFight);
-  PushCombatantToTable(characters.enemies[0], enemiesFight);
+  PushCombatantToTable(characters.enemies[1], enemiesFight);
+  PushCombatantToTable(characters.enemies[2], enemiesFight);
   PushCombatantToTable(characters.enemies[0], enemiesFight);
   PushCombatantToTable(characters.enemies[0], enemiesFight);
   global.controlling = alliesFight[0];

@@ -57,6 +57,13 @@ var texts = [
   }
 ]
 
+/* TEMPLATES */
+// Actor (name and image): 
+// §/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§
+// Target (name and image):
+// §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§
+/* TEMPLATES */
+
 function UpdateBV() {
   BV = global.combat;
 }

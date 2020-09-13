@@ -67,7 +67,17 @@ var characters = {
     new Enemy("goblin_simp", "Goblin Simp",  Race("Goblin"), CharClass("Warrior"), 
     [
       AddItem("broken_iron_sword")
-    ], "rgb(51, 102, 0)", "portraits/portrait_goblin_temp", [], [], [], {level: 1},
+    ], "rgb(51, 102, 0)", "portraits/portrait_goblin_temp", [], [Ability("fierce-assault")], [], {level: 1},
+    {}, {objective: "him", possesive: "his", singular: "he"}),
+    new Enemy("goblin_queen", "Goblin Queen",  Race("Goblin Queen"), CharClass("Warrior"), 
+    [
+      AddItem("broken_iron_sword")
+    ], "rgb(51, 102, 0)", "portraits/portrait_goblin_queen", [], [], [], {level: 5},
+    {}, {objective: "her", possesive: "her", singular: "she"}),
+    new Enemy("goblin_king", "Goblin King",  Race("Goblin King"), CharClass("Brawler"), 
+    [
+      AddItem("broken_iron_sword")
+    ], "rgb(51, 102, 0)", "portraits/portrait_goblin_king", [], [], [], {level: 5},
     {}, {objective: "him", possesive: "his", singular: "he"})
   ]
 }
@@ -96,14 +106,3 @@ characters.player.abilities[1].slot = 4;
 characters.player.spells[0].equipped = true;
 characters.player.spells[0].slot = 1;
 
-function Ability(key) {
-  for(let abi of abilities) {
-    if(abi.key == key) return abi;
-  }
-}
-
-function Spell(key) {
-  for(let spell of spells) {
-    if(spell.key == key) return spell;
-  }
-}

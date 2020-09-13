@@ -30,6 +30,26 @@ const Races = [
             maxmana: 0.75
         },
         xpReward: 20
+    },
+    {
+        key: "Goblin Queen",
+        desc: "Queens are alpha females of the goblin family, ruling over clans alongside their equals - the goblin kings.",
+        baseStats: new Stats(2, 2, 5, 5, 3, 3, 3, 5, 4),
+        multipliers: {
+            maxhp: 0.67,
+            maxmana: 0.91
+        },
+        xpReward: 80
+    },
+    {
+        key: "Goblin King",
+        desc: "Kings are alpha males of the goblin family, ruling over clans alongside their equals - the goblin queens.",
+        baseStats: new Stats(5, 5, 2, 2, 2, 1, 0, 1, 1),
+        multipliers: {
+            maxhp: 0.92,
+            maxmana: 0.74
+        },
+        xpReward: 80
     }
 ]
 
@@ -40,7 +60,11 @@ const Classes = [
         baseStats: new Stats(3, 3, 1, 1, 1, 1, 1, 1, 1),
         bonusStats: {hp: 50, mana: 0},
         threat: 25,
-        role: "offense"
+        role: "offense",
+        abilities: [
+            Ability("fierce-assault"),
+            Ability("shield-bash")
+        ]
     },
     {
         key: "Healer",
@@ -69,7 +93,8 @@ const Classes = [
         desc: "heh lol piplip juo paljon",
         baseStats: new Stats(3,3,0,2,0,0,0,0,3),
         bonusStats: {hp: 75, mana: 5},
-        threat: 10
+        threat: 40,
+        role: "offense"
     },
     {
         key: "Necromancer",
@@ -91,4 +116,6 @@ function Race(key) {
         if(Race.key == key) return Race;
     }
 }
+
+
 
