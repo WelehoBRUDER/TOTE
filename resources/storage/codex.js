@@ -7,12 +7,6 @@
 // @var.+player_name or @var.CHARNAME(+characters.player.key) outputs "Hennri Bauer".
 var codex = [
   {
-    cat: "Go to 1up.fi",
-    text: "§@var.open(codex.0.url)§",
-    url: "http://1up.fi",
-    subcats: []
-  },
-  {
     cat: "New Syntax Introduction",
     text: `With this new update, (color and name come from variable -->§¤B-¤/${CHARCOLOR("ally_healer_christina")}/${CHARNAME("ally_healer_christina")}§) it is §¤BB-I-LT-lg2¤possible§ to add special styles to text. §¤s50-¤THIS TEXT IS MASSIVE!§ §¤s8-¤this text is tiny.§ §¤s75-BB-I¤midgets§ §:break§ §:break§ §¤B-¤Bold§ B- §:break§ §¤BB-¤Bolder§ BB- §:break§ §¤M-¤Medium§ M- §:break§ §¤E-¤Emphasis§ E- §:break§ Normal §:break§ §¤LL-¤Lighter§ LL- §:break§ §¤I-¤Italic§ I- §:break§ §¤B-I¤Bold and Italic§ B-I §:break§ §¤I-BB¤THICC§ I-BB §:break§ sNumber-, ex. s41- §¤s41-¤affects size§ §:break§ §:break§ §¤OL-¤You can overline§ OL-  §:break§ §¤LT-¤Or line-through...§ LT-  §:break§ §¤lg8-¤Why not use spacing?§ lgNumber-`,
     subcats: []
