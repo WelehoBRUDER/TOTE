@@ -1,4 +1,5 @@
 function Saving() {
+  if(global.combat.ongoing) return;
   HideAll();
   Element("saveLoad").textContent = "";
   for (let slot of Saves) {
@@ -44,6 +45,7 @@ function Saving() {
 }
 
 function Loading() {
+  if(global.combat.ongoing) return;
   HideAll();
   Element("saveLoad").textContent = "";
   for (let slot of Saves) {

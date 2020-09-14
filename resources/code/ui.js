@@ -3,9 +3,10 @@ function CreateUiButtons() {
     let but = Create("img");
     but.id = button.id;
     but.src = `resources/images/icons/ui_icon${button.bg}.png`;
-    but.addEventListener("click", ()=>toggleButton(button.open));
+    if(global.combat.ongoing == false || button.combat)but.addEventListener("click", ()=>toggleButton(button.open));
     but.classList.add("ui_button");
     but.setAttribute('draggable', false);
+    if(global.combat.ongoing == true && !button.combat) but.classList.add("darken");
     Element("uiIcons").appendChild(but);
   }
 }
@@ -13,6 +14,16 @@ function CreateUiButtons() {
 function toggleButton(action) {
   HideAll();
   Element(action).style.display = "block";
+  try{
+    Element("settings").querySelector(".darken").classList.remove("darken");
+  }
+  catch(e){
+    console.log("Encountered error: " + e.message);
+  }
+  if(global.combat.ongoing) {
+    Element("saves").classList.add("darken");
+    Element("load").classList.add("darken");
+  }
   if(action == "combat") FormCombatEnvironment();
 }
 
@@ -20,7 +31,8 @@ var ui_buttons = [
   {
     bg: "_combat",
     open: "combat",
-    id: "combatButton"
+    id: "combatButton",
+    combat: true
   },
   {
     bg: "_map",
@@ -35,12 +47,14 @@ var ui_buttons = [
   {
     bg: "_info",
     open: "codex",
-    id: "codexButton"
+    id: "codexButton",
+    combat: true
   },
   {
     bg: "_settings",
     open: "settings",
-    id: "settingsButton"
+    id: "settingsButton",
+    combat: true
   },
 ]
 
@@ -76,5 +90,7 @@ function backToMenu() {
   Element("optionsScreen").style.display = "none";
   Element("settings").style.display = "block";
 }
+
+addToFight();
 
 CreateUiButtons();

@@ -368,6 +368,11 @@ span {
   cursor: pointer;
 }
 
+.darken {
+  cursor: not-allowed !important;
+  filter: brightness(25%);
+}
+
 .ui_button:hover {
   transform: scale(1.05);
 }

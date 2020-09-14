@@ -2,7 +2,25 @@ var player_name = "Hennri Bauer"; // Fallback name
 var player_color = "rgb(100,100,100)";
 var player_image = "portraits/portrait_player_temp";
 
+
 class Actor {
+  /**
+ * Summary.
+ *
+ * Description.
+ *
+ * @param {String}  key           key is a short name used to identify the actor.
+ * @param {String}  name          The actor's name, displayed to the user.
+ * @param {Object}  race          Object detailing the actor's race.
+ * @param {Object}  Class         Object detailing the actor's class.
+ * @param {Array}   equipment     Actor's equipment, fill with item objects.
+ * @param {String}  color         Actor color, used for actor name.
+ * @param {String}  image         Path to the actor's portrait. 
+ * @param {type}   [var]         Description of optional variable.
+ * @param {type}   [var=default] Description of optional variable with default variable.
+ * @param {Object} objectVar     Description.
+ * @param {type}   objectVar.key Description of a key in the objectVar parameter.
+ */
   constructor(key, name, race, Class, equipment, color, image) {
     this.key = key,
       this.name = name,
@@ -23,6 +41,9 @@ class Player extends Actor {
 }
 
 class Enemy extends Actor {
+  /**
+ * @extends Actor
+ */
   constructor(key, name, race, Class, equipment, color, image, modifiers, abilities, statBonuses, xp, stats, pron) {
     super(key, name, race, Class, equipment, color, image),
     this.modifiers = modifiers,
@@ -78,7 +99,7 @@ var characters = {
     [
       AddItem("broken_iron_sword")
     ], "rgb(51, 102, 0)", "portraits/portrait_goblin_king", [], [], [], {level: 5},
-    {}, {objective: "him", possesive: "his", singular: "he"})
+    {}, {objective: "him", possesive: "his", singular: "he"}),
   ]
 }
 

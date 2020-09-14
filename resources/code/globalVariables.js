@@ -11,11 +11,12 @@ let global = {
   equipping: characters.player,
   equippingNUM: 0,
   party: [{equip: characters.player}, {equip: characters.allies[0]}],
-  quickload: false,
+  quickload: true,
   combat: {
     actor: characters.player,
     target: characters.enemies[0],
-    value: 46
+    value: 46,
+    ongoing: true
   }
 };
 
