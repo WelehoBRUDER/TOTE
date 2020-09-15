@@ -16,7 +16,7 @@ let global = {
     actor: null,
     target: null,
     value: 46,
-    ongoing: false
+    ongoing: true
   }
 };
 

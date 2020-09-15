@@ -35,11 +35,11 @@ var texts = [
         texts: [
           {
             key: "combat-slash-hit-1",
-            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ and rushes towards §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§, unleashing a powerful slash. The slash §/orange/connects§ and deals §@var.BTV()§ §/red/damage§ to §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§"
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ §#@var.ACTWEAPONIMG()#§ and rushes towards §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§, unleashing a powerful slash. The slash §/orange/connects§ and deals §@var.BTV()§ §/red/damage§ to §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§"
           },
           {
             key: "combat-slash-hit-2",
-            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ circles around §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ before gripping §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ and striking §@var.OBJPRON(target)§. The blow §/orange/connects§ and deals §@var.BTV()§ §/red/damage§ to §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§, who cringes in pain."
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ circles around §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ before gripping §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ §#@var.ACTWEAPONIMG()#§ and striking §@var.OBJPRON(target)§. The blow §/orange/connects§ and deals §@var.BTV()§ §/red/damage§ to §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§, who cringes in pain."
           }
         ]
       },
@@ -49,7 +49,7 @@ var texts = [
         texts: [
           {
             key: "combat-slash-miss-1",
-            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ and rushes towards §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§, unleashing a powerful slash. The slash §/orange/misses§, allowing §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ to get in position for counter attack!"
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ §#@var.ACTWEAPONIMG()#§ and rushes towards §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§, unleashing a powerful slash. The slash §/orange/misses§, allowing §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ to get in position for counter attack!"
           }
         ]
       },
@@ -59,7 +59,7 @@ var texts = [
         texts: [
           {
             key: "combat-fierce-assault-hit-1",
-            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ and performs a §/orange/fierce§ assault on §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§. The §/yellow/assault§ renders §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ unable to defend, causing §@var.BTV()§ §/red/damage§ to §@var.OBJPRON(target)§."
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ §#@var.ACTWEAPONIMG()#§ and performs a §/orange/fierce§ assault on §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§. The §/yellow/assault§ renders §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ unable to defend, causing §@var.BTV()§ §/red/damage§ to §@var.OBJPRON(target)§."
           }
         ]
       },
@@ -69,7 +69,7 @@ var texts = [
         texts: [
           {
             key: "combat-fierce-assault-hit-1",
-            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ and smashes §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ with all of §@var.POSPRON(actor)§ strength. The §/yellow/smash§ crushes through §/@var.BTC(target)/@var.BTN(target)§'s §#@var.BTI(target)#§ armor, causing §@var.BTV()§ §/red/damage§ to §@var.OBJPRON(target)§."
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ §#@var.ACTWEAPONIMG()#§ and smashes §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ with all of §@var.POSPRON(actor)§ strength. The §/yellow/smash§ crushes through §/@var.BTC(target)/@var.BTN(target)§'s §#@var.BTI(target)#§ armor, causing §@var.BTV()§ §/red/damage§ to §@var.OBJPRON(target)§."
           }
         ]
       }
@@ -122,8 +122,20 @@ function ACTWEAPON() {
   }
 }
 
+function ACTWEAPONIMG() {
+  for(let wep of BV.actor.equipment) {
+    if(wep.dmg) return wep.img;
+  }
+}
+
 function TRGWEAPON() {
   for(let wep of BV.target.equipment) {
     if(wep.dmg) return wep.name;
+  }
+}
+
+function TRGWEAPONIMG() {
+  for(let wep of BV.target.equipment) {
+    if(wep.dmg) return wep.img;
   }
 }

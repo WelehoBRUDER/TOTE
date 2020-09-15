@@ -42,7 +42,7 @@ function AddToRound(target, action, performer) {
   }
 }
 
-function EndRound() {
+async function EndRound() {
   SortActions();
   for(let act of charactersActions) {
     let SuitableText = null;
@@ -59,9 +59,16 @@ function EndRound() {
     global.combat.value  = eval(act.action);
     BV = global.combat;
     act.target.stats.hp -= global.combat.value;
-    Element("combatTextContainer").appendChild(ReadContentCombat(SuitableText));
+    let container =  Element("combatTextContainer");
+    container.appendChild(ReadContentCombat(SuitableText));
+    container.scrollTop = container.scrollHeight;
+    await sleep(500);
   }
   CreatePortraits();
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function GetHighestDamageType(char) {
@@ -85,8 +92,7 @@ function GetRandomCombatText(triggers) {
     if(cat.cat == "battle") {
       for(let subcat of cat.subcats) {
         if(subcat.trigger == triggers) {
-          console.log("hey");
-          return subcat.texts[Random(subcat.texts.length-1)].text;
+          return subcat.texts[Random(subcat.texts.length)].text;
         }
       }
     }
