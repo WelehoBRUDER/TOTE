@@ -85,6 +85,8 @@ function addToFight() {
   PushCombatantToTable(characters.enemies[0], enemiesFight);
   PushCombatantToTable(characters.enemies[0], enemiesFight);
   global.controlling = alliesFight[0];
+  global.combat.actor = alliesFight[0];
+  global.combat.target = enemiesFight[1];
   CreatePortraits();
 }
 

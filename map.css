@@ -7,4 +7,5 @@
   top: 60px;
   margin-left: -605px;
   border-radius: 12px;
+  overflow: auto;
 }

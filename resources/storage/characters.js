@@ -76,28 +76,36 @@ function LisaaJaPoista() {
 var characters = {
   player: new Player(CharClass("Warrior"),
     [
-      AddItem("rusty_iron_sword")
+      AddItem("rusty_iron_sword"),
+      AddItem("leather_chest"),
     ], {}, {objective: "him", possesive: "his", singular: "he"}),
   allies: [
     new Ally("christina_healer", "Christina Schutzengel", Race("Human"), CharClass("Healer"), [
-      AddItem("broken_iron_dagger")
+      AddItem("broken_iron_dagger"),
+      AddItem("leather_chest"),
     ], "gold", "portraits/portrait_white_mage_temp", [], [], {points: 0, needed: 100, modifier: 1.00, level: 1}, {},
     {objective: "her", possesive: "her", singular: "she"}, true)
   ],
   enemies: [
     new Enemy("goblin_simp", "Goblin Simp",  Race("Goblin"), CharClass("Warrior"), 
     [
-      AddItem("broken_iron_sword")
-    ], "rgb(51, 102, 0)", "portraits/portrait_goblin_temp", [], [Ability("fierce-assault")], [], {level: 1},
+      AddItem("broken_iron_sword"),
+      AddItem("leather_chest"),
+    ], "rgb(51, 102, 0)", "portraits/portrait_goblin_temp", [], [Ability("smash")], [], {level: 1},
     {}, {objective: "him", possesive: "his", singular: "he"}),
     new Enemy("goblin_queen", "Goblin Queen",  Race("Goblin Queen"), CharClass("Warrior"), 
     [
-      AddItem("broken_iron_sword")
+      AddItem("broken_iron_sword"),
+      AddItem("leather_chest"),
     ], "rgb(51, 102, 0)", "portraits/portrait_goblin_queen", [], [], [], {level: 5},
     {}, {objective: "her", possesive: "her", singular: "she"}),
     new Enemy("goblin_king", "Goblin King",  Race("Goblin King"), CharClass("Brawler"), 
     [
-      AddItem("broken_iron_sword")
+      AddItem("broken_iron_sword"),
+      AddItem("leather_chest"),
+      AddItem("leather_helmet"),
+      AddItem("leather_gloves"),
+      AddItem("leather_boots")
     ], "rgb(51, 102, 0)", "portraits/portrait_goblin_king", [], [], [], {level: 5},
     {}, {objective: "him", possesive: "his", singular: "he"}),
   ]

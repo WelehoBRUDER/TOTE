@@ -13,10 +13,10 @@ let global = {
   party: [{equip: characters.player}, {equip: characters.allies[0]}],
   quickload: true,
   combat: {
-    actor: characters.player,
-    target: characters.enemies[0],
+    actor: null,
+    target: null,
     value: 46,
-    ongoing: true
+    ongoing: false
   }
 };
 

@@ -15,7 +15,7 @@ function FormCombatEnvironment() {
   ${CombatSpell(global.controlling, 2)}
   ${CombatSpell(global.controlling, 3)}
   ${CombatSpell(global.controlling, 4)}
-<img src="resources/images/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, RegularAttack, global.controlling)">
+<img src="resources/images/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, 'RegularAttack()', global.controlling)">
 <img src="resources/images/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()">
 <img src="resources/images/icons/ultimate_ability.png" id="combatUltimate">
   </div>`;
@@ -39,7 +39,7 @@ function spellOfSlot(char, slot) {
 function CombatAbility(char, slot) {
   if(abiOfSlot(char, slot) != undefined) {
     let abi = abiOfSlot(char, slot);
-    return `<div id="combatAbility${slot}" onmouseover="showInfoCombat('${abi.key}', this)" onmouseleave="hideInfoCombat()">
+    return `<div id="combatAbility${slot}" onmouseover="showInfoCombat('${abi.key}', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, '${abi.action}', global.controlling)">
     <img src="resources/images/icons/ability_wheel.png">
     <img src="resources/images/${abi.img}" class="combatAbiImage">
     </div>`

@@ -1,13 +1,31 @@
 const abilities = [
     {
         key: "fierce-assault",
-        img: "icons/fierce_assault.png"
+        img: "icons/fierce_assault.png",
+        power: {
+          armor_penetration: 100,
+          multiplier: 130
+        },
+        action: "PowerAtk(Ability(`fierce-assault`).power)"
     },
     {
         key: "shield-bash",
         img: "icons/shield_bash.png"
+    },
+    {
+      key: "smash",
+      power: {
+        armor_penetration: 50,
+        multiplier: 150
+      },
+      action: "PowerAtk(Ability(`smash`).power)"
     }
 ];
+
+function Attack() {
+  eval(abilities[0].action);
+  eval(abilities[2].action);
+}
 
 const spells = [
     {

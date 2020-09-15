@@ -52,6 +52,26 @@ var texts = [
             text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ and rushes towards §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§, unleashing a powerful slash. The slash §/orange/misses§, allowing §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ to get in position for counter attack!"
           }
         ]
+      },
+      {
+        subcat: "combat-fierce-assault-hit",
+        trigger: "nomiss PowerAtk(Ability(`fierce-assault`).power) land",
+        texts: [
+          {
+            key: "combat-fierce-assault-hit-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ and performs a §/orange/fierce§ assault on §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§. The §/yellow/assault§ renders §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ unable to defend, causing §@var.BTV()§ §/red/damage§ to §@var.OBJPRON(target)§."
+          }
+        ]
+      },
+      {
+        subcat: "combat-smash-hit",
+        trigger: "nomiss PowerAtk(Ability(`smash`).power) land",
+        texts: [
+          {
+            key: "combat-fierce-assault-hit-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ and smashes §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ with all of §@var.POSPRON(actor)§ strength. The §/yellow/smash§ crushes through §/@var.BTC(target)/@var.BTN(target)§'s §#@var.BTI(target)#§ armor, causing §@var.BTV()§ §/red/damage§ to §@var.OBJPRON(target)§."
+          }
+        ]
       }
     ]
   }

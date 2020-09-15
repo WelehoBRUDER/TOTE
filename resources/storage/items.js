@@ -65,3 +65,6 @@ const items = [
   new Armor("leather_boots", "Leather Boots", 12, 1, "leather_boots", 1, 1, "feet", { slash: 4, blunt: 5, thrust: 2, fire: 2, frost: 4, wind: 4, water: 4, shock: 5, light: 5, dark: 5 }, 0, [new Effect("hinc_mp_10", "maxmana", "increase", 10)]),
   new Armor("magical_chestplate", "Magical Chestplate", 500, 5, "rusty_iron_ring_1", 1, 8, "chest", {slash: 40, blunt: 50, thrust: 20, fire: 20, frost: 40, wind: 40, water: 40, shock: 50, light: 50, dark: 50}, 3, [new Effect("inc_str_5", "str", "increase", 5), new Effect("inc_hp_125", "maxhp", "increase", 125), new Effect("inc_mp_150", "maxmana", "increase", 150)])
 ];
+
+
+
