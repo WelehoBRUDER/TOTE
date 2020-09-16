@@ -24,7 +24,9 @@ function targetingAi(char) {
   }
   let func = decideAbility(char);
   let Speed = CalculateSpeed(char);
-  charactersActions.push({target: targeting, action: func, performer: char, speed: Speed})
+  let act = func;
+  if(act != "RegularAttack()") act = func.action;
+  charactersActions.push({target: targeting, action: act, performer: char, speed: Speed, abi: func})
 }
 
 function modifiersThreat(char) {
@@ -71,7 +73,8 @@ function decideAbility(char) {
   let chosenAbi = null;
   regDamage = RegularAttack();
   for(let abi of char.abilities) {
-    if(bestDamage < eval(abi.action)) {bestDamage = eval(abi.action); chosenAbi = abi.action}
+    if(abi.cooldown > 0) continue;
+    if(bestDamage < eval(abi.action)) {bestDamage = eval(abi.action); chosenAbi = abi}
   }
   console.log("chosen abi: " + chosenAbi + " char: " + char.name);
   if(regDamage >= bestDamage || chosenAbi == null) return "RegularAttack()";

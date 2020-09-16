@@ -37,6 +37,8 @@ function loopMods(char) {
     if(mod.power) {
       let img = Create("img");
       img.src = `resources/images/${mod.img}`;
+      img.style.width = "29px";
+      img.style.height = "21px";
       d.appendChild(img);
     }
   }

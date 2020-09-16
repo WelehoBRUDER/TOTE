@@ -67,7 +67,7 @@ function ShowItemInfo(e) {
     function loop() {
       let textElement = "";
       for (let text in itm.armor) {
-        textElement += `<p style="color: ${colors[text]}">${text[0].toUpperCase()}${text.substring(1)}: <span>${itm.armor[text]}</span> </p>`;
+        textElement += `<p style="color: ${colors[text]}">${text[0].toUpperCase()}${text.substring(1)}: <span>${itm.armor[text]}%</span> </p>`;
       }
       return textElement;
     }

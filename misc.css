@@ -106,9 +106,8 @@
     top: 10px;
 }
 
-#combatSpeed {
+#combatSpeed, #combatDelay {
     position: absolute;
-    top: 60px;
     left: 10px;
     width: 120px;
     height: 30px;
@@ -122,10 +121,25 @@
     font-size: 20px;
 }
 
-#combatSpeedText {
+#combatSpeedText, #combatDelayText {
     position: absolute;
     left: 140px;
+}
+
+#combatSpeed {
+    top: 60px;
+}
+
+#combatDelay {
+    top: 120px;
+}
+
+#combatSpeedText {
     top: 25px;
+}
+
+#combatDelayText {
+    top: 85px;
 }
 
 .optionsCheck {
@@ -390,4 +404,49 @@
 
 #targetingCombat img:hover {
     box-shadow: 0 0 5px 5px rgb(170, 145, 1);
+}
+
+#roundHistory {
+    width: 200px;
+    height: 35px;
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    top: 44vh;
+    border-radius: 6px;
+    z-index: -1;
+    display: flex;
+}
+
+#toggleRound, #toggleHistory {
+    transition: 0.1s;
+    position: relative;
+    height: 90%;
+    width: 50%;
+    color: white;
+    border: 4px solid black;
+    box-sizing: border-box;
+    top: 10%;
+    background-image: url("resources/images/bg/bg_gray.png");
+    font-family: Roboto;
+    font-size: 17px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.roundHistorySelected {
+    border: 4px solid white !important;
+}
+
+.cooldowntext {
+    position: absolute;
+    left: 50%;
+    top: -30px;
+    transform: translateX(-50%);
+    font-size: 50px;
+    color: rgb(243, 161, 161);
+    text-shadow: 0 0 8px rgb(228, 123, 123);
+    z-index: 2;
+    filter: brightness(150%) !important;
+    text-align: center;
 }

@@ -10,6 +10,7 @@ const abilities = [
           mana: 10,
           cd: 4
         },
+        cooldown: 0,
         action: "PowerAtk(Ability(`fierce-assault`).power)"
     },
     {
@@ -26,6 +27,7 @@ const abilities = [
         mana: 0,
         cd: 5
       },
+      cooldown: 0,
       action: "PowerAtk(Ability(`smash`).power)"
     },
     {
@@ -39,6 +41,7 @@ const abilities = [
         mana: 30,
         cd: 2
       },
+      cooldown: 0,
       action: "OffensiveSpell(Ability(`holy-smite`).power)"
     }
 ];

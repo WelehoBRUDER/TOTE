@@ -18,7 +18,9 @@ let global = {
     value: 46,
     blocked: false,
     ongoing: false,
-    speed: 500
+    speed: 500,
+    delay: 800,
+    history: false
   },
   onmap: false
 };

@@ -30,6 +30,16 @@ var texts = [
     cat: "battle",
     subcats: [
       {
+        subcat: "combat-defend",
+        trigger: "defend",
+        texts: [
+          {
+            key: "combat-defend",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ focuses on defense, §/green/reducing§ all damage taken by 50%."
+          }
+        ]
+      },
+      {
         subcat: "combat-slash-hit",
         trigger: "nomiss slash land",
         texts: [

@@ -5,12 +5,12 @@ var combatTextStorage = [];
 function FormCombatEnvironment() {
   combat.innerHTML = `
   <div id="combatTextContainer"></div>
+  <div id="roundHistory">
+    <div id="toggleRound" onclick="toggleText('Round')">Round</div>
+    <div id="toggleHistory" onclick="toggleText('History')">History</div>
+  </div>
   <div id="combatButtonsContainer">
   <div id="abilityInfo"></div>
-  ${CombatAbility(global.controlling, 1)}
-  ${CombatAbility(global.controlling, 2)}
-  ${CombatAbility(global.controlling, 3)}
-  ${CombatAbility(global.controlling, 4)}
   ${CombatSpell(global.controlling, 1)}
   ${CombatSpell(global.controlling, 2)}
   ${CombatSpell(global.controlling, 3)}
@@ -19,7 +19,35 @@ function FormCombatEnvironment() {
 <img src="resources/images/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()" onclick="AddToRound('Defend()', global.controlling.key)">
 <img src="resources/images/icons/ultimate_ability.png" id="combatUltimate">
   </div>`;
+  Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 1));
+  Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 2));
+  Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 3));
+  Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 4));
+  highlightCorrect();
   RestoreCombatText();
+}
+
+function toggleText(arg) {
+  if(arg == "Round") {
+    global.combat.history = false;
+    Element("toggleRound").classList.add("roundHistorySelected");
+    Element("toggleHistory").classList.remove("roundHistorySelected");
+  } else if(arg == "History") {
+    global.combat.history = true;
+    Element("toggleRound").classList.remove("roundHistorySelected");
+    Element("toggleHistory").classList.add("roundHistorySelected");
+  }
+  RestoreCombatText();
+}
+
+function  highlightCorrect() {
+  if(global.combat.history) {
+    Element("toggleRound").classList.remove("roundHistorySelected");
+    Element("toggleHistory").classList.add("roundHistorySelected");
+  } else {
+    Element("toggleRound").classList.add("roundHistorySelected");
+    Element("toggleHistory").classList.remove("roundHistorySelected");
+  }
 }
 
 function abiOfSlot(char, slot) {
@@ -37,18 +65,36 @@ function spellOfSlot(char, slot) {
 }
 
 function CombatAbility(char, slot) {
+  let div = Create("div");
+  div.id = `combatAbility${slot}`;
+  let img = Create("img");
+  img.src = "resources/images/icons/ability_wheel.png";
+  div.appendChild(img);
   if(abiOfSlot(char, slot) != undefined) {
     let abi = abiOfSlot(char, slot);
-    return `<div id="combatAbility${slot}" onmouseover="showInfoCombat('${abi.key}', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, '${abi.action}', global.controlling)">
-    <img src="resources/images/icons/ability_wheel.png">
-    <img src="resources/images/${abi.img}" class="combatAbiImage">
-    </div>`
+    div.addEventListener("mouseover", ()=>showInfoCombat(abi.key, this));
+    div.addEventListener("mouseleave", ()=>hideInfoCombat());
+    div.addEventListener("click", ()=>TargetCharacters(enemiesFight, abi, global.controlling));
+    let abiImg = Create("img");
+    abiImg.src = `resources/images/${abi.img}`
+    abiImg.classList.add("combatAbiImage");
+    div.appendChild(abiImg);
   }
-  else {
-    return `<div id="combatAbility${slot}">
-    <img src="resources/images/icons/ability_wheel.png">
-    </div>`
-  }
+  // if(abiOfSlot(char, slot) != undefined) {
+  //   let abi = abiOfSlot(char, slot);
+  //   console.log(abi);
+
+  //   return `<div id="combatAbility${slot}" onmouseover="showInfoCombat('${abi.key}', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, ${abi}, global.controlling)">
+  //   <img src="resources/images/icons/ability_wheel.png">
+  //   <img src="resources/images/${abi.img}" class="combatAbiImage">
+  //   </div>`
+  // }
+  // else {
+  //   return `<div id="combatAbility${slot}">
+  //   <img src="resources/images/icons/ability_wheel.png">
+  //   </div>`
+  // }
+  return div;
 }
 
 var delay = null;
@@ -84,14 +130,14 @@ function showInfoCombat(key, elem) {
     clearTimeout(delay);
     delay = null;
   }
-  delay = setTimeout(()=>infoContent(key, elem), 800);
+  delay = setTimeout(()=>infoContent(key, elem), global.combat.delay);
 }
 
 function hideInfoCombat() {
   clearTimeout(delay);
   Element("abilityInfo").style.background = "rgba(0,0,0,0.00)";
   Element("abilityInfo").style.opacity = "0.00";
-  setTimeout(function () { Element("abilityInfo").textContent = ""; clearTimeout(delay); }, 100);
+  setTimeout(function () { Element("abilityInfo").textContent = ""; clearTimeout(delay); }, 50);
 }
 
 function GetCombatInfo(key) {
@@ -110,7 +156,12 @@ function CreateCombatText() {
 }
 
 function RestoreCombatText() {
-  for(let txt of combatTextStorage) {
+  Element("combatTextContainer").textContent = "";
+  let bank;
+  if(!global.combat.history) bank = thisRoundHistory;
+  else bank = thisBattleHistory;
+  for(let txt of bank) {
+    BV = txt.bv;
     Element("combatTextContainer").appendChild(ReadContentCombat(txt.text));
   }
 }

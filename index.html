@@ -125,6 +125,15 @@
           <option value="100">Flash</option>
           <option value="0">Instant</option>
         </select>
+        <p id="combatDelayText" class="optionsText">Hover delay</p>
+        <select id="combatDelay" onchange="global.combat.delay=this.value">
+          <option value="3000">Very Long</option>
+          <option value="1500">Long</option>
+          <option value="800" selected="selected">Normal</option>
+          <option value="400">Short</option>
+          <option value="150">Very Short</option>
+          <option value="1">Instant</option>
+        </select>
         <p class="optionsText">Enable Quick Load</p>
       </div>
       <button onclick="backToMenu()" id="optionsBack">Back</button>
