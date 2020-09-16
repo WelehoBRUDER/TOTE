@@ -12,6 +12,9 @@ function CreatePortrait(character, enemy) {
     <div class="portrait_background">
       <p class="portrait_title">${name}</p>
       <img src="resources/images/${portrait_image_url}.png" class="portrait_image">
+      ${createOverlay(character)}
+      ${createWeapon(character)}
+      ${createShield(character)}
       <div class="hpbarbg">
       <p class="barNum">${character.stats.hp} / ${character.stats.maxhp}</p>
       </div>
@@ -21,11 +24,62 @@ function CreatePortrait(character, enemy) {
       <p class="barNum">${character.stats.mana} / ${character.stats.maxmana}</p>
       </div>
       <div class="mpbarfill" style="width: ${character.stats.mana / character.stats.maxmana * 128 + 'px'};"></div>
-      <div class="statusEffects"></div>
+      <div class="statusEffects">${loopMods(character)}</div>
     </div>
   `;
   if (!enemy) Element("allyportraits").appendChild(portrait);
   else Element("enemyportraits").appendChild(portrait);
+}
+
+function loopMods(char) {
+  let d = Create('div');
+  for(let mod of char.modifiers ) {
+    if(mod.power) {
+      let img = Create("img");
+      img.src = `resources/images/${mod.img}`;
+      d.appendChild(img);
+    }
+  }
+  return d.outerHTML;
+}
+
+function createOverlay(char) {
+  let d = Create('div');
+  for(let eq of char.equipment) {
+    if(eq.slot == "helmet" || eq.slot == "chest") {
+      let img = Create("img");
+      img.src = `resources/images/${eq.imgEq}`;
+      img.classList.add("portrait_overlay");
+      d.appendChild(img);
+    }
+  }
+  return d.outerHTML;
+}
+
+function createWeapon(char) {
+  let d = Create('div');
+  for(let eq of char.equipment) {
+    if(eq.dmg) {
+      let img = Create("img");
+      img.src = `resources/images/${eq.img}.png`;
+      img.classList.add("portrait_weapon");
+      d.appendChild(img);
+    }
+  }
+  return d.outerHTML;
+}
+
+function createShield(char) {
+  let d = Create('div');
+  for(let eq of char.equipment) {
+    if(eq.slot == "shield") {
+      let img = Create("img");
+      img.src = `resources/images/${eq.img}.png`;
+      img.classList.add("portrait_shield");
+      d.appendChild(img);
+    }
+  }
+  return d.outerHTML;
 }
 
 let alliesFight = [];

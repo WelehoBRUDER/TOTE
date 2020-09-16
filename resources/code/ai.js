@@ -14,6 +14,7 @@ function targetingAi(char) {
     if(table[i-1]) table[i].threatChance = table[i-1].threatChance;
     else table[i].threatChance = 0;
     table[i].threatChance += 100 + table[i].class.threat + table[i].threat;
+    table[i].threatChance += modifiersThreat(table[i]);
     max = table[i].threatChance;
   }
   let value = Random(max);
@@ -23,8 +24,21 @@ function targetingAi(char) {
   }
   let func = decideAbility(char);
   let Speed = CalculateSpeed(char);
-  console.log(Speed);
   charactersActions.push({target: targeting, action: func, performer: char, speed: Speed})
+}
+
+function modifiersThreat(char) {
+  let threat = 0;
+  for(let mod of char.modifiers) {
+    if(mod.power) {
+      for(let pow of mod.power) {
+        if(pow.type == "threat"){
+          threat += pow.value;
+        }      
+      }
+    }
+  }
+  return threat;
 }
 
 function betterAI()
@@ -59,7 +73,8 @@ function decideAbility(char) {
   for(let abi of char.abilities) {
     if(bestDamage < eval(abi.action)) {bestDamage = eval(abi.action); chosenAbi = abi.action}
   }
-  if(regDamage >= bestDamage) return "RegularAttack()";
+  console.log("chosen abi: " + chosenAbi + " char: " + char.name);
+  if(regDamage >= bestDamage || chosenAbi == null) return "RegularAttack()";
   else return chosenAbi;
 }
 

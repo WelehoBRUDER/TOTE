@@ -16,7 +16,7 @@ function FormCombatEnvironment() {
   ${CombatSpell(global.controlling, 3)}
   ${CombatSpell(global.controlling, 4)}
 <img src="resources/images/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, 'RegularAttack()', global.controlling)">
-<img src="resources/images/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()">
+<img src="resources/images/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()" onclick="AddToRound('Defend()', global.controlling.key)">
 <img src="resources/images/icons/ultimate_ability.png" id="combatUltimate">
   </div>`;
   RestoreCombatText();

@@ -8,7 +8,7 @@ function TargetCharacters(charTable, ability, performer) {
   for (let char of charTable) {
     if (char.stats.hp > 0) {
       Element("targetingCombat").innerHTML += `
-      <img src="resources/images/${char.image}.png" onclick="AddToRound('${char.key}', '${ability}', '${performer.key}')" >
+      <img src="resources/images/${char.image}.png" onclick="AddToRound('${ability}', '${performer.key}', '${char.key}')" >
     `;
     }
   }
@@ -24,15 +24,20 @@ function getCharCombat(key) {
   return null;
 }
 
-function AddToRound(target, action, performer) {
+function AddToRound(action, performer, target) {
   Element("combatButtonsContainer").classList.add("darken");
-  let newTarget = getCharCombat(target);
+  let newTarget;
+  if(target) newTarget = getCharCombat(target);
   let newPerformer = getCharCombat(performer);
   Element("targetingCombat").style.display = "none";
   let Speed = CalculateSpeed(newPerformer);
-  console.log(Speed);
-  charactersActions.push({ target: newTarget, action: action, performer: newPerformer, speed: Speed});
-  console.log(newPerformer);
+  if(target) charactersActions.push({ target: newTarget, action: action, performer: newPerformer, speed: Speed});
+  else if(action != "Defend()") charactersActions.push({action: action, performer: newPerformer, speed: Speed});
+  else {
+    newPerformer.modifiers.push(Defend());
+    charactersActions.push({action: "ignore"});
+    CreatePortraits();
+  }
   if(newPerformer.key == "player0")  {
       for(let i = 0; i<enemiesFight.length; i++) {
         targetingAi(enemiesFight[i]); 
@@ -57,21 +62,27 @@ function CalculateSpeed(char) {
 async function EndRound() {
   SortActions();
   for(let act of charactersActions) {
+    if(act.action == "ignore") continue;
     let SuitableText = null;
+    let trigger1 = null;
     let trigger2 = null;
     if(act.action == "RegularAttack()") {
       trigger2 = GetHighestDamageType(act.performer);
     } else {
       trigger2 = act.action;
     }
-    let triggers = `nomiss ${trigger2} land`;
-    SuitableText = GetRandomCombatText(triggers);
     global.combat.actor = act.performer;
     global.combat.target = act.target;
     global.combat.value  = eval(act.action);
+    if(global.combat.value <= 0) global.combat.value = 0;
+    else if(global.combat.value == "miss") trigger1 = "miss";
+    else if(global.combat.value != "miss") trigger1 = "nomiss";
+    if(global.combat.blocked) trigger1 = "block";
     BV = global.combat;
-    act.target.stats.hp -= global.combat.value;
-
+    if(global.combat.value != "miss") act.target.stats.hp -= global.combat.value;
+    if(global.combat.value <= 0) global.combat.value = "no";
+    let triggers = `${trigger1} ${trigger2} land`;
+    SuitableText = GetRandomCombatText(triggers);
     let container =  Element("combatTextContainer");
     container.appendChild(ReadContentCombat(SuitableText));
     if(act.target.stats.hp <= 0) {
@@ -83,6 +94,8 @@ async function EndRound() {
     CreatePortraits();
     if(global.combat.speed > 0) await sleep(global.combat.speed);
   }
+  RemoveOrDecreaseStatuses();
+  CreatePortraits();
   charactersActions = [];
   for(let char of enemiesFight) {
     char.hasActed = false;
@@ -91,6 +104,33 @@ async function EndRound() {
     char.hasActed = false;
   }
   Element("combatButtonsContainer").classList.remove("darken");
+}
+
+function RemoveOrDecreaseStatuses() {
+  for(let char of alliesFight) {
+    if(char.modifiers.length > 0) {
+      for(let i = 0; i<char.modifiers.length; i++) {
+        if(char.modifiers[i].power) {
+          char.modifiers[i].last--;
+          if(char.modifiers[i].last <= 0) {
+            char.modifiers.splice(i, 1);
+          }
+        }
+      }
+    }
+  }
+  for(let char of enemiesFight) {
+    if(char.modifiers.length > 0) {
+      for(let i = 0; i<char.modifiers.length; i++) {
+        if(char.modifiers[i].power) {
+          char.modifiers[i].last--;
+          if(char.modifiers[i].last <= 0) {
+            char.modifiers.splice(i, 1);
+          }
+        }
+      }
+    }
+  }
 }
 
 function sleep(ms) {

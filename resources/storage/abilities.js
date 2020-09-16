@@ -66,6 +66,18 @@ const spells = [
     }
 ]
 
+const statuses = [
+  {
+    key: "combat-guard",
+    img: "icons/combat/defense_buff.png",
+    power: [
+      {type: "defense", value: 50},
+      {type: "threat", value: -1}
+    ],
+    last: 1
+  }
+]
+
 function Ability(key) {
     for(let abi of abilities) {
       if(abi.key == key) return abi;
