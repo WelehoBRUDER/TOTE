@@ -4,6 +4,7 @@
 
 const map = Element('map');
 const ctx = map.getContext('2d');
+var canMove = true;
 
 let int = 0;
 
@@ -74,8 +75,14 @@ function NotMoveKey(key) {
   else return false;
 }
 
+function ResetMove() {
+  canMove = true;
+}
+
 // Dictates the player character's movement
 function movement(e) {
+  if(global.onmap == false) return;
+  if(!canMove) return;
   // Rejecting incorrect inputs
   if (NotMoveKey(e.key) && e.key != " " && e.key != "Enter") return
   // Enter is the "map action", if the tile has an action it will be performed
@@ -88,23 +95,39 @@ function movement(e) {
   else if (e.key == "w" || e.key == "ArrowUp") {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x, characters.player.cords.y - 1) && characters.player.cords.y - 1 > -1) characters.player.cords.y--;
-    if (CanWalk(characters.player.cords.x, characters.player.cords.y - 1) && characters.player.cords.y - 1 > -1) global.time.minute += 5;
+    if (CanWalk(characters.player.cords.x, characters.player.cords.y - 1) && characters.player.cords.y - 1 > -1) {
+      global.time.minute += 5;
+      canMove = false;
+      setTimeout(ResetMove, 300);
+    } 
   }
   else if (e.key == "s" || e.key == "ArrowDown") {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x, characters.player.cords.y + 1) != 0 && characters.player.cords.y + 1 < 10) characters.player.cords.y++;
-    if (CanWalk(characters.player.cords.x, characters.player.cords.y + 1) != 0 && characters.player.cords.y + 1 < 10) global.time.minute += 5;
+    if (CanWalk(characters.player.cords.x, characters.player.cords.y + 1) != 0 && characters.player.cords.y + 1 < 10) {
+      global.time.minute += 5;
+      canMove = false;
+      setTimeout(ResetMove, 300);
+    } 
 
   }
   else if (e.key == "a" || e.key == "ArrowLeft") {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x - 1, characters.player.cords.y) && characters.player.cords.x - 1 > -1) characters.player.cords.x--;
-    if (CanWalk(characters.player.cords.x - 1, characters.player.cords.y) && characters.player.cords.x - 1 > -1) global.time.minute += 5;
+    if (CanWalk(characters.player.cords.x - 1, characters.player.cords.y) && characters.player.cords.x - 1 > -1) {
+      global.time.minute += 5;
+      canMove = false;
+      setTimeout(ResetMove, 300);
+    } 
   }
   else if (e.key == "d" || e.key == "ArrowRight") {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x + 1, characters.player.cords.y) && characters.player.cords.x + 1 < 16) characters.player.cords.x++;
-    if (CanWalk(characters.player.cords.x + 1, characters.player.cords.y) && characters.player.cords.x + 1 < 16) global.time.minute += 5;
+    if (CanWalk(characters.player.cords.x + 1, characters.player.cords.y) && characters.player.cords.x + 1 < 16) {
+      global.time.minute += 5;
+      canMove = false;
+      setTimeout(ResetMove, 300);
+    } 
   }
   GlobalUpdate();
   if (!characters.player.lit && e.key != "Enter") DrawPlayer();

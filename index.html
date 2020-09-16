@@ -116,6 +116,15 @@
         <div id="QuickLoadCheck" class="optionsCheck" onclick="toggleQL()">
           <p id="qlCheck">X</p>
         </div>
+        <p id="combatSpeedText" class="optionsText">Combat Speed</p>
+        <select id="combatSpeed" onchange="global.combat.speed=this.value">
+          <option value="2000">Slowest</option>
+          <option value="1250">Slow</option>
+          <option value="500" selected="selected">Normal</option>
+          <option value="300">Fast</option>
+          <option value="100">Flash</option>
+          <option value="0">Instant</option>
+        </select>
         <p class="optionsText">Enable Quick Load</p>
       </div>
       <button onclick="backToMenu()" id="optionsBack">Back</button>

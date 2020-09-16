@@ -72,6 +72,26 @@ var texts = [
             text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ §#@var.ACTWEAPONIMG()#§ and smashes §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ with all of §@var.POSPRON(actor)§ strength. The §/yellow/smash§ crushes through §/@var.BTC(target)/@var.BTN(target)§'s §#@var.BTI(target)#§ armor, causing §@var.BTV()§ §/red/damage§ to §@var.OBJPRON(target)§."
           }
         ]
+      },
+      {
+        subcat: "combat-target-death",
+        trigger: "target death",
+        texts: [
+          {
+            key: "combat-death-target-1",
+            text: "§¤B-¤/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ §¤B-¤/crimson/is defeated and falls to§ §¤B-¤/crimson/@var.POSPRON(target)§ §¤B-¤/crimson/knees, collapsing to the ground shortly after.§"
+          }
+        ]
+      },
+      {
+        subcat: "combat-actor-death",
+        trigger: "actor death",
+        texts: [
+          {
+            key: "combat-death-actor-1",
+            text: "§¤B-¤/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ §¤B-¤/crimson/is defeated and falls to§ §¤B-¤/crimson/@var.POSPRON(actor)§ §¤B-¤/crimson/knees, collapsing to the ground shortly after.§"
+          }
+        ]
       }
     ]
   }

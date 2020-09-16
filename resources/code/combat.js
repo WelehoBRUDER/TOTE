@@ -25,21 +25,33 @@ function getCharCombat(key) {
 }
 
 function AddToRound(target, action, performer) {
+  Element("combatButtonsContainer").classList.add("darken");
   let newTarget = getCharCombat(target);
   let newPerformer = getCharCombat(performer);
   Element("targetingCombat").style.display = "none";
-  charactersActions.push({ target: newTarget, action: action, performer: newPerformer, speed: newPerformer.stats.spd });
+  let Speed = CalculateSpeed(newPerformer);
+  console.log(Speed);
+  charactersActions.push({ target: newTarget, action: action, performer: newPerformer, speed: Speed});
+  console.log(newPerformer);
   if(newPerformer.key == "player0")  {
       for(let i = 0; i<enemiesFight.length; i++) {
         targetingAi(enemiesFight[i]); 
       }
       for(let i = 1; i<alliesFight.length; i++) {
-        targetingAi(alliesFight[i]);
+        if(alliesFight[i].ai) targetingAi(alliesFight[i]);
       }
   }
   if(charactersActions.length === enemiesFight.length+alliesFight.length) {
     EndRound();
   }
+}
+
+function CalculateSpeed(char) {
+  let extraSpeed = 0;
+  for(let piece of char.equipment) {
+    if(piece.speed > 0) extraSpeed += piece.speed;
+  }
+  return char.stats.spd + extraSpeed;
 }
 
 async function EndRound() {
@@ -59,12 +71,26 @@ async function EndRound() {
     global.combat.value  = eval(act.action);
     BV = global.combat;
     act.target.stats.hp -= global.combat.value;
+
     let container =  Element("combatTextContainer");
     container.appendChild(ReadContentCombat(SuitableText));
+    if(act.target.stats.hp <= 0) {
+      act.target.stats.hp = 0;
+      let deathTrigger = "target death";
+      container.appendChild(ReadContentCombat(GetRandomCombatText(deathTrigger)));
+    }
     container.scrollTop = container.scrollHeight;
-    await sleep(500);
+    CreatePortraits();
+    if(global.combat.speed > 0) await sleep(global.combat.speed);
   }
-  CreatePortraits();
+  charactersActions = [];
+  for(let char of enemiesFight) {
+    char.hasActed = false;
+  }
+  for(let char of alliesFight) {
+    char.hasActed = false;
+  }
+  Element("combatButtonsContainer").classList.remove("darken");
 }
 
 function sleep(ms) {

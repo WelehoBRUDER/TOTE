@@ -16,8 +16,10 @@ let global = {
     actor: null,
     target: null,
     value: 46,
-    ongoing: true
-  }
+    ongoing: true,
+    speed: 500
+  },
+  onmap: false
 };
 
 

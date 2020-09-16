@@ -55,6 +55,7 @@ function AddItem(key) {
 
 const items = [
   new Weapon("broken_iron_sword", "Broken Iron Sword", 10, 1, "items/broken_iron_sword_1", 1, 1, false, [{ type: "slash", value: 4 }, { type: "thrust", value: 1 }], -1),
+  new Weapon("wooden_club", "Wooden Club", 10, 1, "items/wooden_club", 1, 1, false, [{ type: "blunt", value: 5 }], -1),
   new Weapon("rusty_iron_sword", "Rusty Iron Sword", 25, 1, "items/rusty_iron_sword_1", 1, 1, false, [{type: "slash", value: 6}, {type: "thrust", value: 2}], -1),
   new Weapon("broken_iron_dagger", "Broken Iron Dagger", 8, 1, "items/rusty_iron_sword_1", 1, 1, false, [{type: "slash", value: 3}, {type: "thrust", value: 1}], 1),
   new Weapon("rusty_iron_bastard_sword", "Rusty Bastard Sword", 40, 1, "items/rusty_iron_sword_1", 1, 1, true, [{type: "slash", value: 8}, {type: "thrust", value: 3}], -2),

@@ -89,16 +89,18 @@ var characters = {
   enemies: [
     new Enemy("goblin_simp", "Goblin Simp",  Race("Goblin"), CharClass("Warrior"), 
     [
-      AddItem("broken_iron_sword"),
+      AddItem("wooden_club"),
       AddItem("leather_chest"),
     ], "rgb(51, 102, 0)", "portraits/portrait_goblin_temp", [], [Ability("smash")], [], {level: 1},
     {}, {objective: "him", possesive: "his", singular: "he"}),
+
     new Enemy("goblin_queen", "Goblin Queen",  Race("Goblin Queen"), CharClass("Warrior"), 
     [
       AddItem("broken_iron_sword"),
       AddItem("leather_chest"),
-    ], "rgb(51, 102, 0)", "portraits/portrait_goblin_queen", [], [], [], {level: 5},
+    ], "rgb(34,139,34)", "portraits/portrait_goblin_queen", [], [], [], {level: 5},
     {}, {objective: "her", possesive: "her", singular: "she"}),
+
     new Enemy("goblin_king", "Goblin King",  Race("Goblin King"), CharClass("Brawler"), 
     [
       AddItem("broken_iron_sword"),
@@ -106,7 +108,7 @@ var characters = {
       AddItem("leather_helmet"),
       AddItem("leather_gloves"),
       AddItem("leather_boots")
-    ], "rgb(51, 102, 0)", "portraits/portrait_goblin_king", [], [], [], {level: 5},
+    ], "rgb(154,205,50)", "portraits/portrait_goblin_king", [], [], [], {level: 5},
     {}, {objective: "him", possesive: "his", singular: "he"}),
   ]
 }

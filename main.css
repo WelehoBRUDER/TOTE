@@ -369,8 +369,8 @@ span {
 }
 
 .darken {
-  cursor: not-allowed !important;
   filter: brightness(25%);
+  pointer-events: none;
 }
 
 .ui_button:hover {

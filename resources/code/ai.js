@@ -1,5 +1,7 @@
 
 function targetingAi(char) {
+  if(char.hasActed) return;
+  char.hasActed = true;
   let max = 0;
   let table = ReturnTable(char);
   if(char.class.role == "support") {
@@ -20,7 +22,9 @@ function targetingAi(char) {
     if(unit.threatChance >= value) { targeting = unit; break;}
   }
   let func = decideAbility(char);
-  charactersActions.push({target: targeting, action: func, performer: char, speed: char.stats.spd})
+  let Speed = CalculateSpeed(char);
+  console.log(Speed);
+  charactersActions.push({target: targeting, action: func, performer: char, speed: Speed})
 }
 
 function betterAI()

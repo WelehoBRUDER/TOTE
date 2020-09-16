@@ -13,6 +13,7 @@ function CreateUiButtons() {
 
 function toggleButton(action) {
   HideAll();
+  if(action == "mapFrame") global.onmap = true;
   Element(action).style.display = "block";
   try{
     Element("settings").querySelector(".darken").classList.remove("darken");
@@ -65,6 +66,7 @@ function HideAll() {
   Element("invFrame").style.display = "none";
   Element("combat").style.display = "none";
   Element("saveLoad").textContent = "";
+  global.onmap = false;
 }
 
 function Worldmap() {
