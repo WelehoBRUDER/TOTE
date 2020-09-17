@@ -7,6 +7,10 @@ function CreatePortrait(character, enemy) {
     name += "...";
   }
   let portrait_image_url = `${character.image}`;
+  if(character.key.startsWith("summon_")) {
+    if(enemy) portrait_image_url = `${character.images.hostile}`;
+    else portrait_image_url = `${character.images.friendly}`;
+  }
   if (!global.quickload) if (!imageExists(`resources/images/${portrait_image_url}.png`)) portrait_image_url = "events/missing_image";
   portrait.innerHTML = `
     <div class="portrait_background">

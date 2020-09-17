@@ -6,8 +6,13 @@ function TargetCharacters(charTable, ability, performer) {
   Element("targetingCombat").textContent = '';
   for (let char of charTable) {
     if (char.stats.hp > 0) {
+      let path = char.image;
+      if (path == undefined || char.images) {
+        if (charTable == enemiesFight) path = char.images.hostile;
+        else path = char.images.friendly
+      }
       let targetImage = Create("img");
-      targetImage.src = `resources/images/${char.image}.png`;
+      targetImage.src = `resources/images/${path}.png`;
       targetImage.addEventListener("click", () => AddToRound(ability, performer.key, char.key));
       Element("targetingCombat").appendChild(targetImage);
       //   Element("targetingCombat").innerHTML += `
@@ -32,13 +37,17 @@ function AddToRound(action, performer, target) {
   Element("roundHistory").classList.add("darken");
   let newTarget;
   if (target) newTarget = getCharCombat(target);
+  if(newTarget == null) newTarget = target;
   let newPerformer = getCharCombat(performer);
   Element("targetingCombat").style.display = "none";
+  console.log(performer);
+  console.log(newPerformer);
   let Speed = CalculateSpeed(newPerformer);
   let ability = action;
   if (action.action) ability = action.action;
-  if (target) charactersActions.push({ target: newTarget, action: ability, performer: newPerformer, speed: Speed, abi: action });
-  else if (action != "Defend()") charactersActions.push({ action: action, performer: newPerformer, speed: Speed });
+  let friendly = true;
+  if (target) charactersActions.push({ target: newTarget, action: ability, performer: newPerformer, speed: Speed, abi: action, ally: friendly });
+  else if (action != "Defend()") charactersActions.push({ action: action, performer: newPerformer, speed: Speed, ally: friendly });
   else {
     newPerformer.modifiers.push(Defend());
     charactersActions.push({ action: "defend", performer: newPerformer, speed: 999 });
@@ -46,10 +55,10 @@ function AddToRound(action, performer, target) {
   }
   if (newPerformer.key == "player0") {
     for (let i = 0; i < enemiesFight.length; i++) {
-      targetingAi(enemiesFight[i]);
+      targetingAi(enemiesFight[i], false);
     }
     for (let i = 1; i < alliesFight.length; i++) {
-      if (alliesFight[i].ai) targetingAi(alliesFight[i]);
+      if (alliesFight[i].ai) targetingAi(alliesFight[i], true);
     }
   }
   if (charactersActions.length === enemiesFight.length + alliesFight.length) {
@@ -63,16 +72,16 @@ function LowerCooldowns() {
       if (abi.cooldown > 0) {
         abi.cooldown--;
       }
-      if(char == global.controlling && abi.cooldown > 0) {
-        if(Element(`combatAbility${abi.slot}`).childNodes[2]) Element(`combatAbility${abi.slot}`).childNodes[2].remove();
+      if (char == global.controlling && abi.cooldown > 0) {
+        if (Element(`combatAbility${abi.slot}`).childNodes[2]) Element(`combatAbility${abi.slot}`).childNodes[2].remove();
         let p = Create("p");
         p.textContent = abi.cooldown;
         p.classList.add("cooldowntext");
         Element(`combatAbility${abi.slot}`).appendChild(p);
       }
-      else if(abi.cooldown <= 0 && char == global.controlling) {
+      else if (abi.cooldown <= 0 && char == global.controlling) {
         Element(`combatAbility${abi.slot}`).classList.remove("darken");
-        if(Element(`combatAbility${abi.slot}`).childNodes[2]) Element(`combatAbility${abi.slot}`).childNodes[2].remove();
+        if (Element(`combatAbility${abi.slot}`).childNodes[2]) Element(`combatAbility${abi.slot}`).childNodes[2].remove();
       }
     }
   }
@@ -87,6 +96,7 @@ function LowerCooldowns() {
 
 function CalculateSpeed(char) {
   let extraSpeed = 0;
+  console.log(char);
   for (let piece of char.equipment) {
     if (piece.speed > 0) extraSpeed += piece.speed;
   }
@@ -103,8 +113,10 @@ async function EndRound() {
     let SuitableText = null;
     let trigger1 = null;
     let trigger2 = null;
+    console.log(act.abi);
     if (act.action == "defend") {
       global.combat.actor = act.performer;
+      global.combat.ally = act.ally
       BV = global.combat;
       SuitableText = GetRandomCombatText("defend");
       let bt = JSON.parse(JSON.stringify(global.combat))
@@ -116,6 +128,37 @@ async function EndRound() {
       if (global.combat.speed > 0) await sleep(global.combat.speed);
       continue;
     }
+    else if (act.abi) {
+      if (act.abi.action) {
+        if (act.abi.action.startsWith("Summoning")) {
+          console.log(act);
+          global.combat.actor = act.performer;
+          global.combat.ally = act.ally
+          global.combat.summoned = eval(act.abi.action);
+          BV = global.combat;
+          SuitableText = GetRandomCombatText("summon");
+          let bt = JSON.parse(JSON.stringify(global.combat))
+          thisRoundHistory.push({ text: SuitableText, bv: bt });
+          thisBattleHistory.push({ text: SuitableText, bv: bt });
+          container.appendChild(ReadContentCombat(SuitableText));
+          container.scrollTop = container.scrollHeight;
+          if (act.abi.cost.mana) global.combat.actor.stats.mana -= act.abi.cost.mana;
+          getCharacterAbility(act.performer, act.abi.key).cooldown = act.abi.cost.cd;
+          if (act.performer == global.controlling) {
+            Element(`combatAbility${act.abi.slot}`).classList.add("darken");
+            if (Element(`combatAbility${act.abi.slot}`).childNodes[2]) Element(`combatAbility${act.abi.slot}`).childNodes[2].remove();
+            let p = Create("p");
+            p.textContent = act.abi.cooldown;
+            p.classList.add("cooldowntext");
+            Element(`combatAbility${act.abi.slot}`).appendChild(p);
+          }
+          PushCombatantToTable(eval(act.abi.action), act.target);
+          CreatePortraits();
+          if (global.combat.speed > 0) await sleep(global.combat.speed);
+          continue;
+        }
+      }
+    }
     if (act.action == "RegularAttack()") {
       trigger2 = GetHighestDamageType(act.performer);
     } else {
@@ -124,6 +167,7 @@ async function EndRound() {
     global.combat.actor = act.performer;
     global.combat.target = act.target;
     global.combat.value = eval(act.action);
+    global.combat.ally = act.ally
     if (global.combat.value <= 0) global.combat.value = 0;
     else if (global.combat.value == "miss") trigger1 = "miss";
     else if (global.combat.value != "miss") trigger1 = "nomiss";
@@ -134,14 +178,14 @@ async function EndRound() {
     if (act.abi != undefined && act.abi != "RegularAttack()") {
       if (act.abi.cost.mana) global.combat.actor.stats.mana -= act.abi.cost.mana;
       getCharacterAbility(act.performer, act.abi.key).cooldown = act.abi.cost.cd;
-      if(act.performer == global.controlling) { 
+      if (act.performer == global.controlling) {
         Element(`combatAbility${act.abi.slot}`).classList.add("darken");
-        if(Element(`combatAbility${act.abi.slot}`).childNodes[2]) Element(`combatAbility${act.abi.slot}`).childNodes[2].remove();
+        if (Element(`combatAbility${act.abi.slot}`).childNodes[2]) Element(`combatAbility${act.abi.slot}`).childNodes[2].remove();
         let p = Create("p");
         p.textContent = act.abi.cooldown;
         p.classList.add("cooldowntext");
         Element(`combatAbility${act.abi.slot}`).appendChild(p);
-     }
+      }
     }
     let triggers = `${trigger1} ${trigger2} land`;
     SuitableText = GetRandomCombatText(triggers);

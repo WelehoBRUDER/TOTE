@@ -1,5 +1,5 @@
 
-function targetingAi(char) {
+function targetingAi(char, friendly) {
   if(char.hasActed) return;
   char.hasActed = true;
   let max = 0;
@@ -26,7 +26,7 @@ function targetingAi(char) {
   let Speed = CalculateSpeed(char);
   let act = func;
   if(act != "RegularAttack()") act = func.action;
-  charactersActions.push({target: targeting, action: act, performer: char, speed: Speed, abi: func})
+  charactersActions.push({target: targeting, action: act, performer: char, speed: Speed, abi: func, ally: friendly})
 }
 
 function modifiersThreat(char) {

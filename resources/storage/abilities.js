@@ -43,12 +43,29 @@ const abilities = [
       },
       cooldown: 0,
       action: "OffensiveSpell(Ability(`holy-smite`).power)"
+    },
+    {
+      key: "summon-skeleton-warrior",
+      img: "icons/summon_skeleton_warrior.png",
+      no_target: true,
+      cost: {
+        mana: 60,
+        cd: 8
+      },
+      cooldown: 0,
+      action: "Summoning(summon(`summon_skeleton_warrior`))"
     }
 ];
 
 function Attack() {
   eval(abilities[0].action);
   eval(abilities[2].action);
+}
+
+function summon(key) {
+  for(let summon of summons) {
+    if(summon.key == key) return summon;
+  }
 }
 
 const spells = [

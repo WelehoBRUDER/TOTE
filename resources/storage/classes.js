@@ -50,6 +50,16 @@ const Races = [
             maxmana: 0.74
         },
         xpReward: 80
+    },
+    {
+        key: "Skeleton",
+        desc: "Skeletons are reanimated corpses that lack flash and brains.",
+        baseStats: new Stats(0, -1, -1, -1, -3, -3, -4, 0, 0),
+        multipliers: {
+            maxhp: 0.26,
+            maxmana: 0.66
+        },
+        xpReward: 15
     }
 ]
 

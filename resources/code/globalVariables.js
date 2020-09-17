@@ -20,7 +20,9 @@ let global = {
     ongoing: false,
     speed: 500,
     delay: 800,
-    history: false
+    history: false,
+    ally: true,
+    summoned: null
   },
   onmap: false
 };

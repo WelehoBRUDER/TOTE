@@ -13,6 +13,8 @@ function StatsForCharacters(char) {
     for(let stat in char.race.multipliers) {
         char.stats[stat] = Math.ceil(char.stats[stat] * char.race.multipliers[stat]);
     }
+    if(char.stats.maxhp < 0) char.stats.maxhp = 0;
+    if(char.stats.maxmana < 0) char.stats.maxmana = 0;
     char.stats.hp = char.stats.maxhp;
     char.stats.mana = char.stats.maxmana;
 }
@@ -51,6 +53,9 @@ function RunStatsAll() {
         StatsForCharacters(char);
     }
     for(let char of characters.enemies) {
+        StatsForCharacters(char);
+    }
+    for(let char of summons) {
         StatsForCharacters(char);
     }
     CreatePortraits();

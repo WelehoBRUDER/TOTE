@@ -23,6 +23,10 @@ var texts = [
       {
         key: "shield-bash",
         text: "Deal §/crimson/damage§ based on your equipped §/yellow/shield§ and §/yellow/stun§ enemy for 1 turn. Cooldown: 5 §/yellow/turns§."
+      },
+      {
+        key: "summon-skeleton-warrior",
+        text: "Summon §/yellow/Skeleton Warrior§ to aid you in this battle until victory or its death. Cost: 60 §/cyan/mana§. Cooldown: 8 §/yellow/turns§."
       }
     ]
   },
@@ -182,6 +186,16 @@ var texts = [
             text: "§¤B-¤/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ §¤B-¤/crimson/is defeated and falls to§ §¤B-¤/crimson/@var.POSPRON(actor)§ §¤B-¤/crimson/knees, collapsing to the ground shortly after.§"
           }
         ]
+      },
+      {
+        subcat: "summoning",
+        trigger: "summon",
+        texts: [
+          {
+            key: "combat-summoning-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ gathers §/cyan/mana§ very tightly and calls to another dimension, summoning §/@var.SUMMONEDCOLOR()/@var.SUMMONEDNAME()§ §#@var.SUMMONEDIMAGE()#§!"
+          }
+        ]
       }
     ]
   }
@@ -207,7 +221,12 @@ function  BTN(key) {
 }
 
 function BTI(key) {
-  return BV[key].image;
+  let path = BV[key].image;
+  if(path == undefined || BV[key].images) {
+    if(global.combat.ally && global.combat.target != BV[key]) path = BV[key].images.friendly;
+    else path = BV[key].images.hostile;
+  }
+  return path;
 }
 
 function BC(key) {
@@ -276,4 +295,17 @@ function TRGSHIELDIMG() {
   for(let shield of BV.target.equipment) {
     if(shield.slot == "shield") return shield.img;
   }
+}
+
+function SUMMONEDNAME() {
+  return BV.summoned.name;
+}
+
+function SUMMONEDCOLOR() {
+  return BV.summoned.color;
+}
+
+function SUMMONEDIMAGE() {
+  if(global.combat.ally) return BV.summoned.images.friendly;
+  else return BV.summoned.images.hostile;
 }

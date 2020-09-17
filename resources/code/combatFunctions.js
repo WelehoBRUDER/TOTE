@@ -74,7 +74,8 @@ function CombatAbility(char, slot) {
     let abi = abiOfSlot(char, slot);
     div.addEventListener("mouseover", ()=>showInfoCombat(abi.key, this));
     div.addEventListener("mouseleave", ()=>hideInfoCombat());
-    div.addEventListener("click", ()=>TargetCharacters(enemiesFight, abi, global.controlling));
+    if(abi.no_target) div.addEventListener("click", ()=>AddToRound(abi, global.controlling.key, alliesFight));
+    else div.addEventListener("click", ()=>TargetCharacters(enemiesFight, abi, global.controlling));
     let abiImg = Create("img");
     abiImg.src = `resources/images/${abi.img}`
     abiImg.classList.add("combatAbiImage");

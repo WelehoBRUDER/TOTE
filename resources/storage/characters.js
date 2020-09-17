@@ -44,7 +44,7 @@ class Enemy extends Actor {
   /**
  * @extends Actor
  */
-  constructor(key, name, race, Class, equipment, color, image, modifiers, abilities, statBonuses, xp, stats, pron) {
+  constructor(key, name, race, Class, equipment, color, image, modifiers, abilities, statBonuses, xp, stats, pron, ai_behauviour) {
     super(key, name, race, Class, equipment, color, image),
     this.modifiers = modifiers,
     this.abilities = abilities,
@@ -56,7 +56,7 @@ class Enemy extends Actor {
 }
 
 class Ally extends Actor {
-  constructor(key, name, race, Class, equipment, color, image, modifiers, abilities, xp, stats, pron, ai) {
+  constructor(key, name, race, Class, equipment, color, image, modifiers, abilities, xp, stats, pron, ai, ai_behauviour) {
     super(key, name, race, Class, equipment, color, image),
     this.modifiers = modifiers,
     this.abilities = abilities,
@@ -65,6 +65,21 @@ class Ally extends Actor {
     this.pron = pron,
     this.ai = ai
   }
+}
+
+class Summon extends Actor {
+  constructor(key, name, race, Class, equipment, color, images, modifiers, abilities, statBonuses, xp, stats, pron, ai, ai_behauviour) {
+    super(key, name, race, Class, equipment, color),
+    this.images = images,
+    this.modifiers = modifiers,
+    this.abilities = abilities,
+    this.xp = xp,
+    this.stats = stats,
+    this.pron = pron,
+    this.ai = ai,
+    this.ai_behauviour = ai_behauviour
+  }
+
 }
 
 
@@ -116,6 +131,15 @@ var characters = {
   ]
 }
 
+const summons = [
+  new Summon("summon_skeleton_warrior", "Skeleton Warrior", Race("Skeleton"), CharClass("Warrior"), 
+  [
+    AddItem("rusty_iron_bastard_sword"),
+    AddItem("leather_chest"),
+  ], "rgb(148, 148, 148)", {friendly: "portraits/portrait_skeleton_warrior_ally", hostile: "portraits/portrait_skeleton_warrior_enemy"},
+  [], [], [], {level: 1}, {}, {objective: "him", possesive: "his", singular: "he"}, true)
+]
+
 characters.player.cords = { x: 8, y: 4 };
 characters.player.map = "Forlorn Plains";
 characters.player.lit = false;
@@ -130,13 +154,15 @@ characters.player.inventory = [
   AddItem("magical_chestplate")
 ];
 characters.player.xp = {points: 0, needed: 100, modifier: 1.00, level: 1};
-characters.player.abilities = [Ability("fierce-assault"), Ability("shield-bash")];
+characters.player.abilities = [Ability("fierce-assault"), Ability("shield-bash"), Ability("summon-skeleton-warrior")];
 characters.player.spells = [Spell("mana-blast")];
 
 characters.player.abilities[0].equipped = true;
 characters.player.abilities[0].slot = 1;
 characters.player.abilities[1].equipped = true;
 characters.player.abilities[1].slot = 4;
+characters.player.abilities[2].equipped = true;
+characters.player.abilities[2].slot = 2;
 characters.player.spells[0].equipped = true;
 characters.player.spells[0].slot = 1;
 

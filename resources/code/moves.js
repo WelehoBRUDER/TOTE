@@ -62,6 +62,11 @@ function targetBlock(type) {
     }
 }
 
+function Summoning(char) {
+    let copy = JSON.parse(JSON.stringify(char));
+    return copy;
+}
+
 function RegularAttack() {
     global.combat.blocked = false;
     let totalDamage = 0;
