@@ -168,6 +168,46 @@ var texts = [
         ]
       },
       {
+        subcat: "combat-bash-hit",
+        trigger: "nomiss ShieldBash() land",
+        texts: [
+          {
+            key: "combat-bash-hit-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ bashes §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ with §@var.POSPRON(actor)§ §/yellow/@var.ACTSHIELD()§ §#@var.ACTSHIELDIMG()#§, stunning §@var.OBJPRON(target)§ and dealing §@var.BTV()§ §/crimson/damage§."
+          }
+        ]
+      },
+      {
+        subcat: "combat-bash-miss",
+        trigger: "miss ShieldBash() land",
+        texts: [
+          {
+            key: "combat-bash-miss-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ tries to bash §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ with §@var.POSPRON(actor)§ §/yellow/@var.ACTSHIELD()§ §#@var.ACTSHIELDIMG()#§, but misses and leaves §@var.OBJPRON(actor)§self wide open."
+          }
+        ]
+      },
+      {
+        subcat: "combat-bash-block",
+        trigger: "block ShieldBash() land",
+        texts: [
+          {
+            key: "combat-bash-block-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ bashes §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ with §@var.POSPRON(actor)§ §/yellow/@var.ACTSHIELD()§ §#@var.ACTSHIELDIMG()#§, but §@var.SINPRON(target)§ blocks the attack with §@var.OBJPRON(target)§ §/yellow/@var.TRGSHIELD()§ §#@var.TRGSHIELDIMG()#§, still getting stunned, but only taking §@var.BTV()§ §/crimson/damage§."
+          }
+        ]
+      },
+      {
+        subcat: "combat-recover",
+        trigger: "recover",
+        texts: [
+          {
+            key: "combat-recover-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ spends some time recovering."
+          }
+        ]
+      },
+      {
         subcat: "combat-target-death",
         trigger: "target death",
         texts: [
@@ -193,7 +233,7 @@ var texts = [
         texts: [
           {
             key: "combat-summoning-1",
-            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ gathers §/cyan/mana§ very tightly and calls to another dimension, summoning §/@var.SUMMONEDCOLOR()/@var.SUMMONEDNAME()§ §#@var.SUMMONEDIMAGE()#§!"
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ gathers §/cyan/mana§ between §@var.POSPRON(actor)§ palms, causing it to swirl. This creates a §/rgb(200, 50, 255)/portal§, and out of it appears §@var.ARTICLE(summoned)§ §/@var.SUMMONEDCOLOR()/@var.SUMMONEDNAME()§ §#@var.SUMMONEDIMAGE()#§!"
           }
         ]
       }
@@ -308,4 +348,8 @@ function SUMMONEDCOLOR() {
 function SUMMONEDIMAGE() {
   if(global.combat.ally) return BV.summoned.images.friendly;
   else return BV.summoned.images.hostile;
+}
+
+function ARTICLE(key) {
+  return BV[key].article;
 }

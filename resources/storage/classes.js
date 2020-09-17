@@ -16,7 +16,7 @@ const Races = [
     {
         key: "Human",
         desc: "Humans are natural predators equipped with tremendous endurance and vitality, seemingly incapable of dying from severe injuries and chasing their goal with such strength and determination that a horde of humans seems like an unstoppable wave, capable of sweeping all that stand in front of them.",
-        baseStats: new Stats(2, 0, 1, 1, 0, 1, 0, 2, -1),
+        baseStats: new Stats(2, 1, 1, 1, 0, 1, 0, 2, -1),
         multipliers: {
         },
         xpReward: 50,
@@ -60,6 +60,16 @@ const Races = [
             maxmana: 0.66
         },
         xpReward: 15
+    },
+    {
+        key: "Earth Golem",
+        desc: "Earth Golems are rocks, dirt and mud held together and by mana.",
+        baseStats: new Stats(10, 10, 0, -5, -5, -5, -5, 0, -5),
+        multipliers: {
+            maxhp: 1.12,
+            maxmana: 0.0
+        },
+        xpReward: 60
     }
 ]
 

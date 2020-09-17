@@ -55,15 +55,15 @@ function AddToRound(action, performer, target) {
   }
   if (newPerformer.key == "player0") {
     for (let i = 0; i < enemiesFight.length; i++) {
+      if(enemiesFight[i].stats.hp <= 0) continue;
       targetingAi(enemiesFight[i], false);
     }
     for (let i = 1; i < alliesFight.length; i++) {
+      if(alliesFight[i].stats.hp <= 0) continue;
       if (alliesFight[i].ai) targetingAi(alliesFight[i], true);
     }
   }
-  if (charactersActions.length === enemiesFight.length + alliesFight.length) {
     EndRound();
-  }
 }
 
 function LowerCooldowns() {
@@ -106,6 +106,7 @@ function CalculateSpeed(char) {
 async function EndRound() {
   SortActions();
   LowerCooldowns();
+  RemoveOrDecreaseStatuses();
   thisRoundHistory = [];
   if (!global.combat.history) Element("combatTextContainer").textContent = "";
   for (let act of charactersActions) {
@@ -113,47 +114,21 @@ async function EndRound() {
     let SuitableText = null;
     let trigger1 = null;
     let trigger2 = null;
-    console.log(act.abi);
+    console.log(act.action);
+    if(act.action == "recover") {
+      EndRound_Recover(act, container);
+      if (global.combat.speed > 0) await sleep(global.combat.speed);
+       continue;
+    }
     if (act.action == "defend") {
-      global.combat.actor = act.performer;
-      global.combat.ally = act.ally
-      BV = global.combat;
-      SuitableText = GetRandomCombatText("defend");
-      let bt = JSON.parse(JSON.stringify(global.combat))
-      thisRoundHistory.push({ text: SuitableText, bv: bt });
-      thisBattleHistory.push({ text: SuitableText, bv: bt });
-      container.appendChild(ReadContentCombat(SuitableText));
-      container.scrollTop = container.scrollHeight;
-      CreatePortraits();
+      EndRound_Defend(act, container);
       if (global.combat.speed > 0) await sleep(global.combat.speed);
       continue;
     }
     else if (act.abi) {
       if (act.abi.action) {
         if (act.abi.action.startsWith("Summoning")) {
-          console.log(act);
-          global.combat.actor = act.performer;
-          global.combat.ally = act.ally
-          global.combat.summoned = eval(act.abi.action);
-          BV = global.combat;
-          SuitableText = GetRandomCombatText("summon");
-          let bt = JSON.parse(JSON.stringify(global.combat))
-          thisRoundHistory.push({ text: SuitableText, bv: bt });
-          thisBattleHistory.push({ text: SuitableText, bv: bt });
-          container.appendChild(ReadContentCombat(SuitableText));
-          container.scrollTop = container.scrollHeight;
-          if (act.abi.cost.mana) global.combat.actor.stats.mana -= act.abi.cost.mana;
-          getCharacterAbility(act.performer, act.abi.key).cooldown = act.abi.cost.cd;
-          if (act.performer == global.controlling) {
-            Element(`combatAbility${act.abi.slot}`).classList.add("darken");
-            if (Element(`combatAbility${act.abi.slot}`).childNodes[2]) Element(`combatAbility${act.abi.slot}`).childNodes[2].remove();
-            let p = Create("p");
-            p.textContent = act.abi.cooldown;
-            p.classList.add("cooldowntext");
-            Element(`combatAbility${act.abi.slot}`).appendChild(p);
-          }
-          PushCombatantToTable(eval(act.abi.action), act.target);
-          CreatePortraits();
+          EndRound_Summon(act, container);
           if (global.combat.speed > 0) await sleep(global.combat.speed);
           continue;
         }
@@ -172,20 +147,15 @@ async function EndRound() {
     else if (global.combat.value == "miss") trigger1 = "miss";
     else if (global.combat.value != "miss") trigger1 = "nomiss";
     if (global.combat.blocked) trigger1 = "block";
+    if(global.combat.value != "miss" && act.abi.status) {
+      let statuscopy = JSON.parse(JSON.stringify(act.abi.status));
+      act.target.modifiers.push(statuscopy);
+    }
     BV = global.combat;
     if (global.combat.value != "miss") act.target.stats.hp -= global.combat.value;
     if (global.combat.value <= 0) global.combat.value = "no";
     if (act.abi != undefined && act.abi != "RegularAttack()") {
-      if (act.abi.cost.mana) global.combat.actor.stats.mana -= act.abi.cost.mana;
-      getCharacterAbility(act.performer, act.abi.key).cooldown = act.abi.cost.cd;
-      if (act.performer == global.controlling) {
-        Element(`combatAbility${act.abi.slot}`).classList.add("darken");
-        if (Element(`combatAbility${act.abi.slot}`).childNodes[2]) Element(`combatAbility${act.abi.slot}`).childNodes[2].remove();
-        let p = Create("p");
-        p.textContent = act.abi.cooldown;
-        p.classList.add("cooldowntext");
-        Element(`combatAbility${act.abi.slot}`).appendChild(p);
-      }
+      EndRound_Cost(act);
     }
     let triggers = `${trigger1} ${trigger2} land`;
     SuitableText = GetRandomCombatText(triggers);
@@ -194,18 +164,12 @@ async function EndRound() {
     thisRoundHistory.push({ text: SuitableText, bv: bt });
     thisBattleHistory.push({ text: SuitableText, bv: bt });
     if (act.target.stats.hp <= 0) {
-      act.target.stats.hp = 0;
-      let deathTrigger = "target death";
-      let bt = JSON.parse(JSON.stringify(global.combat))
-      thisRoundHistory.push({ text: GetRandomCombatText(deathTrigger), bv: bt });
-      thisBattleHistory.push({ text: GetRandomCombatText(deathTrigger), bv: bt });
-      container.appendChild(ReadContentCombat(GetRandomCombatText(deathTrigger)));
+      EndRound_targetDeath(act, container);
     }
     container.scrollTop = container.scrollHeight;
     CreatePortraits();
     if (global.combat.speed > 0) await sleep(global.combat.speed);
   }
-  RemoveOrDecreaseStatuses();
   CreatePortraits();
   charactersActions = [];
   for (let char of enemiesFight) {
@@ -228,7 +192,7 @@ function RemoveOrDecreaseStatuses() {
   for (let char of alliesFight) {
     if (char.modifiers.length > 0) {
       for (let i = 0; i < char.modifiers.length; i++) {
-        if (char.modifiers[i].power) {
+        if (char.modifiers[i].last) {
           char.modifiers[i].last--;
           if (char.modifiers[i].last <= 0) {
             char.modifiers.splice(i, 1);
@@ -240,7 +204,7 @@ function RemoveOrDecreaseStatuses() {
   for (let char of enemiesFight) {
     if (char.modifiers.length > 0) {
       for (let i = 0; i < char.modifiers.length; i++) {
-        if (char.modifiers[i].power) {
+        if (char.modifiers[i].last) {
           char.modifiers[i].last--;
           if (char.modifiers[i].last <= 0) {
             char.modifiers.splice(i, 1);
@@ -299,23 +263,81 @@ function SortActions() {
   });
 }
 
-// function TEMP_ENEMY_AI(enemy) {
-//   let maximum = 0;
-//   for(let i=0; i<alliesFight.length; i++) {
-//     alliesFight[i].threatChance = 0;
-//     if(alliesFight[i-1]) alliesFight[i].threatChance = alliesFight[i-1].threatChance;
-//     else alliesFight[i].threatChance = 0;
-//     alliesFight[i].threatChance += 100 + alliesFight[i].class.threat + alliesFight[i].threat;
-//     maximum = alliesFight[i].threatChance;
-//   }
-//   let value = Random(maximum);
-//   let targeting;
-//   for(let char of alliesFight) {
-//     if(char.threatChance >= value) { targeting = char; break;}
-//   }
-//   console.log(targeting);
-// }
-
 var charactersActions = [];
 var thisBattleHistory = [];
 var thisRoundHistory = [];
+
+/* FUNCTIONS MOVED HERE FOR CLARITY IN END ROUND */
+
+function EndRound_Recover(act, container) {
+  global.combat.actor = act.performer;
+  BV = global.combat;
+  SuitableText = GetRandomCombatText("recover");
+  let bt = JSON.parse(JSON.stringify(global.combat))
+  thisRoundHistory.push({ text: SuitableText, bv: bt });
+  thisBattleHistory.push({ text: SuitableText, bv: bt });
+  container.appendChild(ReadContentCombat(SuitableText));
+  container.scrollTop = container.scrollHeight;
+  CreatePortraits();
+}
+
+function EndRound_Defend(act, container) {
+  global.combat.actor = act.performer;
+  global.combat.ally = act.ally
+  BV = global.combat;
+  SuitableText = GetRandomCombatText("defend");
+  let bt = JSON.parse(JSON.stringify(global.combat))
+  thisRoundHistory.push({ text: SuitableText, bv: bt });
+  thisBattleHistory.push({ text: SuitableText, bv: bt });
+  container.appendChild(ReadContentCombat(SuitableText));
+  container.scrollTop = container.scrollHeight;
+  CreatePortraits();
+}
+
+function EndRound_Summon(act, container) {
+  console.log(act);
+  global.combat.actor = act.performer;
+  global.combat.ally = act.ally
+  global.combat.summoned = eval(act.abi.action);
+  BV = global.combat;
+  SuitableText = GetRandomCombatText("summon");
+  let bt = JSON.parse(JSON.stringify(global.combat))
+  thisRoundHistory.push({ text: SuitableText, bv: bt });
+  thisBattleHistory.push({ text: SuitableText, bv: bt });
+  container.appendChild(ReadContentCombat(SuitableText));
+  container.scrollTop = container.scrollHeight;
+  if (act.abi.cost.mana) global.combat.actor.stats.mana -= act.abi.cost.mana;
+  getCharacterAbility(act.performer, act.abi.key).cooldown = act.abi.cost.cd;
+  if (act.performer == global.controlling) {
+    Element(`combatAbility${act.abi.slot}`).classList.add("darken");
+    if (Element(`combatAbility${act.abi.slot}`).childNodes[2]) Element(`combatAbility${act.abi.slot}`).childNodes[2].remove();
+    let p = Create("p");
+    p.textContent = act.abi.cooldown;
+    p.classList.add("cooldowntext");
+    Element(`combatAbility${act.abi.slot}`).appendChild(p);
+  }
+  PushCombatantToTable(eval(act.abi.action), act.target);
+  CreatePortraits();
+}
+
+function EndRound_Cost(act) {
+  if (act.abi.cost.mana) global.combat.actor.stats.mana -= act.abi.cost.mana;
+  getCharacterAbility(act.performer, act.abi.key).cooldown = act.abi.cost.cd;
+  if (act.performer == global.controlling) {
+    Element(`combatAbility${act.abi.slot}`).classList.add("darken");
+    if (Element(`combatAbility${act.abi.slot}`).childNodes[2]) Element(`combatAbility${act.abi.slot}`).childNodes[2].remove();
+    let p = Create("p");
+    p.textContent = act.abi.cooldown;
+    p.classList.add("cooldowntext");
+    Element(`combatAbility${act.abi.slot}`).appendChild(p);
+  }
+}
+
+function EndRound_targetDeath(act, container) {
+  act.target.stats.hp = 0;
+  let deathTrigger = "target death";
+  let bt = JSON.parse(JSON.stringify(global.combat))
+  thisRoundHistory.push({ text: GetRandomCombatText(deathTrigger), bv: bt });
+  thisBattleHistory.push({ text: GetRandomCombatText(deathTrigger), bv: bt });
+  container.appendChild(ReadContentCombat(GetRandomCombatText(deathTrigger)));
+}

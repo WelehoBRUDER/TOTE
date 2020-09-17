@@ -60,6 +60,7 @@ function ShowItemInfo(e) {
   if (itm.slot) Element("infoBox").innerHTML += `<p>Slot: ${itm.slot[0].toUpperCase()}${itm.slot.substring(1)}</p>`;
   if (itm.twohand) Element("infoBox").innerHTML += `<p style="color: orange">Two handed weapon!</p>`;
   if (itm.blockChance) Element("infoBox").innerHTML += `<p>Block chance: ${itm.blockChance}%</p>`;
+  if (itm.damage) Element("infoBox").innerHTML += `<p>Bash damage: ${itm.damage[0].value} ${itm.damage[0].type}</p>`;
   if (itm.armor) {
     Element("infoBox").innerHTML += `<p id="defText">Defenses: </p>
     <div class="grid">${loop()}</div>

@@ -1,3 +1,21 @@
+const statuses = [
+  {
+    key: "combat-guard",
+    img: "icons/combat/defense_buff.png",
+    power: [
+      {type: "defense", value: 50},
+      {type: "threat", value: -1}
+    ],
+    last: 2
+  },
+  {
+    key: "stun",
+    img: "icons/combat/stun.png",
+    recover: true,
+    last: 1
+  }
+]
+
 const abilities = [
     {
         key: "fierce-assault",
@@ -15,7 +33,14 @@ const abilities = [
     },
     {
         key: "shield-bash",
-        img: "icons/shield_bash.png"
+        img: "icons/shield_bash.png",
+        cost: {
+          mana: 0,
+          cd: 4
+        },
+        status: Status(`stun`),
+        cooldown: 0,
+        action: "ShieldBash()"
     },
     {
       key: "smash",
@@ -54,6 +79,17 @@ const abilities = [
       },
       cooldown: 0,
       action: "Summoning(summon(`summon_skeleton_warrior`))"
+    },
+    {
+      key: "summon-earth-golem",
+      img: "icons/summon_earth_golem.png",
+      no_target: true,
+      cost: {
+        mana: 500,
+        cd: 13
+      },
+      cooldown: 0,
+      action: "Summoning(summon(`summon_earth_golem`))"
     }
 ];
 
@@ -84,18 +120,6 @@ const spells = [
       },
       action: "HealingSpell(Ability(`healing-light`).power)"
     }
-]
-
-const statuses = [
-  {
-    key: "combat-guard",
-    img: "icons/combat/defense_buff.png",
-    power: [
-      {type: "defense", value: 50},
-      {type: "threat", value: -1}
-    ],
-    last: 1
-  }
 ]
 
 function Ability(key) {

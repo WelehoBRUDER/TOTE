@@ -94,6 +94,33 @@ function RegularAttack() {
     return Math.ceil(totalDamage);
 }
 
+function ShieldBash() {
+    global.combat.blocked = false;
+    let totalDamage = 0;
+    if(AttackMissed()) return "miss";
+    if(AttackBlocked()) {
+        global.combat.blocked = true;
+        for(let shield of global.combat.actor.equipment) {
+            if(shield.damage) {
+                for(let dmg of shield.damage) {
+                    let armour = global.combat.target.armor[dmg.type];
+                    totalDamage += (CalculateDamage(dmg.value, armour) * targetBlock(dmg.type));
+                }
+            }
+        }
+    } else {
+        for(let shield of global.combat.actor.equipment) {
+            if(shield.damage) {
+                for(let dmg of shield.damage) {
+                    let armour = global.combat.target.armor[dmg.type];
+                    totalDamage += CalculateDamage(dmg.value, armour);
+                }
+            }
+        }
+    }
+    return Math.ceil(totalDamage);
+}
+
 function AttackMissed() {
     if(global.combat.target.stats.agi > global.combat.actor.stats.acc) {
         if(((global.combat.target.stats.agi - global.combat.actor.stats.acc) / 100) >= Math.random()) {

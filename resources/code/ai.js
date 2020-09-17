@@ -10,6 +10,7 @@ function targetingAi(char, friendly) {
     table = OffenseTable(char);
   } 
   for(let i = 0; i<table.length; i++) {
+    if(table[i].stats.hp <= 0) continue;
     table[i].threatChance = 0;
     if(table[i-1]) table[i].threatChance = table[i-1].threatChance;
     else table[i].threatChance = 0;
@@ -26,7 +27,14 @@ function targetingAi(char, friendly) {
   let Speed = CalculateSpeed(char);
   let act = func;
   if(act != "RegularAttack()") act = func.action;
-  charactersActions.push({target: targeting, action: act, performer: char, speed: Speed, abi: func, ally: friendly})
+  if(IsStunned(char)) charactersActions.push({action: "recover", performer: char, speed: Speed});
+  else charactersActions.push({target: targeting, action: act, performer: char, speed: Speed, abi: func, ally: friendly})
+}
+
+function IsStunned(char) {
+  for(let mod of char.modifiers) {
+    if(mod.recover) return true;
+  }
 }
 
 function modifiersThreat(char) {

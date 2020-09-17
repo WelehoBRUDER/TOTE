@@ -38,7 +38,7 @@ function CreatePortrait(character, enemy) {
 function loopMods(char) {
   let d = Create('div');
   for(let mod of char.modifiers ) {
-    if(mod.power) {
+    if(mod.power || mod.last) {
       let img = Create("img");
       img.src = `resources/images/${mod.img}`;
       img.style.width = "29px";
