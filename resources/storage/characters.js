@@ -93,7 +93,7 @@ function LisaaJaPoista() {
 var characters = {
   player: new Player(CharClass("Warrior"),
     [
-      AddItem("rusty_iron_bastard_sword"),
+      AddItem("blue_rose_sword"),
       AddItem("broken_iron_shield"),
       AddItem("leather_chest"),
     ], {}, {objective: "him", possesive: "his", singular: "he"}),
