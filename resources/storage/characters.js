@@ -46,31 +46,35 @@ class Enemy extends Actor {
   /**
  * @extends Actor
  */
-  constructor(key, name, race, Class, equipment, color, image, modifiers, abilities, statBonuses, xp, stats, pron, ai_behauviour, article) {
+  constructor(key, name, race, Class, equipment, color, image, modifiers, abilities, statBonuses, xp, stats, pron, ai_behauviour, article, spells=[]) {
     super(key, name, race, Class, equipment, color, image, article),
     this.modifiers = modifiers,
     this.abilities = abilities,
     this.statBonuses = statBonuses,
     this.xp = xp,
     this.stats = stats,
-    this.pron = pron
+    this.pron = pron,
+    this.ai_behauviour = ai_behauviour,
+    this.spells = spells
   }
 }
 
 class Ally extends Actor {
-  constructor(key, name, race, Class, equipment, color, image, modifiers, abilities, xp, stats, pron, ai, ai_behauviour) {
+  constructor(key, name, race, Class, equipment, color, image, modifiers, abilities, xp, stats, pron, ai, ai_behauviour, spells=[]) {
     super(key, name, race, Class, equipment, color, image),
     this.modifiers = modifiers,
     this.abilities = abilities,
     this.xp = xp,
     this.stats = stats,
     this.pron = pron,
-    this.ai = ai
+    this.ai = ai,
+    this.ai_behauviour = ai_behauviour,
+    this.spells = spells
   }
 }
 
 class Summon extends Actor {
-  constructor(key, name, race, Class, equipment, color, images, modifiers, abilities, statBonuses, xp, stats, pron, ai, ai_behauviour, article) {
+  constructor(key, name, race, Class, equipment, color, images, modifiers, abilities, statBonuses, xp, stats, pron, ai, ai_behauviour, article, spells=[]) {
     super(key, name, race, Class, equipment, color, null, article),
     this.images = images,
     this.modifiers = modifiers,
@@ -79,7 +83,8 @@ class Summon extends Actor {
     this.stats = stats,
     this.pron = pron,
     this.ai = ai,
-    this.ai_behauviour = ai_behauviour
+    this.ai_behauviour = ai_behauviour,
+    this.spells = spells
   }
 
 }
@@ -102,7 +107,9 @@ var characters = {
       AddItem("wooden_healing_staff"),
       AddItem("leather_chest"),
     ], "gold", "portraits/portrait_white_mage_temp", [], [], {points: 0, needed: 100, modifier: 1.00, level: 1}, {},
-    {objective: "her", possesive: "her", singular: "she"}, true)
+    {objective: "her", possesive: "her", singular: "she"}, true, {
+      healing: 60, healing_self: 40
+    }, [Spell("healing-light")])
   ],
   enemies: [
     new Enemy("goblin_simp", "Goblin Simp",  Race("Goblin"), CharClass("Warrior"), 
@@ -110,16 +117,22 @@ var characters = {
       AddItem("wooden_club"),
       AddItem("leather_helmet"),
       AddItem("leather_chest"),
-    ], "rgb(51, 102, 0)", "portraits/portrait_goblin_temp", [], [Ability("smash")], [], {level: 1},
-    {}, {objective: "the simp", possesive: "its", singular: "the simp"}, [], "a"),
+      AddItem("broken_iron_shield"),
+    ], "rgb(51, 102, 0)", "portraits/portrait_goblin_temp", [], [Ability("smash"), Ability("shield-bash")], [], {level: 1},
+    {}, {objective: "the simp", possesive: "its", singular: "the simp"}, {
+      healing_self: 40
+    }, "a", [Spell("dim-healing-light")]),
 
-    new Enemy("goblin_queen", "Goblin Queen",  Race("Goblin Queen"), CharClass("Warrior"), 
+    new Enemy("goblin_queen", "Goblin Queen",  Race("Goblin Queen"), CharClass("Healer"), 
     [
-      AddItem("rusty_iron_bastard_sword"),
+      AddItem("wooden_healing_staff"),
       AddItem("leather_helmet"),
       AddItem("leather_chest"),
     ], "rgb(34,139,34)", "portraits/portrait_goblin_queen", [], [], [], {level: 5},
-    {}, {objective: "her majesty", possesive: "her majesty's", singular: "her majesty"}, [], "the"),
+    {}, {objective: "her majesty", possesive: "her majesty's", singular: "her majesty"}, 
+    {
+      healing: 60, healing_self: 40
+    }, "the", [Spell("healing-light"), Spell("dim-healing-light")]),
 
     new Enemy("goblin_king", "Goblin King",  Race("Goblin King"), CharClass("Brawler"), 
     [
@@ -162,17 +175,17 @@ characters.player.inventory = [
   AddItem("magical_chestplate")
 ];
 characters.player.xp = {points: 0, needed: 100, modifier: 1.00, level: 1};
-characters.player.abilities = [Ability("fierce-assault"), Ability("shield-bash"), Ability("summon-skeleton-warrior"), Ability("summon-earth-golem")];
-characters.player.spells = [Spell("mana-blast")];
+characters.player.abilities = [Ability("fierce-assault"), Ability("shield-bash"), Ability("summon-skeleton-warrior"), Ability("summon-earth-golem"), Ability("sunder"), Ability("blinding-slash")];
+characters.player.spells = [Spell("fireball-1")];
 
 characters.player.abilities[0].equipped = true;
 characters.player.abilities[0].slot = 1;
 characters.player.abilities[1].equipped = true;
 characters.player.abilities[1].slot = 4;
-characters.player.abilities[2].equipped = true;
-characters.player.abilities[2].slot = 2;
-characters.player.abilities[3].equipped = true;
-characters.player.abilities[3].slot = 3;
+characters.player.abilities[5].equipped = true;
+characters.player.abilities[5].slot = 2;
+characters.player.abilities[4].equipped = true;
+characters.player.abilities[4].slot = 3;
 characters.player.spells[0].equipped = true;
 characters.player.spells[0].slot = 1;
 

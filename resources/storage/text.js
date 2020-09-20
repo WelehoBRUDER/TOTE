@@ -27,6 +27,14 @@ var texts = [
       {
         key: "summon-skeleton-warrior",
         text: "Summon §/yellow/Skeleton Warrior§ to aid you in this battle until victory or its death. Cost: 60 §/cyan/mana§. Cooldown: 8 §/yellow/turns§."
+      },
+      {
+        key: "sunder",
+        text: "Deal 60% §/crimson/damage§ to target and cause effect §/yellow/Sundered§ that lowers armor by 50% for 3 turns."
+      },
+      {
+        key: "blinding-slash",
+        text: `Deal 50% §/crimson/damage§ to target and cause effect §/yellow/blinded§ that lowers acc and dex by 70% for 2 turns.`
       }
     ]
   },
@@ -198,12 +206,42 @@ var texts = [
         ]
       },
       {
+        subcat: "combat-heal-spell",
+        trigger: "target heal",
+        texts: [
+          {
+            key: "combat-heal-spell-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ heals §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ for §@var.BTV()§ health."
+          }
+        ]
+      },
+      {
+        subcat: "combat-self-heal",
+        trigger: "self heal",
+        texts: [
+          {
+            key: "combat-self-heal-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ heals §@var.OBJPRON(actor)§self for §@var.BTV()§ health."
+          }
+        ]
+      },
+      {
         subcat: "combat-recover",
         trigger: "recover",
         texts: [
           {
             key: "combat-recover-1",
             text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ spends some time recovering."
+          }
+        ]
+      },
+      {
+        subcat: "combat-take-damage-turn",
+        trigger: "everyturn",
+        texts: [
+          {
+            key: "combat-take-damage-turn-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ takes §@var.BTV()§ §/crimson/damage!§"
           }
         ]
       },
@@ -236,6 +274,26 @@ var texts = [
             text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ gathers §/cyan/mana§ between §@var.POSPRON(actor)§ palms, causing it to swirl. This creates a §/rgb(200, 50, 255)/portal§, and out of it appears §@var.ARTICLE(summoned)§ §/@var.SUMMONEDCOLOR()/@var.SUMMONEDNAME()§ §#@var.SUMMONEDIMAGE()#§!"
           }
         ]
+      },
+      {
+        subcat: "no-debug-error",
+        trigger: "nodebug error",
+        texts: [
+          {
+            key: "no-debug-error-1",
+            text: "Could not find appropriate text for §/@var.BTC(actor)/@var.BTN(actor)§'s §#@var.BTI(actor)#§ move!"
+          }
+        ]
+      },
+      {
+        subcat: "debug-error",
+        trigger: "debug error",
+        texts: [
+          {
+            key: "debug-error-1",
+            text: "§¤BB-I¤/red/ERROR MISSING TEXT!§ §¤BB-I¤/red/ THIS ERROR WILL BE FIXED BY ADDING COMBAT TEXTS FOR: § §¤BB-I¤/orange/@var.GEM()§. LATEST VALUE IS §@var.BTV()§!"
+          }
+        ]
       }
     ]
   }
@@ -258,6 +316,10 @@ function BTC(key) {
 
 function  BTN(key) {
   return BV[key].name;
+}
+
+function GEM() {
+  return BV.error;
 }
 
 function BTI(key) {

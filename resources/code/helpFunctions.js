@@ -24,6 +24,10 @@ function Random(max, min=0) {
   return Math.floor((Math.random() * max - min) + min);
 }
 
+function PercentOf(value, max) {
+  return Math.ceil(max * (value/100));
+}
+
 function GetCodexEntity(cat, subcat, key) {
   for(let cats of codex) {
     if(cats.cat == cat) {

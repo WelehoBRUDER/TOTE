@@ -450,3 +450,23 @@
     filter: brightness(150%) !important;
     text-align: center;
 }
+
+#statusInfo {
+    transition: 0.15s;
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    background: rgba(0, 0, 0, 0.45);
+    width: fit-content;
+    height: fit-content;
+    max-width: 160px;
+    color: white;
+    font-family: Roboto;
+    z-index: 5;
+    margin: 0px;
+}
+
+#statusInfo span {
+    font-size: 13px;
+    align-self: center;
+}

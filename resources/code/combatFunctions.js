@@ -11,10 +11,6 @@ function FormCombatEnvironment() {
   </div>
   <div id="combatButtonsContainer">
   <div id="abilityInfo"></div>
-  ${CombatSpell(global.controlling, 1)}
-  ${CombatSpell(global.controlling, 2)}
-  ${CombatSpell(global.controlling, 3)}
-  ${CombatSpell(global.controlling, 4)}
 <img src="resources/images/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, 'RegularAttack()', global.controlling)">
 <img src="resources/images/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()" onclick="AddToRound('Defend()', global.controlling.key)">
 <img src="resources/images/icons/ultimate_ability.png" id="combatUltimate">
@@ -23,8 +19,30 @@ function FormCombatEnvironment() {
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 2));
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 3));
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 4));
+  Element("combatButtonsContainer").appendChild(CombatSpell(global.controlling, 1));
+  Element("combatButtonsContainer").appendChild(CombatSpell(global.controlling, 2));
+  Element("combatButtonsContainer").appendChild(CombatSpell(global.controlling, 3));
+  Element("combatButtonsContainer").appendChild(CombatSpell(global.controlling, 4));
+  coolDowns();
   highlightCorrect();
   RestoreCombatText();
+}
+
+function coolDowns() {
+  for(let abi of global.controlling.abilities) {
+    if(!abi.equipped) continue;
+    if(abi.cooldown > 0) {
+      Element(`combatAbility${abi.slot}`).classList.add("darken");
+      if (Element(`combatAbility${abi.slot}`).childNodes[2]) Element(`combatAbility${abi.slot}`).childNodes[2].remove();
+      let p = Create("p");
+      p.textContent = abi.cooldown;
+      p.classList.add("cooldowntext");
+      Element(`combatAbility${abi.slot}`).appendChild(p);
+    }
+    if(abi.cost?.mana > global.controlling.stats.mana) {
+      Element(`combatAbility${abi.slot}`).classList.add("darken");
+    } else if(abi.cooldown <= 0) Element(`combatAbility${abi.slot}`).classList.remove("darken");
+  }
 }
 
 function toggleText(arg) {
@@ -72,7 +90,7 @@ function CombatAbility(char, slot) {
   div.appendChild(img);
   if(abiOfSlot(char, slot) != undefined) {
     let abi = abiOfSlot(char, slot);
-    div.addEventListener("mouseover", ()=>showInfoCombat(abi.key, this));
+    div.addEventListener("mouseover", ()=>showInfoCombat(abi.key, div));
     div.addEventListener("mouseleave", ()=>hideInfoCombat());
     if(abi.no_target) div.addEventListener("click", ()=>AddToRound(abi, global.controlling.key, alliesFight));
     else div.addEventListener("click", ()=>TargetCharacters(enemiesFight, abi, global.controlling));
@@ -81,39 +99,46 @@ function CombatAbility(char, slot) {
     abiImg.classList.add("combatAbiImage");
     div.appendChild(abiImg);
   }
-  // if(abiOfSlot(char, slot) != undefined) {
-  //   let abi = abiOfSlot(char, slot);
-  //   console.log(abi);
+  return div;
+}
 
-  //   return `<div id="combatAbility${slot}" onmouseover="showInfoCombat('${abi.key}', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, ${abi}, global.controlling)">
-  //   <img src="resources/images/icons/ability_wheel.png">
-  //   <img src="resources/images/${abi.img}" class="combatAbiImage">
-  //   </div>`
-  // }
-  // else {
-  //   return `<div id="combatAbility${slot}">
-  //   <img src="resources/images/icons/ability_wheel.png">
-  //   </div>`
-  // }
+function CombatSpell(char, slot) {
+  let div = Create("div");
+  div.id = `combatSpell${slot}`;
+  let img = Create("img");
+  img.src = "resources/images/icons/spell_wheel.png";
+  div.appendChild(img);
+  if(spellOfSlot(char, slot) != undefined) {
+    let abi = spellOfSlot(char, slot);
+    div.addEventListener("mouseover", ()=>showInfoCombat(abi.key, div));
+    div.addEventListener("mouseleave", ()=>hideInfoCombat());
+    if(abi.no_target) div.addEventListener("click", ()=>AddToRound(abi, global.controlling.key, alliesFight));
+    else div.addEventListener("click", ()=>TargetCharacters(enemiesFight, abi, global.controlling));
+    let abiImg = Create("img");
+    abiImg.src = `resources/images/${abi.img}`
+    abiImg.classList.add("combatAbiImage");
+    div.appendChild(abiImg);
+  }
   return div;
 }
 
 var delay = null;
+var fadeoutDelay = null;
 
-function CombatSpell(char, slot) {
-  if(spellOfSlot(char, slot) != undefined) {
-    let spell = spellOfSlot(char, slot);
-    return `<div id="combatSpell${slot}" onmouseover="showInfoCombat('${spell.key}', this)" onmouseleave="hideInfoCombat()">
-    <img src="resources/images/icons/spell_wheel.png">
-    <img src="resources/images/${spell.img}" class="combatAbiImage">
-    </div>`
-  }
-  else {
-    return `<div id="combatSpell${slot}">
-    <img src="resources/images/icons/spell_wheel.png">
-    </div>`
-  }
-}
+// function CombatSpell(char, slot) {
+//   if(spellOfSlot(char, slot) != undefined) {
+//     let spell = spellOfSlot(char, slot);
+//     return `<div id="combatSpell${slot}" onmouseover="showInfoCombat('${spell.key}', this)" onmouseleave="hideInfoCombat()">
+//     <img src="resources/images/icons/spell_wheel.png">
+//     <img src="resources/images/${spell.img}" class="combatAbiImage">
+//     </div>`
+//   }
+//   else {
+//     return `<div id="combatSpell${slot}">
+//     <img src="resources/images/icons/spell_wheel.png">
+//     </div>`
+//   }
+// }
 
 function infoContent(key, elem) {
   Element("abilityInfo").textContent = "";
@@ -127,6 +152,9 @@ function infoContent(key, elem) {
 }
 
 function showInfoCombat(key, elem) {
+  if(fadeoutDelay) {
+    clearTimeout(fadeoutDelay);
+  }
   if(delay) {
     clearTimeout(delay);
     delay = null;
@@ -135,10 +163,11 @@ function showInfoCombat(key, elem) {
 }
 
 function hideInfoCombat() {
+  clearTimeout(fadeoutDelay);
   clearTimeout(delay);
   Element("abilityInfo").style.background = "rgba(0,0,0,0.00)";
   Element("abilityInfo").style.opacity = "0.00";
-  setTimeout(function () { Element("abilityInfo").textContent = ""; clearTimeout(delay); }, 50);
+  fadeoutDelay = setTimeout(function () { Element("abilityInfo").textContent = ""; clearTimeout(delay); }, 90);
 }
 
 function GetCombatInfo(key) {

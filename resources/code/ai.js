@@ -4,7 +4,19 @@ function targetingAi(char, friendly) {
   char.hasActed = true;
   let max = 0;
   let table = ReturnTable(char);
+  if(ShouldIHeal(char)) {
+    if(CanIHeal(char)) {
+      HealSelf(char);
+      return;
+    }
+  }
   if(char.class.role == "support") {
+    if(TeamNeedsHealing(char, friendly)) {
+      if(CanIHeal(char)) {
+        ChooseHealing(char, friendly);
+        return;
+      }
+    }
     table = OffenseTable(char);
   } else if(char.class.role == "offense") {
     table = OffenseTable(char);
@@ -23,12 +35,108 @@ function targetingAi(char, friendly) {
   for(let unit of table) {
     if(unit.threatChance >= value) { targeting = unit; break;}
   }
+  global.combat.actor = char;
   let func = decideAbility(char);
   let Speed = CalculateSpeed(char);
   let act = func;
   if(act != "RegularAttack()") act = func.action;
   if(IsStunned(char)) charactersActions.push({action: "recover", performer: char, speed: Speed});
   else charactersActions.push({target: targeting, action: act, performer: char, speed: Speed, abi: func, ally: friendly})
+}
+
+function ChooseHealing(char, friendly) {
+  let Speed = CalculateSpeed(char);
+  if(IsStunned(char)) { charactersActions.push({action: "recover", performer: char, speed: Speed}); return; }
+  let table = [];
+  if(friendly) table = alliesFight;
+  else table = enemiesFight;
+  let healTarget = LowestMemberInGroup(table)
+  let healSkill = MostSuitableHealFor(healTarget, char);
+  charactersActions.push({target: healTarget, action: healSkill.action, performer: char, speed: Speed, abi: healSkill, ally: friendly})
+}
+
+function HealSelf(char) {
+  let Speed = CalculateSpeed(char);
+  if(IsStunned(char)) { charactersActions.push({action: "recover", performer: char, speed: Speed}); return; }
+  let healSkill = MostSuitableHealFor(char, char);
+  charactersActions.push({target: char, action: healSkill.action, performer: char, speed: Speed, abi: healSkill})
+}
+
+function LowestMemberInGroup(group) {
+  let lowesthp = 100;
+  let lowestmember = null;
+  let comparison = 0;
+  for(let member of group) {
+    if(member.key == global.controlling.key) continue;
+    comparison = (member.stats.hp/member.stats.maxhp) * 100;
+    if(comparison < lowesthp) {lowesthp = comparison; lowestmember = member;}
+  }
+  return lowestmember;
+}
+
+function ShouldIHeal(char) {
+  for(let chara of charactersActions) {
+    if(chara.action.toLowerCase().startsWith("heal") && chara.target == char) return false;
+  }
+  if(char.stats.hp < PercentOf(char.ai_behauviour.healing_self, char.stats.maxhp)) return true;
+}
+
+function MostSuitableHealFor(char, healer) {
+  let heals = [];
+  let target = char.stats.maxhp - char.stats.hp;
+  let abiHeal = 0;
+  let spellHeal = 0;
+  let abi = null;
+  let spell = null;
+  let finalValue = 0;
+  function correctspell() {
+    for(let spe of healer.spells) {
+      if(eval(spe.action) == spellHeal) return spe;
+    }
+  }
+  function correctability() {
+    for(let abi of healer.abilities) {
+      if(eval(abi.action) == abiHeal) return abi;
+    }
+  }
+  function abilityorspell() {
+    for(let abi of healer.abilities) {
+      if(eval(abi.action) == finalValue) return abi;
+    }
+    for(let spe of healer.spells) {
+      if(eval(spe.action) == finalValue) return spe;
+    }
+  }
+  for(let abi of healer.abilities) {
+    if(abi.action.toLowerCase().startsWith("heal") && abi.cooldown <= 0 && abi.cost.mana <= healer.stats.mana) {
+      heals.push(eval(abi.action));
+    }
+  }
+  if(heals.length > 1) abiHeal = heals.reduce(function(prev, curr) {return (Math.abs(curr - target) < Math.abs(prev - target) ? curr: prev);});
+  if(abiHeal > 0) abi = correctability();
+  else if(heals.length > 0) {abiHeal = heals[0]; abi = correctability();}
+  heals = [];
+  for(let spell of healer.spells) {
+    if(spell.action.toLowerCase().startsWith("heal") && spell.cooldown <= 0 && spell.cost.mana <= healer.stats.mana) {
+      heals.push(eval(spell.action))
+    }
+  }
+  if(heals.length > 1) spellHeal = heals.reduce(function(prev, curr) {return (Math.abs(curr - target) < Math.abs(prev - target) ? curr: prev);});
+  if(spellHeal > 0) spell = correctspell();
+  else if(heals.length > 0) {spellHeal = heals[0]; spell = correctspell();}
+  if(abi && spell) {
+    heals = [];
+    heals.push(abiHeal);
+    heals.push(spellHeal);
+    finalValue = heals.reduce(function(prev, curr) {return (Math.abs(curr - target) < Math.abs(prev - target) ? curr: prev);});
+    return abilityorspell();
+  }
+  else if(abi && !spell) {
+    return abi;
+  }
+  else {
+    return spell;
+  }
 }
 
 function IsStunned(char) {
@@ -49,6 +157,30 @@ function modifiersThreat(char) {
     }
   }
   return threat;
+}
+
+function TeamNeedsHealing(char, friendly) {
+  cont = false;
+  if(friendly) {
+    for(let member of alliesFight) {
+      cont = false;
+      for(let chara of charactersActions) {
+        if(chara.action.toLowerCase().startsWith("heal") && chara.target == member) cont = true;
+      }
+      if(cont) continue;
+      if(member.stats.hp < PercentOf(char.ai_behauviour.healing, member.stats.maxhp)) return true;
+    }
+  } else {
+    for(let member of enemiesFight) {
+      cont = false;
+      for(let chara of charactersActions) {
+        if(chara.action.toLowerCase().startsWith("heal") && chara.target == member) cont = true;
+      }
+      if(cont) continue;
+      if(member.stats.hp < PercentOf(char.ai_behauviour.healing, member.stats.maxhp)) return true;
+    }
+  }
+  return false
 }
 
 function betterAI()
@@ -84,9 +216,19 @@ function decideAbility(char) {
     if(abi.cooldown > 0) continue;
     if(bestDamage < eval(abi.action)) {bestDamage = eval(abi.action); chosenAbi = abi}
   }
-  console.log("chosen abi: " + chosenAbi + " char: " + char.name);
+  //console.log("chosen abi: " + chosenAbi + " char: " + char.name);
   if(regDamage >= bestDamage || chosenAbi == null) return "RegularAttack()";
   else return chosenAbi;
+}
+
+function CanIHeal(char) {
+  for(let abi of char.abilities) {
+    if(abi.action.toLowerCase().startsWith("heal") && abi.cooldown <= 0 && abi.cost.mana <= char.stats.mana) return true;
+  }
+  for(let spell of char.spells) {
+    if(spell.action.toLowerCase().startsWith("heal") && spell.cooldown <= 0 && spell.cost.mana <= char.stats.mana) return true;
+  }
+  return false;
 }
 
 function ReturnTable(char) {

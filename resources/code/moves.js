@@ -1,49 +1,90 @@
 
 
 function CalculateDamage(damage, armor, type) {
-    let newDamage = Math.ceil(damage * (1 +  (global.combat.actor.stats.str / 25 + global.combat.actor.stats.dex / 50)));
-    newDamage = Math.ceil(newDamage - (newDamage * (armor/100)));
+    let str = Math.ceil(global.combat.actor.stats.str * (1 + actorModifiers("str")));
+    let dex = Math.ceil(global.combat.actor.stats.dex * (1 + actorModifiers("dex")));
+    let newDamage = Math.ceil(damage * (1 + (str / 25 + dex / 50)));
+    let newArmor = (armor / 100) * (1 + targetModifiers("armor"));
+    newDamage = Math.ceil(newDamage - (newDamage * newArmor));
+    newDamage = defenseModifiers(global.combat.target, type, newDamage);
+    return newDamage;
+}
+
+function CalculateMagicalDamage(damage, armor, type) {
+    let wis = Math.ceil(global.combat.actor.stats.wis * (1 + actorModifiers("wis")));
+    let int = Math.ceil(global.combat.actor.stats.int * (1 + actorModifiers("int")));
+    let newDamage = Math.ceil(damage * (1 + (int / 25 + wis / 50)));
+    let newArmor = (armor / 100) * (1 + targetModifiers("armor"));
+    newDamage = Math.ceil(newDamage - (newDamage * newArmor));
     newDamage = defenseModifiers(global.combat.target, type, newDamage);
     return newDamage;
 }
 
 function defenseModifiers(char, type, dmg) {
     let newDamage = dmg;
-    for(let mod of char.modifiers) {
-        if(mod.power) {
-            for(let power of mod.power) {
-                if(power.type == "defense") newDamage -= newDamage * (power.value/100);
-                else if(power.type == type) newDamage -= newDamage * (power.value/100);
+    for (let mod of char.modifiers) {
+        if (mod.power) {
+            for (let power of mod.power) {
+                if (power.type == "defense") newDamage -= newDamage * (power.value / 100);
+                else if (power.type == type) newDamage -= newDamage * (power.value / 100);
             }
         }
     }
     return Math.ceil(newDamage);
 }
 
+function targetModifiers(arg) {
+    let totalModifier = 0;
+    for (let mod of global.combat.target.modifiers) {
+        if (mod.power) {
+            for (let pow of mod.power) {
+                if (pow.type == arg) {
+                    totalModifier += pow.value / 100;
+                }
+            }
+        }
+    }
+    return totalModifier;
+}
+
+function actorModifiers(arg) {
+    let totalModifier = 0;
+    for (let mod of global.combat.actor.modifiers) {
+        if (mod.power) {
+            for (let pow of mod.power) {
+                if (pow.type == arg) {
+                    totalModifier += pow.value / 100;
+                }
+            }
+        }
+    }
+    return totalModifier;
+}
+
 function PowerAtk(power) {
     global.combat.blocked = false;
-    if(AttackMissed()) return "miss";
+    if (AttackMissed()) return "miss";
     let totalDamage = 0;
-    if(AttackBlocked()) {
+    if (AttackBlocked()) {
         global.combat.blocked = true;
-        for(let weapon of global.combat.actor.equipment) {
-            if(weapon.dmg) {
-                for(let dmg of weapon.dmg) {
+        for (let weapon of global.combat.actor.equipment) {
+            if (weapon.dmg) {
+                for (let dmg of weapon.dmg) {
                     let percentage = global.combat.target.armor[dmg.type] * (power.armor_penetration / 100);
                     let armour = global.combat.target.armor[dmg.type] - percentage;
-                    let dmgIncrease = dmg.value * (power.multiplier/100);
+                    let dmgIncrease = dmg.value * (power.multiplier / 100);
                     totalDamage += CalculateDamage(dmgIncrease, armour, dmg.type) * targetBlock(dmg.type);
                 }
             }
         }
     }
     else {
-        for(let weapon of global.combat.actor.equipment) {
-            if(weapon.dmg) {
-                for(let dmg of weapon.dmg) {
+        for (let weapon of global.combat.actor.equipment) {
+            if (weapon.dmg) {
+                for (let dmg of weapon.dmg) {
                     let percentage = global.combat.target.armor[dmg.type] * (power.armor_penetration / 100);
                     let armour = global.combat.target.armor[dmg.type] - percentage;
-                    let dmgIncrease = dmg.value * (power.multiplier/100);
+                    let dmgIncrease = dmg.value * (power.multiplier / 100);
                     totalDamage += CalculateDamage(dmgIncrease, armour, dmg.type);
                 }
             }
@@ -52,11 +93,34 @@ function PowerAtk(power) {
     return Math.ceil(totalDamage);
 }
 
+function AttackSpell(power) {
+    global.combat.blocked = false;
+    if (AttackMissed()) return "miss";
+    let totalDamage = 0;
+    if (AttackBlocked()) {
+        for (dmg of power.values) {
+            let percentage = global.combat.target.armor[dmg.type] * (power.armor_penetration / 100);
+            let armour = global.combat.target.armor[dmg.type] - percentage;
+            let dmgIncrease = dmg.value * (power.multiplier / 100);
+            totalDamage += CalculateMagicalDamage(dmgIncrease, armour, dmg.type) * targetBlock(dmg.type);
+        }
+    }
+    else {
+        for (let dmg of power.values) {
+            let percentage = global.combat.target.armor[dmg.type] * (power.armor_penetration / 100);
+            let armour = global.combat.target.armor[dmg.type] - percentage;
+            let dmgIncrease = dmg.value * (power.multiplier / 100);
+            totalDamage += CalculateMagicalDamage(dmgIncrease, armour, dmg.type);
+        }
+    }
+    return Math.ceil(totalDamage);
+}
+
 function targetBlock(type) {
-    for(let eq of global.combat.target.equipment) {
-        if(eq.slot == "shield") {
-            for(let armor in eq.armor) {
-                if(armor == type) return eq.armor[armor]/100;
+    for (let eq of global.combat.target.equipment) {
+        if (eq.slot == "shield") {
+            for (let armor in eq.armor) {
+                if (armor == type) return eq.armor[armor] / 100;
             }
         }
     }
@@ -70,21 +134,21 @@ function Summoning(char) {
 function RegularAttack() {
     global.combat.blocked = false;
     let totalDamage = 0;
-    if(AttackMissed()) return "miss";
-    if(AttackBlocked()) {
+    if (AttackMissed()) return "miss";
+    if (AttackBlocked()) {
         global.combat.blocked = true;
-        for(let weapon of global.combat.actor.equipment) {
-            if(weapon.dmg) {
-                for(let dmg of weapon.dmg) {
+        for (let weapon of global.combat.actor.equipment) {
+            if (weapon.dmg) {
+                for (let dmg of weapon.dmg) {
                     let armour = global.combat.target.armor[dmg.type];
                     totalDamage += (CalculateDamage(dmg.value, armour) * targetBlock(dmg.type));
                 }
             }
         }
     } else {
-        for(let weapon of global.combat.actor.equipment) {
-            if(weapon.dmg) {
-                for(let dmg of weapon.dmg) {
+        for (let weapon of global.combat.actor.equipment) {
+            if (weapon.dmg) {
+                for (let dmg of weapon.dmg) {
                     let armour = global.combat.target.armor[dmg.type];
                     totalDamage += CalculateDamage(dmg.value, armour);
                 }
@@ -97,21 +161,21 @@ function RegularAttack() {
 function ShieldBash() {
     global.combat.blocked = false;
     let totalDamage = 0;
-    if(AttackMissed()) return "miss";
-    if(AttackBlocked()) {
+    if (AttackMissed()) return "miss";
+    if (AttackBlocked()) {
         global.combat.blocked = true;
-        for(let shield of global.combat.actor.equipment) {
-            if(shield.damage) {
-                for(let dmg of shield.damage) {
+        for (let shield of global.combat.actor.equipment) {
+            if (shield.damage) {
+                for (let dmg of shield.damage) {
                     let armour = global.combat.target.armor[dmg.type];
                     totalDamage += (CalculateDamage(dmg.value, armour) * targetBlock(dmg.type));
                 }
             }
         }
     } else {
-        for(let shield of global.combat.actor.equipment) {
-            if(shield.damage) {
-                for(let dmg of shield.damage) {
+        for (let shield of global.combat.actor.equipment) {
+            if (shield.damage) {
+                for (let dmg of shield.damage) {
                     let armour = global.combat.target.armor[dmg.type];
                     totalDamage += CalculateDamage(dmg.value, armour);
                 }
@@ -122,8 +186,10 @@ function ShieldBash() {
 }
 
 function AttackMissed() {
-    if(global.combat.target.stats.agi > global.combat.actor.stats.acc) {
-        if(((global.combat.target.stats.agi - global.combat.actor.stats.acc) / 100) >= Math.random()) {
+    let agi = global.combat.target.stats.agi * targetModifiers("agi");
+    let acc = global.combat.actor.stats.acc * actorModifiers("acc");
+    if (agi > global.combat.actor.stats.acc) {
+        if (((global.combat.target.stats.agi - global.combat.actor.stats.acc) / 100) >= Math.random()) {
             return true;
         }
         else return false;
@@ -131,11 +197,11 @@ function AttackMissed() {
 }
 
 function AttackBlocked() {
-    if(TargetNoShield()) return false;
+    if (TargetNoShield()) return false;
     else {
-        for(let eq of global.combat.target.equipment) {
-            if(eq.slot == "shield") {
-                if((eq.blockChance/100) >= Math.random()) return true;
+        for (let eq of global.combat.target.equipment) {
+            if (eq.slot == "shield") {
+                if ((eq.blockChance / 100) >= Math.random()) return true;
                 else return false;
             }
         }
@@ -143,10 +209,17 @@ function AttackBlocked() {
 }
 
 function TargetNoShield() {
-    for(let shield of global.combat.target.equipment) {
-        if(shield.slot == "shield") return false;
+    for (let shield of global.combat.target.equipment) {
+        if (shield.slot == "shield") return false;
     }
     return true;
+}
+
+function HealingSpell(power) {
+    if (power.amount) return power.amount;
+    else if (power.percent) {
+        return PercentOf(power.percent, global.combat.target.stats.maxhp);
+    }
 }
 
 function Defend() {
@@ -154,9 +227,10 @@ function Defend() {
 }
 
 function Status(key) {
-    for(let stat of statuses) {
-        if(stat.key == key) {
+    for (let stat of statuses) {
+        if (stat.key == key) {
             let copy = JSON.parse(JSON.stringify(stat));
+            copy.last += 1;
             return copy;
         }
     }

@@ -22,7 +22,8 @@ let global = {
     delay: 800,
     history: false,
     ally: true,
-    summoned: null
+    summoned: null,
+    error: ""
   },
   onmap: false
 };
