@@ -98,6 +98,7 @@ function AttackSpell(power) {
     if (AttackMissed()) return "miss";
     let totalDamage = 0;
     if (AttackBlocked()) {
+        global.combat.blocked = true;
         for (dmg of power.values) {
             let percentage = global.combat.target.armor[dmg.type] * (power.armor_penetration / 100);
             let armour = global.combat.target.armor[dmg.type] - percentage;

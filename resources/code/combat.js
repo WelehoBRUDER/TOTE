@@ -87,6 +87,17 @@ function LowerCooldowns() {
       if(spell.cooldown > 0) {
         spell.cooldown--;
       }
+      if (char == global.controlling && spell.cooldown > 0) {
+        if (Element(`combatSpell${spell.slot}`).childNodes[2]) Element(`combatSpell${spell.slot}`).childNodes[2].remove();
+        let p = Create("p");
+        p.textContent = spell.cooldown;
+        p.classList.add("cooldowntext");
+        Element(`combatSpell${spell.slot}`).appendChild(p);
+      }
+      else if (spell.cooldown <= 0 && char == global.controlling) {
+        Element(`combatSpell${spell.slot}`).classList.remove("darken");
+        if (Element(`combatSpell${spell.slot}`).childNodes[2]) Element(`combatSpell${spell.slot}`).childNodes[2].remove();
+      }
     }
   }
   for (let char of enemiesFight) {
@@ -117,9 +128,7 @@ async function EndRound() {
   LowerCooldowns();
   thisRoundHistory = [];
   if (!global.combat.history) Element("combatTextContainer").textContent = "";
-  console.log("======================================");
   for (let act of charactersActions) {
-    console.log(act);
     let container = Element("combatTextContainer");
     let SuitableText = null;
     let trigger1 = null;
@@ -358,14 +367,6 @@ function EndRound_Summon(act, container) {
   container.scrollTop = container.scrollHeight;
   if (act.abi.cost.mana) global.combat.actor.stats.mana -= act.abi.cost.mana;
   getCharacterAbilityOrSpell(act.performer, act.abi.key).cooldown = act.abi.cost.cd;
-  if (act.performer == global.controlling) {
-    Element(`combatAbility${act.abi.slot}`).classList.add("darken");
-    if (Element(`combatAbility${act.abi.slot}`).childNodes[2]) Element(`combatAbility${act.abi.slot}`).childNodes[2].remove();
-    let p = Create("p");
-    p.textContent = act.abi.cooldown;
-    p.classList.add("cooldowntext");
-    Element(`combatAbility${act.abi.slot}`).appendChild(p);
-  }
   PushCombatantToTable(eval(act.abi.action), act.target);
   CreatePortraits();
 }
@@ -385,14 +386,6 @@ function EndRound_Heal(act, container) {
   container.scrollTop = container.scrollHeight;
   if (act.abi.cost.mana) global.combat.actor.stats.mana -= act.abi.cost.mana;
   getCharacterAbilityOrSpell(act.performer, act.abi.key).cooldown = act.abi.cost.cd;
-  if (act.performer == global.controlling) {
-    Element(`combatAbility${act.abi.slot}`).classList.add("darken");
-    if (Element(`combatAbility${act.abi.slot}`).childNodes[2]) Element(`combatAbility${act.abi.slot}`).childNodes[2].remove();
-    let p = Create("p");
-    p.textContent = act.abi.cooldown;
-    p.classList.add("cooldowntext");
-    Element(`combatAbility${act.abi.slot}`).appendChild(p);
-  }
   act.target.stats.hp += global.combat.value;
   if(act.target.stats.hp > act.target.stats.maxhp) act.target.stats.hp = act.target.stats.maxhp;
   CreatePortraits();
@@ -401,14 +394,6 @@ function EndRound_Heal(act, container) {
 function EndRound_Cost(act) {
   if (act.abi.cost.mana) global.combat.actor.stats.mana -= act.abi.cost.mana;
   getCharacterAbilityOrSpell(act.performer, act.abi.key).cooldown = act.abi.cost.cd;
-  if (act.performer == global.controlling) {
-    Element(`combatAbility${act.abi.slot}`).classList.add("darken");
-    if (Element(`combatAbility${act.abi.slot}`).childNodes[2]) Element(`combatAbility${act.abi.slot}`).childNodes[2].remove();
-    let p = Create("p");
-    p.textContent = act.abi.cooldown;
-    p.classList.add("cooldowntext");
-    Element(`combatAbility${act.abi.slot}`).appendChild(p);
-  }
 }
 
 function EndRound_targetDeath(act, container) {

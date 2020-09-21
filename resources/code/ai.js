@@ -92,7 +92,6 @@ function ShouldIHeal(char) {
 
 function MostSuitableHealFor(char, healer) {
   let heals = [];
-  console.log(char);
   let target = char.stats.maxhp - char.stats.hp;
   let abiHeal = 0;
   let spellHeal = 0;
