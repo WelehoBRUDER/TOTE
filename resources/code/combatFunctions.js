@@ -11,9 +11,9 @@ function FormCombatEnvironment() {
   </div>
   <div id="combatButtonsContainer">
   <div id="abilityInfo"></div>
-<img src="resources/images/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, 'RegularAttack()', global.controlling)">
-<img src="resources/images/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()" onclick="AddToRound('Defend()', global.controlling.key)">
-<img src="resources/images/icons/ultimate_ability.png" id="combatUltimate">
+<img src="resources/images/themes/${global.theme}/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, 'RegularAttack()', global.controlling)">
+<img src="resources/images/themes/${global.theme}/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()" onclick="AddToRound('Defend()', global.controlling.key)">
+<img src="resources/images/themes/${global.theme}/icons/ultimate_ability.png" id="combatUltimate">
   </div>`;
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 1));
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 2));
@@ -100,7 +100,7 @@ function CombatAbility(char, slot) {
   let div = Create("div");
   div.id = `combatAbility${slot}`;
   let img = Create("img");
-  img.src = "resources/images/icons/ability_wheel.png";
+  img.src = `resources/images/themes/${global.theme}/icons/ability_wheel.png`;
   div.appendChild(img);
   if(abiOfSlot(char, slot) != undefined) {
     let abi = abiOfSlot(char, slot);
@@ -120,7 +120,7 @@ function CombatSpell(char, slot) {
   let div = Create("div");
   div.id = `combatSpell${slot}`;
   let img = Create("img");
-  img.src = "resources/images/icons/spell_wheel.png";
+  img.src = `resources/images/themes/${global.theme}/icons/spell_wheel.png`;
   div.appendChild(img);
   if(spellOfSlot(char, slot) != undefined) {
     let abi = spellOfSlot(char, slot);
