@@ -25,7 +25,8 @@ let global = {
     summoned: null,
     error: ""
   },
-  onmap: false
+  onmap: false,
+  theme: "default"
 };
 
 

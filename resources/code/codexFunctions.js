@@ -2,8 +2,8 @@ var tagSearch = false;
 
 Element("contentSearchbutton").style.backgroundImage = 'url("resources/images/icons/magnifying_glass_medium.png")';
 Element("contentSearchtagtoggle").style.backgroundImage = 'url("resources/images/icons/tag_icon_medium.png")';
-Element("content").style.backgroundImage = 'url("resources/images/bg/bg_gray.png")';
-Element("contentScroller").style.backgroundImage = 'url("resources/images/bg/bg_red.png")';
+Element("content").style.backgroundImage = `url("resources/images/themes/${global.theme}/bg/bg_gray.png")`;
+Element("contentScroller").style.backgroundImage = `url("resources/images/themes/${global.theme}/bg/bg_red.png")`;
 
 function CreateCodex() {
   Element("content").textContent = "";

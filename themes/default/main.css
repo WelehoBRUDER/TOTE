@@ -4,7 +4,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-image: url("resources/images/misc/world_map.jpg");
+  background-image: url("../../resources/images/themes/default/bg/world_map.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -17,7 +17,7 @@ body {
   top: 0px;
   width: 100vw;
   height: 100vh;
-  background-image: url("resources/images/misc/world_map.jpg");
+  background-image: url("../../resources/images/themes/default/misc/world_map.jpg");
   background-repeat: no-repeat;
   background-position: center;
   -webkit-background-size: contain;
@@ -899,7 +899,7 @@ span {
   left: 50%;
   margin-left: -180px;
   bottom: 20px;
-  background-image: url("resources/images/bg/bg_cbrown.png");
+  background-image: url("../../resources/images/themes/default/bg/bg_cbrown.png");
   box-shadow: 0 5px 5px 5px rgb(39, 21, 11);
 }
 
@@ -935,4 +935,12 @@ span {
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
+}
+
+#saves,
+#load,
+#worldmap,
+#options,
+#menu {
+  background-image: url("../../resources/images/bg/bg_red.png");
 }
