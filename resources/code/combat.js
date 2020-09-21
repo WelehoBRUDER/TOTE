@@ -411,7 +411,9 @@ function EndRound_Support(act, container) {
     act.target.modifiers.push(statuscopy);
   }
   BV = global.combat;
-  if(act.target == act.performer) SuitableText = GetRandomCombatText("debug error");
+  let trigger2 = null;
+  trigger2 = act.action;
+  if(act.target == act.performer) SuitableText = GetRandomCombatText(`nomiss ${trigger2} land`);
   else SuitableText = GetRandomCombatText("debug error");
   let bt = JSON.parse(JSON.stringify(global.combat))
   let actionElem = ReadContentCombat(SuitableText);
