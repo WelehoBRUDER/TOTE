@@ -5,6 +5,7 @@ function CalculateDamage(damage, armor, type) {
     let dex = Math.ceil(global.combat.actor.stats.dex * (1 + actorModifiers("dex")));
     let newDamage = Math.ceil(damage * (1 + (str / 25 + dex / 50)));
     let newArmor = (armor / 100) * (1 + targetModifiers("armor"));
+    console.log("old: " + armor/100 + " new: " + newArmor);
     newDamage = Math.ceil(newDamage - (newDamage * newArmor));
     newDamage = defenseModifiers(global.combat.target, type, newDamage);
     return newDamage;
@@ -221,6 +222,10 @@ function HealingSpell(power) {
     else if (power.percent) {
         return PercentOf(power.percent, global.combat.target.stats.maxhp);
     }
+}
+
+function SupportSpell(power) {
+    if(power?.amount) return power?.amount;
 }
 
 function Defend() {

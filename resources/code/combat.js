@@ -2,6 +2,7 @@
 
 function TargetCharacters(charTable, ability, performer) {
   if (performer.hasActed) return;
+  if (ability.selfTarget) {AddToRound(ability, performer.key, performer.key); return;}
   Element("targetingCombat").style.display = "grid";
   Element("targetingCombat").textContent = '';
   for (let char of charTable) {
@@ -165,6 +166,10 @@ async function EndRound() {
           continue;
         } else if(act.abi.action.startsWith("Heal")) {
           EndRound_Heal(act, container);
+          if (global.combat.speed > 0) await sleep(global.combat.speed);
+          continue;
+        } else if(act.abi.action.startsWith("Support")) {
+          EndRound_Support(act, container);
           if (global.combat.speed > 0) await sleep(global.combat.speed);
           continue;
         }
@@ -387,6 +392,30 @@ function EndRound_Heal(act, container) {
   if (act.abi.cost.mana) global.combat.actor.stats.mana -= act.abi.cost.mana;
   getCharacterAbilityOrSpell(act.performer, act.abi.key).cooldown = act.abi.cost.cd;
   act.target.stats.hp += global.combat.value;
+  if(act.target.stats.hp > act.target.stats.maxhp) act.target.stats.hp = act.target.stats.maxhp;
+  CreatePortraits();
+}
+
+function EndRound_Support(act, container) {
+  global.combat.actor = act.performer;
+  global.combat.ally = act.ally
+  global.combat.target = act.target;
+  if(act.abi?.action?.power) global.combat.value = Math.ceil(eval(act.action));
+  if(act.abi?.status) {
+    let statuscopy = JSON.parse(JSON.stringify(act.abi.status));
+    act.target.modifiers.push(statuscopy);
+  }
+  BV = global.combat;
+  if(act.target == act.performer) SuitableText = GetRandomCombatText("debug error");
+  else SuitableText = GetRandomCombatText("debug error");
+  let bt = JSON.parse(JSON.stringify(global.combat))
+  thisRoundHistory.push({ text: SuitableText, bv: bt });
+  thisBattleHistory.push({ text: SuitableText, bv: bt });
+  container.appendChild(ReadContentCombat(SuitableText));
+  container.scrollTop = container.scrollHeight;
+  if (act.abi.cost.mana) global.combat.actor.stats.mana -= act.abi.cost.mana;
+  getCharacterAbilityOrSpell(act.performer, act.abi.key).cooldown = act.abi.cost.cd;
+ // act.target.stats.hp += global.combat.value;
   if(act.target.stats.hp > act.target.stats.maxhp) act.target.stats.hp = act.target.stats.maxhp;
   CreatePortraits();
 }

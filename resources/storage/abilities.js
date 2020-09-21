@@ -20,9 +20,10 @@ const statuses = [
     key: "armor-up-1",
     img: "icons/combat/armor_buff.png",
     power: [
-      {type: "armor", value: 25}
+      {type: "armor", value: 50}
     ],
-    last: 3
+    last: 2,
+    text: "Armor has been boosted by 50%!"
   },
   {
     key: "armor-down-1",
@@ -75,7 +76,7 @@ const abilities = [
         img: "icons/shield_bash.png",
         cost: {
           mana: 0,
-          cd: 4
+          cd: 5
         },
         status: Status(`stun`),
         cooldown: 0,
@@ -219,6 +220,21 @@ const spells = [
       status: Status(`burning-1`),
       cooldown: 0,
       action: "AttackSpell(Spell(`fireball-1`).power)"
+    },
+    {
+      key: "harden-1",
+      img: "icons/defense_icon.png",
+      power: {
+        amount: 0
+      },
+      cost: {
+        mana: 25,
+        cd: 4
+      },
+      selfTarget: true,
+      status: Status(`armor-up-1`),
+      cooldown: 0,
+      action: "SupportSpell(Spell(`harden-1`).power)"
     }
 ]
 
