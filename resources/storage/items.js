@@ -75,7 +75,7 @@ const items = [
   new Weapon("broken_iron_dagger", "Broken Iron Dagger", 8, 1, "items/rusty_iron_sword_1", 1, 1, false, [{type: "slash", value: 3}, {type: "thrust", value: 1}], 1),
   new Weapon("wooden_healing_staff", "Stiff Rod", 8, 1, "items/healing_staff", 1, 1, false, [{type: "blunt", value: 4}], 1),
   new Weapon("rusty_iron_bastard_sword", "Rusty Bastard Sword", 40, 1, "items/dildo_sword", 1, 1, true, [{type: "slash", value: 8}, {type: "thrust", value: 3}], -2),
-  new Shield("broken_iron_shield", "Broken Iron Shield", 10, 1, "items/broken_iron_shield_1", 1, 1, "shield", { slash: 52, blunt: 49, thrust: 50, fire: 26, frost: 17, wind: 61, water: 39, shock: 11, light: 15, dark: 14 }, -1, undefined, undefined, 13, [{type: "blunt", value: 5}]),
+  new Shield("broken_iron_shield", "Broken Iron Shield", 10, 1, "items/broken_iron_shield_1", 1, 1, "shield", { slash: 52, blunt: 49, thrust: 50, fire: 26, frost: 17, wind: 61, water: 39, shock: 11, light: 15, dark: 14 }, -1, undefined, undefined, 100, [{type: "blunt", value: 5}]),
   new Armor("leather_chest", "Leather Chestplate", 15, 1, "items/leather_chestplate", 1, 1, "chest", { slash: 5, blunt: 10, thrust: 3, fire: 2, frost: 5, wind: 5, water: 4, shock: 8, light: 5, dark: 5 }, 0, undefined ,"items/leather_chestplate_equipped.png"),
   new Armor("leather_helmet", "Leather Helmet", 10, 1, "items/leather_helmet", 1, 1, "helmet", { slash: 3, blunt: 6, thrust: 2, fire: 2, frost: 3, wind: 4, water: 2, shock: 3, light: 4, dark: 4 }, 0, undefined, "items/leather_helmet_equipped.png"),
   new Armor("leather_gloves", "Leather Gloves", 10, 1, "items/leather_gloves", 1, 1, "gloves", { slash: 2, blunt: 4, thrust: 1, fire: 2, frost: 2, wind: 3, water: 1, shock: 2, light: 3, dark: 2 }, 0),

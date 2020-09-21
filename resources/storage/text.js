@@ -176,6 +176,39 @@ var texts = [
         ]
       },
       {
+        subcat: "combat-sunder-hit",
+        trigger: "nomiss PowerAtk(Ability(`sunder`).power) land",
+        texts: [
+          {
+            key: "combat-sunder-hit-1",
+            text: `§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ §#@var.ACTWEAPONIMG()#§ and breaks a part of §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§'s armor.
+                  §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ takes §@var.BTV()§ §/red/damage§.`
+          }
+        ]
+      },
+      {
+        subcat: "combat-sunder-miss",
+        trigger: "miss PowerAtk(Ability(`sunder`).power) land",
+        texts: [
+          {
+            key: "combat-sunder-miss-1",
+            text: `§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ §#@var.ACTWEAPONIMG()#§ and dashes toward §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§. He misses and retreats,
+                  and §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ is unbothered.`
+          }
+        ]
+      },
+      {
+        subcat: "combat-sunder-block",
+        trigger: "block PowerAtk(Ability(`sunder`).power) land",
+        texts: [
+          {
+            key: "combat-sunder-block-1",
+            text: `§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ grips §@var.POSPRON(actor)§ §/yellow/@var.ACTWEAPON()§ §#@var.ACTWEAPONIMG()#§ and dashes toward §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§.
+                  But §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ was ready for the attack and manages to block §/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§'s attack, only taking §@var.BTV()§ §/red/damage§.`
+          }
+        ]
+      },
+      {
         subcat: "combat-bash-hit",
         trigger: "nomiss ShieldBash() land",
         texts: [
@@ -202,6 +235,66 @@ var texts = [
           {
             key: "combat-bash-block-1",
             text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ bashes §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ with §@var.POSPRON(actor)§ §/yellow/@var.ACTSHIELD()§ §#@var.ACTSHIELDIMG()#§, but §@var.SINPRON(target)§ blocks the attack with §@var.OBJPRON(target)§ §/yellow/@var.TRGSHIELD()§ §#@var.TRGSHIELDIMG()#§, still getting stunned, but only taking §@var.BTV()§ §/crimson/damage§."
+          }
+        ]
+      },
+      {
+        subcat: "combat-blinding-slash-hit",
+        trigger: "nomiss PowerAtk(Ability(`blinding-slash`).power) land",
+        texts: [
+          {
+            key: "combat-blinding-slash-hit-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ strikes toward §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ with §@var.POSPRON(actor)§ §/yellow/@var.ACTSHIELD()§ §#@var.ACTSHIELDIMG()#§ and deals §@var.BTV()§ §/crimson/damage§, leaving the §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ blinded."
+          }
+        ]
+      },
+      {
+        subcat: "combat-blinding-slash-miss",
+        trigger: "miss PowerAtk(Ability(`blinding-slash`).power) land",
+        texts: [
+          {
+            key: "combat-blinding-slash-miss-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ strikes toward §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ with §@var.POSPRON(actor)§ §/yellow/@var.ACTSHIELD()§ §#@var.ACTSHIELDIMG()#§ but miscalculates the attack, missing §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ completely."
+          }
+        ]
+      },
+      {
+        subcat: "combat-blinding-slash-block",
+        trigger: "block PowerAtk(Ability(`blinding-slash`).power) land",
+        texts: [
+          {
+            key: "combat-blinding-slash-block-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ strikes toward §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ with §@var.POSPRON(actor)§ §/yellow/@var.ACTSHIELD()§ §#@var.ACTSHIELDIMG()#§. §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ raises their shield just in time to block, still leaving them blinded, but only dealing §@var.BTV()§ §/crimson/damage§."
+          }
+        ]
+      },
+      {
+        subcat: "combat-fireball-1-hit",
+        trigger: "nomiss AttackSpell(Spell(`fireball-1`).power) land",
+        texts: [
+          {
+            key: "combat-fireball-1-hit-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ casts a fireball and hurls it at §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§, dealing §@var.BTV()§ §/crimson/damage§."
+          }
+        ]
+      },
+      {
+        subcat: "combat-fireball-1-miss",
+        trigger: "miss AttackSpell(Spell(`fireball-1`).power) land",
+        texts: [
+          {
+            key: "combat-fireball-1-miss-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ casts a fireball and hurls it at §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§, but the target runs for cover and avoids damage."
+          }
+        ]
+      },
+      {
+        subcat: "combat-fireball-1-block",
+        trigger: "block AttackSpell(Spell(`fireball-1`).power) land",
+        texts: [
+          {
+            key: "combat-fireball-1-block-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ casts a fireball and hurls it at §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ who manages to block the attack. It still burns, making §/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ take §@var.BTV()§ §/crimson/damage§."
           }
         ]
       },
