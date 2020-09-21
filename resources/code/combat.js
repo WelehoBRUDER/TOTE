@@ -1,4 +1,4 @@
-
+'use strict';
 
 function TargetCharacters(charTable, ability, performer) {
   if (performer.hasActed) return;
@@ -317,12 +317,12 @@ function SortActions() {
 }
 
 function RemoveDeadSummons() {
-  for(i=0; i<alliesFight.length; i++) {
+  for(let i=0; i<alliesFight.length; i++) {
     if(alliesFight[i].images && alliesFight[i].stats.hp <= 0) {
       alliesFight.splice(i, 1);
     }
   }
-  for(i=0; i<enemiesFight.length; i++) {
+  for(let i=0; i<enemiesFight.length; i++) {
     if(enemiesFight[i].images && enemiesFight[i].stats.hp <= 0) {
       enemiesFight.splice(i, 1);
     }
@@ -338,7 +338,7 @@ var thisRoundHistory = [];
 function EndRound_Recover(act, container) {
   global.combat.actor = act.performer;
   BV = global.combat;
-  SuitableText = GetRandomCombatText("recover");
+  let SuitableText = GetRandomCombatText("recover");
   let bt = JSON.parse(JSON.stringify(global.combat))
   let actionElem = ReadContentCombat(SuitableText);
   thisRoundHistory.push({ actionElem: actionElem });
@@ -352,7 +352,7 @@ function EndRound_Defend(act, container) {
   global.combat.actor = act.performer;
   global.combat.ally = act.ally
   BV = global.combat;
-  SuitableText = GetRandomCombatText("defend");
+  let SuitableText = GetRandomCombatText("defend");
   let bt = JSON.parse(JSON.stringify(global.combat))
   let actionElem = ReadContentCombat(SuitableText);
   thisRoundHistory.push({ actionElem: actionElem });
@@ -413,6 +413,7 @@ function EndRound_Support(act, container) {
   BV = global.combat;
   let trigger2 = null;
   trigger2 = act.action;
+  let SuitableText;
   if(act.target == act.performer) SuitableText = GetRandomCombatText(`nomiss ${trigger2} land`);
   else SuitableText = GetRandomCombatText("debug error");
   let bt = JSON.parse(JSON.stringify(global.combat))
