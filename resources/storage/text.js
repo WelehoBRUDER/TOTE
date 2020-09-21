@@ -299,6 +299,16 @@ var texts = [
         ]
       },
       {
+        subcat: "combat-armor-up-1-hit",
+        trigger: "nomiss SupportSpell(Spell(`harden-1`).power) land",
+        texts: [
+          {
+            key: "combat-armor-up-1-hit-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ casts a strenghtening spell on their armor."
+          }
+        ]
+      },
+      {
         subcat: "combat-heal-spell",
         trigger: "target heal",
         texts: [
