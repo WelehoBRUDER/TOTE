@@ -117,7 +117,9 @@ async function EndRound() {
   LowerCooldowns();
   thisRoundHistory = [];
   if (!global.combat.history) Element("combatTextContainer").textContent = "";
+  console.log("======================================");
   for (let act of charactersActions) {
+    console.log(act);
     let container = Element("combatTextContainer");
     let SuitableText = null;
     let trigger1 = null;
