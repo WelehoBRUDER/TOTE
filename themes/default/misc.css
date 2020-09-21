@@ -1,31 +1,37 @@
 @font-face {
-    font-family: Roboto;
-    src: url(../../fonts/Roboto-Thin.ttf);
-    font-weight: thin;
-}
-
-@font-face {
-    font-family: Roboto;
-    src: url(../../fonts/Roboto-Light.ttf);
-    font-weight: lighter;
-}
-
-@font-face {
-    font-family: Roboto;
-    src: url(../../fonts/Roboto-Regular.ttf);
+    font-family: CodexThin;
+    src: url("../../fonts/Roboto-Thin.ttf");
     font-weight: normal;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url(../../fonts/Roboto-Bold.ttf);
-    font-weight: bold;
+    font-family: CodexLight;
+    src: url("../../fonts/Roboto-Light.ttf");
+    font-weight: normal;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url(../../fonts/Roboto-Black.ttf);
-    font-weight: bolder;
+    font-family: Codex;
+    src: url("../../fonts/Roboto-Regular.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: CodexMedium;
+    src: url("../../fonts/Roboto-Medium.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: CodexBold;
+    src: url("../../fonts/Roboto-Bold.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: CodexBolder;
+    src: url("../../fonts/Roboto-Black.ttf");
+    font-weight: normal;
 }
 
 #goForward,
@@ -65,7 +71,7 @@
 
 #charbeingequipped {
     font-size: 20px;
-    font-family: RobotoMedium;
+    font-family: CodexMedium;
     color: white;
     background: rgb(73, 2, 2);
     position: absolute;
@@ -112,7 +118,7 @@
     border-radius: 8px;
     color: white;
     text-align: center;
-    font-family: Roboto;
+    font-family: Codex;
     font-size: 20px;
 }
 
@@ -154,7 +160,7 @@
     transition: 0.2s;
     text-align: center;
     color: white;
-    font-family: Roboto;
+    font-family: Codex;
     font-size: 32px;
 }
 
@@ -167,7 +173,7 @@
 
 .optionsText {
     font-size: 32px;
-    font-family: Roboto;
+    font-family: Codex;
     position: absolute;
     top: -25px;
     left: 60px;
@@ -185,7 +191,7 @@
     user-select: none;
     outline: none;
     font-size: 44px;
-    font-family: RobotoLight;
+    font-family: CodexLight;
     color: white;
     text-shadow: 0 4px 6px black;
     margin: 20px;
@@ -425,7 +431,7 @@
     box-sizing: border-box;
     top: 10%;
     background-image: url("../../resources/images/themes/default/bg/bg_gray.png");
-    font-family: Roboto;
+    font-family: Codex;
     font-size: 17px;
     text-align: center;
     cursor: pointer;
@@ -458,7 +464,7 @@
     height: fit-content;
     max-width: 160px;
     color: white;
-    font-family: Roboto;
+    font-family: Codex;
     z-index: 5;
     margin: 0px;
 }

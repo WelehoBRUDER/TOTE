@@ -181,11 +181,11 @@ function getMark(mark) {
     result = ` letter-spacing: ${amount}px;`;
   }
   switch(mark) {
-    case "B": result = " font-weight: bold;"; break;
-    case "BB": result = " font-weight: bolder;"; break;
-    case "M": result = " font-weight: normal;"; break;
-    case "E": result = " font-weight: normal;"; break;
-    case "LL": result = " font-weight: normal;"; break;
+    case "B": result = " font-family: CodexBold;"; break;
+    case "BB": result = " font-family: CodexBolder;"; break;
+    case "M": result = " font-family: CodexMedium;"; break;
+    case "E": result = " font-family: Codex;"; break;
+    case "LL": result = " font-family: CodexThin;"; break;
     case "I": result = " font-style: italic;"; break;
     case "OL": result = " text-decoration: overline;"; break;
     case "LT": result = " text-decoration: line-through;"; break;
@@ -201,7 +201,11 @@ function ReadContent(text, image) {
   for (let colors of content) {
     let img;
     let link;
-    let color = "";
+    let color;
+    if(global.theme == "default")
+    {
+      color = "white";
+    }
     let text;
     let style = "";
     if(colors.indexOf("¤") != -1) {

@@ -28,7 +28,7 @@ body {
 
 #codex p,
 span {
-  font-family: Roboto;
+  font-family: Codex;
   font-weight: lighter;
 }
 
@@ -430,7 +430,8 @@ span {
   user-select: none;
   outline: none;
   font-size: 48px;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   color: white;
   text-shadow: 0 4px 6px black;
   position: absolute;
@@ -486,7 +487,8 @@ span {
   user-select: none;
   outline: none;
   font-size: 48px;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   color: white;
   text-shadow: 0 4px 6px black;
   margin: 20px;
@@ -574,7 +576,8 @@ span {
 #textAlert {
   color: silver;
   text-shadow: 0 4px 8px black;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   font-size: 20px;
   text-align: center;
 }
@@ -663,7 +666,8 @@ span {
 span {
   color: white;
   font-size: 27px;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   margin: 0px;
   position: relative;
 }
@@ -712,7 +716,8 @@ span {
 .desc {
   color: white;
   font-size: 24px;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   margin: 0px;
   font-style: italic;
   white-space: normal;
@@ -767,7 +772,8 @@ span {
 #armorFrame p,
 #weaponFrame p {
   font-size: 26px;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   color: silver;
   text-shadow: -1px 2px 4px rgb(58, 58, 58);
   position: absolute;
@@ -847,7 +853,8 @@ span {
 
 #ringFrame p {
   font-size: 18px;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   color: silver;
   text-shadow: -1px 2px 4px rgb(58, 58, 58);
   position: absolute;
