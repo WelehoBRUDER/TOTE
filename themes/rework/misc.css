@@ -1,42 +1,42 @@
 @font-face {
     font-family: CodexThin;
-    src: url("../../fonts/JustAnotherHand.ttf");
+    src: url("../../fonts/Mali/Mali-ExtraLight.ttf");
     font-weight: normal;
 }
 
 @font-face {
     font-family: CodexLight;
-    src: url("../../fonts/JustAnotherHand.ttf");
+    src: url("../../fonts/Mali/Mali-Light.ttf");
     font-weight: normal;
 }
 
 @font-face {
     font-family: Codex;
-    src: url("../../fonts/JustAnotherHand.ttf");
+    src: url("../../fonts/Mali/Mali-Regular.ttf");
     font-weight: normal;
 }
 
 @font-face {
     font-family: CodexMedium;
-    src: url("../../fonts/JustAnotherHand.ttf");
+    src: url("../../fonts/Mali/Mali-Medium.ttf");
     font-weight: normal;
 }
 
 @font-face {
     font-family: CodexBold;
-    src: url("../../fonts/JustAnotherHand.ttf");
+    src: url("../../fonts/Mali/Mali-SemiBold.ttf");
     font-weight: normal;
 }
 
 @font-face {
     font-family: CodexBolder;
-    src: url("../../fonts/JustAnotherHand.ttf");
+    src: url("../../fonts/Mali/Mali-Bold.ttf");
     font-weight: normal;
 }
 
 @font-face {
     font-family: BetterLand;
-    src: url("../../fonts/Better\ Land\ \(DEMO\).ttf");
+    src: url("../../fonts/Mali/Mali-Regular.ttf");
     font-weight: normal;
 }
 
