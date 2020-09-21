@@ -41,7 +41,7 @@ const statuses = [
       {type: "dex", value: -70}
     ],
     last: 2,
-    text: "§¤s13-¤This character is blinded and gets a -70%§ §¤s13-¤/red/penalty§ §¤s13-¤to strength and dexterity!§"
+    text: "§¤s13-¤This character is blinded and gets a -70%§ §¤s13-¤/red/penalty§ §¤s13-¤to accuracy and dexterity!§"
   },
   {
     key: "burning-1",
