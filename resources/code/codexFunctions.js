@@ -181,11 +181,11 @@ function getMark(mark) {
     result = ` letter-spacing: ${amount}px;`;
   }
   switch(mark) {
-    case "B": result = " font-family: RobotoBold;"; break;
-    case "BB": result = " font-family: RobotoBolder;"; break;
-    case "M": result = " font-family: RobotoMedium;"; break;
-    case "E": result = " font-family: Roboto;"; break;
-    case "LL": result = " font-family: RobotoThin;"; break;
+    case "B": result = " font-weight: bold;"; break;
+    case "BB": result = " font-weight: bolder;"; break;
+    case "M": result = " font-weight: normal;"; break;
+    case "E": result = " font-weight: normal;"; break;
+    case "LL": result = " font-weight: normal;"; break;
     case "I": result = " font-style: italic;"; break;
     case "OL": result = " text-decoration: overline;"; break;
     case "LT": result = " text-decoration: line-through;"; break;
@@ -201,7 +201,7 @@ function ReadContent(text, image) {
   for (let colors of content) {
     let img;
     let link;
-    let color = "white";
+    let color = "";
     let text;
     let style = "";
     if(colors.indexOf("¤") != -1) {

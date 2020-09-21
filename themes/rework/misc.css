@@ -1,31 +1,49 @@
 @font-face {
-    font-family: Roboto;
-    src: url(../../fonts/Roboto-Thin.ttf);
-    font-weight: thin;
+    font-family: RobotoThin;
+    src: url("../../fonts/Roboto-Thin.ttf");
+    font-weight: normal;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url(../../fonts/Roboto-Light.ttf);
-    font-weight: lighter;
-}
-
-@font-face {
-    font-family: Roboto;
-    src: url(../../fonts/Roboto-Regular.ttf);
+    font-family: RobotoLight;
+    src: url("../../fonts/Roboto-Light.ttf");
     font-weight: normal;
 }
 
 @font-face {
     font-family: Roboto;
-    src: url(../../fonts/Roboto-Bold.ttf);
-    font-weight: bold;
+    src: url("../../fonts/Roboto-Regular.ttf");
+    font-weight: normal;
 }
 
 @font-face {
-    font-family: Roboto;
-    src: url(../../fonts/Roboto-Black.ttf);
-    font-weight: bolder;
+    font-family: RobotoMedium;
+    src: url("../../fonts/Roboto-Medium.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: RobotoBold;
+    src: url("../../fonts/Roboto-Bold.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: RobotoBolder;
+    src: url("../../fonts/Roboto-Black.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: BetterLand;
+    src: url("../../fonts/Better\ Land\ \(DEMO\).ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: JustAnotherHand;
+    src: url("../../fonts/JustAnotherHand.ttf");
+    font-weight: normal;
 }
 
 #goForward,
@@ -86,10 +104,10 @@
     margin-top: -250px;
     margin-left: -225px;
     border-radius: 4px;
-    border: 8px solid rgb(49, 2, 2);
-    box-shadow: 0 8px 6px 8px rgb(39, 1, 1), inset 0 0 8px 8px rgb(80, 3, 3);
+    border: 8px solid rgb(20, 13, 1);
+    box-shadow: 0 8px 6px 8px rgb(39, 12, 1), inset 0 0 8px 8px rgb(80, 31, 3);
     z-index: 3;
-    background-image: url("../../resources/images/themes/default/bg/bg_red.png");
+    background-image: url("../../resources/images/themes/rework/bg/bg_red.png");
 }
 
 #qlContainer {
@@ -354,7 +372,7 @@
 #combatTextContainer {
     width: 800px;
     height: 42vh;
-    background-image: url("../../resources/images/themes/default/bg/bg_gray.png");
+    background-image: url("../../resources/images/themes/rework/bg/bg_gray.png");
     position: absolute;
     top: 10px;
     left: 50%;
@@ -424,7 +442,7 @@
     border: 4px solid black;
     box-sizing: border-box;
     top: 10%;
-    background-image: url("../../resources/images/themes/default/bg/bg_gray.png");
+    background-image: url("../../resources/images/themes/rework/bg/bg_gray.png");
     font-family: Roboto;
     font-size: 17px;
     text-align: center;

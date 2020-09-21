@@ -26,7 +26,7 @@ let global = {
     error: ""
   },
   onmap: false,
-  theme: "default"
+  theme: "rework"
 };
 
 

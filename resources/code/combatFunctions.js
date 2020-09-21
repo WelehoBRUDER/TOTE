@@ -222,7 +222,7 @@ function ReadContentCombat(text) {
   for (let colors of content) {
     let img;
     let link;
-    let color = "white";
+    let color = "";
     let text;
     let style = "";
     if(colors.indexOf("¤") != -1) {
