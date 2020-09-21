@@ -7,22 +7,18 @@ function targetingAi(char, friendly) {
   let triedheal = false;
   if(ShouldIHeal(char)) {
     if(CanIHeal(char)) {
-      console.log("Tried to heal self!");
       HealSelf(char);
       return;
     }
   }
   if(char.class.role == "support") {
     if(TeamNeedsHealing(char, friendly)) {
-      console.log(CanIHeal(char));
       if(CanIHeal(char)) {
-        console.log("Tried to heal!");
         ChooseHealing(char, friendly);
         triedheal = true;
         return;
       }
     }
-    console.log("Did not heal!");
     table = OffenseTable(char);
   } else if(char.class.role == "offense") {
     table = OffenseTable(char);
@@ -57,7 +53,9 @@ function ChooseHealing(char, friendly) {
   let table = [];
   if(friendly) table = alliesFight;
   else table = enemiesFight;
+  console.log(char);
   let healTarget = LowestMemberInGroup(char, table)
+  console.log(healTarget);
   let healSkill = MostSuitableHealFor(healTarget, char);
   charactersActions.push({target: healTarget, action: healSkill.action, performer: char, speed: Speed, abi: healSkill, ally: friendly})
 }
@@ -176,7 +174,7 @@ function TeamNeedsHealing(char, friendly) {
       for(let chara of charactersActions) {
         if(chara.action.toLowerCase().startsWith("heal") && chara.target == member) cont = true;
       }
-      if(cont || member.stats.hp <= 0) continue;
+      if(cont || member.stats.hp <= 0 || member.key == char.key) continue;
       if(member.stats.hp < PercentOf(char.ai_behauviour.healing, member.stats.maxhp)) return true;
     }
   } else {
@@ -185,7 +183,7 @@ function TeamNeedsHealing(char, friendly) {
       for(let chara of charactersActions) {
         if(chara.action.toLowerCase().startsWith("heal") && chara.target == member) cont = true;
       }
-      if(cont || member.stats.hp <= 0) continue;
+      if(cont || member.stats.hp <= 0 || member.key == char.key) continue;
       if(member.stats.hp < PercentOf(char.ai_behauviour.healing, member.stats.maxhp)) return true;
     }
   }

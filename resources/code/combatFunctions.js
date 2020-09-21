@@ -206,7 +206,7 @@ function RestoreCombatText() {
   else bank = thisBattleHistory;
   for(let txt of bank) {
     BV = txt.bv;
-    Element("combatTextContainer").appendChild(ReadContentCombat(txt.text));
+    Element("combatTextContainer").appendChild(txt.actionElem);
   }
 }
 
