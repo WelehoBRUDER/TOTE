@@ -4,6 +4,7 @@ function targetingAi(char, friendly) {
   char.hasActed = true;
   let max = 0;
   let table = ReturnTable(char);
+  let triedheal = false;
   if(ShouldIHeal(char)) {
     if(CanIHeal(char)) {
       HealSelf(char);
@@ -14,6 +15,7 @@ function targetingAi(char, friendly) {
     if(TeamNeedsHealing(char, friendly)) {
       if(CanIHeal(char)) {
         ChooseHealing(char, friendly);
+        triedheal = true;
         return;
       }
     }
@@ -45,12 +47,15 @@ function targetingAi(char, friendly) {
 }
 
 function ChooseHealing(char, friendly) {
+  if(!CanIHeal(char)) return false;
   let Speed = CalculateSpeed(char);
   if(IsStunned(char)) { charactersActions.push({action: "recover", performer: char, speed: Speed}); return; }
   let table = [];
   if(friendly) table = alliesFight;
   else table = enemiesFight;
-  let healTarget = LowestMemberInGroup(table)
+  console.log(char);
+  let healTarget = LowestMemberInGroup(char, table)
+  console.log(healTarget);
   let healSkill = MostSuitableHealFor(healTarget, char);
   charactersActions.push({target: healTarget, action: healSkill.action, performer: char, speed: Speed, abi: healSkill, ally: friendly})
 }
@@ -62,12 +67,12 @@ function HealSelf(char) {
   charactersActions.push({target: char, action: healSkill.action, performer: char, speed: Speed, abi: healSkill})
 }
 
-function LowestMemberInGroup(group) {
+function LowestMemberInGroup(char, group) {
   let lowesthp = 100;
   let lowestmember = null;
   let comparison = 0;
   for(let member of group) {
-    if(member.key == global.controlling.key) continue;
+    if(member.key == char.key || member.stats.hp <= 0) continue;
     comparison = (member.stats.hp/member.stats.maxhp) * 100;
     if(comparison < lowesthp) {lowesthp = comparison; lowestmember = member;}
   }
@@ -78,7 +83,9 @@ function ShouldIHeal(char) {
   for(let chara of charactersActions) {
     if(chara.action.toLowerCase().startsWith("heal") && chara.target == char) return false;
   }
+  console.log(char.stats.hp < PercentOf(char.ai_behauviour.healing_self, char.stats.maxhp));
   if(char.stats.hp < PercentOf(char.ai_behauviour.healing_self, char.stats.maxhp)) return true;
+  else return false;
 }
 
 function MostSuitableHealFor(char, healer) {
@@ -167,7 +174,7 @@ function TeamNeedsHealing(char, friendly) {
       for(let chara of charactersActions) {
         if(chara.action.toLowerCase().startsWith("heal") && chara.target == member) cont = true;
       }
-      if(cont) continue;
+      if(cont || member.stats.hp <= 0 || member.key == char.key) continue;
       if(member.stats.hp < PercentOf(char.ai_behauviour.healing, member.stats.maxhp)) return true;
     }
   } else {
@@ -176,7 +183,7 @@ function TeamNeedsHealing(char, friendly) {
       for(let chara of charactersActions) {
         if(chara.action.toLowerCase().startsWith("heal") && chara.target == member) cont = true;
       }
-      if(cont) continue;
+      if(cont || member.stats.hp <= 0 || member.key == char.key) continue;
       if(member.stats.hp < PercentOf(char.ai_behauviour.healing, member.stats.maxhp)) return true;
     }
   }

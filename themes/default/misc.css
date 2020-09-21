@@ -1,36 +1,36 @@
 @font-face {
     font-family: RobotoThin;
-    src: url(fonts/Roboto-Thin.ttf);
+    src: url(../../fonts/Roboto-Thin.ttf);
     font-weight: normal;
 }
 
 @font-face {
     font-family: RobotoLight;
-    src: url(fonts/Roboto-Light.ttf);
+    src: url(../../fonts/Roboto-Light.ttf);
     font-weight: normal;
 }
 
 @font-face {
     font-family: Roboto;
-    src: url(fonts/Roboto-Regular.ttf);
+    src: url(../../fonts/Roboto-Regular.ttf);
     font-weight: normal;
 }
 
 @font-face {
     font-family: RobotoMedium;
-    src: url(fonts/Roboto-Medium.ttf);
+    src: url(../../fonts/Roboto-Medium.ttf);
     font-weight: normal;
 }
 
 @font-face {
     font-family: RobotoBold;
-    src: url(fonts/Roboto-Bold.ttf);
+    src: url(../../fonts/Roboto-Bold.ttf);
     font-weight: normal;
 }
 
 @font-face {
     font-family: RobotoBolder;
-    src: url(fonts/Roboto-Black.ttf);
+    src: url(../../fonts/Roboto-Black.ttf);
     font-weight: normal;
 }
 
@@ -95,7 +95,7 @@
     border: 8px solid rgb(49, 2, 2);
     box-shadow: 0 8px 6px 8px rgb(39, 1, 1), inset 0 0 8px 8px rgb(80, 3, 3);
     z-index: 3;
-    background-image: url("resources/images/bg/bg_red.png");
+    background-image: url("../../resources/images/themes/default/bg/bg_red.png");
 }
 
 #qlContainer {
@@ -106,7 +106,8 @@
     top: 10px;
 }
 
-#combatSpeed, #combatDelay {
+#combatSpeed,
+#combatDelay {
     position: absolute;
     left: 10px;
     width: 120px;
@@ -121,7 +122,8 @@
     font-size: 20px;
 }
 
-#combatSpeedText, #combatDelayText {
+#combatSpeedText,
+#combatDelayText {
     position: absolute;
     left: 140px;
 }
@@ -163,7 +165,7 @@
 }
 
 #qlCheck {
-    transform: scale(0.00);
+    transform: scale(0);
     position: absolute;
     left: 7px;
     bottom: -35px;
@@ -196,17 +198,17 @@
     position: relative;
     top: 325px;
     cursor: pointer;
-  }
-  
-  #optionsBack:hover {
+}
+
+#optionsBack:hover {
     top: 333px;
     box-shadow: 0 4px 4px 4px rgb(70, 8, 20);
-  }
-  
-  #optionsBack:active {
+}
+
+#optionsBack:active {
     top: 335px;
     box-shadow: 0 2px 4px 4px rgb(70, 8, 20);
-  }
+}
 
 /* COMBAT */
 
@@ -358,7 +360,7 @@
 #combatTextContainer {
     width: 800px;
     height: 42vh;
-    background-image: url("resources/images/bg/bg_gray.png");
+    background-image: url("../../resources/images/themes/default/bg/bg_gray.png");
     position: absolute;
     top: 10px;
     left: 50%;
@@ -418,7 +420,8 @@
     display: flex;
 }
 
-#toggleRound, #toggleHistory {
+#toggleRound,
+#toggleHistory {
     transition: 0.1s;
     position: relative;
     height: 90%;
@@ -427,7 +430,7 @@
     border: 4px solid black;
     box-sizing: border-box;
     top: 10%;
-    background-image: url("resources/images/bg/bg_gray.png");
+    background-image: url("../../resources/images/themes/default/bg/bg_gray.png");
     font-family: Roboto;
     font-size: 17px;
     text-align: center;

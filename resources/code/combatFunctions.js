@@ -43,6 +43,20 @@ function coolDowns() {
       Element(`combatAbility${abi.slot}`).classList.add("darken");
     } else if(abi.cooldown <= 0) Element(`combatAbility${abi.slot}`).classList.remove("darken");
   }
+  for(let abi of global.controlling.spells) {
+    if(!abi.equipped) continue;
+    if(abi.cooldown > 0) {
+      Element(`combatSpell${abi.slot}`).classList.add("darken");
+      if (Element(`combatSpell${abi.slot}`).childNodes[2]) Element(`combatSpell${abi.slot}`).childNodes[2].remove();
+      let p = Create("p");
+      p.textContent = abi.cooldown;
+      p.classList.add("cooldowntext");
+      Element(`combatSpell${abi.slot}`).appendChild(p);
+    }
+    if(abi.cost?.mana > global.controlling.stats.mana) {
+      Element(`combatSpell${abi.slot}`).classList.add("darken");
+    } else if(abi.cooldown <= 0) Element(`combatSpell${abi.slot}`).classList.remove("darken");
+  }
 }
 
 function toggleText(arg) {
@@ -192,7 +206,7 @@ function RestoreCombatText() {
   else bank = thisBattleHistory;
   for(let txt of bank) {
     BV = txt.bv;
-    Element("combatTextContainer").appendChild(ReadContentCombat(txt.text));
+    Element("combatTextContainer").appendChild(txt.actionElem);
   }
 }
 

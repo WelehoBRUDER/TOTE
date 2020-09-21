@@ -1,5 +1,5 @@
-Element("invFrame").style.backgroundImage = "url(resources/images/bg/bg_gray.png";
-Element("invGridFrame").style.backgroundImage = "url(resources/images/bg/bg_cbrown.png";
+Element("invFrame").style.backgroundImage = `url(resources/images/themes/${global.theme}/bg/bg_gray.png`;
+Element("invGridFrame").style.backgroundImage = `url(resources/images/themes/${global.theme}/bg/bg_cbrown.png`;
 
 function CreateInv() {
   Element("invGrid").textContent = "";

@@ -2,7 +2,7 @@ function CreateUiButtons() {
   for(let button of ui_buttons) {
     let but = Create("img");
     but.id = button.id;
-    but.src = `resources/images/icons/ui_icon${button.bg}.png`;
+    but.src = `../../resources/images/themes/${global.theme}/icons/ui_icon${button.bg}.png`;
     if(global.combat.ongoing == false || button.combat)but.addEventListener("click", ()=>toggleButton(button.open));
     but.classList.add("ui_button");
     but.setAttribute('draggable', false);
