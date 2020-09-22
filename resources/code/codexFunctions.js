@@ -274,6 +274,7 @@ function SearchEntities() {
       for (let content of subcats.content) {
         if (tagSearch == true && content.tags) {
           for (let tag of content.tags) {
+            if (tag == undefined || tag?.tag == undefined) continue;
             if (searchValue.length < 3) {
               let Tag = tag.tag;
               if(Tag.startsWith("@var.")) Tag = VariableText(Tag);

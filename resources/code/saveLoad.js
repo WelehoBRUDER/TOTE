@@ -6,8 +6,8 @@ function Saving() {
     if (slot.key == "back") {
       let button = Create("button");
       button.textContent = `Back`;
-      button.style.fontSize = "48px";
-      button.style.width = "260px";
+      button.style.fontSize = "1.4vw";
+      button.style.width = "40%";
       button.style.backgroundImage = `url('../../resources/images/themes/${global.theme}/bg/bg_red.png')`;
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => toggleButton("settings"));
@@ -15,9 +15,8 @@ function Saving() {
     else if (slot.key == "file") {
       let button = Create("button");
       button.textContent = `Save to File`;
-      button.style.width = "160px";
-      button.style.fontSize = "24px";
-      button.style.height = "90px";
+      button.style.width = "45%";
+      button.style.fontSize = "1.1vw";
       button.style.backgroundImage = `url('../../resources/images/themes/${global.theme}/bg/bg_red.png')`;
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => SaveNoPrompt("toFile"));
@@ -25,8 +24,8 @@ function Saving() {
     else if (!slot.save) {
       let button = Create("button");
       button.textContent = `Save ${slot.key} - empty`;
-      button.style.fontSize = "24px";
-      button.style.width = "500px";
+      button.style.fontSize = "1.4vw";
+      button.style.width = "100%";
       button.style.backgroundImage = `url('../../resources/images/themes/${global.theme}/bg/bg_red.png')`;
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => SaveNoPrompt(slot.key));
@@ -35,8 +34,8 @@ function Saving() {
       let button = Create("button");
       let pInfo = JSON.parse(localStorage.getItem(`${slot.key}characters`));
       button.textContent = `Save ${slot.key} - ${pInfo.player.name} | ${pInfo.player.map} | last saved: ${slot.date}`;
-      button.style.fontSize = "24px";
-      button.style.width = "500px";
+      button.style.fontSize = "1.4vw";
+      button.style.width = "100%";
       button.style.backgroundImage = `url('../../resources/images/themes/${global.theme}/bg/bg_red.png')`;
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => SavePrompt(slot.key));
@@ -52,8 +51,8 @@ function Loading() {
     if (slot.key == "back") {
       let button = Create("button");
       button.textContent = `Back`;
-      button.style.fontSize = "48px";
-      button.style.width = "260px";
+      button.style.fontSize = "1.4vw";
+      button.style.width = "40%";
       button.style.backgroundImage = `url('../../resources/images/themes/${global.theme}/bg/bg_red.png')`;
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => toggleButton("settings"));
@@ -61,9 +60,8 @@ function Loading() {
     else if (slot.key == "file") {
       let button = Create("button");
       button.textContent = `Load from File`;
-      button.style.width = "160px";
-      button.style.fontSize = "36px";
-      button.style.height = "120px";
+      button.style.width = "45%";
+      button.style.fontSize = "1.1vw";
       button.style.backgroundImage = `url('../../resources/images/themes/${global.theme}/bg/bg_red.png')`;
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => LoadSlotNoPrompt("toFile"));
@@ -71,8 +69,8 @@ function Loading() {
     else if (!slot.save) {
       let button = Create("button");
       button.textContent = `Save ${slot.key} - empty`;
-      button.style.fontSize = "24px";
-      button.style.width = "500px";
+      button.style.fontSize = "1.4vw";
+      button.style.width = "100%";
       button.style.filter = "brightness(50%)";
       button.style.pointerEvents = "none";
       button.style.backgroundImage = `url('../../resources/images/themes/${global.theme}/bg/bg_red.png')`;
@@ -82,8 +80,8 @@ function Loading() {
       let button = Create("button");
       let pInfo = JSON.parse(localStorage.getItem(`${slot.key}characters`));
       button.textContent = `Save ${slot.key} - ${pInfo.player.name} | ${pInfo.player.map} | last saved: ${slot.date}`;
-      button.style.fontSize = "24px";
-      button.style.width = "500px";
+      button.style.fontSize = "1.4vw";
+      button.style.width = "100%";
       button.style.backgroundImage = `url('../../resources/images/themes/${global.theme}/bg/bg_red.png')`;
       Element("saveLoad").appendChild(button);
       button.addEventListener("click", () => LoadSlotPrompt(slot.key));

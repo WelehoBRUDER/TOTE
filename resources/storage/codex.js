@@ -154,9 +154,9 @@ var codex = [
           {
             key: "Erika",
             image: "portraits/portrait_erika_temp|yellow|orange",
-            content: `§:break§§/@var.CHARCOLOR("player")/@var.CHARNAME("player")§’s little sister. That’s it folks, see you in the next episode.`,
+            content: `§:break§§/@var.CHARCOLOR(player)/@var.CHARNAME(player)§’s little sister. That’s it folks, see you in the next episode.`,
             tags: [
-              { tag: "@var.CHARNAME('player')" }
+              { tag: "@var.CHARNAME(player)" }
             ]
           },
         ]
