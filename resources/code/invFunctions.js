@@ -42,7 +42,7 @@ function ShowItemInfo(e) {
   let itm;
   if (e.target.id.length > 8) {
     itm = FindEquipment(e.target.id);
-    infoContainer.style.top = `${e.target.parentElement.offsetTop}px`;
+    infoContainer.style.top = `${Math.min(e.target.parentElement.offsetTop, window.innerHeight-infoContainer.height)}px`;
     infoContainer.style.left = `${e.target.parentElement.offsetLeft + 150}px`;
   }
   else {
