@@ -11,21 +11,6 @@ body {
   filter: blur();
 }
 
-/* #bgframe {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 100vw;
-  height: 100vh;
-  background-image: url("../../resources/images/themes/rework/misc/world_map.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  -webkit-background-size: contain;
-  -moz-background-size: contain;
-  -o-background-size: contain;
-  background-size: contain;
-} */
-
 #codex p,
 span {
   font-family: CodexLight;
@@ -128,32 +113,32 @@ span {
 }
 
 .CodexCategories {
-  font-size: 28px;
+  font-size: 2vw;
   text-decoration: underline;
   font-weight: bold;
 }
 
 .CodexArrows {
-  font-size: 26px;
+  font-size: 1.8vw;
   text-decoration: none !important;
   position: absolute;
   user-select: none !important;
 }
 
 .CodexArrowsSmall {
-  font-size: 20px;
+  font-size: 1.6vw;
   text-decoration: none !important;
   position: absolute;
   user-select: none !important;
 }
 
 .CodexSubcategories {
-  font-size: 22px;
+  font-size: 1.9vw;
   text-decoration: underline;
 }
 
 .CodexEntities {
-  font-size: 20px;
+  font-size: 1.6vw;
   position: relative;
   cursor: pointer;
 }
@@ -166,7 +151,7 @@ span {
 
 .CodexEntryTitle {
   font-family: "Charmonman" !important;
-  font-size: 56px;
+  font-size: 3.5vw;
   color: rgb(36, 17, 8);
   text-shadow: 0 0 16px black;
   text-decoration: underline;
@@ -213,7 +198,7 @@ span {
 #CodexBaseText p,
 span {
   user-select: text !important;
-  font-size: 30px;
+  font-size: 1.4vw;
   color: rgb(36, 17, 8);
   text-shadow: 0 0 8px black;
 }
@@ -546,7 +531,8 @@ span {
   border: none;
   width: 100px;
   height: 60px;
-  box-shadow: 0 6px 4px 4px rgb(80, 79, 79), inset 0 0 4px 4px rgb(131, 121, 121);
+  box-shadow: 0 6px 4px 4px rgb(80, 79, 79),
+    inset 0 0 4px 4px rgb(131, 121, 121);
   position: absolute;
   bottom: 24px;
   cursor: pointer;
@@ -559,13 +545,15 @@ span {
 #yesAlert:hover,
 #noAlert:hover {
   bottom: 20px;
-  box-shadow: 0 2px 4px 4px rgb(80, 79, 79), inset 0 0 4px 4px rgb(131, 121, 121);
+  box-shadow: 0 2px 4px 4px rgb(80, 79, 79),
+    inset 0 0 4px 4px rgb(131, 121, 121);
 }
 
 #yesAlert:active,
 #noAlert:active {
   bottom: 18px;
-  box-shadow: 0 0px 4px 4px rgb(80, 79, 79), inset 0 0 4px 4px rgb(131, 121, 121);
+  box-shadow: 0 0px 4px 4px rgb(80, 79, 79),
+    inset 0 0 4px 4px rgb(131, 121, 121);
 }
 
 #yesAlert {
@@ -667,7 +655,7 @@ span {
 #infoBox p,
 span {
   color: rgb(141, 85, 59);
-  font-size: 30px;
+  font-size: 1.5vw;
   font-family: Codex;
   margin: 0px;
   position: relative;
@@ -855,7 +843,7 @@ span {
 #ringFrame p {
   font-size: 18px;
   font-family: CodexLight;
-  color:rgb(49, 34, 25);
+  color: rgb(49, 34, 25);
   text-shadow: -1px 2px 4px rgb(58, 58, 58);
   position: absolute;
 }
@@ -953,6 +941,6 @@ span {
   background-image: url("../../resources/images/themes/rework/bg/bg_red.png");
 }
 
-#allyportraits>div>.portrait_background {
+#allyportraits > div > .portrait_background {
   background-image: url("../../resources/images/themes/rework/portraits/portrait_background_ally.png");
 }

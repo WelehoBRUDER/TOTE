@@ -256,14 +256,14 @@ function ReadContentCombat(text) {
     style += ` color: ${color};`;
     if (text == ":break") textContent.innerHTML += "<br>";
     else if(global.quickload && img != undefined) {
-      if (img != undefined && link == undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/${img}.png">`;
-      else if (img != undefined && link != undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
+      if (img != undefined && link == undefined) textContent.innerHTML += `<img style="width: 2.3vw; height: 3.4vh;" src="resources/images/${img}.png">`;
+      else if (img != undefined && link != undefined) textContent.innerHTML += `<img style="width: 2.3vw; height: 3.4vh;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
     }
     else if(!global.quickload && img != undefined) {
-      if (img != undefined && link == undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/${img}.png">`;
-      else if(img != undefined && link == undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/events/missing_image.png">`;
-      else if (img != undefined && link != undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
-      else if(img != undefined && link != undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/events/missing_image.png" onclick="${link}">`;
+      if (img != undefined && link == undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="wifth: 2.4vw; height: 3.5vh;" src="resources/images/${img}.png">`;
+      else if(img != undefined && link == undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="wifth: 2.4vw; height: 3.5vh;" src="resources/images/events/missing_image.png">`;
+      else if (img != undefined && link != undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="wifth: 2.4vw; height: 3.5vh;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
+      else if(img != undefined && link != undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="wifth: 2.4vw; height: 3.5vh;" class="PointerClass" src="resources/images/events/missing_image.png" onclick="${link}">`;
     }
     else if (link != undefined) textContent.innerHTML += `<span style = "${style}" class="PointerClass" onclick="${link}">${text}</span>`;
     else if (text) textContent.innerHTML += `<span style = "${style}" >${text}</span>`;
