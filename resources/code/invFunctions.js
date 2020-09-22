@@ -11,8 +11,9 @@ function CreateInv() {
       let itm = characters.player.inventory[i];
       item.id = `invItem${i}`;
       let img = Create("img");
-      img.style.height = "85px";
-      img.style.width = "80px";
+      img.style.height = "90%";
+      img.style.width = "80%";
+      img.style.selfAlign = "center";
       if (global.quickload) {
         img.src = `resources/images/${itm.img}.png`;
       }
@@ -39,16 +40,19 @@ function CreateInv() {
 function ShowItemInfo(e) {
   infoContainer.style.transform = "scale(1)";
   infoContainer.textContent = "";
+  console.log(e);
   let itm;
   if (e.target.id.length > 8) {
     itm = FindEquipment(e.target.id);
-    infoContainer.style.top = `${Math.min(e.target.parentElement.offsetTop, window.innerHeight-infoContainer.height)}px`;
-    infoContainer.style.left = `${e.target.parentElement.offsetLeft + 150}px`;
+    console.log(infoContainer.offsetLeft);
+    //infoContainer.style.top = `${Math.min(e.y, window.innerHeight-infoContainer.height)}px`;
+    infoContainer.style.left = `${e.x}px`;
   }
   else {
     itm = characters.player.inventory[e.target.id.substring(7)];
-    infoContainer.style.top = `${e.target.offsetTop}px`;
-    infoContainer.style.left = `${e.target.offsetLeft + 585}px`;
+    //infoContainer.style.top = `${Math.min(e.y, window.innerHeight-infoContainer.height)}px`;
+    infoContainer.style.top = `${e.y}px`
+    infoContainer.style.left = `${e.x}px`;
   }
   infoContainer.innerHTML += `<h1>${itm.name}</h1>`
   if (FoundDesc(itm) != false) infoContainer.appendChild(HandleDescSyntax(FoundDesc(itm)));

@@ -174,7 +174,7 @@ function getMark(mark) {
   let result = "";
   if(mark.indexOf("s") != -1) {
     let size = mark.split("s")[1];
-    result = ` font-size: ${size}px;`;
+    result = ` font-size: ${+size+100}%;`;
   }
   if(mark.indexOf("lg") != -1) {
     let amount = mark.split("lg")[1];

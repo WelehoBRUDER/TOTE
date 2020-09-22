@@ -22,12 +22,12 @@ function CreatePortrait(character, enemy) {
       <div class="hpbarbg">
       <p class="barNum">${character.stats.hp} / ${character.stats.maxhp}</p>
       </div>
-      <div class="hpbarfill" style="width: ${character.stats.hp / character.stats.maxhp * 128 + 'px'};">
+      <div class="hpbarfill" style="width: ${character.stats.hp / character.stats.maxhp * 42  + '%'};">
       </div>
       <div class="mpbarbg">
       <p class="barNum">${character.stats.mana} / ${character.stats.maxmana}</p>
       </div>
-      <div class="mpbarfill" style="width: ${character.stats.mana / character.stats.maxmana * 128 + 'px'};"></div>
+      <div class="mpbarfill" style="width: ${character.stats.mana / character.stats.maxmana * 42 + '%'};"></div>
       <div class="statusEffects" onmousemove="statusEffectInfo()" onmouseleave="statusEffectHide()">${loopMods(character)}</div>
     </div>
   `;

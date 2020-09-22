@@ -22,8 +22,8 @@ span {
   background-color: rgb(85, 85, 85);
   position: absolute;
   left: 50%;
-  top: 100px;
-  margin-left: -600px;
+  top: 5%;
+  transform: translateX(-50%);
   box-shadow: inset 0 0 16px 16px rgb(24, 24, 24), 0 0 8px 8px rgb(43, 43, 43);
 }
 
@@ -210,8 +210,8 @@ span {
 }
 
 .codexImage {
-  width: 256px;
-  height: 256px;
+  width: 15vw;
+  height: 15vw;
   border: 4px solid;
   position: relative;
   right: 0px;
@@ -221,89 +221,87 @@ span {
 }
 
 #allyportraits {
-  width: 350px;
-  height: 750px;
+  width: 18vw;
+  height: 38.5vw;
   position: absolute;
-  left: 50%;
-  top: 75px;
-  margin-left: -950px;
+  left: 0%;
+  top: 0%;
   overflow: auto;
 }
 
 #enemyportraits {
-  width: 350px;
-  height: 750px;
+  width: 18vw;
+  height: 38.5vw;
   position: absolute;
-  left: 50%;
-  top: 75px;
-  margin-left: 610px;
+  right: 1.75%;
+  top: 0%;
   overflow: auto;
 }
 
 .portrait_background {
-  width: 300px;
-  height: 210px;
+  width: 15.5vw;
+  height: 10.5vw;
   background-color: rgb(66, 66, 66);
   box-shadow: 0 0 15px 12px rgb(31, 31, 31);
   position: relative;
   background-image: url("../../resources/images/themes/rework/portraits/portrait_background.png");
   background-repeat: no-repeat;
   background-size: cover;
-  margin: 25px;
-  border-radius: 8px;
+  margin: 10%;
+  border-radius: 1vw;
 }
 
 .portrait_title {
-  font-size: 24px;
+  font-size: 1.2vw;
   color: gold;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: -18px;
+  top: -5%;
   text-shadow: -2px 2px 2px black;
   white-space: nowrap;
   text-decoration: underline;
 }
 
 .portrait_image {
-  border-radius: 12px;
+  border-radius: 1vw;
   box-shadow: 0 0 12px 8px black;
   position: absolute;
-  left: 20px;
-  bottom: 20px;
-  width: 110px;
-  height: 130px;
+  left: 10%;
+  bottom: 7.5%;
+  width: 33%;
+  height: 63%;
 }
 
 .portrait_overlay {
   position: absolute;
   z-index: 4;
-  left: 20px;
-  bottom: 20px;
-  width: 110px;
-  height: 130px;
+  left: 10%;
+  bottom: 7.5%;
+  width: 33%;
+  height: 63%;
 }
 
 .portrait_weapon {
   position: absolute;
   z-index: 5;
-  left: 75px;
-  bottom: 0px;
-  width: 80px;
-  height: 85px;
+  left: 30%;
+  bottom: 0%;
+  width: 26%;
+  height: 43%;
 }
 
 .portrait_shield {
   position: absolute;
   z-index: 5;
-  left: -30px;
-  bottom: 0px;
-  width: 80px;
-  height: 85px;
+  left: -7.5%;
+  bottom: 0%;
+  width: 26%;
+  height: 43%;
   transform: rotateZ(-10deg);
 }
 
-.portrait_class {
+/* .portrait_class {
   height: 50px;
   width: 50px;
   border-radius: 100%;
@@ -311,64 +309,64 @@ span {
   left: 50%;
   bottom: 30px;
   margin-left: -25px;
-}
+} */
 
 .hpbarbg,
 .mpbarbg {
-  width: 128px;
-  height: 23px;
+  width: 42%;
+  height: 11%;
   border: 2px solid black;
   position: absolute;
   background-color: rgb(44, 44, 44);
   box-shadow: inset 0 0 6px 4px rgb(36, 36, 36), 0 0 4px 4px black;
-  left: 153px;
+  left: 50%;
 }
 
 .barNum {
   color: white;
-  font-size: 20px;
+  font-size: 1vw;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: -20px;
+  top: -1vw;
   z-index: 1;
   white-space: nowrap;
 }
 
 .hpbarfill,
 .mpbarfill {
-  left: 155px;
-  height: 23px;
+  left: 50.5%;
+  height: 11%;
   position: absolute;
 }
 
 .hpbarbg {
-  top: 60px;
+  top: 30%;
 }
 
 .mpbarbg {
-  top: 102px;
+  top: 50%;
 }
 
 .hpbarfill {
-  top: 62px;
+  top: 30.5%;
   background-color: rgb(134, 6, 6);
   box-shadow: inset 0 0 6px 4px rgb(80, 3, 3);
 }
 
 .mpbarfill {
-  top: 104px;
+  top: 50.5%;
   background-color: rgb(6, 36, 134);
   box-shadow: inset 0 0 6px 4px rgb(3, 8, 80);
 }
 
 .statusEffects {
-  width: 128px;
-  height: 48px;
+  width: 42%;
+  height: 23%;
   background-color: rgb(34, 33, 33);
   position: absolute;
-  right: 17px;
-  bottom: 16px;
+  right: 6.75%;
+  bottom: 7.5%;
   border: 2px solid black;
   box-shadow: inset 0 0 6px 4px rgb(36, 36, 36), 0 0 4px 4px black;
   overflow: auto;
@@ -588,12 +586,12 @@ span {
 }
 
 #invFrame {
-  width: 1200px;
-  height: 720px;
+  width: 60vw;
+  height: 38vw;
   position: absolute;
   left: 50%;
-  margin-left: -600px;
-  top: 100px;
+  top: 2%;
+  transform: translateX(-50%);
   border-radius: 8px;
   border: 8px solid rgb(80, 80, 80);
   box-shadow: 0 6px 5px 5px rgb(59, 59, 59);
@@ -618,14 +616,15 @@ span {
 
 #invGrid div {
   transition: 0.1s;
-  width: 90px;
-  height: 95px;
+  width: 4.7vw;
+  height: 4.95vw;
   background-color: rgb(54, 54, 54);
   border: 6px solid rgb(27, 27, 27);
   box-sizing: border-box;
-  margin: 12px;
-  padding: 0px;
+  margin: 0.55vw;
+  padding: 0vw;
   position: relative;
+  text-align: center;
 }
 
 #invGrid p {
@@ -633,7 +632,7 @@ span {
   right: 8px;
   bottom: -25px;
   color: white;
-  font-size: 24px;
+  font-size: 1.2vw;
   text-shadow: 0 0 4px black;
 }
 
@@ -644,13 +643,13 @@ span {
 #infoBox {
   transition: 0.2s;
   transform: scale(1);
-  width: 440px;
+  width: 20vw;
   height: fit-content;
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0%;
+  left: 0%;
   user-select: none;
-  background-color: rgb(27, 27, 27);
+  background-color: rgba(27, 27, 27, 0.9);
   text-shadow: 0 1px 2px silver;
   font-weight: bold;
   z-index: 5;
@@ -659,7 +658,7 @@ span {
 #infoBox p,
 span {
   color: rgb(141, 85, 59);
-  font-size: 1.5vw;
+  font-size: 1vw;
   font-family: Codex;
   margin: 0px;
   position: relative;
@@ -668,33 +667,37 @@ span {
 }
 
 .effectBox {
-  width: 420px;
+  width: 95%;
   height: fit-content;
   background: rgb(61, 58, 58);
   position: relative;
-  left: -15px;
+  left: -2.5%;
   border-radius: 8px;
   box-shadow: 0 2px, 4px 4px rgb(32, 32, 32), inset 0 0 8px 8px rgb(47, 47, 47);
+  overflow: hidden;
 }
 
 .effectMain {
   position: relative;
   white-space: nowrap;
-  margin-left: -25px;
-  left: -30px;
+  margin-left: -5%;
+  left: -10%;
+  font-size: 1vw;
 }
 
 .effectLine {
   display: flex;
   white-space: nowrap;
   position: relative;
-  margin-left: -25px;
+  margin-left: -8%;
+  font-size: 1vw;
 }
 
 .effectLine p {
   position: relative;
   text-shadow: 0 0 4px rgb(0, 0, 0) !important;
   font-weight: bold;
+  font-size: 1vw;
 }
 
 .effectLine span {
@@ -702,15 +705,16 @@ span {
   position: relative;
   text-shadow: 0 0 4px rgb(0, 0, 0) !important;
   font-weight: bold;
+  font-size: 1vw;
 }
 
 #infoBox div {
-  margin: 25px;
+  margin: 5%;
 }
 
 .desc {
   color: white;
-  font-size: 24px;
+  font-size: 1vw;
   font-family: CodexLight;
   margin: 0px;
   font-style: italic;
@@ -721,10 +725,11 @@ span {
   color: white;
   text-align: center;
   text-decoration: underline;
+  font-size: 2vw;
 }
 
 #infoBox p {
-  margin-left: 10px;
+  margin-left: 3.5%;
 }
 
 .grid {
@@ -747,8 +752,8 @@ span {
 #armorFrame div,
 #weaponFrame div {
   transition: 0.1s;
-  width: 135px;
-  height: 140px;
+  width: 30%;
+  height: 20%;
   background-color: rgb(54, 54, 54);
   border: 6px solid rgb(27, 27, 27);
   box-sizing: border-box;
@@ -765,7 +770,7 @@ span {
 
 #armorFrame p,
 #weaponFrame p {
-  font-size: 26px;
+  font-size: 1.25vw;
   font-family: CodexLight;
   color: rgb(49, 34, 25);
   text-shadow: -1px 2px 4px rgb(58, 58, 58);
@@ -773,69 +778,69 @@ span {
 }
 
 #helmet {
-  left: 50px;
-  top: 25px;
+  left: 10%;
+  top: 5%;
 }
 
 #helmetText {
-  left: 50px;
-  top: 145px;
+  left: 10%;
+  top: 21%;
 }
 
 #chestarmor {
-  right: 50px;
-  top: 25px;
+  right: 10%;
+  top: 5%;
 }
 
 #chestText {
-  right: 50px;
-  top: 145px;
+  right: 10%;
+  top: 21%;
 }
 
 #gloves {
-  left: 50px;
-  top: 215px;
+  left: 10%;
+  top: 30%;
 }
 
 #glovesText {
-  left: 50px;
-  top: 335px;
+  left: 10%;
+  top: 46%;
 }
 
 #feet {
-  right: 50px;
-  top: 215px;
+  right: 10%;
+  top: 30%;
 }
 
 #feetText {
-  right: 60px;
-  top: 335px;
+  right: 10%;
+  top: 46%;
 }
 
 #weaponSlot {
-  left: 50px;
-  top: 430px;
+  left: 10%;
+  top: 60%;
 }
 
 #weaponText {
-  left: 70px;
-  top: 555px;
+  left: 10%;
+  top: 76%;
 }
 
 #shieldSlot {
-  right: 50px;
-  top: 430px;
+  right: 10%;
+  top: 60%;
 }
 
 #shieldText {
-  right: 90px;
-  top: 555px;
+  right: 10%;
+  top: 76%;
 }
 
 #ringFrame div {
   transition: 0.1s;
-  width: 76px;
-  height: 65px;
+  width: 3.1vw;
+  height: 2.9vw;
   background-color: rgb(54, 54, 54);
   border: 6px solid rgb(27, 27, 27);
   box-sizing: border-box;
@@ -845,7 +850,7 @@ span {
 }
 
 #ringFrame p {
-  font-size: 18px;
+  font-size: 0.9vw;
   font-family: CodexLight;
   color: rgb(49, 34, 25);
   text-shadow: -1px 2px 4px rgb(58, 58, 58);
@@ -853,33 +858,35 @@ span {
 }
 
 #ring1 {
-  left: 60px;
-  bottom: 25px;
+  left: 10%;
+  bottom: 5%;
 }
 
 #ring2 {
-  left: 196px;
-  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 5%;
 }
 
 #ring3 {
-  right: 60px;
-  bottom: 25px;
+  right: 10%;
+  bottom: 5%;
 }
 
 #ring1Text {
-  left: 72px;
-  bottom: -20px;
+  left: 10%;
+  bottom: 0%;
 }
 
 #ring2Text {
-  left: 208px;
-  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0%;
 }
 
 #ring3Text {
-  right: 72px;
-  bottom: -20px;
+  right: 10%;
+  bottom: 0%;
 }
 
 .equippedItem {
