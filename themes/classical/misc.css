@@ -219,21 +219,21 @@
 /* COMBAT */
 
 #combatButtonsContainer {
-  width: 750px;
-  height: 350px;
+  width: 40vw;
+  height: 18vw;
   position: absolute;
   left: 50%;
-  margin-left: -375px;
-  bottom: 140px;
+  transform: translateX(-50%);
+  top: 56vh;
 }
 
-#ability_wheel {
+/* #ability_wheel {
   position: absolute;
   left: -75px;
   bottom: 10px;
   width: fit-content;
   height: fit-content;
-}
+} */
 
 #combatAbility1 img,
 #combatAbility2 img,
@@ -247,6 +247,10 @@
   text-align: center;
   align-self: center;
   justify-self: center;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #combatAbility1,
@@ -257,83 +261,93 @@
 #combatSpell2,
 #combatSpell3,
 #combatSpell4 {
-  height: 96px;
-  width: 96px;
+  height: 4.5vw;
+  width: 4.5vw;
+  text-align: center;
 }
 
 .combatAbiImage {
-  top: 12px;
-  width: 65px;
-  height: 65px;
-  left: 16px;
+  width: 75% !important;
+  height: 75% !important;
+  top: 10%;
 }
 
 #combatAbility1 {
   position: absolute;
-  left: -100px;
-  top: 110px;
+  left: 0%;
+  top: 25%;
 }
 
 #combatAbility2 {
   position: absolute;
-  left: 100px;
-  top: 110px;
+  left: 25%;
+  top: 25%;
 }
 
 #combatAbility3 {
   position: absolute;
-  left: 0px;
-  top: 220px;
+  left: 12.5%;
+  top: 50%;
 }
 
 #combatAbility4 {
   position: absolute;
-  left: 0px;
-  top: 0px;
+  left: 12.5%;
+  top: 0%;
 }
 
 #combatSpell1 {
   position: absolute;
-  left: 550px;
-  top: 110px;
+  right: 25%;
+  top: 25%;
 }
 
 #combatSpell2 {
   position: absolute;
-  left: 750px;
-  top: 110px;
+  right: 0%;
+  top: 25%;
 }
 
 #combatSpell3 {
   position: absolute;
-  left: 650px;
-  top: 220px;
+  right: 12.5%;
+  top: 50%;
 }
 
 #combatSpell4 {
   position: absolute;
-  left: 650px;
-  top: 0px;
+  right: 12.5%;
+  top: 0%;
 }
 
 #combatUltimate {
   position: absolute;
   left: 50%;
-  margin-left: -64px;
+  transform: translateX(-50%);
+  width: 7.5vw;
+  height: 7.5vw;
 }
 
 #combatAttack,
 #combatDefense {
   position: absolute;
-  top: 220px;
+  top: 50%;
+  width: 6.5vw;
+  height: 6.5vw;
+}
+
+#combatAttack img,
+#combatDefense img {
+  width: 100%;
+  height: 100%;
 }
 
 #combatAttack {
-  left: 175px;
+  left: 30%
 }
 
 #combatDefense {
-  right: 175px;
+  right: 30%;
 }
 
 #combatButtonsContainer div {
@@ -346,12 +360,15 @@
   display: block;
   transition: 0.1s;
   background-color: rgba(0, 0, 0, 0.45);
-  width: 200px;
+  width: 15vw;
   height: fit-content;
   position: absolute;
   text-align: center;
   border-radius: 20px;
   z-index: 3;
+  font-size: 1vw !important;
+  margin-left: -5vw;
+  margin-top: -10vh;
 }
 
 #abilityInfo p {

@@ -38,6 +38,8 @@ span {
   box-shadow: inset 0 0 16px 16px rgb(68, 34, 7), 0 0 8px 8px rgb(92, 62, 22);
   overflow: hidden;
   overflow-y: auto;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #contentScroller > p:first-child {
@@ -92,6 +94,8 @@ span {
   top: 2.5px;
   color: silver;
   text-shadow: 0 0 6px black;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #content {
@@ -102,6 +106,8 @@ span {
   top: 5px;
   border: 5px solid black;
   overflow-y: auto;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .CodexCategories,
@@ -116,32 +122,32 @@ span {
 }
 
 .CodexCategories {
-  font-size: 2vw;
+  font-size: 1.4vw;
   text-decoration: underline;
   font-weight: bold;
 }
 
 .CodexArrows {
-  font-size: 1.8vw;
+  font-size: 1.35vw;
   text-decoration: none !important;
   position: absolute;
   user-select: none !important;
 }
 
 .CodexArrowsSmall {
-  font-size: 1.6vw;
+  font-size: 1.15vw;
   text-decoration: none !important;
   position: absolute;
   user-select: none !important;
 }
 
 .CodexSubcategories {
-  font-size: 1.9vw;
+  font-size: 1.35vw;
   text-decoration: underline;
 }
 
 .CodexEntities {
-  font-size: 1.6vw;
+  font-size: 1.15vw;
   position: relative;
   cursor: pointer;
 }
@@ -154,13 +160,13 @@ span {
 
 .CodexEntryTitle {
   font-family: "Charmonman" !important;
-  font-size: 3.5vw;
+  font-size: 3vw;
   color: rgb(36, 17, 8);
   text-shadow: 0 0 16px black;
   text-decoration: underline;
   position: absolute;
   left: 50%;
-  top: -40px;
+  top: 0%;
   transform: translateX(-50%);
   white-space: nowrap;
   font-weight: bold;
@@ -222,7 +228,7 @@ span {
 
 #allyportraits {
   width: 18vw;
-  height: 38.5vw;
+  height: 80vh;
   position: absolute;
   left: 0%;
   top: 0%;
@@ -231,7 +237,7 @@ span {
 
 #enemyportraits {
   width: 18vw;
-  height: 38.5vw;
+  height: 80vh;
   position: absolute;
   right: 1.75%;
   top: 0%;
