@@ -137,7 +137,7 @@ async function EndRound() {
     for(let mod of act.performer.modifiers) {
       if(mod.everyTurn && mod.power) {
         let damag = 0;
-        for(dmg of mod.power) {
+        for(let dmg of mod.power) {
           act.performer.stats.hp -= dmg.value;
           damag += dmg.value;
         }
@@ -367,9 +367,9 @@ function EndRound_Summon(act, container) {
   global.combat.ally = act.ally
   global.combat.summoned = eval(act.abi.action);
   BV = global.combat;
-  SuitableText = GetRandomCombatText("summon");
+  let SuitableText = GetRandomCombatText("summon");
   let bt = JSON.parse(JSON.stringify(global.combat));
-  let actionElem = ReadContentCombat("summon");
+  let actionElem = ReadContentCombat(SuitableText);
   thisRoundHistory.push({ actionElem: actionElem });
   thisBattleHistory.push({ actionElem: actionElem });
   container.appendChild(actionElem);
@@ -386,6 +386,7 @@ function EndRound_Heal(act, container) {
   global.combat.target = act.target;
   global.combat.value = Math.ceil(eval(act.action));
   BV = global.combat;
+  let SuitableText;
   if(act.target == act.performer) SuitableText = GetRandomCombatText("self heal");
   else SuitableText = GetRandomCombatText("target heal");
   let bt = JSON.parse(JSON.stringify(global.combat))

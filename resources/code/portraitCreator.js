@@ -69,7 +69,7 @@ function statusEffectInfo() {
   }
   else if (hovering == event.target) {
     hoverbox.style.top = `${event.y}px`;
-    hoverbox.style.left = `${event.x}px`;
+    hoverbox.style.left = `${event.x - 150}px`;
   }
   let pass = event;
   infodelay = setTimeout(() => statusEffectInfoExecute(pass), global.combat.delay);
@@ -89,7 +89,7 @@ function statusEffectInfoExecute(event) {
       hoverbox.appendChild(ReadContentCombat(infotext))
     }
     hoverbox.style.top = `${event.y}px`;
-    hoverbox.style.left = `${event.x}px`;
+    hoverbox.style.left = `${event.x - 150}px`;
 }
 
 function statusEffectHide() {
