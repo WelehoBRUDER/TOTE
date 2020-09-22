@@ -101,7 +101,7 @@
   border: 8px solid rgb(20, 13, 1);
   box-shadow: 0 8px 6px 8px rgb(39, 12, 1), inset 0 0 8px 8px rgb(80, 31, 3);
   z-index: 3;
-  background-image: url("../../resources/images/themes/rework/bg/bg_red.png");
+  background-image: url("../../resources/images/themes/classical/bg/bg_red.png");
 }
 
 #qlContainer {
@@ -366,7 +366,7 @@
 #combatTextContainer {
   width: 45vw;
   height: 42vh;
-  background-image: url("../../resources/images/themes/rework/bg/bg_gray.png");
+  background-image: url("../../resources/images/themes/classical/bg/bg_gray.png");
   position: absolute;
   top: 10px;
   left: 50%;
@@ -436,7 +436,7 @@
   border: 4px solid black;
   box-sizing: border-box;
   top: 10%;
-  background-image: url("../../resources/images/themes/rework/bg/bg_gray.png");
+  background-image: url("../../resources/images/themes/classical/bg/bg_gray.png");
   font-family: Codex;
   font-size: 17px;
   text-align: center;
