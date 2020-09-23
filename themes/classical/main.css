@@ -694,7 +694,7 @@ span {
   font-family: Codex;
   margin: 0px;
   position: relative;
-  filter: brightness(80%);
+  filter: brightness(60%) saturate(150%);
   text-shadow: none !important;
   font-weight: bold;
 }
