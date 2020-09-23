@@ -167,6 +167,7 @@ characters.player.lit = false;
 characters.player.inventory = [
   AddItem("broken_iron_sword"),
   AddItem("broken_iron_dagger"),
+  AddItem("simple_iron_spear"),
   AddItem("rusty_iron_bastard_sword"),
   AddItem("leather_chest"),
   AddItem("leather_helmet"),

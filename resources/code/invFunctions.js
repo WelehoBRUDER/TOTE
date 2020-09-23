@@ -106,6 +106,17 @@ function ShowItemInfo(e) {
     effectDiv.appendChild(effects(itm.effects));
     infoContainer.appendChild(effectDiv);
   }
+  if(itm.traits) {
+    let traitContainer = Create("p");
+    traitContainer.classList.add("traitContainer");
+    for(let trait of itm.traits) {
+      let span = Create("span");
+      if(trait.value > 0) span.textContent = `${trait.title}: ${GetStringByKey(trait.action, traitActions)} increased by ${trait.value}%`;
+      else if(trait.value < 0) span.textContent = `${trait.title}: ${GetStringByKey(trait.action, traitActions)} decreased by ${trait.value}%`;
+      traitContainer.appendChild(span);
+    }
+    infoContainer.appendChild(traitContainer);
+  }
 }
 
 function effects(effects) {
@@ -121,6 +132,7 @@ function effects(effects) {
   }
   return main;
 }
+
 
 
 function GetStringByKey(key, array) {
@@ -152,7 +164,7 @@ function HandleDescSyntax(text) {
       text = colors.split("/")[2];
     } else if (text == undefined) text = colors;
     if (text == ":break") textContent.innerHTML += "<br>";
-    else if (img != undefined) textContent.innerHTML += `<img style="width: 22px; height: 22px;" src="resources/images/icons/${img}.png">`;
+    else if (img != undefined) textContent.innerHTML += `<img style="width: 1.1vw; height: 1.1vw;" src="resources/images/icons/${img}.png">`;
     else if (text) textContent.innerHTML += `<span style = "color: ${color || "white"}" class="desc">${text}</span>`;
   }
   return textContent;
@@ -454,6 +466,10 @@ const symbols = [
   { key: "fth", content: "§/rgb(201, 198, 187)/faith §%warn_icon%§" },
   { key: "acc", content: "§/rgb(201, 198, 187)/accuracy §%warn_icon%§" },
 ];
+
+const traitActions = [
+  { key: "flying_target_hit_chance", content: "Chance to hit flying enemies" }
+]
 
 function GetAVGArmor(char) {
   let arm = {};

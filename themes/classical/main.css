@@ -669,7 +669,7 @@ span {
   font-family: Codex;
   margin: 0px;
   position: relative;
-  filter: brightness(50%);
+  filter: brightness(80%);
   text-shadow: none !important;
 }
 
@@ -713,6 +713,12 @@ span {
   text-shadow: 0 0 4px rgb(0, 0, 0) !important;
   font-weight: bold;
   font-size: 1vw;
+}
+
+.traitContainer span {
+  font-weight: bold;
+  color: white;
+  filter: brightness(80%) !important;
 }
 
 #infoBox div {
