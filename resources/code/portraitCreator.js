@@ -45,9 +45,9 @@ function loopMods(char) {
       let img = Create("img");
       img.src = `resources/images/${mod.img}`;
       img.id = mod.key;
-      img.style.width = "33px";
-      img.style.height = "33px";
-      img.style.margin = "3px";
+      img.style.width = "1.8vw";
+      img.style.height = "1.8vw";
+      img.style.margin = "0.1vw";
       d.appendChild(img);
     }
   }

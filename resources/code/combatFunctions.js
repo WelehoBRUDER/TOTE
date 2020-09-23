@@ -139,28 +139,13 @@ function CombatSpell(char, slot) {
 var delay = null;
 var fadeoutDelay = null;
 
-// function CombatSpell(char, slot) {
-//   if(spellOfSlot(char, slot) != undefined) {
-//     let spell = spellOfSlot(char, slot);
-//     return `<div id="combatSpell${slot}" onmouseover="showInfoCombat('${spell.key}', this)" onmouseleave="hideInfoCombat()">
-//     <img src="resources/images/icons/spell_wheel.png">
-//     <img src="resources/images/${spell.img}" class="combatAbiImage">
-//     </div>`
-//   }
-//   else {
-//     return `<div id="combatSpell${slot}">
-//     <img src="resources/images/icons/spell_wheel.png">
-//     </div>`
-//   }
-// }
-
 function infoContent(key, elem) {
   Element("abilityInfo").textContent = "";
   let text = GetCombatInfo(key);
   if(text == undefined) text = "§¤s19-BB¤/red/Unfortunately it seems that your text was not found...§";
   Element("abilityInfo").style.background = "rgba(0,0,0,0.55)";
   Element("abilityInfo").style.opacity = "1.00";
-  Element("abilityInfo").style.top = `${((elem.offsetTop) / document.documentElement.clientHeight) * 100}vh`;
+  Element("abilityInfo").style.top = `${((elem.offsetTop) / document.documentElement.clientHeight) * 90}vh`;
   Element("abilityInfo").style.left = `${((elem.offsetLeft) / document.documentElement.clientWidth) * 100}vw`;
   Element("abilityInfo").appendChild(ReadContentCombat(text));
 }
@@ -256,14 +241,14 @@ function ReadContentCombat(text) {
     style += ` color: ${color};`;
     if (text == ":break") textContent.innerHTML += "<br>";
     else if(global.quickload && img != undefined) {
-      if (img != undefined && link == undefined) textContent.innerHTML += `<img style="width: 2.3vw; height: 3.4vh;" src="resources/images/${img}.png">`;
-      else if (img != undefined && link != undefined) textContent.innerHTML += `<img style="width: 2.3vw; height: 3.4vh;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
+      if (img != undefined && link == undefined) textContent.innerHTML += `<img style="width: 2.3vw; height: 2.3vw;" src="resources/images/${img}.png">`;
+      else if (img != undefined && link != undefined) textContent.innerHTML += `<img style="width: 2.3vw; height: 2.3vw;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
     }
     else if(!global.quickload && img != undefined) {
-      if (img != undefined && link == undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="wifth: 2.4vw; height: 3.5vh;" src="resources/images/${img}.png">`;
-      else if(img != undefined && link == undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="wifth: 2.4vw; height: 3.5vh;" src="resources/images/events/missing_image.png">`;
-      else if (img != undefined && link != undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="wifth: 2.4vw; height: 3.5vh;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
-      else if(img != undefined && link != undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="wifth: 2.4vw; height: 3.5vh;" class="PointerClass" src="resources/images/events/missing_image.png" onclick="${link}">`;
+      if (img != undefined && link == undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 2.4vw; height: 3.5vh;" src="resources/images/${img}.png">`;
+      else if(img != undefined && link == undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 2.4vw; height: 3.5vh;" src="resources/images/events/missing_image.png">`;
+      else if (img != undefined && link != undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 2.4vw; height: 3.5vh;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
+      else if(img != undefined && link != undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 2.4vw; height: 3.5vh;" class="PointerClass" src="resources/images/events/missing_image.png" onclick="${link}">`;
     }
     else if (link != undefined) textContent.innerHTML += `<span style = "${style}" class="PointerClass" onclick="${link}">${text}</span>`;
     else if (text) textContent.innerHTML += `<span style = "${style}" >${text}</span>`;

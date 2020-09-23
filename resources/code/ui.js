@@ -78,10 +78,10 @@ function Worldmap() {
 function toggleQL() {
   if(global.quickload == false) {
     global.quickload = true;
-    Element("qlCheck").style.transform = "scale(1.00)";
+    Element("qlCheck").style.transform = "translateX(-50%) translateY(-127.5%) scale(1.0)";
   } else {
     global.quickload = false;
-    Element("qlCheck").style.transform = "scale(0.00)";
+    Element("qlCheck").style.transform = "translateX(-50%) translateY(-127.5%) scale(0)";
   }
 }
 
