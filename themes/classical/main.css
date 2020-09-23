@@ -1,3 +1,25 @@
+*{
+  scrollbar-width: thin;
+  scrollbar-color: black transparent;
+}
+
+::-webkit-scrollbar
+{
+  width: 6px !important;  /* for vertical scrollbars */
+  height: 6px !important; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: black !important;
+  border-radius: 3px;
+}
+
 body {
   background-color: rgb(61, 61, 61);
   user-select: none;
