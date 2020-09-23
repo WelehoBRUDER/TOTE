@@ -138,12 +138,20 @@
   top: 120px;
 }
 
+#themeSelect {
+  top: 9vw;
+}
+
 #combatSpeedText {
   top: 25px;
 }
 
 #combatDelayText {
   top: 85px;
+}
+
+#themeSelectText {
+  top: 9.5vw;
 }
 
 .optionsCheck {
