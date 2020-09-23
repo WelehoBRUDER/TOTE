@@ -112,7 +112,8 @@
 }
 
 #combatSpeed,
-#combatDelay {
+#combatDelay,
+#themeSelect {
   position: absolute;
   left: 0%;
   width: 30%;
@@ -128,7 +129,8 @@
 }
 
 #combatSpeedText,
-#combatDelayText {
+#combatDelayText,
+#themeSelectText {
   position: absolute;
   left: 35%;
   transform: translateY(-115%);
@@ -142,12 +144,20 @@
   top: 6vw;
 }
 
+#themeSelect {
+  top: 9vw;
+}
+
 #combatSpeedText {
   top: 3.5vw;
 }
 
 #combatDelayText {
   top: 6.5vw;
+}
+
+#themeSelectText {
+  top: 9.5vw;
 }
 
 .optionsCheck {

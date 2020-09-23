@@ -79,3 +79,9 @@ function getMonth() {
 }
 
 GlobalUpdate();
+
+function ReloadTheme() {
+  const baseURL = "./themes/"
+  Element("maintheme").href = baseURL + global.theme + '/main.css'
+  Element("misctheme").href = baseURL + global.theme + '/misc.css'
+}

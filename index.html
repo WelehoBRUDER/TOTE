@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TOTE - v0.0.2</title>
-    <link rel="stylesheet" href="./themes/classical/misc.css" />
-    <link rel="stylesheet" href="./themes/classical/main.css" />
+    <link id="maintheme" rel="stylesheet" href="./themes/classical/misc.css" />
+    <link id="misctheme" rel="stylesheet" href="./themes/classical/main.css" />
     <link rel="stylesheet" href="map.css" />
   </head>
 
@@ -144,6 +144,11 @@
           <option value="400">Short</option>
           <option value="150">Very Short</option>
           <option value="1">Instant</option>
+        </select>
+        <p id="themeSelectText" class="optionsText">Theme</p>
+        <select id="themeSelect" onchange="global.theme=this.value; ReloadTheme()">
+          <option value="classical">Classical</option>
+          <option value="original">Original</option>
         </select>
         <p class="optionsText">Enable Quick Load</p>
       </div>

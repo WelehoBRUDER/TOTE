@@ -107,7 +107,8 @@
 }
 
 #combatSpeed,
-#combatDelay {
+#combatDelay,
+#themeSelect {
   position: absolute;
   left: 10px;
   width: 120px;
@@ -123,7 +124,8 @@
 }
 
 #combatSpeedText,
-#combatDelayText {
+#combatDelayText,
+#themeSelectText {
   position: absolute;
   left: 140px;
 }
