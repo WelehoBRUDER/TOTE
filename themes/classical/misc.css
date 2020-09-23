@@ -390,7 +390,9 @@
 #abilityInfo {
   display: block;
   transition: 0.1s;
-  background-color: rgba(0, 0, 0, 0.45);
+  /* background-color: rgba(0, 0, 0, 0.45); */
+  background: rgb(227, 195, 109) !important;
+  box-shadow: inset 0vw 0vw 2em 1.5em rgb(199, 168, 82);
   width: 15vw;
   height: fit-content;
   position: absolute;
@@ -409,6 +411,7 @@
 
 #abilityInfo span {
   font-size: 1vw;
+  filter: brightness(60%);
 }
 
 #combatTextContainer {
@@ -512,7 +515,9 @@
   position: absolute;
   left: 10%;
   top: 10%;
-  background: rgba(0, 0, 0, 0.45);
+  /* background: rgba(0, 0, 0, 0.45); */
+  background: rgb(227, 195, 109) !important;
+  box-shadow: inset 0vw 0vw 1.5em 1.2em rgb(199, 168, 82);
   width: fit-content;
   height: fit-content;
   max-width: 11vw;
@@ -520,13 +525,14 @@
   font-family: Codex;
   z-index: 10;
   margin: 0px;
+  border-radius: 1.2vw;
 }
 
 #statusInfo span{
   font-size: 1vw !important;
   align-self: center;
-  color: white;
-  filter: brightness(90%);
+  color: rgb(51, 41, 25);
+  filter: brightness(75%);
 }
 
 #statusInfo p {
