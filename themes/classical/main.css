@@ -656,10 +656,13 @@ span {
   top: 0%;
   left: 0%;
   user-select: none;
-  background-color: rgba(27, 27, 27, 0.9);
+  /*background-color: rgba(27, 27, 27, 0.9);*/
+  background: rgb(227, 195, 109);
+  box-shadow: inset 0vw 0vw 7em 5em rgb(199, 168, 82);
   text-shadow: 0 1px 2px silver;
   font-weight: bold;
   z-index: 5;
+  border-radius: 1.8vw;
 }
 
 #infoBox p,
@@ -671,16 +674,17 @@ span {
   position: relative;
   filter: brightness(80%);
   text-shadow: none !important;
+  font-weight: bold;
 }
 
 .effectBox {
   width: 95%;
   height: fit-content;
-  background: rgb(61, 58, 58);
+  background: rgb(158, 131, 58);
   position: relative;
   left: -2.5%;
-  border-radius: 8px;
-  box-shadow: 0 2px, 4px 4px rgb(32, 32, 32), inset 0 0 8px 8px rgb(47, 47, 47);
+  border-radius: 0.55vw;
+  box-shadow: 0 0.1vw, 0.2vw 0.2vw rgb(114, 93, 36), inset 0 0 0.4vw 0.4vw rgb(139, 115, 47);
   overflow: hidden;
 }
 
