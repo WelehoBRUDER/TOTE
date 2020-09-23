@@ -13,6 +13,7 @@ function FormCombatEnvironment() {
   <div id="abilityInfo"></div>
 <img src="resources/images/themes/${global.theme}/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, 'RegularAttack()', global.controlling)">
 <img src="resources/images/themes/${global.theme}/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()" onclick="AddToRound('Defend()', global.controlling.key)">
+<div id="ultimateGodrays" class="enabled"></div>
 <img src="resources/images/themes/${global.theme}/icons/ultimate_ability.png" id="combatUltimate">
   </div>`;
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 1));

@@ -260,15 +260,15 @@
 #combatSpell2,
 #combatSpell3,
 #combatSpell4 {
-  height: 4.5vw;
-  width: 4.5vw;
+  height: 5vw;
+  width: 5vw;
   text-align: center;
 }
 
 .combatAbiImage {
-  width: 75% !important;
-  height: 75% !important;
-  top: 10%;
+  width: 50% !important;
+  height: 50% !important;
+  top: 25%;
 }
 
 #combatAbility1 {
@@ -320,11 +320,43 @@
 }
 
 #combatUltimate {
+  display: block;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   width: 7.5vw;
   height: 7.5vw;
+}
+
+#ultimateGodrays.enabled {
+  /* Enable when ultimate ready */
+  /* Broken for now, can't change width */
+  --width-multi: 1;
+
+  background-image: url("../../resources/images/themes/classical/icons/godrays.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation: godrays 10s infinite linear;
+  display: block;
+  position: absolute;
+  left: calc(50% - 7.5vw* var(--width-multi));
+  top: calc(-15vw/4*var(--width-multi));
+  width: calc(15vw * var(--width-multi));
+  height: calc(15vw * var(--width-multi));
+  opacity: 75%;
+}
+
+#ultimateGodrays.disabled {
+  display: none;
+}
+
+@keyframes godrays {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 #combatAttack,
