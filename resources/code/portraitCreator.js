@@ -2,10 +2,6 @@ function CreatePortrait(character, enemy) {
   let portrait = Create('div');
   portrait.id = character.key + "_Portrait";
   let name = character.name;
-  if (name.length > 18) {
-    name = name.substring(0, 17);
-    name += "...";
-  }
   let portrait_image_url = `${character.image}`;
   if (character.key.startsWith("summon_")) {
     if (enemy) portrait_image_url = `${character.images.hostile}`;
@@ -156,6 +152,7 @@ function PushCombatantToTable(combatant, table) {
   copy.armor = GetAVGArmor(copy);
   copy.hasActed = false;
   copy.threat = 0;
+  if(table != alliesFight) copy.name = CreateName(copy);
   if (copy.armor == {}) copy.armor = ArmorZero();
   table.push(copy);
 }

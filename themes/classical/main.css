@@ -277,18 +277,24 @@ span {
   background-size: cover;
   margin: 10%;
   border-radius: 1vw;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .portrait_title {
-  font-size: 1.2vw;
+  max-width: 95%;
+  font-size: 1vw;
   color: gold;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   top: -5%;
   text-shadow: -2px 2px 2px black;
-  white-space: nowrap;
   text-decoration: underline;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .portrait_image {

@@ -22,9 +22,10 @@ class Actor {
  * @param {type}      objectVar.key Description of a key in the objectVar parameter.
  * @param {String}    article       the/a/an.
  */
-  constructor(key, name, race, Class, equipment, color, image, article="the") {
+  constructor(key, name, namePool, race, Class, equipment, color, image, article="the") {
     this.key = key,
       this.name = name,
+      this.namePool = namePool,
       this.race = race,
       this.class = Class,
       this.equipment = equipment,
@@ -36,7 +37,7 @@ class Actor {
 
 class Player extends Actor {
   constructor(Class, equipment, stats, pron) {
-    super("player", player_name, Race("Human"), Class, equipment, player_color, player_image)
+    super("player", player_name, "none",  Race("Human"), Class, equipment, player_color, player_image)
     this.stats = stats
     this.pron = pron
   }
@@ -46,8 +47,8 @@ class Enemy extends Actor {
   /**
  * @extends Actor
  */
-  constructor(key, name, race, Class, equipment, color, image, modifiers, abilities, statBonuses, xp, stats, pron, ai_behauviour, article, spells=[]) {
-    super(key, name, race, Class, equipment, color, image, article),
+  constructor(key, name, namePool, race, Class, equipment, color, image, modifiers, abilities, statBonuses, xp, stats, pron, ai_behauviour, article, spells=[]) {
+    super(key, name, namePool, race, Class, equipment, color, image, article),
     this.modifiers = modifiers,
     this.abilities = abilities,
     this.statBonuses = statBonuses,
@@ -60,8 +61,8 @@ class Enemy extends Actor {
 }
 
 class Ally extends Actor {
-  constructor(key, name, race, Class, equipment, color, image, modifiers, abilities, xp, stats, pron, ai, ai_behauviour, spells=[]) {
-    super(key, name, race, Class, equipment, color, image),
+  constructor(key, name, namePool, race, Class, equipment, color, image, modifiers, abilities, xp, stats, pron, ai, ai_behauviour, spells=[]) {
+    super(key, name, namePool, race, Class, equipment, color, image),
     this.modifiers = modifiers,
     this.abilities = abilities,
     this.xp = xp,
@@ -74,8 +75,8 @@ class Ally extends Actor {
 }
 
 class Summon extends Actor {
-  constructor(key, name, race, Class, equipment, color, images, modifiers, abilities, statBonuses, xp, stats, pron, ai, ai_behauviour, article, spells=[]) {
-    super(key, name, race, Class, equipment, color, null, article),
+  constructor(key, name, namePool, race, Class, equipment, color, images, modifiers, abilities, statBonuses, xp, stats, pron, ai, ai_behauviour, article, spells=[]) {
+    super(key, name, namePool, race, Class, equipment, color, null, article),
     this.images = images,
     this.modifiers = modifiers,
     this.abilities = abilities,
@@ -103,7 +104,7 @@ var characters = {
       AddItem("leather_chest"),
     ], {}, {objective: "him", possesive: "his", singular: "he"}),
   allies: [
-    new Ally("christina_healer", "Christina Schutzengel", Race("Human"), CharClass("Healer"), [
+    new Ally("christina_healer", "Christina Schutzengel", "women",  Race("Human"), CharClass("Healer"), [
       AddItem("wooden_healing_staff"),
       AddItem("leather_chest"),
     ], "gold", "portraits/portrait_white_mage_temp", [], [], {points: 0, needed: 100, modifier: 1.00, level: 1}, {},
@@ -112,7 +113,7 @@ var characters = {
     }, [Spell("healing-light")])
   ],
   enemies: [
-    new Enemy("goblin_simp", "Goblin Simp",  Race("Goblin"), CharClass("Warrior"), 
+    new Enemy("goblin_simp", "Goblin Simp", "men",  Race("Goblin"), CharClass("Warrior"), 
     [
       AddItem("wooden_club"),
       AddItem("leather_helmet"),
@@ -123,7 +124,7 @@ var characters = {
       healing_self: 40
     }, "a", [Spell("dim-healing-light")]),
 
-    new Enemy("goblin_queen", "Goblin Queen",  Race("Goblin Queen"), CharClass("Healer"), 
+    new Enemy("goblin_queen", "Goblin Queen", "women",  Race("Goblin Queen"), CharClass("Healer"), 
     [
       AddItem("wooden_healing_staff"),
       AddItem("leather_helmet"),
@@ -134,7 +135,7 @@ var characters = {
       healing: 60, healing_self: 40
     }, "the", [Spell("healing-light"), Spell("dim-healing-light")]),
 
-    new Enemy("goblin_king", "Goblin King",  Race("Goblin King"), CharClass("Brawler"), 
+    new Enemy("goblin_king", "Goblin King", "men",  Race("Goblin King"), CharClass("Brawler"), 
     [
       AddItem("rusty_iron_bastard_sword"),
       AddItem("leather_chest"),
@@ -147,13 +148,13 @@ var characters = {
 }
 
 const summons = [
-  new Summon("summon_skeleton_warrior", "Skeleton Warrior", Race("Skeleton"), CharClass("Warrior"), 
+  new Summon("summon_skeleton_warrior", "Skeleton Warrior", "none", Race("Skeleton"), CharClass("Warrior"), 
   [
     AddItem("rusty_iron_bastard_sword"),
     AddItem("leather_chest"),
   ], "rgb(148, 148, 148)", {friendly: "portraits/portrait_skeleton_warrior_ally", hostile: "portraits/portrait_skeleton_warrior_enemy"},
   [], [], [], {level: 1}, {}, {objective: "him", possesive: "his", singular: "he"}, true, [], "a"),
-  new Summon("summon_earth_golem", "Earth Golem", Race("Earth Golem"), CharClass("Brawler"), 
+  new Summon("summon_earth_golem", "Earth Golem", "none", Race("Earth Golem"), CharClass("Brawler"), 
   [
     AddItem("wooden_club"),
     AddItem("leather_gloves")
