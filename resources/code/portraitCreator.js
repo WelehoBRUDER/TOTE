@@ -338,7 +338,10 @@ function generateCharacterSheet(char) {
     if(stat == "maxhp" || stat == "maxmana" || stat == "hp" || stat == "mana") continue;
     statItem.classList.add("characterSheet--stats-item");
     statItem.appendChild(statTexture);
-    statItem.innerHTML += statToText(stat) + ": " + target.stats[stat];
+    let val = 0;
+    if(stat == "spd") val = CalculateSpeed(target);
+    else val = target.stats[stat];
+    statItem.innerHTML += statToText(stat) + ": " + val;
     statSheet.appendChild(statItem);
   }
   base.appendChild(statSheet);

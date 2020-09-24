@@ -134,6 +134,9 @@ async function EndRound() {
     let SuitableText = null;
     let trigger1 = null;
     let trigger2 = null;
+    if(act.performer.stats.hp <= 0) {
+      continue;
+    }
     for(let mod of act.performer.modifiers) {
       if(mod.everyTurn && mod.power) {
         let damag = 0;
@@ -144,11 +147,13 @@ async function EndRound() {
         global.combat.value = damag;
         global.combat.actor = act.performer;
         container.appendChild(ReadContentCombat(GetRandomCombatText("everyturn")));
+        if (global.combat.speed > 0) await sleep(global.combat.speed);
+        continue;
       }
     }
     if(act.action != "resurrect" && act.target?.stats?.hp <= 0) continue;
     //console.log(act.action);
-    if(act.action == "recover") {
+    if(act.action == "recover" || IsStunned(act.performer)) {
       EndRound_Recover(act, container);
       if (global.combat.speed > 0) await sleep(global.combat.speed);
        continue;
@@ -211,6 +216,7 @@ async function EndRound() {
     thisRoundHistory.push({ actionElem: actionElem });
     thisBattleHistory.push({ actionElem: actionElem });
     if (act.target.stats.hp <= 0) {
+      if (global.combat.speed > 0) await sleep(global.combat.speed);
       EndRound_targetDeath(act, container);
     }
     container.scrollTop = container.scrollHeight;

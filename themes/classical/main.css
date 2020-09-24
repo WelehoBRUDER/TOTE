@@ -73,7 +73,7 @@ body {
   width: 15.5vw;
   height: 10.5vw;
   background-color: rgb(66, 66, 66);
-  box-shadow: 0 0 15px 12px rgb(31, 31, 31);
+  box-shadow: 0 0 0.3vw 0.2vw rgb(31, 31, 31);
   position: relative;
   background-image: url("../../resources/images/themes/classical/portraits/portrait_background.png");
   background-repeat: no-repeat;
@@ -81,7 +81,6 @@ body {
   margin: 10%;
   border-radius: 1vw;
   text-overflow: ellipsis;
-  overflow: hidden;
   white-space: nowrap;
   cursor: pointer;
   pointer-events: all;

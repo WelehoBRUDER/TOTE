@@ -41,7 +41,7 @@ function DrawMap() {
             break;
         }
         img.onload = function () {
-          ctx.drawImage(img, x * 80, y * 80);
+          ctx.drawImage(img, x * 80, y * 80, 80, 80);
           if (characters.player.cords.x == x && characters.player.cords.y == y && !characters.player.lit) DrawPlayer();
           else if (characters.player.cords.x == x && characters.player.cords.y == y && characters.player.lit) DrawPlayerHighlight();
         }
@@ -55,7 +55,7 @@ function DrawPlayer() {
   let img = new Image();
   img.src = "resources/images/tiles/player_tile.png";
   img.onload = function () {
-    ctx.drawImage(img, characters.player.cords.x * 80, characters.player.cords.y * 80);
+    ctx.drawImage(img, characters.player.cords.x * 80, characters.player.cords.y * 80, 80, 80);
   }
 }
 
@@ -64,7 +64,7 @@ function DrawPlayerHighlight() {
   let img = new Image();
   img.src = "resources/images/tiles/playerHighlight_tile.png";
   img.onload = function () {
-    ctx.drawImage(img, characters.player.cords.x * 80, characters.player.cords.y * 80);
+    ctx.drawImage(img, characters.player.cords.x * 80, characters.player.cords.y * 80, 80, 80);
   }
 }
 
@@ -160,7 +160,7 @@ function DrawImage(x, y) {
       break;
   }
   img.onload = function () {
-    ctx.drawImage(img, x * 80, y * 80);
+    ctx.drawImage(img, x * 80, y * 80, 80, 80);
   }
 }
 

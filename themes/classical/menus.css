@@ -312,6 +312,7 @@
     font-family: CodexMedium;
     color: rgb(87, 57, 38);
     filter: brightness(50%);
+    padding-right: 0.4vw;
 }
 
 .characterSheet--sheetContainer {
