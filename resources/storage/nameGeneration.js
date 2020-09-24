@@ -4,10 +4,8 @@ const CreateName = (char)=>{
   for(let cat of names) {
     if(char.race.key.indexOf(cat.key) != -1) {
       for(let pool of cat.pools) {
-        console.log(pool.pool);
         if(pool.pool == char.namePool) {
           let nameString = `${pool.names[Random(pool.names.length)]} the ${char.name}`;
-          console.log(nameString);
           return nameString;
         }
       }
@@ -53,7 +51,8 @@ const names = [
           "Craazet",
           "Juiveecs",
           "Keettiats",
-          "Vruirlact"
+          "Vruirlact",
+          "Kullervo"
         ]
       },
       {
@@ -88,7 +87,8 @@ const names = [
           "Wutulk",
           "Chosrishee",
           "Leesbarxe",
-          "Jolkinq"
+          "Jolkinq",
+          "Grunhilde"
         ]
       }
     ]

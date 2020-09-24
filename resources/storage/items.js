@@ -63,7 +63,7 @@ class Effect {
 function AddItem(key) {
   let copy;
   for(let item of items) {
-    if(item.key == key) copy = JSON.parse(JSON.stringify(item));
+    if(item.key == key) copy = deepCopy(item);
   }
   return copy;
 }
