@@ -225,8 +225,27 @@ function generateCharacterSheet(char) {
 
   let portrait = Create("img");
   portrait.classList.add("characterSheet--image");
+  portrait.style.borderColor = target.color;
   portrait.src = `../../resources/images/${target.image}.png`;
   base.appendChild(portrait);
+
+  let ManaHealthContainer = Create("div");
+  ManaHealthContainer.classList.add("characterSheet--basestats");
+  let manaIcon = Create("div");
+  let healthIcon = Create("div");
+  manaIcon.classList.add("characterSheet--basestats-mana");
+  healthIcon.classList.add("characterSheet--basestats-health");
+  let manaNumber = Create("p");
+  let healthNumber = Create("p");
+  manaNumber.classList.add("characterSheet--basestats-number");
+  healthNumber.classList.add("characterSheet--basestats-number");
+  manaNumber.textContent = target.stats.maxmana;
+  healthNumber.textContent = target.stats.maxhp;
+  manaIcon.appendChild(manaNumber);
+  healthIcon.appendChild(healthNumber);
+  ManaHealthContainer.appendChild(manaIcon);
+  ManaHealthContainer.appendChild(healthIcon);
+  base.appendChild(ManaHealthContainer);
 
   let name = Create("p");
   name.classList.add("characterSheet--name");
@@ -250,6 +269,15 @@ function generateCharacterSheet(char) {
 
   let abilitySheet = Create("div");
   abilitySheet.classList.add("characterSheet--abilities");
+  if(target.abilities.length == 0) {
+    let abilitySheetItem = Create("div");
+    abilitySheetItem.classList.add("characterSheet--abilities-item");
+    let abilityName = Create("p");
+    abilityName.classList.add("characterSheet--abilities-name");
+    abilityName.textContent = "No special abilities!";
+    abilitySheetItem.appendChild(abilityName);
+    abilitySheet.appendChild(abilitySheetItem);
+  }
   for(let abi of target.abilities) {
     let abilitySheetItem = Create("div");
     abilitySheetItem.classList.add("characterSheet--abilities-item");
@@ -283,6 +311,15 @@ function generateCharacterSheet(char) {
     spellName.textContent = abi.name;
     spellSheetItem.appendChild(spellName);
     spellSheet.appendChild(spellSheetItem);
+  }
+  if(target.spells.length == 0) {
+    let abilitySheetItem = Create("div");
+    abilitySheetItem.classList.add("characterSheet--abilities-item");
+    let abilityName = Create("p");
+    abilityName.classList.add("characterSheet--abilities-name");
+    abilityName.textContent = "No affinity for spells!";
+    abilitySheetItem.appendChild(abilityName);
+    spellSheet.appendChild(abilitySheetItem);
   }
   base.appendChild(spellSheet);
 

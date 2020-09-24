@@ -129,7 +129,7 @@ var characters = {
       AddItem("wooden_healing_staff"),
       AddItem("leather_helmet"),
       AddItem("leather_chest"),
-    ], "rgb(34,139,34)", "portraits/portrait_goblin_queen", [], [], [], {level: 5},
+    ], "rgb(34,139,34)", "portraits/portrait_goblin_queen", [], [], [], {level: 1},
     {}, {objective: "her majesty", possesive: "her majesty's", singular: "her majesty"}, 
     {
       healing: 60, healing_self: 40
@@ -142,7 +142,7 @@ var characters = {
       AddItem("leather_helmet"),
       AddItem("leather_gloves"),
       AddItem("leather_boots")
-    ], "rgb(154,205,50)", "portraits/portrait_goblin_king", [], [], [], {level: 5},
+    ], "rgb(154,205,50)", "portraits/portrait_goblin_king", [], [], [], {level: 1},
     {}, {objective: "him", possesive: "his", singular: "he"}, [], "the"),
   ]
 }
