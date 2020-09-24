@@ -267,6 +267,9 @@ function generateCharacterSheet(char) {
   }
   base.appendChild(desc);
 
+  let sheetContainer = Create("div");
+  sheetContainer.classList.add("characterSheet--sheetContainer");
+
   let abilitySheet = Create("div");
   abilitySheet.classList.add("characterSheet--abilities");
   if(target.abilities.length == 0) {
@@ -293,7 +296,7 @@ function generateCharacterSheet(char) {
     abilitySheetItem.appendChild(abilityName);
     abilitySheet.appendChild(abilitySheetItem);
   }
-  base.appendChild(abilitySheet);
+  sheetContainer.appendChild(abilitySheet);
 
   let spellSheet = Create("div");
   spellSheet.classList.add("characterSheet--spells");
@@ -321,7 +324,24 @@ function generateCharacterSheet(char) {
     abilitySheetItem.appendChild(abilityName);
     spellSheet.appendChild(abilitySheetItem);
   }
-  base.appendChild(spellSheet);
+  sheetContainer.appendChild(spellSheet);
+
+  base.appendChild(sheetContainer);
+
+  let statSheet = Create("div");
+  statSheet.classList.add("characterSheet--stats");
+  for(let stat in target.stats) {
+    let statItem = Create("p");
+    let statTexture = Create("img");
+    statTexture.classList.add("characterSheet--stats-texture");
+    statTexture.src = "../../resources/images/themes/" + global.theme + "/icons/health_container.png";
+    if(stat == "maxhp" || stat == "maxmana" || stat == "hp" || stat == "mana") continue;
+    statItem.classList.add("characterSheet--stats-item");
+    statItem.appendChild(statTexture);
+    statItem.innerHTML += statToText(stat) + ": " + target.stats[stat];
+    statSheet.appendChild(statItem);
+  }
+  base.appendChild(statSheet);
 
   document.body.appendChild(base);
   draggableElement(base);
@@ -329,6 +349,21 @@ function generateCharacterSheet(char) {
 
 function FindCharDesc(key) {
   return false;
+}
+
+function statToText(stat) {
+  switch(stat) {
+    case "vig": return "Vigour";
+    case "str": return "Strength";
+    case "dex": return "Dexterity";
+    case "agi": return "Agility";
+    case "wis": return "Wisdom";
+    case "int": return "Intelligence";
+    case "fth": return "Faith";
+    case "acc": return "Accuracy";
+    case "spd": return "Speed";
+
+  }
 }
 
 

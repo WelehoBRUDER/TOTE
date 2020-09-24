@@ -314,34 +314,44 @@
     filter: brightness(50%);
 }
 
-.characterSheet--abilities {
+.characterSheet--sheetContainer {
+    display: flex;
+    width: fit-content;
     height: fit-content;
+    width: 90%;
+    max-height: 30%;
+    position: relative;
+    top: 2.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: flex-start;
+    flex-direction: row;
+    align-content: center;
+    align-self: center;
+}
+
+.characterSheet--abilities {
     width: 45%;
     max-height: 30%;
     overflow-x: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow-y: auto;
-    position: absolute;
-    left: 2.5%;
-    top: 45%;
     border: 0.2vw solid rgb(85, 36, 36);
     border-radius: 1vw;
+    margin-right: 2.5%;
 }
 
 .characterSheet--spells {
-    height: fit-content;
     width: 45%;
     max-height: 30%;
     overflow-x: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow-y: auto;
-    position: absolute;
-    right: 2.5%;
-    top: 45%;
     border: 0.2vw solid rgb(41, 36, 85);
     border-radius: 1vw;
+    margin-left: 2.5%;
 }
 
 .characterSheet--abilities-item {
@@ -349,7 +359,7 @@
 }
 
 .characterSheet--abilities-image {
-    width: 3.25vw;
+    width: 4vw;
 }
 
 .characterSheet--abilities-name {
@@ -362,6 +372,38 @@
     overflow-x: hidden;
     white-space: nowrap;
     max-width: 80%;
+}
+
+.characterSheet--stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    position: relative;
+    top: 5%;
+    left: 50%;
+    width: 80%;
+    height: fit-content;
+    transform: translateX(-50%);
+    border-radius: 1vw;
+    border: 0.2vw solid silver;
+    padding: 0vw;
+    margin: 0vw;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.characterSheet--stats-item {
+    padding: 0vw;
+    margin: 0.1vw;
+    align-self: center;
+    font-size: 1.4vw;
+    font-family: Charmonman;
+    color: rgb(71, 49, 29);
+    filter: brightness(50%);
+}
+
+.characterSheet--stats-texture {
+    width: 1.4vw;
+    align-self: center;
 }
 
 .characterSheet > button {
