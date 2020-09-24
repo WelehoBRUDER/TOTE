@@ -349,8 +349,8 @@
   animation: godrays 10s infinite linear;
   display: block;
   position: absolute;
-  left: calc(50% - 7.5vw* var(--width-multi));
-  top: calc(-15vw/4*var(--width-multi));
+  left: calc(50% - 7.5vw * var(--width-multi));
+  top: calc(-15vw / 4 * var(--width-multi));
   width: calc(15vw * var(--width-multi));
   height: calc(15vw * var(--width-multi));
   opacity: 75%;
@@ -384,7 +384,7 @@
 }
 
 #combatAttack {
-  left: 30%
+  left: 30%;
 }
 
 #combatDefense {
@@ -429,6 +429,8 @@
   height: 42vh;
   background-image: url("../../resources/images/themes/classical/bg/bg_gray.png");
   position: absolute;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
@@ -538,7 +540,7 @@
   border-radius: 1.2vw;
 }
 
-#statusInfo span{
+#statusInfo span {
   font-size: 1vw !important;
   align-self: center;
   color: rgb(51, 41, 25);

@@ -129,7 +129,7 @@ function targetBlock(type) {
 }
 
 function Summoning(char) {
-    let copy = JSON.parse(JSON.stringify(char));
+    let copy = deepCopy(char);
     return copy;
 }
 
@@ -235,7 +235,7 @@ function Defend() {
 function Status(key) {
     for (let stat of statuses) {
         if (stat.key == key) {
-            let copy = JSON.parse(JSON.stringify(stat));
+            let copy = deepCopy(stat);
             copy.last += 1;
             return copy;
         }

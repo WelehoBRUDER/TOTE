@@ -4,8 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TOTE - v0.0.2</title>
-    <link id="maintheme" rel="stylesheet" href="./themes/classical/misc.css" />
-    <link id="misctheme" rel="stylesheet" href="./themes/classical/main.css" />
+    <link id="misctheme" rel="stylesheet" href="./themes/classical/misc.css" />
+    <link id="maintheme" rel="stylesheet" href="./themes/classical/main.css" />
+    <link id="invtheme" rel="stylesheet" href="./themes/classical/inv.css" />
+    <link
+      id="codextheme"
+      rel="stylesheet"
+      href="./themes/classical/codex.css"
+    />
+    <link
+      id="menustheme"
+      rel="stylesheet"
+      href="./themes/classical/menus.css"
+    />
     <link rel="stylesheet" href="map.css" />
   </head>
 
@@ -146,7 +157,10 @@
           <option value="1">Instant</option>
         </select>
         <p id="themeSelectText" class="optionsText">Theme</p>
-        <select id="themeSelect" onchange="global.theme=this.value; ReloadTheme()">
+        <select
+          id="themeSelect"
+          onchange="global.theme=this.value; ReloadTheme()"
+        >
           <option value="classical">Classical</option>
           <option value="original">Original</option>
         </select>
@@ -180,7 +194,7 @@
 <script src="resources/storage/codex.js"></script>
 <script src="resources/storage/desc.js"></script>
 <script src="resources/storage/map.js"></script>
-<script src="resources/storage/nameGeneration.js" ></script>
+<script src="resources/storage/nameGeneration.js"></script>
 <script src="resources/code/globalVariables.js"></script>
 <script src="resources/storage/text.js"></script>
 <script src="resources/code/portraitCreator.js"></script>

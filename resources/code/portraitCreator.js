@@ -9,7 +9,7 @@ function CreatePortrait(character, enemy) {
   }
   if (!global.quickload) if (!imageExists(`resources/images/${portrait_image_url}.png`)) portrait_image_url = "events/missing_image";
   portrait.innerHTML = `
-    <div class="portrait_background">
+    <div class="portrait_background" onclick="generateCharacterSheet('${character.key}')">
       <p class="portrait_title">${name}</p>
       <img src="resources/images/${portrait_image_url}.png" class="portrait_image">
       ${createOverlay(character)}
@@ -147,7 +147,7 @@ let alliesFight = [];
 let enemiesFight = [];
 
 function PushCombatantToTable(combatant, table) {
-  let copy = JSON.parse(JSON.stringify(combatant));
+  let copy = deepCopy(combatant);
   copy.key += `${table.length}`;
   copy.armor = GetAVGArmor(copy);
   copy.hasActed = false;
@@ -206,5 +206,92 @@ function addToFight() {
   CreatePortraits();
 }
 
+function generateCharacterSheet(char) {
+  let key = char.replace(/\d/, '');
+  if(Element(key + "Sheet")) return;
+  let base = Create("div");
+  base.id=key+"Sheet";
+  let target = deepCopy(CHAR(key));
+  base.classList.add("characterSheet");
+
+  let quitBtn = Create("button")
+  let draggableArea = Create("div");
+  draggableArea.id = base.id + "Draggable";
+  draggableArea.classList.add("draggableArea");
+  base.appendChild(draggableArea);
+  quitBtn.innerHTML = "  X  ";
+  quitBtn.onclick = ()=>base.parentNode.removeChild(base);
+  base.appendChild(quitBtn);
+
+  let portrait = Create("img");
+  portrait.classList.add("characterSheet--image");
+  portrait.src = `../../resources/images/${target.image}.png`;
+  base.appendChild(portrait);
+
+  let name = Create("p");
+  name.classList.add("characterSheet--name");
+  name.textContent = target.name;
+  name.style.color = target.color;
+  base.appendChild(name);
+
+  let classLevel = Create("p");
+  classLevel.classList.add("characterSheet--class");
+  classLevel.textContent = "Level " + target.xp.level + " - " + target.class.key;
+  base.appendChild(classLevel);
+
+  let desc = Create("p");
+  desc.classList.add("characterSheet--desc");
+  if(FindCharDesc(key)) {
+
+  } else {
+    desc.textContent = 'This is a generic description. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
+  }
+  base.appendChild(desc);
+
+  let abilitySheet = Create("div");
+  abilitySheet.classList.add("characterSheet--abilities");
+  for(let abi of target.abilities) {
+    let abilitySheetItem = Create("div");
+    abilitySheetItem.classList.add("characterSheet--abilities-item");
+    if(abi.img) {
+      let img = Create("img");
+      img.classList.add("characterSheet--abilities-image");
+      img.src = "../../resources/images/" + abi.img;
+      abilitySheetItem.appendChild(img);
+    }
+    let abilityName = Create("p");
+    abilityName.classList.add("characterSheet--abilities-name");
+    abilityName.textContent = abi.name;
+    abilitySheetItem.appendChild(abilityName);
+    abilitySheet.appendChild(abilitySheetItem);
+  }
+  base.appendChild(abilitySheet);
+
+  let spellSheet = Create("div");
+  spellSheet.classList.add("characterSheet--spells");
+  for(let abi of target.spells) {
+    let spellSheetItem = Create("div");
+    spellSheetItem.classList.add("characterSheet--abilities-item");
+    if(abi.img) {
+      let img = Create("img");
+      img.classList.add("characterSheet--abilities-image");
+      img.src = "../../resources/images/" + abi.img;
+      spellSheetItem.appendChild(img);
+    }
+    let spellName = Create("p");
+    spellName.classList.add("characterSheet--abilities-name");
+    spellName.textContent = abi.name;
+    spellSheetItem.appendChild(spellName);
+    spellSheet.appendChild(spellSheetItem);
+  }
+  base.appendChild(spellSheet);
+
+  document.body.appendChild(base);
+  draggableElement(base);
+}
+
+function FindCharDesc(key) {
+  return false;
+}
 
 

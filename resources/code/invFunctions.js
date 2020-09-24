@@ -40,11 +40,9 @@ function CreateInv() {
 function ShowItemInfo(e) {
   infoContainer.style.transform = "scale(1)";
   infoContainer.textContent = "";
-  console.log(e);
   let itm;
   if (e.target.id.length > 8) {
     itm = FindEquipment(e.target.id);
-    console.log(infoContainer.offsetLeft);
     //infoContainer.style.top = `${Math.min(e.y, window.innerHeight-infoContainer.height)}px`;
     infoContainer.style.left = `${e.x}px`;
   }
@@ -478,7 +476,7 @@ function GetAVGArmor(char) {
   for (let eq of char.equipment) {
     if (eq.slot && eq.slot != "shield") {
       if (firstTime) {
-        arm = JSON.parse(JSON.stringify(eq.armor));
+        arm = deepCopy(eq.armor);
         firstTime = false;
         for (let text in arm) {
           arm[text] = 0;

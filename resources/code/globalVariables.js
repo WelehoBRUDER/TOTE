@@ -84,4 +84,7 @@ function ReloadTheme() {
   const baseURL = "./themes/"
   Element("maintheme").href = baseURL + global.theme + '/main.css'
   Element("misctheme").href = baseURL + global.theme + '/misc.css'
+  Element("invtheme").href = baseURL + global.theme + '/inv.css'
+  Element("codextheme").href = baseURL + global.theme + '/codex.css'
+  Element("menustheme").href = baseURL + global.theme + '/menus.css'
 }
