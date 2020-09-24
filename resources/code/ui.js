@@ -3,6 +3,8 @@ function CreateUiButtons() {
     let but = Create("img");
     but.id = button.id;
     but.src = `../../resources/images/themes/${global.theme}/icons/ui_icon${button.bg}.png`;
+    but.style.width = "4.5vw";
+    but.style.height = "4.5vw";
     if(global.combat.ongoing == false || button.combat)but.addEventListener("click", ()=>toggleButton(button.open));
     but.classList.add("ui_button");
     but.setAttribute('draggable', false);
@@ -76,10 +78,10 @@ function Worldmap() {
 function toggleQL() {
   if(global.quickload == false) {
     global.quickload = true;
-    Element("qlCheck").style.transform = "scale(1.00)";
+    Element("qlCheck").style.transform = "translateX(-50%) translateY(-127.5%) scale(1.0)";
   } else {
     global.quickload = false;
-    Element("qlCheck").style.transform = "scale(0.00)";
+    Element("qlCheck").style.transform = "translateX(-50%) translateY(-127.5%) scale(0)";
   }
 }
 

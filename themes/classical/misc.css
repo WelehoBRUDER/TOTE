@@ -1,0 +1,552 @@
+@font-face {
+  font-family: CodexThin;
+  src: url("../../fonts/Mali/Mali-ExtraLight.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: CodexLight;
+  src: url("../../fonts/Mali/Mali-Light.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Codex;
+  src: url("../../fonts/Mali/Mali-Regular.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: CodexMedium;
+  src: url("../../fonts/Mali/Mali-Medium.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: CodexBold;
+  src: url("../../fonts/Mali/Mali-SemiBold.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: CodexBolder;
+  src: url("../../fonts/Mali/Mali-Bold.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Charmonman;
+  src: url("../../fonts/Charmonman-Bold.ttf");
+  font-weight: normal;
+}
+
+#goForward,
+#goBackward {
+  transition: 0.15s;
+  padding: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
+  color: white;
+  background: rgb(31, 31, 31);
+  border-radius: 6px;
+  box-shadow: inset 0 0 6px 6px rgb(19, 19, 19);
+  text-shadow: 0 0 0px black;
+  font-size: 1.1vw;
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  top: -3.3%;
+  pointer-events: all;
+  z-index: 2;
+}
+
+#goForward:hover,
+#goBackward:hover {
+  background: rgb(59, 59, 59);
+  box-shadow: inset 0 0 6px 6px rgb(44, 44, 44);
+  text-shadow: -2px 3px 5px black;
+}
+
+#goForward {
+  left: 34.5%;
+}
+
+#goBackward {
+  left: 0%;
+}
+
+#charbeingequipped {
+  font-size: 1.25vw;
+  font-family: CodexMedium;
+  color: white;
+  background: rgb(73, 2, 2);
+  position: absolute;
+  left: 12.5%;
+  top: -2.5%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* OPTIONS MENU */
+#optionsScreen {
+  width: 24vw;
+  height: 27.5vw;
+  background-color: rgb(94, 4, 4);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 5%;
+  border: 0.3vw solid rgb(20, 13, 1);
+  box-shadow: 0 0.3vw 0.2vw 0.3vw rgb(39, 12, 1), inset 0 0 8px 8px rgb(80, 31, 3);
+  z-index: 3;
+  background-image: url("../../resources/images/themes/classical/bg/bg_red.png");
+}
+
+#qlContainer {
+  width: 90%;
+  height: 15%;
+  position: relative;
+  left: 5%;
+  top: 5%;
+}
+
+#combatSpeed,
+#combatDelay,
+#themeSelect {
+  position: absolute;
+  left: 0%;
+  width: 30%;
+  height: 35%;
+  border: none;
+  background-color: rgb(70, 70, 70);
+  box-shadow: inset 0 0 0.15vw 0.15vw rgb(82, 82, 82);
+  border-radius: 5%;
+  color: white;
+  text-align: center;
+  font-family: Codex;
+  font-size: 1.2vw;
+}
+
+#combatSpeedText,
+#combatDelayText,
+#themeSelectText {
+  position: absolute;
+  left: 35%;
+  transform: translateY(-115%);
+}
+
+#combatSpeed {
+  top: 3vw;
+}
+
+#combatDelay {
+  top: 6vw;
+}
+
+#themeSelect {
+  top: 9vw;
+}
+
+#combatSpeedText {
+  top: 3.5vw;
+}
+
+#combatDelayText {
+  top: 6.5vw;
+}
+
+#themeSelectText {
+  top: 9.5vw;
+}
+
+.optionsCheck {
+  display: block;
+  width: 2.4vw;
+  height: 2.4vw;
+  background-color: rgb(87, 15, 15);
+  border: 0.1vw solid darkred;
+  position: absolute;
+  text-align: center;
+}
+
+.optionsCheck p {
+  transition: 0.2s;
+  text-align: center;
+  color: white;
+  font-family: Codex;
+  font-size: 2.4vw;
+}
+
+#qlCheck {
+  align-self: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-127.5%) scale(0);
+}
+
+.optionsText {
+  font-size: 1.5vw;
+  font-family: Codex;
+  position: absolute;
+  top: -30%;
+  left: 15%;
+  color: white;
+  text-shadow: 0 0 0.2vw black;
+}
+
+#optionsBack {
+  transition: 0.15s;
+  width: 5vw;
+  height: 2.5vw;
+  border: none;
+  box-shadow: 0 0.4vw 0.15vw 0.15vw rgb(70, 8, 20);
+  background-color: rgb(92, 1, 19);
+  user-select: none;
+  outline: none;
+  font-size: 1.4vw;
+  font-family: CodexLight;
+  color: white;
+  text-shadow: 0 0.15vw 0.2vw black;
+  margin-left: 5%;
+  position: absolute;
+  bottom: 5%;
+  cursor: pointer;
+}
+
+#optionsBack:hover {
+  bottom: 3%;
+  box-shadow: 0 0.15vw 0.15vw 0.15vw rgb(70, 8, 20);
+}
+
+#optionsBack:active {
+  bottom: 2%;
+  box-shadow: 0 0.05vw 0.15vw 0.15vw rgb(70, 8, 20);
+}
+
+/* COMBAT */
+
+#combatButtonsContainer {
+  width: 40vw;
+  height: 18vw;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 56vh;
+}
+
+/* #ability_wheel {
+  position: absolute;
+  left: -75px;
+  bottom: 10px;
+  width: fit-content;
+  height: fit-content;
+} */
+
+#combatAbility1 img,
+#combatAbility2 img,
+#combatAbility3 img,
+#combatAbility4 img,
+#combatSpell1 img,
+#combatSpell2 img,
+#combatSpell3 img,
+#combatSpell4 img {
+  position: absolute;
+  text-align: center;
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#combatAbility1,
+#combatAbility2,
+#combatAbility3,
+#combatAbility4,
+#combatSpell1,
+#combatSpell2,
+#combatSpell3,
+#combatSpell4 {
+  height: 5vw;
+  width: 5vw;
+  text-align: center;
+}
+
+.combatAbiImage {
+  width: 50% !important;
+  height: 50% !important;
+  top: 25%;
+}
+
+#combatAbility1 {
+  position: absolute;
+  left: 0%;
+  top: 25%;
+}
+
+#combatAbility2 {
+  position: absolute;
+  left: 25%;
+  top: 25%;
+}
+
+#combatAbility3 {
+  position: absolute;
+  left: 12.5%;
+  top: 50%;
+}
+
+#combatAbility4 {
+  position: absolute;
+  left: 12.5%;
+  top: 0%;
+}
+
+#combatSpell1 {
+  position: absolute;
+  right: 25%;
+  top: 25%;
+}
+
+#combatSpell2 {
+  position: absolute;
+  right: 0%;
+  top: 25%;
+}
+
+#combatSpell3 {
+  position: absolute;
+  right: 12.5%;
+  top: 50%;
+}
+
+#combatSpell4 {
+  position: absolute;
+  right: 12.5%;
+  top: 0%;
+}
+
+#combatUltimate {
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7.5vw;
+  height: 7.5vw;
+}
+
+#ultimateGodrays.enabled {
+  /* Enable when ultimate ready */
+  /* Broken for now, can't change width */
+  --width-multi: 1;
+
+  background-image: url("../../resources/images/themes/classical/icons/godrays.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation: godrays 10s infinite linear;
+  display: block;
+  position: absolute;
+  left: calc(50% - 7.5vw * var(--width-multi));
+  top: calc(-15vw / 4 * var(--width-multi));
+  width: calc(15vw * var(--width-multi));
+  height: calc(15vw * var(--width-multi));
+  opacity: 75%;
+}
+
+#ultimateGodrays.disabled {
+  display: none;
+}
+
+@keyframes godrays {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#combatAttack,
+#combatDefense {
+  position: absolute;
+  top: 50%;
+  width: 6.5vw;
+  height: 6.5vw;
+}
+
+#combatAttack img,
+#combatDefense img {
+  width: 100%;
+  height: 100%;
+}
+
+#combatAttack {
+  left: 30%;
+}
+
+#combatDefense {
+  right: 30%;
+}
+
+#combatButtonsContainer div {
+  transition: 0.1s;
+  transform: scale(1);
+  cursor: pointer;
+}
+
+#abilityInfo {
+  display: block;
+  transition: 0.1s;
+  /* background-color: rgba(0, 0, 0, 0.45); */
+  background: rgb(227, 195, 109) !important;
+  box-shadow: inset 0vw 0vw 2em 1.5em rgb(199, 168, 82);
+  width: 15vw;
+  height: fit-content;
+  position: absolute;
+  text-align: center;
+  border-radius: 20px;
+  z-index: 3;
+  font-size: 1vw !important;
+  margin-left: -5vw;
+  margin-top: -10vh;
+}
+
+#abilityInfo p {
+  margin: 5px;
+  opacity: 1.5;
+}
+
+#abilityInfo span {
+  font-size: 1vw;
+  filter: brightness(60%);
+}
+
+#combatTextContainer {
+  width: 45vw;
+  height: 42vh;
+  background-image: url("../../resources/images/themes/classical/bg/bg_gray.png");
+  position: absolute;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid rgb(39, 39, 39);
+  box-shadow: 0px 4px 6px 6px rgb(26, 26, 26);
+  border-radius: 12px;
+  overflow: auto;
+}
+
+#combatTextContainer p {
+  margin: 5px;
+  margin-left: 20px;
+  padding: 5px;
+  border: 2px solid rgb(48, 48, 48);
+}
+
+#targetingCombat {
+  width: 24vw;
+  height: 14.5vw;
+  background-color: rgba(0, 0, 0, 0.45);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 4;
+  overflow: auto;
+  display: none;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#targetingCombat img {
+  transition: 0.1s;
+  width: 5.5vw;
+  height: 5.5vw;
+  border-radius: 100%;
+  position: relative;
+  border: 0.1vw solid gold;
+  box-shadow: 0 0 0.05vw 0.05vw gold;
+  margin: 5%;
+}
+
+#targetingCombat img:hover {
+  box-shadow: 0 0 0.25vw 0.25vw rgb(170, 145, 1);
+}
+
+#roundHistory {
+  width: 10vw;
+  height: 1.8vw;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 44.5vh;
+  border-radius: 10%;
+  z-index: 1;
+  display: flex;
+}
+
+#toggleRound,
+#toggleHistory {
+  transition: 0.1s;
+  position: relative;
+  height: 90%;
+  width: 50%;
+  color: white;
+  border: 0.1vw solid black;
+  box-sizing: border-box;
+  top: 10%;
+  background-image: url("../../resources/images/themes/classical/bg/bg_gray.png");
+  font-family: Codex;
+  font-size: 0.9vw;
+  text-align: center;
+  cursor: pointer;
+}
+
+.roundHistorySelected {
+  border: 0.1vw solid white !important;
+}
+
+.cooldowntext {
+  position: absolute;
+  left: 50%;
+  top: -28.5%;
+  transform: translateX(-50%);
+  font-size: 2.5vw;
+  color: rgb(243, 161, 161);
+  text-shadow: 0 0 8px rgb(228, 123, 123);
+  z-index: 2;
+  filter: brightness(150%) !important;
+  text-align: center;
+}
+
+#statusInfo {
+  transition: 0.15s;
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  /* background: rgba(0, 0, 0, 0.45); */
+  background: rgb(227, 195, 109) !important;
+  box-shadow: inset 0vw 0vw 1.5em 1.2em rgb(199, 168, 82);
+  width: fit-content;
+  height: fit-content;
+  max-width: 11vw;
+  color: white;
+  font-family: Codex;
+  z-index: 10;
+  margin: 0px;
+  border-radius: 1.2vw;
+}
+
+#statusInfo span {
+  font-size: 1vw !important;
+  align-self: center;
+  color: rgb(51, 41, 25);
+  filter: brightness(75%);
+}
+
+#statusInfo p {
+  margin-left: 5%;
+}

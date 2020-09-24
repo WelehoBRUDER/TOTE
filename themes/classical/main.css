@@ -1,0 +1,271 @@
+* {
+  scrollbar-width: thin;
+  scrollbar-color: black transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px !important; /* for vertical scrollbars */
+  height: 6px !important; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: black !important;
+  border-radius: 3px;
+}
+
+body {
+  background-color: rgb(61, 61, 61);
+  user-select: none;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("../../resources/images/themes/classical/bg/world_map.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  filter: blur();
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #525252;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(34, 34, 34);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(20, 20, 20);
+}
+
+#allyportraits {
+  width: 18vw;
+  height: 80vh;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  overflow: auto;
+}
+
+#enemyportraits {
+  width: 18vw;
+  height: 80vh;
+  position: absolute;
+  right: 1.75%;
+  top: 0%;
+  overflow: auto;
+}
+
+.portrait_background {
+  width: 15.5vw;
+  height: 10.5vw;
+  background-color: rgb(66, 66, 66);
+  box-shadow: 0 0 15px 12px rgb(31, 31, 31);
+  position: relative;
+  background-image: url("../../resources/images/themes/classical/portraits/portrait_background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 10%;
+  border-radius: 1vw;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.portrait_title {
+  max-width: 95%;
+  font-size: 1vw;
+  color: gold;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -5%;
+  text-shadow: -2px 2px 2px black;
+  text-decoration: underline;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.portrait_image {
+  border-radius: 1vw;
+  box-shadow: 0 0 12px 8px black;
+  position: absolute;
+  left: 10%;
+  bottom: 7.5%;
+  width: 33%;
+  height: 63%;
+}
+
+.portrait_overlay {
+  position: absolute;
+  z-index: 4;
+  left: 10%;
+  bottom: 7.5%;
+  width: 33%;
+  height: 63%;
+}
+
+.portrait_weapon {
+  position: absolute;
+  z-index: 5;
+  left: 30%;
+  bottom: 0%;
+  width: 26%;
+  height: 43%;
+}
+
+.portrait_shield {
+  position: absolute;
+  z-index: 5;
+  left: -7.5%;
+  bottom: 0%;
+  width: 26%;
+  height: 43%;
+  transform: rotateZ(-10deg);
+}
+
+/* .portrait_class {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  margin-left: -25px;
+} */
+
+.hpbarbg,
+.mpbarbg {
+  width: 42%;
+  height: 11%;
+  border: 2px solid black;
+  position: absolute;
+  background-color: rgb(44, 44, 44);
+  box-shadow: inset 0 0 6px 4px rgb(36, 36, 36), 0 0 4px 4px black;
+  left: 50%;
+}
+
+.barNum {
+  color: white;
+  font-size: 1vw;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -1vw;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.hpbarfill,
+.mpbarfill {
+  left: 50.5%;
+  height: 11%;
+  position: absolute;
+}
+
+.hpbarbg {
+  top: 30%;
+}
+
+.mpbarbg {
+  top: 50%;
+}
+
+.hpbarfill {
+  top: 30.5%;
+  background-color: rgb(134, 6, 6);
+  box-shadow: inset 0 0 6px 4px rgb(80, 3, 3);
+}
+
+.mpbarfill {
+  top: 50.5%;
+  background-color: rgb(6, 36, 134);
+  box-shadow: inset 0 0 6px 4px rgb(3, 8, 80);
+}
+
+.statusEffects {
+  width: 42%;
+  height: 23%;
+  background-color: rgb(34, 33, 33);
+  position: absolute;
+  right: 6.75%;
+  bottom: 7.5%;
+  border: 2px solid black;
+  box-shadow: inset 0 0 6px 4px rgb(36, 36, 36), 0 0 4px 4px black;
+  overflow: auto;
+}
+
+#textAlert {
+  color: silver;
+  text-shadow: 0 4px 8px black;
+  font-family: CodexLight;
+  font-size: 20px;
+  text-align: center;
+}
+
+#timeFrame {
+  width: 18vw;
+  height: 5vw;
+  background-color: rgb(97, 14, 14);
+  border-radius: 16px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  background-image: url("../../resources/images/themes/classical/bg/bg_cbrown.png");
+  box-shadow: 0 5px 5px 5px rgb(39, 21, 11);
+}
+
+#timeFrame div {
+  width: 90%;
+  height: 1.5%;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 45%;
+  box-shadow: inset 0 0 0.5% 0.5% silver, 0 0 1% 0.5% rgb(177, 176, 176);
+}
+
+#timeFrame p {
+  color: white;
+  text-shadow: 0 2px 6px rgb(0, 0, 0);
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  position: absolute;
+}
+
+#clock {
+  font-size: 1.4vw;
+  top: -18%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#date {
+  font-size: 1.4vw;
+  bottom: -18%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+#allyportraits > div > .portrait_background {
+  background-image: url("../../resources/images/themes/classical/portraits/portrait_background_ally.png");
+}

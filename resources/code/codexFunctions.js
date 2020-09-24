@@ -174,18 +174,18 @@ function getMark(mark) {
   let result = "";
   if(mark.indexOf("s") != -1) {
     let size = mark.split("s")[1];
-    result = ` font-size: ${size}px;`;
+    result = ` font-size: ${+size+100}%;`;
   }
   if(mark.indexOf("lg") != -1) {
     let amount = mark.split("lg")[1];
     result = ` letter-spacing: ${amount}px;`;
   }
   switch(mark) {
-    case "B": result = " font-family: RobotoBold;"; break;
-    case "BB": result = " font-family: RobotoBolder;"; break;
-    case "M": result = " font-family: RobotoMedium;"; break;
-    case "E": result = " font-family: Roboto;"; break;
-    case "LL": result = " font-family: RobotoThin;"; break;
+    case "B": result = " font-family: CodexBold;"; break;
+    case "BB": result = " font-family: CodexBolder;"; break;
+    case "M": result = " font-family: CodexMedium;"; break;
+    case "E": result = " font-family: Codex;"; break;
+    case "LL": result = " font-family: CodexThin;"; break;
     case "I": result = " font-style: italic;"; break;
     case "OL": result = " text-decoration: overline;"; break;
     case "LT": result = " text-decoration: line-through;"; break;
@@ -201,7 +201,11 @@ function ReadContent(text, image) {
   for (let colors of content) {
     let img;
     let link;
-    let color = "white";
+    let color;
+    if(global.theme == "default")
+    {
+      color = "white";
+    }
     let text;
     let style = "";
     if(colors.indexOf("¤") != -1) {
@@ -270,6 +274,7 @@ function SearchEntities() {
       for (let content of subcats.content) {
         if (tagSearch == true && content.tags) {
           for (let tag of content.tags) {
+            if (tag == undefined || tag?.tag == undefined) continue;
             if (searchValue.length < 3) {
               let Tag = tag.tag;
               if(Tag.startsWith("@var.")) Tag = VariableText(Tag);

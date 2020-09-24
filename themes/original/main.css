@@ -11,24 +11,10 @@ body {
   filter: blur();
 }
 
-/* #bgframe {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 100vw;
-  height: 100vh;
-  background-image: url("../../resources/images/themes/default/misc/world_map.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  -webkit-background-size: contain;
-  -moz-background-size: contain;
-  -o-background-size: contain;
-  background-size: contain;
-} */
-
 #codex p,
 span {
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
 }
 
 #codex {
@@ -128,32 +114,32 @@ span {
 }
 
 .CodexCategories {
-  font-size: 28px;
+  font-size: 2vw;
   text-decoration: underline;
   font-weight: bold;
 }
 
 .CodexArrows {
-  font-size: 26px;
+  font-size: 1.8vw;
   text-decoration: none !important;
   position: absolute;
   user-select: none !important;
 }
 
 .CodexArrowsSmall {
-  font-size: 20px;
+  font-size: 1.6vw;
   text-decoration: none !important;
   position: absolute;
   user-select: none !important;
 }
 
 .CodexSubcategories {
-  font-size: 22px;
+  font-size: 1.9vw;
   text-decoration: underline;
 }
 
 .CodexEntities {
-  font-size: 20px;
+  font-size: 1.6vw;
   position: relative;
   cursor: pointer;
 }
@@ -165,7 +151,7 @@ span {
 }
 
 .CodexEntryTitle {
-  font-size: 56px;
+  font-size: 4vw;
   color: rgb(211, 211, 211);
   text-shadow: 0 0 16px black;
   text-decoration: underline;
@@ -210,7 +196,7 @@ span {
 #CodexBaseText p,
 span {
   user-select: text !important;
-  font-size: 30px;
+  font-size: 2.1vw;
   color: silver;
   text-shadow: 0 0 8px black;
 }
@@ -252,7 +238,7 @@ span {
   background-color: rgb(66, 66, 66);
   box-shadow: 0 0 15px 12px rgb(31, 31, 31);
   position: relative;
-  background-image: url(resources/images/portraits/portrait_background.png);
+  background-image: url("../../resources/images/themes/default/portraits/portrait_background.png");
   background-repeat: no-repeat;
   background-size: cover;
   margin: 25px;
@@ -429,7 +415,8 @@ span {
   user-select: none;
   outline: none;
   font-size: 48px;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   color: white;
   text-shadow: 0 4px 6px black;
   position: absolute;
@@ -485,7 +472,8 @@ span {
   user-select: none;
   outline: none;
   font-size: 48px;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   color: white;
   text-shadow: 0 4px 6px black;
   margin: 20px;
@@ -540,7 +528,8 @@ span {
   border: none;
   width: 100px;
   height: 60px;
-  box-shadow: 0 6px 4px 4px rgb(80, 79, 79), inset 0 0 4px 4px rgb(131, 121, 121);
+  box-shadow: 0 6px 4px 4px rgb(80, 79, 79),
+    inset 0 0 4px 4px rgb(131, 121, 121);
   position: absolute;
   bottom: 24px;
   cursor: pointer;
@@ -553,13 +542,15 @@ span {
 #yesAlert:hover,
 #noAlert:hover {
   bottom: 20px;
-  box-shadow: 0 2px 4px 4px rgb(80, 79, 79), inset 0 0 4px 4px rgb(131, 121, 121);
+  box-shadow: 0 2px 4px 4px rgb(80, 79, 79),
+    inset 0 0 4px 4px rgb(131, 121, 121);
 }
 
 #yesAlert:active,
 #noAlert:active {
   bottom: 18px;
-  box-shadow: 0 0px 4px 4px rgb(80, 79, 79), inset 0 0 4px 4px rgb(131, 121, 121);
+  box-shadow: 0 0px 4px 4px rgb(80, 79, 79),
+    inset 0 0 4px 4px rgb(131, 121, 121);
 }
 
 #yesAlert {
@@ -573,7 +564,8 @@ span {
 #textAlert {
   color: silver;
   text-shadow: 0 4px 8px black;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   font-size: 20px;
   text-align: center;
 }
@@ -662,7 +654,8 @@ span {
 span {
   color: white;
   font-size: 27px;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   margin: 0px;
   position: relative;
 }
@@ -711,7 +704,8 @@ span {
 .desc {
   color: white;
   font-size: 24px;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   margin: 0px;
   font-style: italic;
   white-space: normal;
@@ -766,7 +760,8 @@ span {
 #armorFrame p,
 #weaponFrame p {
   font-size: 26px;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   color: silver;
   text-shadow: -1px 2px 4px rgb(58, 58, 58);
   position: absolute;
@@ -846,7 +841,8 @@ span {
 
 #ringFrame p {
   font-size: 18px;
-  font-family: RobotoLight;
+  font-family: Codex;
+  font-weight: lighter;
   color: silver;
   text-shadow: -1px 2px 4px rgb(58, 58, 58);
   position: absolute;
@@ -942,5 +938,5 @@ span {
 #worldmap,
 #options,
 #menu {
-  background-image: url("../../resources/images/bg/bg_red.png");
+  background-image: url("../../resources/images/themes/default/bg/bg_red.png");
 }

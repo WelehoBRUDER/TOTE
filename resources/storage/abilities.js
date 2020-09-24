@@ -59,6 +59,7 @@ const statuses = [
 const abilities = [
     {
         key: "fierce-assault",
+        name: "Fierce Assault",
         img: "icons/fierce_assault.png",
         power: {
           armor_penetration: 100,
@@ -73,6 +74,7 @@ const abilities = [
     },
     {
         key: "shield-bash",
+        name: "Shield Bash",
         img: "icons/shield_bash.png",
         cost: {
           mana: 0,
@@ -84,6 +86,7 @@ const abilities = [
     },
     {
       key: "sunder",
+      name: "Sunder",
       img: "icons/sunder.png",
       power: {
         armor_penetration: 0,
@@ -99,6 +102,7 @@ const abilities = [
     },
     {
       key: "blinding-slash",
+      name: "Blinding Slash",
       img: "icons/blinding_slash.png",
       power: {
         armor_penetration: 0,
@@ -114,6 +118,7 @@ const abilities = [
     },
     {
       key: "smash",
+      name: "Smash",
       power: {
         armor_penetration: 50,
         multiplier: 150
@@ -127,6 +132,7 @@ const abilities = [
     },
     {
       key: "holy-smite",
+      name: "Holy Smite",
       power: {
         armor_penetration: 0,
         multiplier: 150,
@@ -141,6 +147,7 @@ const abilities = [
     },
     {
       key: "summon-skeleton-warrior",
+      name: "Summon Skeleton Warrior",
       img: "icons/summon_skeleton_warrior.png",
       no_target: true,
       cost: {
@@ -152,6 +159,7 @@ const abilities = [
     },
     {
       key: "summon-earth-golem",
+      name: "Summon Earth Golem",
       img: "icons/summon_earth_golem.png",
       no_target: true,
       cost: {
@@ -177,10 +185,12 @@ function summon(key) {
 const spells = [
     {
         key: "mana-blast",
+        name: "Mana Blast",
         img: "icons/mana_blast.png"
     },
     {
       key: "healing-light",
+      name: "Healing Light",
       power: {
         amount: 100
       },
@@ -193,6 +203,7 @@ const spells = [
     },
     {
       key: "dim-healing-light",
+      name: "Dim Healing Light",
       power: {
         amount: 50
       },
@@ -205,6 +216,7 @@ const spells = [
     },
     {
       key: "fireball-1",
+      name: "Fireball",
       img: "icons/tinder.png",
       power: {
         values: [
@@ -223,7 +235,8 @@ const spells = [
     },
     {
       key: "harden-1",
-      img: "icons/defense_icon.png",
+      name: "Harden",
+      img: "icons/warrior_icon.png",
       power: {
         amount: 0
       },

@@ -1,5 +1,6 @@
 Element("invFrame").style.backgroundImage = `url(resources/images/themes/${global.theme}/bg/bg_gray.png`;
 Element("invGridFrame").style.backgroundImage = `url(resources/images/themes/${global.theme}/bg/bg_cbrown.png`;
+var infoContainer = Element("infoBox");
 
 function CreateInv() {
   Element("invGrid").textContent = "";
@@ -10,8 +11,9 @@ function CreateInv() {
       let itm = characters.player.inventory[i];
       item.id = `invItem${i}`;
       let img = Create("img");
-      img.style.height = "85px";
-      img.style.width = "80px";
+      img.style.height = "90%";
+      img.style.width = "80%";
+      img.style.selfAlign = "center";
       if (global.quickload) {
         img.src = `resources/images/${itm.img}.png`;
       }
@@ -36,33 +38,34 @@ function CreateInv() {
 }
 
 function ShowItemInfo(e) {
-  Element("infoBox").style.transform = "scale(1)";
-  Element("infoBox").textContent = "";
+  infoContainer.style.transform = "scale(1)";
+  infoContainer.textContent = "";
   let itm;
   if (e.target.id.length > 8) {
     itm = FindEquipment(e.target.id);
-    Element("infoBox").style.top = `${e.target.parentElement.offsetTop}px`;
-    Element("infoBox").style.left = `${e.target.parentElement.offsetLeft + 150}px`;
+    //infoContainer.style.top = `${Math.min(e.y, window.innerHeight-infoContainer.height)}px`;
+    infoContainer.style.left = `${e.x}px`;
   }
   else {
     itm = characters.player.inventory[e.target.id.substring(7)];
-    Element("infoBox").style.top = `${e.target.offsetTop}px`;
-    Element("infoBox").style.left = `${e.target.offsetLeft + 585}px`;
+    //infoContainer.style.top = `${Math.min(e.y, window.innerHeight-infoContainer.height)}px`;
+    infoContainer.style.top = `${e.y}px`
+    infoContainer.style.left = `${e.x}px`;
   }
-  Element("infoBox").innerHTML += `<h1>${itm.name}</h1>`
-  if (FoundDesc(itm) != false) Element("infoBox").appendChild(HandleDescSyntax(FoundDesc(itm)));
-  else if (debug) Element("infoBox").appendChild(HandleDescSyntax(`§/red/ERROR: DESCRIPTION NOT FOUND!§`));
-  Element("infoBox").innerHTML += `<p>Price: ${itm.price}<span style="color: yellow">¤</span</p>
+  infoContainer.innerHTML += `<h1>${itm.name}</h1>`
+  if (FoundDesc(itm) != false) infoContainer.appendChild(HandleDescSyntax(FoundDesc(itm)));
+  else if (debug) infoContainer.appendChild(HandleDescSyntax(`§/red/ERROR: DESCRIPTION NOT FOUND!§`));
+  infoContainer.innerHTML += `<p>Price: ${itm.price}<span style="color: yellow">¤</span</p>
   <p>Amount: ${itm.amount}</p>
   <p>Level: ${itm.level}</p>
   `;
-  if (itm.speed) Element("infoBox").innerHTML += `<p>Speed: <span style="color: ${speedColor(itm.speed)}">${itm.speed}</span></p>`
-  if (itm.slot) Element("infoBox").innerHTML += `<p>Slot: ${itm.slot[0].toUpperCase()}${itm.slot.substring(1)}</p>`;
-  if (itm.twohand) Element("infoBox").innerHTML += `<p style="color: orange">Two handed weapon!</p>`;
-  if (itm.blockChance) Element("infoBox").innerHTML += `<p>Block chance: ${itm.blockChance}%</p>`;
-  if (itm.damage) Element("infoBox").innerHTML += `<p>Bash damage: ${itm.damage[0].value} ${itm.damage[0].type}</p>`;
+  if (itm.speed) infoContainer.innerHTML += `<p>Speed: <span style="color: ${speedColor(itm.speed)}">${itm.speed}</span></p>`
+  if (itm.slot) infoContainer.innerHTML += `<p>Slot: ${itm.slot[0].toUpperCase()}${itm.slot.substring(1)}</p>`;
+  if (itm.twohand) infoContainer.innerHTML += `<p style="color: orange">Two handed weapon!</p>`;
+  if (itm.blockChance) infoContainer.innerHTML += `<p>Block chance: ${itm.blockChance}%</p>`;
+  if (itm.damage) infoContainer.innerHTML += `<p>Bash damage: ${itm.damage[0].value} ${itm.damage[0].type}</p>`;
   if (itm.armor) {
-    Element("infoBox").innerHTML += `<p id="defText">Defenses: </p>
+    infoContainer.innerHTML += `<p id="defText">Defenses: </p>
     <div class="grid">${loop()}</div>
     `;
     function loop() {
@@ -74,7 +77,7 @@ function ShowItemInfo(e) {
     }
   }
   if (itm.dmg) {
-    Element("infoBox").innerHTML += `<p id="defText">Damages: </p>
+    infoContainer.innerHTML += `<p id="defText">Damages: </p>
     <div class="grid">${loop()}</div>
     `;
     function loop() {
@@ -84,7 +87,7 @@ function ShowItemInfo(e) {
       }
       return textElement;
     }
-    Element("infoBox").innerHTML += `<p>Total: ${totalDmg(itm.dmg)}</p>`
+    infoContainer.innerHTML += `<p>Total: ${totalDmg(itm.dmg)}</p>`
     function totalDmg(dmg) {
       let damage = 0;
       for (let value of dmg) {
@@ -95,11 +98,22 @@ function ShowItemInfo(e) {
     }
   }
   if (itm.effects) {
-    Element("infoBox").innerHTML += `<p>Effects:</p>`;
+    infoContainer.innerHTML += `<p>Effects:</p>`;
     let effectDiv = Create("div");
     effectDiv.classList.add("effectBox");
     effectDiv.appendChild(effects(itm.effects));
-    Element("infoBox").appendChild(effectDiv);
+    infoContainer.appendChild(effectDiv);
+  }
+  if(itm.traits) {
+    let traitContainer = Create("p");
+    traitContainer.classList.add("traitContainer");
+    for(let trait of itm.traits) {
+      let span = Create("span");
+      if(trait.value > 0) span.textContent = `${trait.title}: ${GetStringByKey(trait.action, traitActions)} increased by ${trait.value}%`;
+      else if(trait.value < 0) span.textContent = `${trait.title}: ${GetStringByKey(trait.action, traitActions)} decreased by ${trait.value}%`;
+      traitContainer.appendChild(span);
+    }
+    infoContainer.appendChild(traitContainer);
   }
 }
 
@@ -116,6 +130,7 @@ function effects(effects) {
   }
   return main;
 }
+
 
 
 function GetStringByKey(key, array) {
@@ -147,7 +162,7 @@ function HandleDescSyntax(text) {
       text = colors.split("/")[2];
     } else if (text == undefined) text = colors;
     if (text == ":break") textContent.innerHTML += "<br>";
-    else if (img != undefined) textContent.innerHTML += `<img style="width: 22px; height: 22px;" src="resources/images/icons/${img}.png">`;
+    else if (img != undefined) textContent.innerHTML += `<img style="width: 1.1vw; height: 1.1vw;" src="resources/images/icons/${img}.png">`;
     else if (text) textContent.innerHTML += `<span style = "color: ${color || "white"}" class="desc">${text}</span>`;
   }
   return textContent;
@@ -193,7 +208,7 @@ function speedColor(speed) {
 }
 
 function HideItemInfo() {
-  Element("infoBox").style.transform = "scale(0)";
+  infoContainer.style.transform = "scale(0)";
 }
 
 function CreateEquippedInventory() {
@@ -450,6 +465,10 @@ const symbols = [
   { key: "acc", content: "§/rgb(201, 198, 187)/accuracy §%warn_icon%§" },
 ];
 
+const traitActions = [
+  { key: "flying_target_hit_chance", content: "Chance to hit flying enemies" }
+]
+
 function GetAVGArmor(char) {
   let arm = {};
   let amnt = 0;
@@ -457,7 +476,7 @@ function GetAVGArmor(char) {
   for (let eq of char.equipment) {
     if (eq.slot && eq.slot != "shield") {
       if (firstTime) {
-        arm = JSON.parse(JSON.stringify(eq.armor));
+        arm = deepCopy(eq.armor);
         firstTime = false;
         for (let text in arm) {
           arm[text] = 0;

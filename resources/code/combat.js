@@ -137,7 +137,7 @@ async function EndRound() {
     for(let mod of act.performer.modifiers) {
       if(mod.everyTurn && mod.power) {
         let damag = 0;
-        for(dmg of mod.power) {
+        for(let dmg of mod.power) {
           act.performer.stats.hp -= dmg.value;
           damag += dmg.value;
         }
@@ -189,7 +189,7 @@ async function EndRound() {
     else if (global.combat.value != "miss") trigger1 = "nomiss";
     if (global.combat.blocked) trigger1 = "block";
     if(global.combat.value != "miss" && act.abi.status) {
-      let statuscopy = JSON.parse(JSON.stringify(act.abi.status));
+      let statuscopy = deepCopy(act.abi.status);
       act.target.modifiers.push(statuscopy);
     }
     BV = global.combat;
@@ -207,7 +207,7 @@ async function EndRound() {
     }
     let actionElem = ReadContentCombat(SuitableText)
     container.appendChild(actionElem);
-    let bt = JSON.parse(JSON.stringify(global.combat))
+    let bt = deepCopy(global.combat)
     thisRoundHistory.push({ actionElem: actionElem });
     thisBattleHistory.push({ actionElem: actionElem });
     if (act.target.stats.hp <= 0) {
@@ -339,7 +339,7 @@ function EndRound_Recover(act, container) {
   global.combat.actor = act.performer;
   BV = global.combat;
   let SuitableText = GetRandomCombatText("recover");
-  let bt = JSON.parse(JSON.stringify(global.combat))
+  let bt = deepCopy(global.combat)
   let actionElem = ReadContentCombat(SuitableText);
   thisRoundHistory.push({ actionElem: actionElem });
   thisBattleHistory.push({ actionElem: actionElem });
@@ -353,7 +353,7 @@ function EndRound_Defend(act, container) {
   global.combat.ally = act.ally
   BV = global.combat;
   let SuitableText = GetRandomCombatText("defend");
-  let bt = JSON.parse(JSON.stringify(global.combat))
+  let bt = deepCopy(global.combat)
   let actionElem = ReadContentCombat(SuitableText);
   thisRoundHistory.push({ actionElem: actionElem });
   thisBattleHistory.push({ actionElem: actionElem });
@@ -367,9 +367,9 @@ function EndRound_Summon(act, container) {
   global.combat.ally = act.ally
   global.combat.summoned = eval(act.abi.action);
   BV = global.combat;
-  SuitableText = GetRandomCombatText("summon");
-  let bt = JSON.parse(JSON.stringify(global.combat));
-  let actionElem = ReadContentCombat("summon");
+  let SuitableText = GetRandomCombatText("summon");
+  let bt = deepCopy(global.combat);
+  let actionElem = ReadContentCombat(SuitableText);
   thisRoundHistory.push({ actionElem: actionElem });
   thisBattleHistory.push({ actionElem: actionElem });
   container.appendChild(actionElem);
@@ -386,9 +386,10 @@ function EndRound_Heal(act, container) {
   global.combat.target = act.target;
   global.combat.value = Math.ceil(eval(act.action));
   BV = global.combat;
+  let SuitableText;
   if(act.target == act.performer) SuitableText = GetRandomCombatText("self heal");
   else SuitableText = GetRandomCombatText("target heal");
-  let bt = JSON.parse(JSON.stringify(global.combat))
+  let bt = deepCopy(global.combat);
   let actionElem = ReadContentCombat(SuitableText);
   thisRoundHistory.push({ actionElem: actionElem });
   thisBattleHistory.push({ actionElem: actionElem });
@@ -407,7 +408,7 @@ function EndRound_Support(act, container) {
   global.combat.target = act.target;
   if(act.abi?.action?.power) global.combat.value = Math.ceil(eval(act.action));
   if(act.abi?.status) {
-    let statuscopy = JSON.parse(JSON.stringify(act.abi.status));
+    let statuscopy = deepCopy(act.abi.status);
     act.target.modifiers.push(statuscopy);
   }
   BV = global.combat;
@@ -416,7 +417,7 @@ function EndRound_Support(act, container) {
   let SuitableText;
   if(act.target == act.performer) SuitableText = GetRandomCombatText(`nomiss ${trigger2} land`);
   else SuitableText = GetRandomCombatText("debug error");
-  let bt = JSON.parse(JSON.stringify(global.combat))
+  let bt = deepCopy(global.combat);
   let actionElem = ReadContentCombat(SuitableText);
   thisRoundHistory.push({ actionElem: actionElem });
   thisBattleHistory.push({ actionElem: actionElem });
@@ -437,7 +438,7 @@ function EndRound_Cost(act) {
 function EndRound_targetDeath(act, container) {
   act.target.stats.hp = 0;
   let deathTrigger = "target death";
-  let bt = JSON.parse(JSON.stringify(global.combat))
+  let bt = deepCopy(global.combat);
   let actionElem = ReadContentCombat(GetRandomCombatText(deathTrigger))
   thisRoundHistory.push({ actionElem: actionElem });
   thisBattleHistory.push({ actionElem: actionElem });

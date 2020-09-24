@@ -11,9 +11,10 @@ function FormCombatEnvironment() {
   </div>
   <div id="combatButtonsContainer">
   <div id="abilityInfo"></div>
-<img src="resources/images/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, 'RegularAttack()', global.controlling)">
-<img src="resources/images/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()" onclick="AddToRound('Defend()', global.controlling.key)">
-<img src="resources/images/icons/ultimate_ability.png" id="combatUltimate">
+<img src="resources/images/themes/${global.theme}/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, 'RegularAttack()', global.controlling)">
+<img src="resources/images/themes/${global.theme}/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()" onclick="AddToRound('Defend()', global.controlling.key)">
+<div id="ultimateGodrays" class="enabled"></div>
+<img src="resources/images/themes/${global.theme}/icons/ultimate_ability.png" id="combatUltimate">
   </div>`;
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 1));
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 2));
@@ -100,7 +101,7 @@ function CombatAbility(char, slot) {
   let div = Create("div");
   div.id = `combatAbility${slot}`;
   let img = Create("img");
-  img.src = "resources/images/icons/ability_wheel.png";
+  img.src = `resources/images/themes/${global.theme}/icons/ability_wheel.png`;
   div.appendChild(img);
   if(abiOfSlot(char, slot) != undefined) {
     let abi = abiOfSlot(char, slot);
@@ -120,7 +121,7 @@ function CombatSpell(char, slot) {
   let div = Create("div");
   div.id = `combatSpell${slot}`;
   let img = Create("img");
-  img.src = "resources/images/icons/spell_wheel.png";
+  img.src = `resources/images/themes/${global.theme}/icons/spell_wheel.png`;
   div.appendChild(img);
   if(spellOfSlot(char, slot) != undefined) {
     let abi = spellOfSlot(char, slot);
@@ -139,29 +140,14 @@ function CombatSpell(char, slot) {
 var delay = null;
 var fadeoutDelay = null;
 
-// function CombatSpell(char, slot) {
-//   if(spellOfSlot(char, slot) != undefined) {
-//     let spell = spellOfSlot(char, slot);
-//     return `<div id="combatSpell${slot}" onmouseover="showInfoCombat('${spell.key}', this)" onmouseleave="hideInfoCombat()">
-//     <img src="resources/images/icons/spell_wheel.png">
-//     <img src="resources/images/${spell.img}" class="combatAbiImage">
-//     </div>`
-//   }
-//   else {
-//     return `<div id="combatSpell${slot}">
-//     <img src="resources/images/icons/spell_wheel.png">
-//     </div>`
-//   }
-// }
-
 function infoContent(key, elem) {
   Element("abilityInfo").textContent = "";
   let text = GetCombatInfo(key);
   if(text == undefined) text = "§¤s19-BB¤/red/Unfortunately it seems that your text was not found...§";
   Element("abilityInfo").style.background = "rgba(0,0,0,0.55)";
   Element("abilityInfo").style.opacity = "1.00";
-  Element("abilityInfo").style.top = `${(elem.offsetTop - 100)}px`;
-  Element("abilityInfo").style.left = `${(elem.offsetLeft - 50)}px`;
+  Element("abilityInfo").style.top = `${((elem.offsetTop) / document.documentElement.clientHeight) * 90}vh`;
+  Element("abilityInfo").style.left = `${((elem.offsetLeft) / document.documentElement.clientWidth) * 100}vw`;
   Element("abilityInfo").appendChild(ReadContentCombat(text));
 }
 
@@ -222,7 +208,7 @@ function ReadContentCombat(text) {
   for (let colors of content) {
     let img;
     let link;
-    let color = "white";
+    let color = "";
     let text;
     let style = "";
     if(colors.indexOf("¤") != -1) {
@@ -256,14 +242,14 @@ function ReadContentCombat(text) {
     style += ` color: ${color};`;
     if (text == ":break") textContent.innerHTML += "<br>";
     else if(global.quickload && img != undefined) {
-      if (img != undefined && link == undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/${img}.png">`;
-      else if (img != undefined && link != undefined) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
+      if (img != undefined && link == undefined) textContent.innerHTML += `<img style="width: 2.3vw; height: 2.3vw;" src="resources/images/${img}.png">`;
+      else if (img != undefined && link != undefined) textContent.innerHTML += `<img style="width: 2.3vw; height: 2.3vw;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
     }
     else if(!global.quickload && img != undefined) {
-      if (img != undefined && link == undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/${img}.png">`;
-      else if(img != undefined && link == undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" src="resources/images/events/missing_image.png">`;
-      else if (img != undefined && link != undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
-      else if(img != undefined && link != undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 30px; height: 30px;" class="PointerClass" src="resources/images/events/missing_image.png" onclick="${link}">`;
+      if (img != undefined && link == undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 2.4vw; height: 3.5vh;" src="resources/images/${img}.png">`;
+      else if(img != undefined && link == undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 2.4vw; height: 3.5vh;" src="resources/images/events/missing_image.png">`;
+      else if (img != undefined && link != undefined && imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 2.4vw; height: 3.5vh;" class="PointerClass" src="resources/images/${img}.png" onclick="${link}">`;
+      else if(img != undefined && link != undefined && !imageExists(`resources/images/${img}.png`)) textContent.innerHTML += `<img style="width: 2.4vw; height: 3.5vh;" class="PointerClass" src="resources/images/events/missing_image.png" onclick="${link}">`;
     }
     else if (link != undefined) textContent.innerHTML += `<span style = "${style}" class="PointerClass" onclick="${link}">${text}</span>`;
     else if (text) textContent.innerHTML += `<span style = "${style}" >${text}</span>`;

@@ -17,7 +17,7 @@ let global = {
     target: null,
     value: 46,
     blocked: false,
-    ongoing: true,
+    ongoing: false,
     speed: 500,
     delay: 800,
     history: false,
@@ -26,7 +26,7 @@ let global = {
     error: ""
   },
   onmap: false,
-  theme: "default"
+  theme: "classical"
 };
 
 
@@ -79,3 +79,12 @@ function getMonth() {
 }
 
 GlobalUpdate();
+
+function ReloadTheme() {
+  const baseURL = "./themes/"
+  Element("maintheme").href = baseURL + global.theme + '/main.css'
+  Element("misctheme").href = baseURL + global.theme + '/misc.css'
+  Element("invtheme").href = baseURL + global.theme + '/inv.css'
+  Element("codextheme").href = baseURL + global.theme + '/codex.css'
+  Element("menustheme").href = baseURL + global.theme + '/menus.css'
+}

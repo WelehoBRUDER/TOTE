@@ -2,10 +2,6 @@ function CreatePortrait(character, enemy) {
   let portrait = Create('div');
   portrait.id = character.key + "_Portrait";
   let name = character.name;
-  if (name.length > 18) {
-    name = name.substring(0, 17);
-    name += "...";
-  }
   let portrait_image_url = `${character.image}`;
   if (character.key.startsWith("summon_")) {
     if (enemy) portrait_image_url = `${character.images.hostile}`;
@@ -13,7 +9,7 @@ function CreatePortrait(character, enemy) {
   }
   if (!global.quickload) if (!imageExists(`resources/images/${portrait_image_url}.png`)) portrait_image_url = "events/missing_image";
   portrait.innerHTML = `
-    <div class="portrait_background">
+    <div class="portrait_background" onclick="generateCharacterSheet('${character.key}')">
       <p class="portrait_title">${name}</p>
       <img src="resources/images/${portrait_image_url}.png" class="portrait_image">
       ${createOverlay(character)}
@@ -22,12 +18,12 @@ function CreatePortrait(character, enemy) {
       <div class="hpbarbg">
       <p class="barNum">${character.stats.hp} / ${character.stats.maxhp}</p>
       </div>
-      <div class="hpbarfill" style="width: ${character.stats.hp / character.stats.maxhp * 128 + 'px'};">
+      <div class="hpbarfill" style="width: ${character.stats.hp / character.stats.maxhp * 42  + '%'};">
       </div>
       <div class="mpbarbg">
       <p class="barNum">${character.stats.mana} / ${character.stats.maxmana}</p>
       </div>
-      <div class="mpbarfill" style="width: ${character.stats.mana / character.stats.maxmana * 128 + 'px'};"></div>
+      <div class="mpbarfill" style="width: ${character.stats.mana / character.stats.maxmana * 42 + '%'};"></div>
       <div class="statusEffects" onmousemove="statusEffectInfo()" onmouseleave="statusEffectHide()">${loopMods(character)}</div>
     </div>
   `;
@@ -45,9 +41,9 @@ function loopMods(char) {
       let img = Create("img");
       img.src = `resources/images/${mod.img}`;
       img.id = mod.key;
-      img.style.width = "33px";
-      img.style.height = "33px";
-      img.style.margin = "3px";
+      img.style.width = "1.8vw";
+      img.style.height = "1.8vw";
+      img.style.margin = "0.1vw";
       d.appendChild(img);
     }
   }
@@ -69,7 +65,7 @@ function statusEffectInfo() {
   }
   else if (hovering == event.target) {
     hoverbox.style.top = `${event.y}px`;
-    hoverbox.style.left = `${event.x}px`;
+    hoverbox.style.left = `${event.x - 150}px`;
   }
   let pass = event;
   infodelay = setTimeout(() => statusEffectInfoExecute(pass), global.combat.delay);
@@ -89,7 +85,7 @@ function statusEffectInfoExecute(event) {
       hoverbox.appendChild(ReadContentCombat(infotext))
     }
     hoverbox.style.top = `${event.y}px`;
-    hoverbox.style.left = `${event.x}px`;
+    hoverbox.style.left = `${event.x - 150}px`;
 }
 
 function statusEffectHide() {
@@ -151,11 +147,12 @@ let alliesFight = [];
 let enemiesFight = [];
 
 function PushCombatantToTable(combatant, table) {
-  let copy = JSON.parse(JSON.stringify(combatant));
+  let copy = deepCopy(combatant);
   copy.key += `${table.length}`;
   copy.armor = GetAVGArmor(copy);
   copy.hasActed = false;
   copy.threat = 0;
+  if(table != alliesFight) copy.name = CreateName(copy);
   if (copy.armor == {}) copy.armor = ArmorZero();
   table.push(copy);
 }
@@ -209,5 +206,164 @@ function addToFight() {
   CreatePortraits();
 }
 
+function generateCharacterSheet(char) {
+  let key = char.replace(/\d/, '');
+  if(Element(key + "Sheet")) return;
+  let base = Create("div");
+  base.id=key+"Sheet";
+  let target = deepCopy(CHAR(key));
+  base.classList.add("characterSheet");
+
+  let quitBtn = Create("button")
+  let draggableArea = Create("div");
+  draggableArea.id = base.id + "Draggable";
+  draggableArea.classList.add("draggableArea");
+  base.appendChild(draggableArea);
+  quitBtn.innerHTML = "  X  ";
+  quitBtn.onclick = ()=>base.parentNode.removeChild(base);
+  base.appendChild(quitBtn);
+
+  let portrait = Create("img");
+  portrait.classList.add("characterSheet--image");
+  portrait.style.borderColor = target.color;
+  portrait.src = `../../resources/images/${target.image}.png`;
+  base.appendChild(portrait);
+
+  let ManaHealthContainer = Create("div");
+  ManaHealthContainer.classList.add("characterSheet--basestats");
+  let manaIcon = Create("div");
+  let healthIcon = Create("div");
+  manaIcon.classList.add("characterSheet--basestats-mana");
+  healthIcon.classList.add("characterSheet--basestats-health");
+  let manaNumber = Create("p");
+  let healthNumber = Create("p");
+  manaNumber.classList.add("characterSheet--basestats-number");
+  healthNumber.classList.add("characterSheet--basestats-number");
+  manaNumber.textContent = target.stats.maxmana;
+  healthNumber.textContent = target.stats.maxhp;
+  manaIcon.appendChild(manaNumber);
+  healthIcon.appendChild(healthNumber);
+  ManaHealthContainer.appendChild(manaIcon);
+  ManaHealthContainer.appendChild(healthIcon);
+  base.appendChild(ManaHealthContainer);
+
+  let name = Create("p");
+  name.classList.add("characterSheet--name");
+  name.textContent = target.name;
+  name.style.color = target.color;
+  base.appendChild(name);
+
+  let classLevel = Create("p");
+  classLevel.classList.add("characterSheet--class");
+  classLevel.textContent = "Level " + target.xp.level + " - " + target.class.key;
+  base.appendChild(classLevel);
+
+  let desc = Create("p");
+  desc.classList.add("characterSheet--desc");
+  if(FindCharDesc(key)) {
+
+  } else {
+    desc.textContent = 'This is a generic description. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
+  }
+  base.appendChild(desc);
+
+  let sheetContainer = Create("div");
+  sheetContainer.classList.add("characterSheet--sheetContainer");
+
+  let abilitySheet = Create("div");
+  abilitySheet.classList.add("characterSheet--abilities");
+  if(target.abilities.length == 0) {
+    let abilitySheetItem = Create("div");
+    abilitySheetItem.classList.add("characterSheet--abilities-item");
+    let abilityName = Create("p");
+    abilityName.classList.add("characterSheet--abilities-name");
+    abilityName.textContent = "No special abilities!";
+    abilitySheetItem.appendChild(abilityName);
+    abilitySheet.appendChild(abilitySheetItem);
+  }
+  for(let abi of target.abilities) {
+    let abilitySheetItem = Create("div");
+    abilitySheetItem.classList.add("characterSheet--abilities-item");
+    if(abi.img) {
+      let img = Create("img");
+      img.classList.add("characterSheet--abilities-image");
+      img.src = "../../resources/images/" + abi.img;
+      abilitySheetItem.appendChild(img);
+    }
+    let abilityName = Create("p");
+    abilityName.classList.add("characterSheet--abilities-name");
+    abilityName.textContent = abi.name;
+    abilitySheetItem.appendChild(abilityName);
+    abilitySheet.appendChild(abilitySheetItem);
+  }
+  sheetContainer.appendChild(abilitySheet);
+
+  let spellSheet = Create("div");
+  spellSheet.classList.add("characterSheet--spells");
+  for(let abi of target.spells) {
+    let spellSheetItem = Create("div");
+    spellSheetItem.classList.add("characterSheet--abilities-item");
+    if(abi.img) {
+      let img = Create("img");
+      img.classList.add("characterSheet--abilities-image");
+      img.src = "../../resources/images/" + abi.img;
+      spellSheetItem.appendChild(img);
+    }
+    let spellName = Create("p");
+    spellName.classList.add("characterSheet--abilities-name");
+    spellName.textContent = abi.name;
+    spellSheetItem.appendChild(spellName);
+    spellSheet.appendChild(spellSheetItem);
+  }
+  if(target.spells.length == 0) {
+    let abilitySheetItem = Create("div");
+    abilitySheetItem.classList.add("characterSheet--abilities-item");
+    let abilityName = Create("p");
+    abilityName.classList.add("characterSheet--abilities-name");
+    abilityName.textContent = "No affinity for spells!";
+    abilitySheetItem.appendChild(abilityName);
+    spellSheet.appendChild(abilitySheetItem);
+  }
+  sheetContainer.appendChild(spellSheet);
+
+  base.appendChild(sheetContainer);
+
+  let statSheet = Create("div");
+  statSheet.classList.add("characterSheet--stats");
+  for(let stat in target.stats) {
+    let statItem = Create("p");
+    let statTexture = Create("img");
+    statTexture.classList.add("characterSheet--stats-texture");
+    statTexture.src = "../../resources/images/themes/" + global.theme + "/icons/health_container.png";
+    if(stat == "maxhp" || stat == "maxmana" || stat == "hp" || stat == "mana") continue;
+    statItem.classList.add("characterSheet--stats-item");
+    statItem.appendChild(statTexture);
+    statItem.innerHTML += statToText(stat) + ": " + target.stats[stat];
+    statSheet.appendChild(statItem);
+  }
+  base.appendChild(statSheet);
+
+  document.body.appendChild(base);
+  draggableElement(base);
+}
+
+function FindCharDesc(key) {
+  return false;
+}
+
+function statToText(stat) {
+  switch(stat) {
+    case "vig": return "Vigour";
+    case "str": return "Strength";
+    case "dex": return "Dexterity";
+    case "agi": return "Agility";
+    case "wis": return "Wisdom";
+    case "int": return "Intelligence";
+    case "fth": return "Faith";
+    case "acc": return "Accuracy";
+    case "spd": return "Speed";
+
+  }
+}
 
 
