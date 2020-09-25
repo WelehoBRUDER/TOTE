@@ -19,7 +19,7 @@ function IsEntrance(x, y) {
       characters.player.map = mapArrays[int].entrances[i].tar;
       characters.player.cords.x = mapArrays[int].entrances[i].tarX;
       characters.player.cords.y = mapArrays[int].entrances[i].tarY;
-      global.time.minute += 10;
+      global.time += 10;
       GlobalUpdate();
       DrawMap();
       return;

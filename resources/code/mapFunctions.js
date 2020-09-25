@@ -96,7 +96,7 @@ function movement(e) {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x, characters.player.cords.y - 1) && characters.player.cords.y - 1 > -1) characters.player.cords.y--;
     if (CanWalk(characters.player.cords.x, characters.player.cords.y - 1) && characters.player.cords.y - 1 > -1) {
-      global.time.minute += 5;
+      global.time += 5;
       canMove = false;
       setTimeout(ResetMove, 300);
     } 
@@ -105,7 +105,7 @@ function movement(e) {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x, characters.player.cords.y + 1) != 0 && characters.player.cords.y + 1 < 10) characters.player.cords.y++;
     if (CanWalk(characters.player.cords.x, characters.player.cords.y + 1) != 0 && characters.player.cords.y + 1 < 10) {
-      global.time.minute += 5;
+      global.time += 5;
       canMove = false;
       setTimeout(ResetMove, 300);
     } 
@@ -115,7 +115,7 @@ function movement(e) {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x - 1, characters.player.cords.y) && characters.player.cords.x - 1 > -1) characters.player.cords.x--;
     if (CanWalk(characters.player.cords.x - 1, characters.player.cords.y) && characters.player.cords.x - 1 > -1) {
-      global.time.minute += 5;
+      global.time += 5;
       canMove = false;
       setTimeout(ResetMove, 300);
     } 
@@ -124,7 +124,7 @@ function movement(e) {
     DrawImage(characters.player.cords.x, characters.player.cords.y);
     if (CanWalk(characters.player.cords.x + 1, characters.player.cords.y) && characters.player.cords.x + 1 < 16) characters.player.cords.x++;
     if (CanWalk(characters.player.cords.x + 1, characters.player.cords.y) && characters.player.cords.x + 1 < 16) {
-      global.time.minute += 5;
+      global.time += 5;
       canMove = false;
       setTimeout(ResetMove, 300);
     } 

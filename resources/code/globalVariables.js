@@ -1,12 +1,6 @@
 
 let global = {
-  time: {
-    minute: 15,
-    hour: 7,
-    day: 1,
-    month: 3,
-    year: 266
-  },
+  time: 139939560,
   controlling: null,
   equipping: characters.player,
   equippingNUM: 0,
@@ -30,40 +24,40 @@ let global = {
   tile_pack: "classic"
 };
 
+var units = {
+  "year": 24*60*365,
+  "month": 24*60*30,
+  "week": 24*60*7,
+  "day": 24*60,
+  "minute": 1
+}
+
 
 // Updates global variables
 function GlobalUpdate() {
-  while (global.time.minute > 59) {
-    global.time.hour++;
-    global.time.minute -= 60;
-  }
-  while (global.time.hour > 23) {
-    global.time.day++;
-    global.time.hour -= 24;
-  }
-  while (global.time.day > 27) {
-    global.time.month++;
-    global.time.day -= 28;
-  }
-  while (global.time.month > 11) {
-    global.time.year++;
-    global.time.month -= 12;
-  }
-  if (global.time.day < 1) global.time.day = 1;
-  if (global.time.month < 1) global.time.month = 1;
-  Element("clock").textContent = `${global.time.hour}:${global.time.minute < 10 ? "0" : ""}${global.time.minute}`;
-  Element("date").textContent = `${global.time.day}${timeAbbreviation()} of ${getMonth()}, ${global.time.year}`;
+  let minutes = global.time;
+  let year = Math.floor(minutes / (24*60*365));
+  minutes %= (24*60*365);
+  let month = Math.floor(minutes / (24*60*30));
+  minutes %= (24*60*30);
+  let day = Math.floor(minutes / (24*60));
+  minutes %= (24*60);
+  let hour = Math.floor(minutes / 60);
+  minutes %= 60;
+  if(day < 1) day = 1;
+  Element("clock").textContent = `${hour}:${minutes < 10 ? "0" : ""}${minutes}`;
+  Element("date").textContent = `${day}${timeAbbreviation(day)} of ${getMonth(month)}, ${year}`;
 }
 
-function timeAbbreviation() {
-  if (global.time.day == 1) return "st";
-  else if (global.time.day == 2) return "nd";
-  else if (global.time.day == 3) return "rd";
+function timeAbbreviation(day) {
+  if (day == 1) return "st";
+  else if (day == 2) return "nd";
+  else if (day == 3) return "rd";
   else return "th";
 }
 
-function getMonth() {
-  switch (global.time.month) {
+function getMonth(month) {
+  switch (month) {
     case 1: return "Janaruy";
     case 2: return "Februari";
     case 3: return "Märsch";
