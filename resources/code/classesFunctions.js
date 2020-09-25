@@ -8,6 +8,10 @@ function StatsForCharacters(char) {
     for(let stat in char.race.baseStats) {
         char.stats[stat] += char.race.baseStats[stat];
     }
+    for(let stat in char.stats) {
+        if(stat == "hp" || stat == "maxhp" || stat == "mana" || stat == "maxmana") continue;
+        char.stats[stat] += char.xp.level;
+    }
     char.stats.maxhp += IncMaxHP(char.stats);
     char.stats.maxmana += IncMaxMana(char.stats);
     for(let stat in char.race.multipliers) {
@@ -23,8 +27,8 @@ function IncMaxHP(stats) {
     let incVal = 0;
     for(let stat in stats) {
         if(stat == "vig") incVal += 25*stats[stat];
-        else if(stat == "str") incVal += 10*stats[stat];
-        else if(stat == "agi") incVal += 5*stats[stat];
+        else if(stat == "str") incVal += 5*stats[stat];
+        else if(stat == "agi") incVal += 2*stats[stat];
     }
     return incVal;
 }
@@ -33,8 +37,8 @@ function IncMaxMana(stats) {
     let incVal = 0;
     for(let stat in stats) {
         if(stat == "wis") incVal += 25*stats[stat];
-        else if(stat == "int") incVal += 10*stats[stat];
-        else if(stat == "fth") incVal += 5*stats[stat];
+        else if(stat == "int") incVal += 5*stats[stat];
+        else if(stat == "fth") incVal += 2*stats[stat];
     }
     return incVal;
 }

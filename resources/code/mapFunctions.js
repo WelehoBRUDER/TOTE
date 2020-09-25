@@ -25,19 +25,19 @@ function DrawMap() {
         let img = new Image();
         switch (mapArrays[int].map[y][x]) {
           case 9:
-            img.src = "resources/images/tiles/forbidden_tile.png";
+            img.src = "resources/images/tiles/" + global.tile_pack + "/forbidden_tile.png";
             break;
           case 0:
-            img.src = "resources/images/tiles/water_tile.png";
+            img.src = "resources/images/tiles/" + global.tile_pack + "/water_tile.png";
             break;
           case 1:
-            img.src = "resources/images/tiles/grass_tile.png";
+            img.src = "resources/images/tiles/" + global.tile_pack + "/grass_tile.png";
             break;
           case 2:
-            img.src = "resources/images/tiles/cobble_tile.png";
+            img.src = "resources/images/tiles/" + global.tile_pack + "/cobble_tile.png";
             break;
           case 3:
-            img.src = "resources/images/tiles/tree_tile.png";
+            img.src = "resources/images/tiles/" + global.tile_pack + "/tree_tile.png";
             break;
         }
         img.onload = function () {
@@ -53,7 +53,7 @@ function DrawMap() {
 // Draws the player character over an existing tile
 function DrawPlayer() {
   let img = new Image();
-  img.src = "resources/images/tiles/player_tile.png";
+  img.src = "resources/images/tiles/" + global.tile_pack + "/player_tile.png";
   img.onload = function () {
     ctx.drawImage(img, characters.player.cords.x * 80, characters.player.cords.y * 80, 80, 80);
   }
@@ -62,7 +62,7 @@ function DrawPlayer() {
 // Draws the player character over an existing tile with a highlight.
 function DrawPlayerHighlight() {
   let img = new Image();
-  img.src = "resources/images/tiles/playerHighlight_tile.png";
+  img.src = "resources/images/tiles/" + global.tile_pack + "/playerHighlight_tile.png";
   img.onload = function () {
     ctx.drawImage(img, characters.player.cords.x * 80, characters.player.cords.y * 80, 80, 80);
   }
@@ -147,16 +147,16 @@ function DrawImage(x, y) {
   let img = new Image();
   switch (mapArrays[int].map[y][x]) {
     case 0:
-      img.src = "resources/images/tiles/water_tile.png";
+      img.src = "resources/images/tiles/" + global.tile_pack + "/water_tile.png";
       break;
     case 1:
-      img.src = "resources/images/tiles/grass_tile.png";
+      img.src = "resources/images/tiles/" + global.tile_pack + "/grass_tile.png";
       break;
     case 2:
-      img.src = "resources/images/tiles/cobble_tile.png";
+      img.src = "resources/images/tiles/" + global.tile_pack + "/cobble_tile.png";
       break;
     case 3:
-      img.src = "resources/images/tiles/tree_tile.png";
+      img.src = "resources/images/tiles/" + global.tile_pack + "/tree_tile.png";
       break;
   }
   img.onload = function () {

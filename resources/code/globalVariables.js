@@ -26,7 +26,8 @@ let global = {
     error: ""
   },
   onmap: false,
-  theme: "classical"
+  theme: "classical",
+  tile_pack: "classic"
 };
 
 
