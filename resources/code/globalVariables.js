@@ -24,15 +24,6 @@ let global = {
   tile_pack: "classic"
 };
 
-var units = {
-  "year": 24*60*365,
-  "month": 24*60*30,
-  "week": 24*60*7,
-  "day": 24*60,
-  "minute": 1
-}
-
-
 // Updates global variables
 function GlobalUpdate() {
   let minutes = global.time;
