@@ -36,6 +36,7 @@ function GlobalUpdate() {
   let hour = Math.floor(minutes / 60);
   minutes %= 60;
   if(day < 1) day = 1;
+  if(month < 1) month = 1
   Element("clock").textContent = `${hour}:${minutes < 10 ? "0" : ""}${minutes}`;
   Element("date").textContent = `${day}${timeAbbreviation(day)} of ${getMonth(month)}, ${year}`;
 }

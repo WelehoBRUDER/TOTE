@@ -124,6 +124,18 @@ function CalculateSpeed(char) {
   return char.stats.spd + extraSpeed;
 }
 
+function ReRollThis(act, friendly) {
+  let rerolled = RerollAi(act.performer, friendly)
+  return rerolled;
+}
+
+function IsCharFriendly(char) {
+  for(let ally of alliesFight) {
+    if(ally.key == char.key) return true;
+  }
+  return false;
+}
+
 async function EndRound() {
   SortActions();
   LowerCooldowns();
@@ -151,8 +163,16 @@ async function EndRound() {
         continue;
       }
     }
-    if(act.action != "resurrect" && act.target?.stats?.hp <= 0) continue;
-    //console.log(act.action);
+    let BREAK_INFINITE_LOOP = 100;
+    if(act.action != "resurrect" && act.target?.stats?.hp <= 0) {
+      for(let i = 0; i<BREAK_INFINITE_LOOP; i++) {
+        if(act?.performer) {
+          let friendly = IsCharFriendly(act?.performer);
+          act = ReRollThis(act, friendly);
+        }
+      }
+    }
+    if((act.action != "resurrect" && act.target?.stats?.hp <= 0) || !act?.action) continue;
     if(act.action == "recover" || IsStunned(act.performer)) {
       EndRound_Recover(act, container);
       if (global.combat.speed > 0) await sleep(global.combat.speed);
@@ -198,6 +218,7 @@ async function EndRound() {
       act.target.modifiers.push(statuscopy);
     }
     BV = global.combat;
+    if(act.abi.selfTarget) global.combat.value = 0;
     if (global.combat.value != "miss") act.target.stats.hp -= global.combat.value;
     if (global.combat.value <= 0) global.combat.value = "no";
     if (act.abi != undefined && act.abi != "RegularAttack()") {

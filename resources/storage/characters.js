@@ -107,7 +107,7 @@ var characters = {
     new Ally("christina_healer", "Christina Schutzengel", "women",  Race("Human"), CharClass("Healer"), [
       AddItem("wooden_healing_staff"),
       AddItem("leather_chest"),
-    ], "gold", "portraits/portrait_white_mage_temp", [], [], {points: 0, needed: 100, modifier: 1.00, level: 100}, {},
+    ], "gold", "portraits/portrait_white_mage_temp", [], [], {points: 0, needed: 100, modifier: 1.00, level: 1}, {},
     {objective: "her", possesive: "her", singular: "she"}, true, {
       healing: 60, healing_self: 40
     }, [Spell("healing-light")])
@@ -119,7 +119,7 @@ var characters = {
       AddItem("leather_helmet"),
       AddItem("leather_chest"),
       AddItem("broken_iron_shield"),
-    ], "rgb(51, 102, 0)", "portraits/portrait_goblin_temp", [], [Ability("smash"), Ability("shield-bash")], [], {level: 50},
+    ], "rgb(51, 102, 0)", "portraits/portrait_goblin_temp", [], [Ability("smash"), Ability("shield-bash"), Ability("taunt-1")], [], {level: 1},
     {}, {objective: "the simp", possesive: "its", singular: "the simp"}, {
       healing_self: 40
     }, "a", [Spell("dim-healing-light")]),
@@ -129,7 +129,7 @@ var characters = {
       AddItem("wooden_healing_staff"),
       AddItem("leather_helmet"),
       AddItem("leather_chest"),
-    ], "rgb(34,139,34)", "portraits/portrait_goblin_queen", [], [], [], {level: 50},
+    ], "rgb(34,139,34)", "portraits/portrait_goblin_queen", [], [], [], {level: 1},
     {}, {objective: "her majesty", possesive: "her majesty's", singular: "her majesty"}, 
     {
       healing: 60, healing_self: 40
@@ -142,7 +142,7 @@ var characters = {
       AddItem("leather_helmet"),
       AddItem("leather_gloves"),
       AddItem("leather_boots")
-    ], "rgb(154,205,50)", "portraits/portrait_goblin_king", [], [], [], {level: 50},
+    ], "rgb(154,205,50)", "portraits/portrait_goblin_king", [], [Ability("taunt-1"), Ability("smash")], [], {level: 1},
     {}, {objective: "him", possesive: "his", singular: "he"}, [], "the"),
   ]
 }
@@ -176,7 +176,7 @@ characters.player.inventory = [
   AddItem("leather_boots"),
   AddItem("magical_chestplate")
 ];
-characters.player.xp = {points: 0, needed: 100, modifier: 1.00, level: 100};
+characters.player.xp = {points: 0, needed: 100, modifier: 1.00, level: 1};
 characters.player.abilities = [Ability("fierce-assault"), Ability("shield-bash"), Ability("summon-skeleton-warrior"), Ability("summon-earth-golem"), Ability("sunder"), Ability("blinding-slash")];
 characters.player.spells = [Spell("fireball-1"), Spell("harden-1")];
 

@@ -5,7 +5,6 @@ function CalculateDamage(damage, armor, type) {
     let dex = Math.ceil(global.combat.actor.stats.dex * (1 + actorModifiers("dex")));
     let newDamage = Math.ceil(damage * (1 + (str / 25 + dex / 50)));
     let newArmor = (armor / 100) * (1 + targetModifiers("armor"));
-    console.log("old: " + armor/100 + " new: " + newArmor);
     newDamage = Math.ceil(newDamage - (newDamage * newArmor));
     newDamage = defenseModifiers(global.combat.target, type, newDamage);
     return newDamage;
@@ -230,6 +229,10 @@ function SupportSpell(power) {
 
 function Defend() {
     return Status("combat-guard");
+}
+
+function Buff(power) {
+    if(power?.amount) return power?.amount;
 }
 
 function Status(key) {

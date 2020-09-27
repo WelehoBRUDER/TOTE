@@ -152,9 +152,25 @@ function PushCombatantToTable(combatant, table) {
   copy.armor = GetAVGArmor(copy);
   copy.hasActed = false;
   copy.threat = 0;
-  if(table != alliesFight) copy.name = CreateName(copy);
+  if(table != alliesFight) { 
+    copy.name = CreateName(copy);
+    if(FoundBehaviors(copy)) copy.template = FoundBehaviors(copy)[Random(FoundBehaviors(copy).length)];
+   }
   if (copy.armor == {}) copy.armor = ArmorZero();
   table.push(copy);
+}
+
+function FoundBehaviors(char) {
+  for(let race of ai_templates) {
+    if(race.for.toLowerCase() == char.race.key.toLowerCase()) {
+      for(let item of race.class_templates) {
+        if(item.key.toLowerCase() == char.class.key.toLowerCase()) {
+          return item.ai_templates;
+        }
+      } 
+    }
+  }
+  return undefined;
 }
 
 function ArmorZero() {

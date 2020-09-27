@@ -53,6 +53,16 @@ const statuses = [
     everyTurn: true,
     last: 3,
     text: "This character is §/orange/burning§ and takes 15 damage every turn."
+  },
+  {
+    key: "taunt-1",
+    img: "icons/combat/taunt.png",
+    power: [
+      {type: "attack", value: 15},
+      {type: "threat", power: 15}
+    ],
+    last: 3,
+    text: "This character is taunting and thus is 15% more §/red/threatening§, and deals 15% more §/crimson/damage§."
   }
 ]
 
@@ -168,6 +178,22 @@ const abilities = [
       },
       cooldown: 0,
       action: "Summoning(summon(`summon_earth_golem`))"
+    },
+    {
+      key: "taunt-1",
+      name: "Taunt",
+      img: "icons/warrior_icon.png",
+      power: {
+        amount: 0
+      },
+      cost: {
+        mana: 0,
+        cd: 3
+      },
+      selfTarget: true,
+      status: Status(`taunt-1`),
+      cooldown: 0,
+      action: "Buff(Ability(`taunt-1`).power)"
     }
 ];
 
