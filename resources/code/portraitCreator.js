@@ -350,7 +350,7 @@ function generateCharacterSheet(char) {
     let statItem = Create("p");
     let statTexture = Create("img");
     statTexture.classList.add("characterSheet--stats-texture");
-    statTexture.src = "../../resources/images/themes/" + global.theme + "/icons/health_container.png";
+    statTexture.src = "../../resources/images/themes/" + global.theme + "/icons/" + stat + "_stat.png";
     if(stat == "maxhp" || stat == "maxmana" || stat == "hp" || stat == "mana") continue;
     statItem.classList.add("characterSheet--stats-item");
     statItem.appendChild(statTexture);
