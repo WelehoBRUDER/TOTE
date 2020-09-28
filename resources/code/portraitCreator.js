@@ -152,6 +152,8 @@ function PushCombatantToTable(combatant, table) {
   copy.armor = GetAVGArmor(copy);
   copy.hasActed = false;
   copy.threat = 0;
+  copy.critChance = 10;
+  copy.critMulti = 2;
   if(table != alliesFight) { 
     copy.name = CreateName(copy);
     if(FoundBehaviors(copy)) copy.template = FoundBehaviors(copy)[Random(FoundBehaviors(copy).length)];
