@@ -395,15 +395,15 @@
 .characterSheet--stats-item {
     padding: 0vw;
     margin: 0.1vw;
+    width: 33%;
     align-self: center;
-    font-size: 1.4vw;
-    font-family: Charmonman;
+    font-size: 1.5vw;
+    font-family: CodexMedium;
     color: rgb(71, 49, 29);
-    filter: brightness(50%);
 }
 
 .characterSheet--stats-texture {
-    width: 1.4vw;
+    width: 1.55vw;
     align-self: center;
 }
 

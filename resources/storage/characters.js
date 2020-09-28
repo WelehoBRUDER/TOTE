@@ -142,7 +142,7 @@ var characters = {
       AddItem("leather_helmet"),
       AddItem("leather_gloves"),
       AddItem("leather_boots")
-    ], "rgb(154,205,50)", "portraits/portrait_goblin_king", [], [Ability("taunt-1"), Ability("smash")], [], {level: 1},
+    ], "rgb(154,205,50)", "portraits/portrait_goblin_king", [], [Ability("taunt-1"), Ability("smash")], [], {level: 1000},
     {}, {objective: "him", possesive: "his", singular: "he"}, [], "the"),
   ]
 }

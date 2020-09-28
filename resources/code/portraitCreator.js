@@ -357,7 +357,7 @@ function generateCharacterSheet(char) {
     let val = 0;
     if(stat == "spd") val = CalculateSpeed(target);
     else val = target.stats[stat];
-    statItem.innerHTML += statToText(stat) + ": " + val;
+    statItem.innerHTML += stat.toUpperCase() + ": " + val;
     statSheet.appendChild(statItem);
   }
   base.appendChild(statSheet);
@@ -368,21 +368,6 @@ function generateCharacterSheet(char) {
 
 function FindCharDesc(key) {
   return false;
-}
-
-function statToText(stat) {
-  switch(stat) {
-    case "vig": return "Vigour";
-    case "str": return "Strength";
-    case "dex": return "Dexterity";
-    case "agi": return "Agility";
-    case "wis": return "Wisdom";
-    case "int": return "Intelligence";
-    case "fth": return "Faith";
-    case "acc": return "Accuracy";
-    case "spd": return "Speed";
-
-  }
 }
 
 
