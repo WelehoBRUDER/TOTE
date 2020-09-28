@@ -359,7 +359,7 @@ function generateCharacterSheet(char) {
     let val = 0;
     if(stat == "spd") val = CalculateSpeed(target);
     else val = target.stats[stat];
-    statItem.innerHTML += stat.toUpperCase() + ": " + val;
+    statItem.innerHTML += " " + stat.toUpperCase() + ": " + val;
     statSheet.appendChild(statItem);
   }
   base.appendChild(statSheet);
