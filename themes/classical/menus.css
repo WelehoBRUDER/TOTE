@@ -399,7 +399,6 @@
     font-size: 1.4vw;
     font-family: Charmonman;
     color: rgb(71, 49, 29);
-    filter: brightness(50%);
 }
 
 .characterSheet--stats-texture {
