@@ -237,7 +237,8 @@ function FIGHTCHAR(key) {
 function generateCharacterSheet(char) {
   console.log(char);
   let key = char;
-  if(key.indexOf(/\d/) != -1) key = char.replace(/\d/, '');
+  let replace = key.replace(/\d/, '');
+  if(replace != key)  key = replace;
   if(Element(key + "Sheet")) return;
   let base = Create("div");
   base.id=key+"Sheet";
