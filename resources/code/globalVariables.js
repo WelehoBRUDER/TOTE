@@ -11,7 +11,7 @@ let global = {
     target: null,
     value: 46,
     blocked: false,
-    ongoing: false,
+    ongoing: true,
     speed: 500,
     delay: 800,
     history: false,

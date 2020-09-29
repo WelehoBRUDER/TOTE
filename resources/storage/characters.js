@@ -137,12 +137,12 @@ var characters = {
 
     new Enemy("goblin_king", "Goblin King", "men",  Race("Goblin King"), CharClass("Brawler"), 
     [
-      AddItem("rusty_iron_bastard_sword"),
+      AddItem("wooden_healing_staff"),
       AddItem("leather_chest"),
       AddItem("leather_helmet"),
       AddItem("leather_gloves"),
       AddItem("leather_boots")
-    ], "rgb(154,205,50)", "portraits/portrait_goblin_king", [], [Ability("taunt-1"), Ability("smash")], [], {level: 1000},
+    ], "rgb(154,205,50)", "portraits/portrait_goblin_king", [], [Ability("taunt-1"), Ability("smash")], [], {level: 1},
     {}, {objective: "him", possesive: "his", singular: "he"}, [], "the"),
   ]
 }

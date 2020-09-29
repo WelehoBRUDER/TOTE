@@ -369,6 +369,16 @@ var texts = [
         ]
       },
       {
+        subcat: "combat-taunt",
+        trigger: "Buff(Ability(`taunt-1`).power)",
+        texts: [
+          {
+            key: "combat-taunt-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ begins drawing attention to §@var.OBJPRON(actor)§self by grunting and yelling, culminating in a taunt!"
+          }
+        ]
+      },
+      {
         subcat: "summoning",
         trigger: "summon",
         texts: [

@@ -26,8 +26,8 @@ const Races = [
         desc: "Goblins are nimble creatures of short stature that possess low intelligence, strength and constitution.",
         baseStats: new Stats(-1, -1, 3, 3, -1, -1, -1, 0, 1),
         multipliers: {
-            maxhp: 0.28,
-            maxmana: 0.75
+            maxhp: 0.325,
+            maxmana: 0.25
         },
         xpReward: 20
     },
@@ -46,8 +46,8 @@ const Races = [
         desc: "Kings are alpha males of the goblin family, ruling over clans alongside their equals - the goblin queens.",
         baseStats: new Stats(5, 5, 2, 2, 2, 1, 0, 1, 1),
         multipliers: {
-            maxhp: 0.92,
-            maxmana: 0.74
+            maxhp: 0.85,
+            maxmana: 0.5
         },
         xpReward: 80
     },

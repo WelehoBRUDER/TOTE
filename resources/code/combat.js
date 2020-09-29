@@ -159,6 +159,8 @@ async function EndRound() {
         global.combat.value = damag;
         global.combat.actor = act.performer;
         container.appendChild(ReadContentCombat(GetRandomCombatText("everyturn")));
+        StatsForCharacters(act.performer)
+        if(act.target) StatsForCharacters(act.target)
         if (global.combat.speed > 0) await sleep(global.combat.speed);
         continue;
       }
@@ -172,15 +174,20 @@ async function EndRound() {
         }
       }
     }
+    if(act == undefined || act?.action == undefined) continue;
     if((act.action != "resurrect" && act.target?.stats?.hp <= 0) || !act?.action) continue;
     if(act.action == "recover" || IsStunned(act.performer)) {
       EndRound_Recover(act, container);
       if (global.combat.speed > 0) await sleep(global.combat.speed);
+      StatsForCharacters(act.performer)
+      if(act.target) StatsForCharacters(act.target)
        continue;
     }
     if (act.action == "defend") {
       EndRound_Defend(act, container);
       if (global.combat.speed > 0) await sleep(global.combat.speed);
+      StatsForCharacters(act.performer)
+      if(act.target) StatsForCharacters(act.target)
       continue;
     }
     else if (act.abi) {
@@ -188,14 +195,20 @@ async function EndRound() {
         if (act.abi.action.startsWith("Summoning")) {
           EndRound_Summon(act, container);
           if (global.combat.speed > 0) await sleep(global.combat.speed);
+          StatsForCharacters(act.performer)
+          if(act.target) StatsForCharacters(act.target)
           continue;
         } else if(act.abi.action.startsWith("Heal")) {
           EndRound_Heal(act, container);
           if (global.combat.speed > 0) await sleep(global.combat.speed);
+          StatsForCharacters(act.performer)
+          if(act.target) StatsForCharacters(act.target)
           continue;
         } else if(act.abi.action.startsWith("Support")) {
           EndRound_Support(act, container);
           if (global.combat.speed > 0) await sleep(global.combat.speed);
+          StatsForCharacters(act.performer)
+          if(act.target) StatsForCharacters(act.target)
           continue;
         }
       }
@@ -225,6 +238,7 @@ async function EndRound() {
       EndRound_Cost(act);
     }
     let triggers = `${trigger1} ${trigger2} land`;
+    if(act.action.startsWith("Buff")) triggers = trigger2;
     SuitableText = GetRandomCombatText(triggers);
     if(SuitableText == null || SuitableText == undefined) {
       global.combat.error = act.action;
@@ -238,16 +252,18 @@ async function EndRound() {
     thisBattleHistory.push({ actionElem: actionElem });
     if (act.target.stats.hp <= 0) {
       if (global.combat.speed > 0) await sleep(global.combat.speed);
+      StatsForCharacters(act.performer)
+      if(act.target) StatsForCharacters(act.target)
       EndRound_targetDeath(act, container);
     }
     container.scrollTop = container.scrollHeight;
-    CreatePortraits();
+    StatsForCharacters(act.performer)
+    if(act.target) StatsForCharacters(act.target)
     if (global.combat.speed > 0) await sleep(global.combat.speed);
   }
   RemoveOrDecreaseStatuses();
   coolDowns();
   RemoveDeadSummons();
-  CreatePortraits();
   charactersActions = [];
   for (let char of enemiesFight) {
     char.hasActed = false;

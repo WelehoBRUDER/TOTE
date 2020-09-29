@@ -187,10 +187,10 @@ function ShieldBash() {
 }
 
 function AttackMissed() {
-    let agi = global.combat.target.stats.agi * targetModifiers("agi");
-    let acc = global.combat.actor.stats.acc * actorModifiers("acc");
+    let agi = global.combat.target.stats.agi;
+    let acc = global.combat.actor.stats.acc;
     if (agi > global.combat.actor.stats.acc) {
-        if (((global.combat.target.stats.agi - global.combat.actor.stats.acc) / 100) >= Math.random()) {
+        if (((global.combat.target.stats.agi - global.combat.actor.stats.acc) / 250) >= Math.random()) {
             return true;
         }
         else return false;

@@ -9,13 +9,13 @@ const ai_templates = [
             key: "taunter",
             behavior: {
               buff_self: 50,
-              attack_enemy: 10
+              attack_enemy: 30
             }
           },
           {
             key: "fighter",
             behavior: {
-              buff_self: 10,
+              buff_self: 30,
               attack_enemy: 50
             }
           }
@@ -33,13 +33,13 @@ const ai_templates = [
             key: "taunter",
             behavior: {
               buff_self: 60,
-              attack_enemy: 10
+              attack_enemy: 35
             }
           },
           {
             key: "fighter",
             behavior: {
-              buff_self: 10,
+              buff_self: 35,
               attack_enemy: 70
             }
           }

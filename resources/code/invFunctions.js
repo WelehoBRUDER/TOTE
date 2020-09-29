@@ -104,13 +104,13 @@ function ShowItemInfo(e) {
     effectDiv.appendChild(effects(itm.effects));
     infoContainer.appendChild(effectDiv);
   }
-  if(itm.traits) {
+  if (itm.traits) {
     let traitContainer = Create("p");
     traitContainer.classList.add("traitContainer");
-    for(let trait of itm.traits) {
+    for (let trait of itm.traits) {
       let span = Create("span");
-      if(trait.value > 0) span.textContent = `${trait.title}: ${GetStringByKey(trait.action, traitActions)} increased by ${trait.value}%`;
-      else if(trait.value < 0) span.textContent = `${trait.title}: ${GetStringByKey(trait.action, traitActions)} decreased by ${trait.value}%`;
+      if (trait.value > 0) span.textContent = `${trait.title}: ${GetStringByKey(trait.action, traitActions)} increased by ${trait.value}%`;
+      else if (trait.value < 0) span.textContent = `${trait.title}: ${GetStringByKey(trait.action, traitActions)} decreased by ${trait.value}%`;
       traitContainer.appendChild(span);
     }
     infoContainer.appendChild(traitContainer);
@@ -162,7 +162,7 @@ function HandleDescSyntax(text) {
       text = colors.split("/")[2];
     } else if (text == undefined) text = colors;
     if (text == ":break") textContent.innerHTML += "<br>";
-    else if (img != undefined) textContent.innerHTML += `<img style="width: 1.1vw; height: 1.1vw;" src="resources/images/icons/${img}.png">`;
+    else if (img != undefined) textContent.innerHTML += `<img style="width: 1.1vw; height: 1.1vw;" src="resources/images/themes/${global.theme}/icons/${img}.png">`;
     else if (text) textContent.innerHTML += `<span style = "color: ${color || "white"}" class="desc">${text}</span>`;
   }
   return textContent;
@@ -211,8 +211,14 @@ function HideItemInfo() {
   infoContainer.style.transform = "scale(0)";
 }
 
+document.body.addEventListener('DOMContentLoaded', init);
+
+function init() {
+  CreateEquippedInventory();
+}
+
 function CreateEquippedInventory() {
-  UpdatePlayerStats();
+  StatsForCharacters(global.equipping)
   Element("weaponSlot").innerHTML = "";
   Element("chestarmor").innerHTML = "";
   Element("helmet").innerHTML = "";
@@ -433,7 +439,6 @@ function GetWeaponInt() {
   return false;
 }
 
-CreateEquippedInventory();
 
 const colors = {
   dark: "rgb(10, 10, 10)",
@@ -454,15 +459,15 @@ const actions = [
 ];
 
 const symbols = [
-  { key: "maxhp", content: "§/rgb(237, 9, 47)/maximum health§ §%heart_icon_small%§" },
-  { key: "maxmana", content: "§/rgb(9, 106, 128)/maximum mana§ §%warn_icon%§" },
-  { key: "str", content: "§/rgb(201, 198, 187)/strength§ §%warn_icon%§" },
-  { key: "dex", content: "§/rgb(201, 198, 187)/dexterity §%warn_icon%§" },
-  { key: "agi", content: "§/rgb(201, 198, 187)/agility §%warn_icon%§" },
-  { key: "wis", content: "§/rgb(201, 198, 187)/wisdom §%warn_icon%§" },
-  { key: "int", content: "§/rgb(201, 198, 187)/intelligence §%warn_icon%§" },
-  { key: "fth", content: "§/rgb(201, 198, 187)/faith §%warn_icon%§" },
-  { key: "acc", content: "§/rgb(201, 198, 187)/accuracy §%warn_icon%§" },
+  { key: "maxhp", content: "§/rgb(237, 9, 47)/maximum health§ §%vig_stat%§" },
+  { key: "maxmana", content: "§/rgb(9, 106, 128)/maximum mana§ §%mana_container%§" },
+  { key: "str", content: "§/rgb(201, 198, 187)/strength§ §%str_stat%§" },
+  { key: "dex", content: "§/rgb(201, 198, 187)/dexterity §%dex_stat%§" },
+  { key: "agi", content: "§/rgb(201, 198, 187)/agility §%agi_stat%§" },
+  { key: "wis", content: "§/rgb(201, 198, 187)/wisdom §%wis_stat%§" },
+  { key: "int", content: "§/rgb(201, 198, 187)/intelligence §%int_stat%§" },
+  { key: "fth", content: "§/rgb(201, 198, 187)/faith §%fth_stat%§" },
+  { key: "acc", content: "§/rgb(201, 198, 187)/accuracy §%acc_stat%§" },
 ];
 
 const traitActions = [
@@ -495,7 +500,7 @@ function GetAVGArmor(char) {
   return arm;
 }
 
-function UpdatePlayerStats() {
+function AddEffectsToCharacter() {
   if (!global.equipping.modifiers) global.equipping.modifiers = [];
   for (let eq of global.equipping.equipment) {
     if (eq.effects) {
@@ -503,7 +508,6 @@ function UpdatePlayerStats() {
         if (!ModExists(effect.key)) {
           effect.applied = false;
           global.equipping.modifiers.push(effect);
-          AddValueOfMod(effect);
         }
       }
     }
@@ -511,11 +515,34 @@ function UpdatePlayerStats() {
   while (KeepRunningModRemoval()) {
     RemoveModIfEquipRemoved();
   }
-  addToFight();
 }
 
+function RunMods() {
+  for(let mod of global.equipping.modifiers) {
+    AddValueOfMod(mod);
+  }
+}
+
+// function UpdatePlayerStats() {
+//   if (!global.equipping.modifiers) global.equipping.modifiers = [];
+//   for (let eq of global.equipping.equipment) {
+//     if (eq.effects) {
+//       for (let effect of eq.effects) {
+//         if (!ModExists(effect.key)) {
+//           effect.applied = false;
+//           global.equipping.modifiers.push(effect);
+//         }
+//         AddValueOfMod(effect);
+//       }
+//     }
+//   }
+//   while (KeepRunningModRemoval()) {
+//     RemoveModIfEquipRemoved();
+//   }
+//   addToFight();
+// }
+
 function AddValueOfMod(effect) {
-  if (effect.applied == true) return;
   if (effect.action == "increase") global.equipping.stats[effect.type] += effect.value;
   else if (effect.action == "decrease") global.equipping.stats[effect.type] -= effect.value;
   effect.applied = true;
@@ -533,8 +560,8 @@ function RemoveModIfEquipRemoved() {
   for (let i = 0; i < global.equipping.modifiers.length; i++) {
     if (ModShouldNotExist(global.equipping.modifiers[i].key)) {
       let effect = global.equipping.modifiers[i];
-      if (effect.action == "increase") global.equipping.stats[effect.type] -= effect.value;
-      else if (effect.action == "decrease") global.equipping.stats[effect.type] += effect.value;
+      // if (effect.action == "increase") global.equipping.stats[effect.type] -= effect.value;
+      // else if (effect.action == "decrease") global.equipping.stats[effect.type] += effect.value;
       copy.splice(i, 1);
     }
   }

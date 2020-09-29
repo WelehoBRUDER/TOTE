@@ -104,6 +104,7 @@ function statusEffectInfoHide() {
 }
 
 
+
 function createOverlay(char) {
   let d = Create('div');
   for (let eq of char.equipment) {
@@ -224,12 +225,25 @@ function addToFight() {
   CreatePortraits();
 }
 
+function FIGHTCHAR(key) {
+  for(let char of enemiesFight) {
+    if(char.key == key) return char;
+  }
+  for(let char of alliesFight) {
+    if(char.key == key) return char;
+  }
+}
+
 function generateCharacterSheet(char) {
-  let key = char.replace(/\d/, '');
+  console.log(char);
+  let key = char;
+  if(!global.combat.ongoing) key = char.replace(/\d/, '');
   if(Element(key + "Sheet")) return;
   let base = Create("div");
   base.id=key+"Sheet";
-  let target = deepCopy(CHAR(key));
+  let target;
+  if(!global.combat.ongoing) target = deepCopy(CHAR(key));
+  else target = deepCopy(FIGHTCHAR(key))
   base.classList.add("characterSheet");
 
   let quitBtn = Create("button")
