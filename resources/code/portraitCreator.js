@@ -237,12 +237,12 @@ function FIGHTCHAR(key) {
 function generateCharacterSheet(char) {
   console.log(char);
   let key = char;
-  if(!global.combat.ongoing) key = char.replace(/\d/, '');
+  if(key.indexOf(/\d/) != -1) key = char.replace(/\d/, '');
   if(Element(key + "Sheet")) return;
   let base = Create("div");
   base.id=key+"Sheet";
   let target;
-  if(!global.combat.ongoing) target = deepCopy(CHAR(key));
+  if(key.indexOf(/\d/) == -1) target = deepCopy(CHAR(key));
   else target = deepCopy(FIGHTCHAR(key))
   base.classList.add("characterSheet");
 

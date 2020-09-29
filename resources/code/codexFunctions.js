@@ -232,6 +232,7 @@ function ReadContent(text, image) {
     } if (colors.indexOf("&") != -1) {
       link = colors.split("&")[1];
       text = colors.split("&")[2];
+      if(text.startsWith("@var.")) text = VariableText(text);
     } else if  (text == undefined) {
       text = colors;
       if(text.startsWith("@var.")) text = VariableText(text);
