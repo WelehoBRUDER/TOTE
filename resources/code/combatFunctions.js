@@ -13,8 +13,6 @@ function FormCombatEnvironment() {
   <div id="abilityInfo"></div>
 <img src="resources/images/themes/${global.theme}/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, 'RegularAttack()', global.controlling)">
 <img src="resources/images/themes/${global.theme}/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()" onclick="AddToRound('Defend()', global.controlling.key)">
-<div id="ultimateGodrays" class="enabled"></div>
-<img src="resources/images/themes/${global.theme}/icons/ultimate_ability.png" id="combatUltimate">
   </div>`;
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 1));
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 2));
@@ -24,6 +22,7 @@ function FormCombatEnvironment() {
   Element("combatButtonsContainer").appendChild(CombatSpell(global.controlling, 2));
   Element("combatButtonsContainer").appendChild(CombatSpell(global.controlling, 3));
   Element("combatButtonsContainer").appendChild(CombatSpell(global.controlling, 4));
+  Element("combatButtonsContainer").appendChild(Ultimate());
   coolDowns();
   highlightCorrect();
   RestoreCombatText();
@@ -134,6 +133,22 @@ function CombatSpell(char, slot) {
     abiImg.classList.add("combatAbiImage");
     div.appendChild(abiImg);
   }
+  return div;
+}
+function Ultimate() {
+  let div = Create("div");
+  div.id = `containerUltimate`;
+  let img = Create("img");
+  img.src = `resources/images/themes/${global.theme}/icons/ultimate_ability.png`;
+  img.id = "combatUltimate";
+  let rays = Create("div");
+  rays.id = "ultimateGodrays";
+  rays.classList.add("enabled");
+  let ult = Create("img");
+  ult.src = "resources/images/icons/sword_rain_ultimate.png";
+  div.appendChild(img);
+  div.appendChild(rays);
+  div.appendChild(ult);
   return div;
 }
 
