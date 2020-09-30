@@ -211,7 +211,7 @@ function HideItemInfo() {
   infoContainer.style.transform = "scale(0)";
 }
 
-document.body.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', init);
 
 function init() {
   CreateEquippedInventory();
@@ -219,6 +219,7 @@ function init() {
 
 function CreateEquippedInventory() {
   StatsForCharacters(global.equipping)
+  addToFight();
   Element("weaponSlot").innerHTML = "";
   Element("chestarmor").innerHTML = "";
   Element("helmet").innerHTML = "";
@@ -522,25 +523,6 @@ function RunMods() {
     AddValueOfMod(mod);
   }
 }
-
-// function UpdatePlayerStats() {
-//   if (!global.equipping.modifiers) global.equipping.modifiers = [];
-//   for (let eq of global.equipping.equipment) {
-//     if (eq.effects) {
-//       for (let effect of eq.effects) {
-//         if (!ModExists(effect.key)) {
-//           effect.applied = false;
-//           global.equipping.modifiers.push(effect);
-//         }
-//         AddValueOfMod(effect);
-//       }
-//     }
-//   }
-//   while (KeepRunningModRemoval()) {
-//     RemoveModIfEquipRemoved();
-//   }
-//   addToFight();
-// }
 
 function AddValueOfMod(effect) {
   if (effect.action == "increase") global.equipping.stats[effect.type] += effect.value;

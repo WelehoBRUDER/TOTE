@@ -17,7 +17,8 @@ let global = {
     history: false,
     ally: true,
     summoned: null,
-    error: ""
+    error: "",
+    crit: false
   },
   onmap: false,
   theme: "classical",

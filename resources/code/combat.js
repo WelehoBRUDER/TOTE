@@ -142,6 +142,7 @@ async function EndRound() {
   thisRoundHistory = [];
   if (!global.combat.history) Element("combatTextContainer").textContent = "";
   for (let act of charactersActions) {
+    global.combat.crit = false;
     let container = Element("combatTextContainer");
     let SuitableText = null;
     let trigger1 = null;
@@ -245,6 +246,7 @@ async function EndRound() {
       if(debug) SuitableText = GetRandomCombatText("debug error");
       else SuitableText = GetRandomCombatText("nodebug error");
     }
+    if(global.combat.crit) SuitableText += " §¤BB-I¤/rgb(153, 37, 29)/CRITICAL HIT!§";
     let actionElem = ReadContentCombat(SuitableText)
     container.appendChild(actionElem);
     let bt = deepCopy(global.combat)

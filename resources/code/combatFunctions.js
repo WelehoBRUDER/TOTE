@@ -14,6 +14,7 @@ function FormCombatEnvironment() {
 <img src="resources/images/themes/${global.theme}/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, 'RegularAttack()', global.controlling)">
 <img src="resources/images/themes/${global.theme}/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()" onclick="AddToRound('Defend()', global.controlling.key)">
   </div>`;
+  Element("combatButtonsContainer").appendChild(Ultimate());
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 1));
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 2));
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 3));
@@ -22,7 +23,6 @@ function FormCombatEnvironment() {
   Element("combatButtonsContainer").appendChild(CombatSpell(global.controlling, 2));
   Element("combatButtonsContainer").appendChild(CombatSpell(global.controlling, 3));
   Element("combatButtonsContainer").appendChild(CombatSpell(global.controlling, 4));
-  Element("combatButtonsContainer").appendChild(Ultimate());
   coolDowns();
   highlightCorrect();
   RestoreCombatText();
@@ -146,6 +146,7 @@ function Ultimate() {
   rays.classList.add("enabled");
   let ult = Create("img");
   ult.src = "resources/images/icons/sword_rain_ultimate.png";
+  ult.id = "ultimateImage";
   div.appendChild(img);
   div.appendChild(rays);
   div.appendChild(ult);

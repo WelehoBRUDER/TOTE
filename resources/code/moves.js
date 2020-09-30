@@ -62,6 +62,7 @@ function actorModifiers(arg) {
 }
 
 function PowerAtk(power) {
+    global.combat.crit = false;
     global.combat.blocked = false;
     if (AttackMissed()) return "miss";
     let totalDamage = 0;
@@ -79,13 +80,15 @@ function PowerAtk(power) {
         }
     }
     else {
+        if(AttackCrit()) global.combat.crit = true;
         for (let weapon of global.combat.actor.equipment) {
             if (weapon.dmg) {
                 for (let dmg of weapon.dmg) {
                     let percentage = global.combat.target.armor[dmg.type] * (power.armor_penetration / 100);
                     let armour = global.combat.target.armor[dmg.type] - percentage;
                     let dmgIncrease = dmg.value * (power.multiplier / 100);
-                    totalDamage += CalculateDamage(dmgIncrease, armour, dmg.type);
+                    if(global.combat.crit) totalDamage += CalculateDamage(dmgIncrease*global.combat.actor.critMulti, armour, dmg.type);
+                    else totalDamage += CalculateDamage(dmgIncrease, armour, dmg.type);
                 }
             }
         }
@@ -94,6 +97,7 @@ function PowerAtk(power) {
 }
 
 function AttackSpell(power) {
+    global.combat.crit = false;
     global.combat.blocked = false;
     if (AttackMissed()) return "miss";
     let totalDamage = 0;
@@ -107,11 +111,13 @@ function AttackSpell(power) {
         }
     }
     else {
+        if(AttackCrit()) global.combat.crit = true;
         for (let dmg of power.values) {
             let percentage = global.combat.target.armor[dmg.type] * (power.armor_penetration / 100);
             let armour = global.combat.target.armor[dmg.type] - percentage;
             let dmgIncrease = dmg.value * (power.multiplier / 100);
-            totalDamage += CalculateMagicalDamage(dmgIncrease, armour, dmg.type);
+            if(global.combat.crit) totalDamage += CalculateMagicalDamage(dmgIncrease*global.combat.actor.critMulti, armour, dmg.type);
+            else totalDamage += CalculateMagicalDamage(dmgIncrease, armour, dmg.type);
         }
     }
     return Math.ceil(totalDamage);
@@ -133,6 +139,7 @@ function Summoning(char) {
 }
 
 function RegularAttack() {
+    global.combat.crit = false;
     global.combat.blocked = false;
     let totalDamage = 0;
     if (AttackMissed()) return "miss";
@@ -147,11 +154,13 @@ function RegularAttack() {
             }
         }
     } else {
+        if(AttackCrit()) global.combat.crit = true;
         for (let weapon of global.combat.actor.equipment) {
             if (weapon.dmg) {
                 for (let dmg of weapon.dmg) {
                     let armour = global.combat.target.armor[dmg.type];
-                    totalDamage += CalculateDamage(dmg.value, armour);
+                    if(global.combat.crit) totalDamage += CalculateDamage(dmg.value*global.combat.actor.critMulti, armour);
+                    else totalDamage += CalculateDamage(dmg.value, armour);
                 }
             }
         }
@@ -160,6 +169,7 @@ function RegularAttack() {
 }
 
 function ShieldBash() {
+    global.combat.crit = false;
     global.combat.blocked = false;
     let totalDamage = 0;
     if (AttackMissed()) return "miss";
@@ -174,11 +184,13 @@ function ShieldBash() {
             }
         }
     } else {
+        if(AttackCrit()) global.combat.crit = true;
         for (let shield of global.combat.actor.equipment) {
             if (shield.damage) {
                 for (let dmg of shield.damage) {
                     let armour = global.combat.target.armor[dmg.type];
-                    totalDamage += CalculateDamage(dmg.value, armour);
+                    if(global.combat.crit) totalDamage += CalculateDamage(dmg.value*global.combat.actor.critMulti, armour);
+                    else totalDamage += CalculateDamage(dmg.value, armour);
                 }
             }
         }
@@ -195,6 +207,13 @@ function AttackMissed() {
         }
         else return false;
     }
+}
+
+function AttackCrit() {
+    if(global.combat.actor.critChance / 100 >= Math.random()) {
+        return true;
+    }
+    else return false;
 }
 
 function AttackBlocked() {

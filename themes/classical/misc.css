@@ -259,6 +259,7 @@
   width: 100%;
   height: 100%;
   left: 50%;
+  z-index: 1;
   transform: translateX(-50%);
 }
 
@@ -332,10 +333,28 @@
 #combatUltimate {
   display: block;
   position: absolute;
-  left: 50%;
+  width: 7.5vw;
+  height: 7.5vw;
+  z-index: 2;
+}
+
+#containerUltimate {
+  display: block;
+  position: absolute;
+  left: 40%;
   transform: translateX(-50%);
   width: 7.5vw;
   height: 7.5vw;
+}
+
+#ultimateImage {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 80%;
+  top: 7.5%;
 }
 
 #ultimateGodrays.enabled {
@@ -354,6 +373,7 @@
   width: calc(15vw * var(--width-multi));
   height: calc(15vw * var(--width-multi));
   opacity: 75%;
+  z-index: 0;
 }
 
 #ultimateGodrays.disabled {
