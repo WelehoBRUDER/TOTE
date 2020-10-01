@@ -277,6 +277,20 @@ const spells = [
     }
 ]
 
+const ultimates = [
+  {
+    key: "sword-rain",
+    name: "Sword Rain",
+    img: "icons/ultimate_sword_rain.png",
+    cost: {
+      cd: 4
+    },
+    cooldown: 0,
+    action: "SwordRainUltimate()",
+    charge: 97
+  }
+]
+
 function Ability(key) {
     for(let abi of abilities) {
       if(abi.key == key) return abi;
@@ -286,6 +300,12 @@ function Ability(key) {
   function Spell(key) {
     for(let spell of spells) {
       if(spell.key == key) return spell;
+    }
+  }
+
+  function Ultimate(key) {
+    for(let ult of ultimates) {
+      if(ult.key == key) return ult;
     }
   }
 

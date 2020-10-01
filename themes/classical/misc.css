@@ -542,6 +542,19 @@
   text-align: center;
 }
 
+.ultcharge {
+  position: absolute;
+  left: 53%;
+  top: 0%;
+  transform: translateX(-50%);
+  font-size: 2.2vw;
+  color: rgb(243, 161, 161);
+  text-shadow: 0 0 8px rgb(228, 123, 123);
+  z-index: 4;
+  filter: brightness(300%) !important;
+  font-family: CodexMedium;
+}
+
 #statusInfo {
   transition: 0.15s;
   position: absolute;

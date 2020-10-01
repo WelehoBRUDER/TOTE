@@ -254,6 +254,11 @@ function Buff(power) {
     if(power?.amount) return power?.amount;
 }
 
+function SwordRainUltimate() {
+    AddToRound(UltEquipped(), )
+}
+
+
 function Status(key) {
     for (let stat of statuses) {
         if (stat.key == key) {

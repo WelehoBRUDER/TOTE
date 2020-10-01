@@ -33,7 +33,7 @@ function getCharCombat(key) {
   return null;
 }
 
-function AddToRound(action, performer, target) {
+function AddToRound(action, performer, target, ultimate) {
   Element("combatButtonsContainer").classList.add("darken");
   Element("roundHistory").classList.add("darken");
   let newTarget;

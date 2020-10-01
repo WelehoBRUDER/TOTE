@@ -179,6 +179,7 @@ characters.player.inventory = [
 characters.player.xp = {points: 0, needed: 100, modifier: 1.00, level: 1};
 characters.player.abilities = [Ability("fierce-assault"), Ability("shield-bash"), Ability("summon-skeleton-warrior"), Ability("summon-earth-golem"), Ability("sunder"), Ability("blinding-slash")];
 characters.player.spells = [Spell("fireball-1"), Spell("harden-1")];
+characters.player.ultimates = [Ultimate("sword-rain")];
 
 characters.player.abilities[0].equipped = true;
 characters.player.abilities[0].slot = 1;
@@ -192,4 +193,5 @@ characters.player.spells[0].equipped = true;
 characters.player.spells[0].slot = 1;
 characters.player.spells[1].equipped = true;
 characters.player.spells[1].slot = 4;
+characters.player.ultimates[0].equipped = true;
 
