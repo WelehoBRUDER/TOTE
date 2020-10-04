@@ -8,6 +8,21 @@ var canMove = true;
 
 let int = 0;
 
+// TILES
+const mapTiles = [
+  "resources/images/tiles/" + global.tile_pack + "/water_tile.png",
+  "resources/images/tiles/" + global.tile_pack + "/grass_tile.png",
+  "resources/images/tiles/" + global.tile_pack + "/cobble_tile.png",
+  "resources/images/tiles/" + global.tile_pack + "/tree_tile.png",
+  "resources/images/tiles/" + global.tile_pack + "/tree_tile.png",
+  "resources/images/tiles/" + global.tile_pack + "/tree_tile.png",
+  "resources/images/tiles/" + global.tile_pack + "/tree_tile.png",
+  "resources/images/tiles/" + global.tile_pack + "/tree_tile.png",
+  "resources/images/tiles/" + global.tile_pack + "/forbidden_tile.png",
+  "resources/images/tiles/" + global.tile_pack + "/forbidden_tile.png",
+]
+// TILES
+
 // Gets the int of a map based on its key
 function GetMap(key) {
   for (let i = 0; i < mapArrays.length; i++) {
@@ -23,23 +38,7 @@ function DrawMap() {
       setImage(x, y);
       function setImage(x, y) {
         let img = new Image();
-        switch (mapArrays[int].map[y][x]) {
-          case 9:
-            img.src = "resources/images/tiles/" + global.tile_pack + "/forbidden_tile.png";
-            break;
-          case 0:
-            img.src = "resources/images/tiles/" + global.tile_pack + "/water_tile.png";
-            break;
-          case 1:
-            img.src = "resources/images/tiles/" + global.tile_pack + "/grass_tile.png";
-            break;
-          case 2:
-            img.src = "resources/images/tiles/" + global.tile_pack + "/cobble_tile.png";
-            break;
-          case 3:
-            img.src = "resources/images/tiles/" + global.tile_pack + "/tree_tile.png";
-            break;
-        }
+        img.src = mapTiles[mapArrays[int].map[y][x]];
         img.onload = function () {
           ctx.drawImage(img, x * 80, y * 80, 80, 80);
           if (characters.player.cords.x == x && characters.player.cords.y == y && !characters.player.lit) DrawPlayer();
@@ -145,20 +144,7 @@ function CanWalk(x, y) {
 // Draws a single tile again, used while moving
 function DrawImage(x, y) {
   let img = new Image();
-  switch (mapArrays[int].map[y][x]) {
-    case 0:
-      img.src = "resources/images/tiles/" + global.tile_pack + "/water_tile.png";
-      break;
-    case 1:
-      img.src = "resources/images/tiles/" + global.tile_pack + "/grass_tile.png";
-      break;
-    case 2:
-      img.src = "resources/images/tiles/" + global.tile_pack + "/cobble_tile.png";
-      break;
-    case 3:
-      img.src = "resources/images/tiles/" + global.tile_pack + "/tree_tile.png";
-      break;
-  }
+  img.src = mapTiles[mapArrays[int].map[y][x]];
   img.onload = function () {
     ctx.drawImage(img, x * 80, y * 80, 80, 80);
   }
