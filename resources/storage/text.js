@@ -407,6 +407,46 @@ var texts = [
             text: "§¤BB-I¤/red/ERROR MISSING TEXT!§ §¤BB-I¤/red/ THIS ERROR WILL BE FIXED BY ADDING COMBAT TEXTS FOR: § §¤BB-I¤/orange/@var.GEM()§. LATEST VALUE IS §@var.BTV()§!"
           }
         ]
+      },
+      {
+        subcat: "ultimate-sword-rain",
+        trigger: "ultimate sword-rain",
+        texts: [
+          {
+            key: "ultimate-sword-rain-1",
+            text: "§/@var.BTC(actor)/@var.BTN(actor)§ §#@var.BTI(actor)#§ gathers all of the strength within §@var.POSPRON§ body and casts §/yellow/Sword Rain§ upon the battlefield!"
+          }
+        ]
+      },
+      {
+        subcat: "ultimate-sword-rain-hit",
+        trigger: "ultimate sword-rain hit",
+        texts: [
+          {
+            key: "ultimate-sword-rain-hit-1",
+            text: "§¤B-¤/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ is hit by the §/yellow/Sword Rain§, taking §@var.BTV§ §/crimson/damage§!"
+          }
+        ]
+      },
+      {
+        subcat: "ultimate-sword-rain-miss",
+        trigger: "ultimate sword-rain miss",
+        texts: [
+          {
+            key: "ultimate-sword-rain-miss-1",
+            text: "§¤B-¤/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ manages to dodge the §/yellow/Sword Rain§!"
+          }
+        ]
+      },
+      {
+        subcat: "ultimate-sword-rain-block",
+        trigger: "ultimate sword-rain block",
+        texts: [
+          {
+            key: "ultimate-sword-rain-block-1",
+            text: "§¤B-¤/@var.BTC(target)/@var.BTN(target)§ §#@var.BTI(target)#§ is hit by the §/yellow/Sword Rain§, but manages to block it with  §@var.POSPRON(target)§ §/yellow/@var.TRGSHIELD()§ §#@var.TRGSHIELDIMG()#§."
+          }
+        ]
       }
     ]
   }

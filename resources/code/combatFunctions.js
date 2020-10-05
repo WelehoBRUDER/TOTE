@@ -14,7 +14,8 @@ function FormCombatEnvironment() {
 <img src="resources/images/themes/${global.theme}/icons/attack_icon.png" id="combatAttack" onmouseover="showInfoCombat('attack', this)" onmouseleave="hideInfoCombat()" onclick="TargetCharacters(enemiesFight, 'RegularAttack()', global.controlling)">
 <img src="resources/images/themes/${global.theme}/icons/defense_icon.png" id="combatDefense" onmouseover="showInfoCombat('defense', this)" onmouseleave="hideInfoCombat()" onclick="AddToRound('Defend()', global.controlling.key)">
   </div>`;
-  Element("combatButtonsContainer").appendChild(Ultimate());
+  Element("combatButtonsContainer").appendChild(UltimateCreation());
+  UltimateCharge();
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 1));
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 2));
   Element("combatButtonsContainer").appendChild(CombatAbility(global.controlling, 3));
@@ -135,22 +136,49 @@ function CombatSpell(char, slot) {
   }
   return div;
 }
-function Ultimate() {
+function UltimateCreation() {
   let div = Create("div");
   div.id = `containerUltimate`;
   let img = Create("img");
   img.src = `resources/images/themes/${global.theme}/icons/ultimate_ability.png`;
   img.id = "combatUltimate";
-  let rays = Create("div");
-  rays.id = "ultimateGodrays";
-  rays.classList.add("enabled");
-  let ult = Create("img");
-  ult.src = "resources/images/icons/sword_rain_ultimate.png";
-  ult.id = "ultimateImage";
   div.appendChild(img);
-  div.appendChild(rays);
-  div.appendChild(ult);
+  if(UltEquipped()) {
+    let ultimate = UltEquipped();
+    let ult = Create("img");
+    ult.src = "resources/images/icons/sword_rain_ultimate.png";
+    ult.id = "ultimateImage";
+    div.appendChild(ult);
+  }
   return div;
+}
+
+function UltimateCharge() {
+  if(!UltEquipped) return;
+  let main = Element("containerUltimate");
+  let ult = UltEquipped();
+  if(ult.charge < 100) {
+    main.classList.add("darken");
+    if (main.childNodes[2]) main.childNodes[2].remove();
+    let p = Create("p");
+    p.textContent = ult.charge + "%";
+    p.classList.add("ultcharge");
+    main.appendChild(p);
+  }
+  else {
+    let rays = Create("div");
+    rays.id = "ultimateGodrays";
+    rays.classList.add("enabled");
+    main.appendChild(rays);
+    main.addEventListener("click", ()=>eval(ult.action));
+  }
+}
+
+function UltEquipped() {
+  for(let ult of global.controlling.ultimates) {
+    if(ult.equipped) return ult;
+  }
+  return false;
 }
 
 var delay = null;
